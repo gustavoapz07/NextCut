@@ -1,3 +1,17 @@
 # Archivos que no son conocimiento del proyecto (instrucciones y config del agente)
 CLAUDE.md
 .claude/
+
+# Archivos generados que solo agregarían ruido al grafo
+package-lock.json
+supabase/.temp/
+app/index.html
+app/public/
+
+# Configuración de herramientas: su propósito ya está en el plan y en ADR-006
+package.json
+tsconfig.json
+biome.json
+lefthook.yml
+wrangler.jsonc
+.github/

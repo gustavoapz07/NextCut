@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plan-implementacion.md"
 type: "concept"
-community: "Avisos, tiempo real y privacidad"
+community: "Documentación y decisiones"
 location: "L365"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Avisos_tiempo_real_y_privacidad
+  - community/Documentación_y_decisiones
 ---
 
 # Decisiones pendientes
@@ -17,4 +17,4 @@ tags:
 - [[Riesgos técnicos]] - `conceptually_related_to` [INFERRED]
 - [[Validación de campo]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Avisos_tiempo_real_y_privacidad
+#graphify/concept #graphify/EXTRACTED #community/Documentación_y_decisiones

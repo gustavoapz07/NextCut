@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plan-implementacion.md"
 type: "concept"
-community: "Avisos, tiempo real y privacidad"
+community: "Avisos y panel del barbero"
 location: "L261"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Avisos_tiempo_real_y_privacidad
+  - community/Avisos_y_panel_del_barbero
 ---
 
 # Sprint 3 · Barbero, TV y avisos
@@ -17,4 +17,4 @@ tags:
 - [[Panel del barbero]] - `references` [EXTRACTED]
 - [[Resend (SMTP de Auth)]] - `conceptually_related_to` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Avisos_tiempo_real_y_privacidad
+#graphify/concept #graphify/EXTRACTED #community/Avisos_y_panel_del_barbero

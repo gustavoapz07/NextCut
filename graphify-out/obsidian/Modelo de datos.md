@@ -12,9 +12,9 @@ tags:
 # Modelo de datos
 
 ## Connections
-- [[Bitácora de eventos (eventos_turno)]] - `shares_data_with` [INFERRED]
+- [[Arquitectura]] - `references` [EXTRACTED]
 - [[Funciones de la base (security definer)]] - `conceptually_related_to` [INFERRED]
-- [[README de Siguiente]] - `references` [EXTRACTED]
+- [[Row Level Security (RLS)]] - `conceptually_related_to` [INFERRED]
 - [[Sprint 1 · Base de datos y seguridad]] - `references` [EXTRACTED]
 - [[Tabla turnos (codigo_publico aleatorio)]] - `references` [EXTRACTED]
 - [[Vista fila_publica]] - `conceptually_related_to` [INFERRED]

@@ -12,7 +12,6 @@ tags:
 # ADR-004 · Sin pagos en línea en el MVP
 
 ## Connections
-- [[2026-10-25 · Investigación inicial]] - `references` [EXTRACTED]
 - [[Bitácora de eventos (eventos_turno)]] - `references` [INFERRED]
 - [[Montos alterados por el barbero]] - `conceptually_related_to` [INFERRED]
 - [[P1 Inasistencias (no-shows)]] - `conceptually_related_to` [INFERRED]

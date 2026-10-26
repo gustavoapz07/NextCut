@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plan-implementacion.md"
 type: "concept"
-community: "Avisos, tiempo real y privacidad"
+community: "Stack, arquitectura y Sprint 0"
 location: "L330"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Avisos_tiempo_real_y_privacidad
+  - community/Stack_arquitectura_y_Sprint_0
 ---
 
 # Riesgos técnicos
@@ -20,4 +20,4 @@ tags:
 - [[TypeScript 7 (compilador nativo)]] - `conceptually_related_to` [EXTRACTED]
 - [[Web Push (PWA)]] - `conceptually_related_to` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Avisos_tiempo_real_y_privacidad
+#graphify/concept #graphify/EXTRACTED #community/Stack_arquitectura_y_Sprint_0

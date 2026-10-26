@@ -1,0 +1,68 @@
+# Revisiones de cada PR y de cada push a main (docs/plan-implementacion.md, sección 11).
+# Las pruebas pgTAP de la base, la concurrencia y Playwright se suman en los sprints 1 y 2.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  revisar:
+    name: Lint, tipos, pruebas y build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+        env:
+          LEFTHOOK: 0
+
+      - name: Lint y formato (Biome)
+        run: npx biome ci .
+
+      - name: Tipos (TypeScript 7)
+        run: npm run typecheck
+
+      - name: Pruebas unitarias (Vitest)
+        run: npm run test
+
+      - name: Build
+        run: npm run build
+
+      - name: El build no contiene claves secretas (fallo 1)
+        run: |
+          if grep -rEl "sb_secret_|service_role" dist/; then
+            echo "::error::El build contiene una clave secreta o una referencia a service_role."
+            exit 1
+          fi
+
+  secretos:
+    name: Secretos (gitleaks)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: gitleaks/gitleaks-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

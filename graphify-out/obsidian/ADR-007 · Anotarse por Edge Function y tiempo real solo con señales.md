@@ -13,12 +13,14 @@ tags:
 
 ## Connections
 - [[2026-10-26 · Plan de implementación y graphify automático]] - `references` [EXTRACTED]
+- [[Arquitectura]] - `conceptually_related_to` [INFERRED]
 - [[Canal público filabarberia_id (señal vacía)]] - `references` [EXTRACTED]
 - [[Edge Function unirse-a-fila]] - `references` [EXTRACTED]
 - [[Fallo 2 · Endpoints expuestos]] - `references` [EXTRACTED]
 - [[Fallo 7 · Permisos excesivos]] - `references` [EXTRACTED]
 - [[Función unirse_a_fila]] - `references` [INFERRED]
 - [[Plan de implementación]] - `conceptually_related_to` [INFERRED]
+- [[Pruebas de riesgo del Sprint 0 (Broadcast público, Web Push, Turnstile con IP)]] - `conceptually_related_to` [INFERRED]
 - [[Registro de decisiones]] - `references` [EXTRACTED]
 - [[Seguridad]] - `references` [EXTRACTED]
 - [[Tabla turnos (codigo_publico aleatorio)]] - `references` [INFERRED]

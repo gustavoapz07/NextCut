@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plan-implementacion.md"
 type: "concept"
-community: "Stack, hosting y antiabuso"
+community: "Antiabuso y monitoreo"
 location: "L272"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Stack_hosting_y_antiabuso
+  - community/Antiabuso_y_monitoreo
 ---
 
 # Sprint 4 · Dueño, antiabuso y lanzamiento
@@ -20,4 +20,4 @@ tags:
 - [[Sentry (errores sin datos personales)]] - `references` [EXTRACTED]
 - [[Supabase MCP]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Stack_hosting_y_antiabuso
+#graphify/concept #graphify/EXTRACTED #community/Antiabuso_y_monitoreo

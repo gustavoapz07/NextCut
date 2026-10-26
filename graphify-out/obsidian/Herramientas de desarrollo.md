@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plan-implementacion.md"
 type: "concept"
-community: "Herramientas de desarrollo"
+community: "Stack, arquitectura y Sprint 0"
 location: "L63"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Herramientas_de_desarrollo
+  - community/Stack_arquitectura_y_Sprint_0
 ---
 
 # Herramientas de desarrollo
@@ -14,6 +14,7 @@ tags:
 ## Connections
 - [[ADR-006 · Herramientas de desarrollo y pruebas]] - `conceptually_related_to` [INFERRED]
 - [[Biome (lint y formato)]] - `references` [EXTRACTED]
+- [[Desarrollo local]] - `conceptually_related_to` [INFERRED]
 - [[Lefthook (hooks de git)]] - `references` [EXTRACTED]
 - [[Plan de implementación]] - `references` [EXTRACTED]
 - [[Playwright + axe]] - `references` [EXTRACTED]
@@ -21,4 +22,4 @@ tags:
 - [[Vitest + Testing Library]] - `references` [EXTRACTED]
 - [[gitleaks]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Herramientas_de_desarrollo
+#graphify/concept #graphify/EXTRACTED #community/Stack_arquitectura_y_Sprint_0

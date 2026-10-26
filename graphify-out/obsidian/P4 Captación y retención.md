@@ -1,11 +1,11 @@
 ---
 source_file: "docs/investigacion.md"
 type: "concept"
-community: "Investigación y documentación"
+community: "Problema, evidencia y validación"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Investigación_y_documentación
+  - community/Problema_evidencia_y_validación
 ---
 
 # P4 Captación y retención
@@ -16,4 +16,4 @@ tags:
 - [[Matriz de decisión ponderada]] - `references` [EXTRACTED]
 - [[Zenoti Benchmark 2026]] - `cites` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Investigación_y_documentación
+#graphify/concept #graphify/EXTRACTED #community/Problema_evidencia_y_validación

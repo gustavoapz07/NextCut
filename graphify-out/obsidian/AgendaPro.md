@@ -1,11 +1,11 @@
 ---
 source_file: "docs/investigacion.md"
 type: "concept"
-community: "Producto y competencia"
+community: "Competencia y mercado"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Producto_y_competencia
+  - community/Competencia_y_mercado
 ---
 
 # AgendaPro
@@ -14,4 +14,4 @@ tags:
 - [[Competencia]] - `references` [EXTRACTED]
 - [[P3 Caja y comisiones]] - `cites` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Producto_y_competencia
+#graphify/concept #graphify/EXTRACTED #community/Competencia_y_mercado

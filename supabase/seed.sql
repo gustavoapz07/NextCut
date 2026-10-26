@@ -1,0 +1,2 @@
+-- Datos de prueba para `supabase db reset`.
+-- En el Sprint 1 se agregan 2 barberías, 3 barberos y sus servicios para probar el aislamiento.

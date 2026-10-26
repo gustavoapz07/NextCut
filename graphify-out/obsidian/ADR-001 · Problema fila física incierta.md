@@ -1,18 +1,17 @@
 ---
 source_file: "docs/decisiones.md"
 type: "rationale"
-community: "Investigación y documentación"
+community: "Problema, evidencia y validación"
 location: "L10"
 tags:
   - graphify/rationale
   - graphify/INFERRED
-  - community/Investigación_y_documentación
+  - community/Problema_evidencia_y_validación
 ---
 
 # ADR-001 · Problema: fila física incierta
 
 ## Connections
-- [[2026-10-25 · Investigación inicial]] - `references` [EXTRACTED]
 - [[Criterios seguir  ajustar  detener]] - `conceptually_related_to` [INFERRED]
 - [[Fila virtual híbrida]] - `references` [INFERRED]
 - [[Matriz de decisión ponderada]] - `cites` [EXTRACTED]
@@ -25,4 +24,4 @@ tags:
 - [[Tasa de abandono]] - `conceptually_related_to` [INFERRED]
 - [[Validación de campo]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/INFERRED #community/Investigación_y_documentación
+#graphify/rationale #graphify/INFERRED #community/Problema_evidencia_y_validación

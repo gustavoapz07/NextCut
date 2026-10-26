@@ -1,59 +1,73 @@
 {
   "colorGroups": [
     {
-      "query": "tag:#community/Investigaci\u00f3n_y_documentaci\u00f3n",
+      "query": "tag:#community/Stack_arquitectura_y_Sprint_0",
       "color": {
         "a": 1,
         "rgb": 5142951
       }
     },
     {
-      "query": "tag:#community/Base_de_datos_y_seguridad",
+      "query": "tag:#community/Problema_evidencia_y_validaci\u00f3n",
       "color": {
         "a": 1,
         "rgb": 15896107
       }
     },
     {
-      "query": "tag:#community/Stack_hosting_y_antiabuso",
+      "query": "tag:#community/Base_de_datos_y_seguridad",
       "color": {
         "a": 1,
         "rgb": 14767961
       }
     },
     {
-      "query": "tag:#community/Avisos_tiempo_real_y_privacidad",
+      "query": "tag:#community/C\u00f3digo_de_la_app",
       "color": {
         "a": 1,
         "rgb": 7780274
       }
     },
     {
-      "query": "tag:#community/Producto_y_competencia",
+      "query": "tag:#community/Documentaci\u00f3n_y_decisiones",
       "color": {
         "a": 1,
         "rgb": 5873999
       }
     },
     {
-      "query": "tag:#community/Herramientas_de_desarrollo",
+      "query": "tag:#community/Antiabuso_y_monitoreo",
       "color": {
         "a": 1,
         "rgb": 15583560
       }
     },
     {
-      "query": "tag:#community/Validaci\u00f3n_piloto_y_m\u00e9tricas",
+      "query": "tag:#community/Avisos_y_panel_del_barbero",
       "color": {
         "a": 1,
         "rgb": 11565729
       }
     },
     {
-      "query": "tag:#community/Validaci\u00f3n_de_entrada",
+      "query": "tag:#community/Herramientas_de_desarrollo",
       "color": {
         "a": 1,
         "rgb": 16752039
+      }
+    },
+    {
+      "query": "tag:#community/Competencia_y_mercado",
+      "color": {
+        "a": 1,
+        "rgb": 10253663
+      }
+    },
+    {
+      "query": "tag:#community/Datos_de_prueba",
+      "color": {
+        "a": 1,
+        "rgb": 12234924
       }
     }
   ]

@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plan-implementacion.md"
 type: "concept"
-community: "Validación de entrada"
+community: "Stack, arquitectura y Sprint 0"
 location: "L72"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Validación_de_entrada
+  - community/Stack_arquitectura_y_Sprint_0
 ---
 
 # Playwright + axe
@@ -15,4 +15,4 @@ tags:
 - [[Herramientas de desarrollo]] - `references` [EXTRACTED]
 - [[Sprint 2 · Cliente fila pública y turno en vivo]] - `conceptually_related_to` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Validación_de_entrada
+#graphify/concept #graphify/EXTRACTED #community/Stack_arquitectura_y_Sprint_0

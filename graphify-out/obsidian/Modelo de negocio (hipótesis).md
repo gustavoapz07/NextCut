@@ -1,18 +1,19 @@
 ---
 source_file: "README.md"
-type: "concept"
-community: "Avisos, tiempo real y privacidad"
-location: "L273"
+type: "rationale"
+community: "Avisos y panel del barbero"
+location: "L276"
 tags:
-  - graphify/concept
-  - graphify/EXTRACTED
-  - community/Avisos_tiempo_real_y_privacidad
+  - graphify/rationale
+  - graphify/INFERRED
+  - community/Avisos_y_panel_del_barbero
 ---
 
 # Modelo de negocio (hipótesis)
 
 ## Connections
 - [[Notificaciones sin costo variable]] - `conceptually_related_to` [INFERRED]
-- [[README de Siguiente]] - `references` [EXTRACTED]
+- [[Siguiente (producto)]] - `references` [EXTRACTED]
+- [[Tasa de abandono]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Avisos_tiempo_real_y_privacidad
+#graphify/rationale #graphify/INFERRED #community/Avisos_y_panel_del_barbero

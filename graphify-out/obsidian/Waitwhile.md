@@ -1,11 +1,11 @@
 ---
 source_file: "docs/investigacion.md"
 type: "concept"
-community: "Producto y competencia"
+community: "Competencia y mercado"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Producto_y_competencia
+  - community/Competencia_y_mercado
 ---
 
 # Waitwhile
@@ -14,4 +14,4 @@ tags:
 - [[Competencia]] - `references` [EXTRACTED]
 - [[Fila virtual híbrida]] - `semantically_similar_to` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Producto_y_competencia
+#graphify/concept #graphify/EXTRACTED #community/Competencia_y_mercado

@@ -1,0 +1,23 @@
+# Revisiones antes de cada commit y de cada push (docs/plan-implementacion.md, sección 4).
+# Lefthook solo gestiona pre-commit y pre-push: los hooks post-* son de graphify.
+# Para saltarlas en una emergencia: LEFTHOOK=0 git commit ...
+
+pre-commit:
+  parallel: true
+  jobs:
+    - name: biome
+      glob: "*.{js,jsx,ts,tsx,json,jsonc,css}"
+      run: npx biome check --write --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}
+      stage_fixed: true
+
+    - name: gitleaks
+      # Una sola línea y sin comillas dobles: en Windows, Lefthook envuelve el comando en "sh -c ...".
+      run: if command -v gitleaks >/dev/null 2>&1; then gitleaks git --pre-commit --staged --redact --no-banner; else echo 'gitleaks no está instalado en esta máquina, se revisa en CI.'; fi
+
+pre-push:
+  jobs:
+    - name: tipos
+      run: npm run typecheck
+
+    - name: pruebas
+      run: npm run test

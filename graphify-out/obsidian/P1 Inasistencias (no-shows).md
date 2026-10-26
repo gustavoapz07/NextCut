@@ -1,11 +1,11 @@
 ---
 source_file: "docs/investigacion.md"
 type: "concept"
-community: "Investigación y documentación"
+community: "Problema, evidencia y validación"
 tags:
   - graphify/concept
   - graphify/INFERRED
-  - community/Investigación_y_documentación
+  - community/Problema_evidencia_y_validación
 ---
 
 # P1 Inasistencias (no-shows)
@@ -22,4 +22,4 @@ tags:
 - [[Turnos fantasma]] - `semantically_similar_to` [INFERRED]
 - [[Zenoti Benchmark 2026]] - `cites` [EXTRACTED]
 
-#graphify/concept #graphify/INFERRED #community/Investigación_y_documentación
+#graphify/concept #graphify/INFERRED #community/Problema_evidencia_y_validación

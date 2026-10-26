@@ -3,10 +3,11 @@
 .env.*
 !.env.example
 
-# Dependencias y builds
+# Dependencias, builds y estado local de las herramientas
 node_modules/
 dist/
 .supabase/
+.wrangler/
 
 # Caché, respaldos diarios y temporales de Graphify (el grafo sí se versiona)
 graphify-out/cache/
@@ -16,6 +17,8 @@ graphify-out/.graphify_old.json
 graphify-out/.graphify_incremental.json
 graphify-out/.graphify_chunk_*.json
 graphify-out/needs_update
+graphify-out/.rebuild.lock
+graphify-out/.graphify_labels.pending.json
 
 # Estado local de Claude Code (los hooks y el skill sí se versionan)
 .claude/settings.local.json

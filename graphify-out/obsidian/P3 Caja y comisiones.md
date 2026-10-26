@@ -1,11 +1,11 @@
 ---
 source_file: "docs/investigacion.md"
 type: "concept"
-community: "Investigación y documentación"
+community: "Problema, evidencia y validación"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Investigación_y_documentación
+  - community/Problema_evidencia_y_validación
 ---
 
 # P3 Caja y comisiones
@@ -20,4 +20,4 @@ tags:
 - [[Montos alterados por el barbero]] - `references` [INFERRED]
 - [[Reporte del día para el dueño]] - `conceptually_related_to` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Investigación_y_documentación
+#graphify/concept #graphify/EXTRACTED #community/Problema_evidencia_y_validación

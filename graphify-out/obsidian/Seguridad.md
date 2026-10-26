@@ -1,12 +1,12 @@
 ---
 source_file: "docs/seguridad.md"
 type: "document"
-community: "Investigación y documentación"
+community: "Documentación y decisiones"
 location: "L1"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Investigación_y_documentación
+  - community/Documentación_y_decisiones
 ---
 
 # Seguridad
@@ -35,4 +35,4 @@ tags:
 - [[Registro de decisiones]] - `references` [EXTRACTED]
 - [[Sprint 4 · Dueño, antiabuso y lanzamiento]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Investigación_y_documentación
+#graphify/document #graphify/EXTRACTED #community/Documentación_y_decisiones

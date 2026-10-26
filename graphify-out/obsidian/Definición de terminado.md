@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plan-implementacion.md"
 type: "concept"
-community: "Investigación y documentación"
+community: "Documentación y decisiones"
 location: "L320"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Investigación_y_documentación
+  - community/Documentación_y_decisiones
 ---
 
 # Definición de terminado
@@ -19,4 +19,4 @@ tags:
 - [[Seguridad]] - `references` [EXTRACTED]
 - [[graphify (grafo de conocimiento)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Investigación_y_documentación
+#graphify/concept #graphify/EXTRACTED #community/Documentación_y_decisiones

@@ -1,21 +1,19 @@
 ---
 source_file: "README.md"
 type: "concept"
-community: "Producto y competencia"
-location: "L43"
+community: "Competencia y mercado"
+location: "L293"
 tags:
   - graphify/concept
-  - graphify/EXTRACTED
-  - community/Producto_y_competencia
+  - graphify/INFERRED
+  - community/Competencia_y_mercado
 ---
 
 # Fila virtual híbrida
 
 ## Connections
 - [[ADR-001 · Problema fila física incierta]] - `references` [INFERRED]
-- [[Cálculo del tiempo estimado]] - `references` [EXTRACTED]
-- [[Estados de un turno]] - `conceptually_related_to` [EXTRACTED]
-- [[Siguiente (producto)]] - `implements` [EXTRACTED]
+- [[Hoja de ruta v0.1–v0.3]] - `references` [EXTRACTED]
 - [[Waitwhile]] - `semantically_similar_to` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Producto_y_competencia
+#graphify/concept #graphify/INFERRED #community/Competencia_y_mercado

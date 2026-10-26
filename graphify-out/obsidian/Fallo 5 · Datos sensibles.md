@@ -1,12 +1,12 @@
 ---
 source_file: "docs/seguridad.md"
 type: "concept"
-community: "Avisos, tiempo real y privacidad"
+community: "Base de datos y seguridad"
 location: "L67"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Avisos_tiempo_real_y_privacidad
+  - community/Base_de_datos_y_seguridad
 ---
 
 # Fallo 5 · Datos sensibles
@@ -21,4 +21,4 @@ tags:
 - [[Vista fila_publica]] - `references` [EXTRACTED]
 - [[ver_turno(codigo)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Avisos_tiempo_real_y_privacidad
+#graphify/concept #graphify/EXTRACTED #community/Base_de_datos_y_seguridad

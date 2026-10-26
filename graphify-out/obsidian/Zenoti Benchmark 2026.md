@@ -1,11 +1,11 @@
 ---
 source_file: "docs/investigacion.md"
 type: "document"
-community: "Investigación y documentación"
+community: "Problema, evidencia y validación"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Investigación_y_documentación
+  - community/Problema_evidencia_y_validación
 ---
 
 # Zenoti Benchmark 2026
@@ -15,4 +15,4 @@ tags:
 - [[P2 Fila física incierta]] - `cites` [EXTRACTED]
 - [[P4 Captación y retención]] - `cites` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Investigación_y_documentación
+#graphify/document #graphify/EXTRACTED #community/Problema_evidencia_y_validación

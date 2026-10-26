@@ -1,12 +1,12 @@
 ---
 source_file: "docs/decisiones.md"
 type: "rationale"
-community: "Stack, hosting y antiabuso"
+community: "Documentación y decisiones"
 location: "L46"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Stack_hosting_y_antiabuso
+  - community/Documentación_y_decisiones
 ---
 
 # ADR-005 · Hosting en Cloudflare Workers
@@ -20,4 +20,4 @@ tags:
 - [[Vercel (alternativa descartada)]] - `references` [EXTRACTED]
 - [[Workers en lugar de Pages]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Stack_hosting_y_antiabuso
+#graphify/rationale #graphify/EXTRACTED #community/Documentación_y_decisiones

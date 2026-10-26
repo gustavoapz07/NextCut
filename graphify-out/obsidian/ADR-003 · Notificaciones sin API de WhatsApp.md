@@ -1,12 +1,12 @@
 ---
 source_file: "docs/decisiones.md"
 type: "rationale"
-community: "Avisos, tiempo real y privacidad"
+community: "Avisos y panel del barbero"
 location: "L31"
 tags:
   - graphify/rationale
   - graphify/INFERRED
-  - community/Avisos_tiempo_real_y_privacidad
+  - community/Avisos_y_panel_del_barbero
 ---
 
 # ADR-003 · Notificaciones sin API de WhatsApp
@@ -20,4 +20,4 @@ tags:
 - [[Registro de decisiones]] - `references` [EXTRACTED]
 - [[Web Push (PWA)]] - `references` [INFERRED]
 
-#graphify/rationale #graphify/INFERRED #community/Avisos_tiempo_real_y_privacidad
+#graphify/rationale #graphify/INFERRED #community/Avisos_y_panel_del_barbero

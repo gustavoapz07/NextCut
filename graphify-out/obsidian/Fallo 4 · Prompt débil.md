@@ -1,12 +1,12 @@
 ---
 source_file: "docs/seguridad.md"
 type: "concept"
-community: "Investigación y documentación"
+community: "Documentación y decisiones"
 location: "L62"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Investigación_y_documentación
+  - community/Documentación_y_decisiones
 ---
 
 # Fallo 4 · Prompt débil
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Seguridad]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Investigación_y_documentación
+#graphify/concept #graphify/EXTRACTED #community/Documentación_y_decisiones

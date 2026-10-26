@@ -1,12 +1,12 @@
 ---
 source_file: "README.md"
 type: "concept"
-community: "Avisos, tiempo real y privacidad"
+community: "Avisos y panel del barbero"
 location: "L125"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Avisos_tiempo_real_y_privacidad
+  - community/Avisos_y_panel_del_barbero
 ---
 
 # Botón wa.me
@@ -18,4 +18,4 @@ tags:
 - [[Riesgos técnicos]] - `conceptually_related_to` [EXTRACTED]
 - [[Sprint 3 · Barbero, TV y avisos]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Avisos_tiempo_real_y_privacidad
+#graphify/concept #graphify/EXTRACTED #community/Avisos_y_panel_del_barbero

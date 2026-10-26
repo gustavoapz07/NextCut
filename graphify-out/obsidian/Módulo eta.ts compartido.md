@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plan-implementacion.md"
 type: "concept"
-community: "Avisos, tiempo real y privacidad"
+community: "Stack, arquitectura y Sprint 0"
 location: "L153"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Avisos_tiempo_real_y_privacidad
+  - community/Stack_arquitectura_y_Sprint_0
 ---
 
 # Módulo eta.ts compartido
@@ -18,4 +18,4 @@ tags:
 - [[Sprint 2 · Cliente fila pública y turno en vivo]] - `references` [EXTRACTED]
 - [[Vitest + Testing Library]] - `conceptually_related_to` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Avisos_tiempo_real_y_privacidad
+#graphify/concept #graphify/EXTRACTED #community/Stack_arquitectura_y_Sprint_0

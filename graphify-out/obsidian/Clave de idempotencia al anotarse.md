@@ -1,12 +1,12 @@
 ---
 source_file: "docs/seguridad.md"
 type: "concept"
-community: "Base de datos y seguridad"
+community: "Antiabuso y monitoreo"
 location: "L100"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Base_de_datos_y_seguridad
+  - community/Antiabuso_y_monitoreo
 ---
 
 # Clave de idempotencia al anotarse
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Fallo 8 · Manejo de errores]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Base_de_datos_y_seguridad
+#graphify/concept #graphify/EXTRACTED #community/Antiabuso_y_monitoreo

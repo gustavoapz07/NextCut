@@ -1,19 +1,19 @@
 ---
 source_file: "README.md"
 type: "rationale"
-community: "Producto y competencia"
+community: "Stack, arquitectura y Sprint 0"
 location: "L111"
 tags:
   - graphify/rationale
-  - graphify/EXTRACTED
-  - community/Producto_y_competencia
+  - graphify/INFERRED
+  - community/Stack_arquitectura_y_Sprint_0
 ---
 
 # Cálculo del tiempo estimado
 
 ## Connections
-- [[Fila virtual híbrida]] - `references` [EXTRACTED]
+- [[Métricas de éxito]] - `conceptually_related_to` [INFERRED]
 - [[Módulo eta.ts compartido]] - `implements` [INFERRED]
-- [[Reporte del día para el dueño]] - `references` [EXTRACTED]
+- [[Tabla turnos (codigo_publico aleatorio)]] - `shares_data_with` [INFERRED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Producto_y_competencia
+#graphify/rationale #graphify/INFERRED #community/Stack_arquitectura_y_Sprint_0

@@ -12,10 +12,11 @@ tags:
 # Fallo 2 · Endpoints expuestos
 
 ## Connections
-- [[2026-10-26 · Plan de implementación y graphify automático]] - `references` [EXTRACTED]
+- [[2026-10-26 · Sprint 0 base del proyecto]] - `references` [EXTRACTED]
 - [[ADR-007 · Anotarse por Edge Function y tiempo real solo con señales]] - `references` [EXTRACTED]
 - [[Adivinar códigos de turno]] - `references` [EXTRACTED]
 - [[Canal público filabarberia_id (señal vacía)]] - `references` [INFERRED]
+- [[Cloudflare Turnstile]] - `conceptually_related_to` [INFERRED]
 - [[Edge Function unirse-a-fila]] - `conceptually_related_to` [INFERRED]
 - [[Fuga de datos entre barberías]] - `references` [EXTRACTED]
 - [[Función unirse_a_fila]] - `references` [EXTRACTED]

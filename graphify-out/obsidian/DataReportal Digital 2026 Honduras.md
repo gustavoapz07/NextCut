@@ -1,11 +1,11 @@
 ---
 source_file: "docs/investigacion.md"
 type: "document"
-community: "Producto y competencia"
+community: "Competencia y mercado"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Producto_y_competencia
+  - community/Competencia_y_mercado
 ---
 
 # DataReportal Digital 2026 Honduras
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Contexto Honduras 2026]] - `cites` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Producto_y_competencia
+#graphify/document #graphify/EXTRACTED #community/Competencia_y_mercado

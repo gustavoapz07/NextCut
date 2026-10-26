@@ -1,12 +1,12 @@
 ---
 source_file: "docs/seguridad.md"
 type: "concept"
-community: "Base de datos y seguridad"
+community: "Antiabuso y monitoreo"
 location: "L98"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Base_de_datos_y_seguridad
+  - community/Antiabuso_y_monitoreo
 ---
 
 # Sentry
@@ -15,4 +15,4 @@ tags:
 - [[Fallo 10 · Monitoreo, logs y alertas]] - `references` [EXTRACTED]
 - [[Fallo 8 · Manejo de errores]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Base_de_datos_y_seguridad
+#graphify/concept #graphify/EXTRACTED #community/Antiabuso_y_monitoreo

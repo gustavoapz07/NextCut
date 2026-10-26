@@ -1,12 +1,12 @@
 ---
 source_file: "docs/seguridad.md"
 type: "concept"
-community: "Avisos, tiempo real y privacidad"
+community: "Herramientas de desarrollo"
 location: "L74"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Avisos_tiempo_real_y_privacidad
+  - community/Herramientas_de_desarrollo
 ---
 
 # Borrado de teléfonos a los 90 días
@@ -15,4 +15,4 @@ tags:
 - [[Fallo 5 · Datos sensibles]] - `references` [EXTRACTED]
 - [[Pendientes antes del piloto]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Avisos_tiempo_real_y_privacidad
+#graphify/concept #graphify/EXTRACTED #community/Herramientas_de_desarrollo

@@ -1,15 +1,15 @@
 {
   "README.md": {
-    "mtime": 1793019842.7968392,
-    "seen": 1793020552.0063035,
-    "ast_hash": "af06ff70c193b825fb316ab45be64e57",
-    "semantic_hash": "af06ff70c193b825fb316ab45be64e57"
+    "mtime": 1793022113.9971943,
+    "seen": 1793022456.2014785,
+    "ast_hash": "52c097b5ad9fd62219942fb23e14b4fd",
+    "semantic_hash": "52c097b5ad9fd62219942fb23e14b4fd"
   },
   "docs/bitacora.md": {
-    "mtime": 1793019864.7635012,
-    "seen": 1793020552.0063238,
-    "ast_hash": "61d9d3268e76d128ba40ee8e14e62d45",
-    "semantic_hash": "61d9d3268e76d128ba40ee8e14e62d45"
+    "mtime": 1793022131.6344328,
+    "seen": 1793022456.2014856,
+    "ast_hash": "b3642073ebfe37f9178db46ef1f2c26f",
+    "semantic_hash": "b3642073ebfe37f9178db46ef1f2c26f"
   },
   "docs/decisiones.md": {
     "mtime": 1793019806.7902422,
@@ -40,5 +40,59 @@
     "seen": 1793020552.0063388,
     "ast_hash": "9e8bdab2f52f93a3ed7a044291b75d50",
     "semantic_hash": "9e8bdab2f52f93a3ed7a044291b75d50"
+  },
+  "app/src/components/ErrorDeRuta.tsx": {
+    "mtime": 1793021536.4254127,
+    "seen": 1793022456.2014024,
+    "ast_hash": "303cae7badacbe625b091d4d42cffdef",
+    "semantic_hash": "303cae7badacbe625b091d4d42cffdef"
+  },
+  "app/src/components/NoEncontrado.tsx": {
+    "mtime": 1793021533.496315,
+    "seen": 1793022456.2014203,
+    "ast_hash": "f882271a37360b74d6460d5f3b68e29b",
+    "semantic_hash": "f882271a37360b74d6460d5f3b68e29b"
+  },
+  "app/src/features/inicio/Inicio.tsx": {
+    "mtime": 1793021529.9832892,
+    "seen": 1793022456.2014306,
+    "ast_hash": "214751f0f6342704ad3e0166fb2ca16b",
+    "semantic_hash": "214751f0f6342704ad3e0166fb2ca16b"
+  },
+  "app/src/main.tsx": {
+    "mtime": 1793021524.8177502,
+    "seen": 1793022456.2014384,
+    "ast_hash": "f8ff36b9f401346106e3b1a16286ff59",
+    "semantic_hash": "f8ff36b9f401346106e3b1a16286ff59"
+  },
+  "app/src/router.test.tsx": {
+    "mtime": 1793021543.299822,
+    "seen": 1793022456.2014456,
+    "ast_hash": "eaabd3313e5f80d44ee2af3755be4392",
+    "semantic_hash": "eaabd3313e5f80d44ee2af3755be4392"
+  },
+  "app/src/router.tsx": {
+    "mtime": 1793021527.3777103,
+    "seen": 1793022456.2014537,
+    "ast_hash": "467978dd91ecfa09af43630a0912c603",
+    "semantic_hash": "467978dd91ecfa09af43630a0912c603"
+  },
+  "app/src/test/setup.ts": {
+    "mtime": 1793021539.4900627,
+    "seen": 1793022456.2014596,
+    "ast_hash": "522e3714e0d342c9b24b23367d8a85b2",
+    "semantic_hash": "522e3714e0d342c9b24b23367d8a85b2"
+  },
+  "supabase/seed.sql": {
+    "mtime": 1793021773.7951815,
+    "seen": 1793022456.2014658,
+    "ast_hash": "4fa30c10f1fb7293f2a76d0aa99bf8f2",
+    "semantic_hash": "4fa30c10f1fb7293f2a76d0aa99bf8f2"
+  },
+  "vite.config.ts": {
+    "mtime": 1793021448.7297187,
+    "seen": 1793022456.2014723,
+    "ast_hash": "78a38ea596a0edeb7389f95c1078250d",
+    "semantic_hash": "78a38ea596a0edeb7389f95c1078250d"
   }
 }

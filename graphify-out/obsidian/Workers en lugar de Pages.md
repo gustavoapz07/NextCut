@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plan-implementacion.md"
 type: "rationale"
-community: "Stack, hosting y antiabuso"
+community: "Documentación y decisiones"
 location: "L60"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Stack_hosting_y_antiabuso
+  - community/Documentación_y_decisiones
 ---
 
 # Workers en lugar de Pages
@@ -18,4 +18,4 @@ tags:
 - [[Integración y despliegue (local, vista previa, producción)]] - `conceptually_related_to` [INFERRED]
 - [[Stack v0.1 con versiones]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Stack_hosting_y_antiabuso
+#graphify/rationale #graphify/EXTRACTED #community/Documentación_y_decisiones

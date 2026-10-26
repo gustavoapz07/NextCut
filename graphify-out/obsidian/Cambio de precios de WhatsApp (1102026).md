@@ -1,11 +1,11 @@
 ---
 source_file: "docs/investigacion.md"
 type: "concept"
-community: "Avisos, tiempo real y privacidad"
+community: "Avisos y panel del barbero"
 tags:
   - graphify/concept
   - graphify/INFERRED
-  - community/Avisos_tiempo_real_y_privacidad
+  - community/Avisos_y_panel_del_barbero
 ---
 
 # Cambio de precios de WhatsApp (1/10/2026)
@@ -16,4 +16,4 @@ tags:
 - [[Fallo 6 · Sin límite de tokens]] - `conceptually_related_to` [INFERRED]
 - [[P1 Inasistencias (no-shows)]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/INFERRED #community/Avisos_tiempo_real_y_privacidad
+#graphify/concept #graphify/INFERRED #community/Avisos_y_panel_del_barbero

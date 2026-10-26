@@ -1,12 +1,12 @@
 ---
 source_file: "README.md"
 type: "concept"
-community: "Avisos, tiempo real y privacidad"
+community: "Avisos y panel del barbero"
 location: "L53"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Avisos_tiempo_real_y_privacidad
+  - community/Avisos_y_panel_del_barbero
 ---
 
 # Panel del barbero
@@ -15,7 +15,8 @@ tags:
 - [[Botón wa.me]] - `references` [EXTRACTED]
 - [[Fallo 8 · Manejo de errores]] - `conceptually_related_to` [INFERRED]
 - [[Roles dueno y barbero]] - `conceptually_related_to` [INFERRED]
-- [[Siguiente (producto)]] - `conceptually_related_to` [EXTRACTED]
+- [[Siguiente (producto)]] - `references` [EXTRACTED]
 - [[Sprint 3 · Barbero, TV y avisos]] - `references` [EXTRACTED]
+- [[Tabla turnos (codigo_publico aleatorio)]] - `shares_data_with` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Avisos_tiempo_real_y_privacidad
+#graphify/concept #graphify/EXTRACTED #community/Avisos_y_panel_del_barbero

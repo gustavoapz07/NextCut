@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plan-implementacion.md"
 type: "rationale"
-community: "Stack, hosting y antiabuso"
+community: "Stack, arquitectura y Sprint 0"
 location: "L61"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Stack_hosting_y_antiabuso
+  - community/Stack_arquitectura_y_Sprint_0
 ---
 
 # Claves nuevas de Supabase (sb_publishable / sb_secret)
@@ -17,4 +17,4 @@ tags:
 - [[Sprint 0 · Entorno y pruebas de riesgo]] - `conceptually_related_to` [EXTRACTED]
 - [[Stack v0.1 con versiones]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Stack_hosting_y_antiabuso
+#graphify/rationale #graphify/EXTRACTED #community/Stack_arquitectura_y_Sprint_0

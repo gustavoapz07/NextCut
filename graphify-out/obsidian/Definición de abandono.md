@@ -1,12 +1,12 @@
 ---
 source_file: "docs/validacion-campo.md"
 type: "concept"
-community: "Validación, piloto y métricas"
+community: "Problema, evidencia y validación"
 location: "L83"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Validación_piloto_y_métricas
+  - community/Problema_evidencia_y_validación
 ---
 
 # Definición de abandono
@@ -15,4 +15,4 @@ tags:
 - [[Hoja de observación de sábado]] - `references` [EXTRACTED]
 - [[Tasa de abandono]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Validación_piloto_y_métricas
+#graphify/concept #graphify/EXTRACTED #community/Problema_evidencia_y_validación

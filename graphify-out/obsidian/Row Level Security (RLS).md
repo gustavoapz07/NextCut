@@ -16,6 +16,7 @@ tags:
 - [[Clave publicable y clave secreta de Supabase]] - `conceptually_related_to` [EXTRACTED]
 - [[Fallo 2 · Endpoints expuestos]] - `references` [EXTRACTED]
 - [[Fuga de datos entre barberías]] - `references` [EXTRACTED]
+- [[Modelo de datos]] - `conceptually_related_to` [INFERRED]
 - [[Pruebas pgTAP]] - `references` [EXTRACTED]
 - [[Sprint 1 · Base de datos y seguridad]] - `conceptually_related_to` [EXTRACTED]
 - [[Supabase (Postgres, Auth, Realtime, Edge Functions)]] - `conceptually_related_to` [INFERRED]

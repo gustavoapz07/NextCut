@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plan-implementacion.md"
 type: "concept"
-community: "Stack, hosting y antiabuso"
+community: "Antiabuso y monitoreo"
 location: "L88"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Stack_hosting_y_antiabuso
+  - community/Antiabuso_y_monitoreo
 ---
 
 # Supabase MCP
@@ -16,4 +16,4 @@ tags:
 - [[Sprint 4 · Dueño, antiabuso y lanzamiento]] - `conceptually_related_to` [INFERRED]
 - [[Supabase (Postgres, Auth, Realtime, Edge Functions)]] - `conceptually_related_to` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Stack_hosting_y_antiabuso
+#graphify/concept #graphify/EXTRACTED #community/Antiabuso_y_monitoreo

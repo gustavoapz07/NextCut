@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plan-implementacion.md"
 type: "concept"
-community: "Stack, hosting y antiabuso"
+community: "Stack, arquitectura y Sprint 0"
 location: "L17"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Stack_hosting_y_antiabuso
+  - community/Stack_arquitectura_y_Sprint_0
 ---
 
 # Calendario de 8 semanas
@@ -18,4 +18,4 @@ tags:
 - [[Recortes si no alcanza el tiempo]] - `references` [EXTRACTED]
 - [[Sprint 0 · Entorno y pruebas de riesgo]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Stack_hosting_y_antiabuso
+#graphify/concept #graphify/EXTRACTED #community/Stack_arquitectura_y_Sprint_0

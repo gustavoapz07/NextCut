@@ -1,12 +1,12 @@
 ---
 source_file: "README.md"
 type: "rationale"
-community: "Avisos, tiempo real y privacidad"
+community: "Avisos y panel del barbero"
 location: "L119"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Avisos_tiempo_real_y_privacidad
+  - community/Avisos_y_panel_del_barbero
 ---
 
 # Notificaciones sin costo variable
@@ -17,4 +17,4 @@ tags:
 - [[Modelo de negocio (hipótesis)]] - `conceptually_related_to` [INFERRED]
 - [[Web Push (PWA)]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Avisos_tiempo_real_y_privacidad
+#graphify/rationale #graphify/EXTRACTED #community/Avisos_y_panel_del_barbero

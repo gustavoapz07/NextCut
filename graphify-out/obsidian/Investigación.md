@@ -1,11 +1,11 @@
 ---
 source_file: "docs/investigacion.md"
 type: "document"
-community: "Investigación y documentación"
+community: "Documentación y decisiones"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Investigación_y_documentación
+  - community/Documentación_y_decisiones
 ---
 
 # Investigación
@@ -27,4 +27,4 @@ tags:
 - [[Seguridad]] - `references` [EXTRACTED]
 - [[Validación de campo]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Investigación_y_documentación
+#graphify/document #graphify/EXTRACTED #community/Documentación_y_decisiones

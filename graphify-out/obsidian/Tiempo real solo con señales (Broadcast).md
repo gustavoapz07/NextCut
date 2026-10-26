@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plan-implementacion.md"
 type: "rationale"
-community: "Avisos, tiempo real y privacidad"
+community: "Stack, arquitectura y Sprint 0"
 location: "L152"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Avisos_tiempo_real_y_privacidad
+  - community/Stack_arquitectura_y_Sprint_0
 ---
 
 # Tiempo real solo con señales (Broadcast)
@@ -18,4 +18,4 @@ tags:
 - [[Riesgos técnicos]] - `conceptually_related_to` [EXTRACTED]
 - [[Sprint 0 · Entorno y pruebas de riesgo]] - `conceptually_related_to` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Avisos_tiempo_real_y_privacidad
+#graphify/rationale #graphify/EXTRACTED #community/Stack_arquitectura_y_Sprint_0

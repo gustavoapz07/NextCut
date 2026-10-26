@@ -12,7 +12,6 @@ tags:
 # Fallo 7 · Permisos excesivos
 
 ## Connections
-- [[2026-10-26 · Plan de implementación y graphify automático]] - `references` [EXTRACTED]
 - [[ADR-007 · Anotarse por Edge Function y tiempo real solo con señales]] - `references` [EXTRACTED]
 - [[Bitácora de eventos (eventos_turno)]] - `conceptually_related_to` [INFERRED]
 - [[Clave publicable y clave secreta de Supabase]] - `references` [EXTRACTED]

@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plan-implementacion.md"
 type: "concept"
-community: "Avisos, tiempo real y privacidad"
+community: "Stack, arquitectura y Sprint 0"
 location: "L50"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Avisos_tiempo_real_y_privacidad
+  - community/Stack_arquitectura_y_Sprint_0
 ---
 
 # pg_cron + pg_net
@@ -17,4 +17,4 @@ tags:
 - [[Funciones de la base (security definer)]] - `conceptually_related_to` [EXTRACTED]
 - [[Stack v0.1 con versiones]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Avisos_tiempo_real_y_privacidad
+#graphify/concept #graphify/EXTRACTED #community/Stack_arquitectura_y_Sprint_0

@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plan-implementacion.md"
 type: "concept"
-community: "Avisos, tiempo real y privacidad"
+community: "Stack, arquitectura y Sprint 0"
 location: "L96"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Avisos_tiempo_real_y_privacidad
+  - community/Stack_arquitectura_y_Sprint_0
 ---
 
 # Arquitectura detallada
@@ -20,4 +20,4 @@ tags:
 - [[Tiempo real solo con señales (Broadcast)]] - `references` [EXTRACTED]
 - [[pg_cron + pg_net]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Avisos_tiempo_real_y_privacidad
+#graphify/concept #graphify/EXTRACTED #community/Stack_arquitectura_y_Sprint_0

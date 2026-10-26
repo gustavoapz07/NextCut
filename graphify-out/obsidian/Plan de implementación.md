@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plan-implementacion.md"
 type: "document"
-community: "Investigación y documentación"
+community: "Documentación y decisiones"
 location: "L1"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Investigación_y_documentación
+  - community/Documentación_y_decisiones
 ---
 
 # Plan de implementación
@@ -15,6 +15,7 @@ tags:
 - [[2026-10-26 · Plan de implementación y graphify automático]] - `references` [EXTRACTED]
 - [[ADR-006 · Herramientas de desarrollo y pruebas]] - `references` [EXTRACTED]
 - [[ADR-007 · Anotarse por Edge Function y tiempo real solo con señales]] - `conceptually_related_to` [INFERRED]
+- [[Arquitectura]] - `references` [EXTRACTED]
 - [[Arquitectura detallada]] - `references` [EXTRACTED]
 - [[Bitácora de cambios]] - `references` [EXTRACTED]
 - [[Calendario de 8 semanas]] - `references` [EXTRACTED]
@@ -35,4 +36,4 @@ tags:
 - [[Validación de campo]] - `references` [EXTRACTED]
 - [[graphify (grafo de conocimiento)]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Investigación_y_documentación
+#graphify/document #graphify/EXTRACTED #community/Documentación_y_decisiones

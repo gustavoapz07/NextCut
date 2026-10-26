@@ -1,12 +1,12 @@
 ---
 source_file: "docs/bitacora.md"
 type: "document"
-community: "Investigación y documentación"
+community: "Documentación y decisiones"
 location: "L1"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Investigación_y_documentación
+  - community/Documentación_y_decisiones
 ---
 
 # Bitácora de cambios
@@ -14,6 +14,7 @@ tags:
 ## Connections
 - [[2026-10-25 · Investigación inicial]] - `references` [EXTRACTED]
 - [[2026-10-26 · Plan de implementación y graphify automático]] - `references` [EXTRACTED]
+- [[2026-10-26 · Sprint 0 base del proyecto]] - `references` [EXTRACTED]
 - [[Definición de terminado]] - `references` [EXTRACTED]
 - [[Plan de implementación]] - `references` [EXTRACTED]
 - [[README de Siguiente]] - `references` [EXTRACTED]
@@ -22,4 +23,4 @@ tags:
 - [[Sprint 0 · Entorno y pruebas de riesgo]] - `references` [EXTRACTED]
 - [[Validación de campo]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Investigación_y_documentación
+#graphify/document #graphify/EXTRACTED #community/Documentación_y_decisiones

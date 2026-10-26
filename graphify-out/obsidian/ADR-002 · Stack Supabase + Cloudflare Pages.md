@@ -1,12 +1,12 @@
 ---
 source_file: "docs/decisiones.md"
 type: "rationale"
-community: "Stack, hosting y antiabuso"
+community: "Documentación y decisiones"
 location: "L21"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Stack_hosting_y_antiabuso
+  - community/Documentación_y_decisiones
 ---
 
 # ADR-002 · Stack Supabase + Cloudflare Pages
@@ -23,4 +23,4 @@ tags:
 - [[Vercel (alternativa descartada)]] - `references` [EXTRACTED]
 - [[Workers en lugar de Pages]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Stack_hosting_y_antiabuso
+#graphify/rationale #graphify/EXTRACTED #community/Documentación_y_decisiones

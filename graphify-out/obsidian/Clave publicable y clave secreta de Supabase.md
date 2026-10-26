@@ -12,7 +12,6 @@ tags:
 # Clave publicable y clave secreta de Supabase
 
 ## Connections
-- [[2026-10-26 · Plan de implementación y graphify automático]] - `references` [INFERRED]
 - [[Fallo 1 · API keys en el código]] - `references` [EXTRACTED]
 - [[Fallo 7 · Permisos excesivos]] - `references` [EXTRACTED]
 - [[Row Level Security (RLS)]] - `conceptually_related_to` [EXTRACTED]

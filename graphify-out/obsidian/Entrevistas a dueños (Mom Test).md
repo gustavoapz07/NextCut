@@ -1,12 +1,12 @@
 ---
 source_file: "docs/validacion-campo.md"
 type: "concept"
-community: "Validación, piloto y métricas"
+community: "Problema, evidencia y validación"
 location: "L17"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Validación_piloto_y_métricas
+  - community/Problema_evidencia_y_validación
 ---
 
 # Entrevistas a dueños (Mom Test)
@@ -22,4 +22,4 @@ tags:
 - [[Registro por entrevista]] - `references` [EXTRACTED]
 - [[Validación de campo]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Validación_piloto_y_métricas
+#graphify/concept #graphify/EXTRACTED #community/Problema_evidencia_y_validación

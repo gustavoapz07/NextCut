@@ -2,7 +2,7 @@
 
 > Que ningún cliente se vaya por no saber cuánto le falta.
 
-**Estado:** investigación terminada · [plan de implementación](docs/plan-implementacion.md) listo · validación de campo pendiente · sin código todavía
+**Estado:** investigación terminada · [plan de implementación](docs/plan-implementacion.md) listo · Sprint 0 en curso (base del proyecto lista) · validación de campo pendiente
 **Última actualización:** 26 de octubre de 2026
 
 Siguiente es un SaaS para barberías que atienden por orden de llegada. Convierte la fila física en una fila virtual: el cliente escanea un QR o abre un enlace, ve cuántas personas hay y cuánto falta, se anota desde donde esté y recibe un aviso cuando le toca. El barbero pasa los turnos desde el celular. El dueño ve, por primera vez, cuántos clientes atendió cada barbero, cuánto esperaron y cuántos se fueron sin cortarse.
@@ -245,17 +245,20 @@ El diseño se auditó contra los 10 fallos más comunes en apps con APIs y agent
 
 La estructura completa está en el [plan de implementación](docs/plan-implementacion.md#7-estructura-del-repositorio).
 
-## Desarrollo local (cuando exista el código)
+## Desarrollo local
 
-Requisitos: Node.js 24 LTS y Docker Desktop. La CLI de Supabase y Wrangler se instalan con el proyecto.
+Requisitos: Node.js 24 LTS y, para la base local, Docker Desktop. La CLI de Supabase, Wrangler, Biome y Lefthook se instalan con el proyecto.
 
 ```bash
 npm install
-npx supabase start      # Postgres, Auth, Realtime y Edge Functions locales
+npm run dev             # app en http://localhost:5173
+npm run check           # lint, tipos, pruebas y build (lo mismo que corre CI)
+npx supabase start      # Postgres, Auth, Realtime y Edge Functions locales (requiere Docker)
 npx supabase db reset   # aplica migraciones y datos de prueba
-npm run dev
 npx supabase test db    # pruebas de RLS: un barbero de A no ve la fila de B
 ```
+
+Antes de cada commit, Lefthook corre Biome y gitleaks; antes de cada push, los tipos y las pruebas.
 
 Variables en `.env.local` (nunca se suben al repositorio; hay un `.env.example`):
 

@@ -1,11 +1,11 @@
 ---
 source_file: "docs/investigacion.md"
 type: "rationale"
-community: "Investigación y documentación"
+community: "Problema, evidencia y validación"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Investigación_y_documentación
+  - community/Problema_evidencia_y_validación
 ---
 
 # Análisis de sensibilidad
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Matriz de decisión ponderada]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Investigación_y_documentación
+#graphify/rationale #graphify/EXTRACTED #community/Problema_evidencia_y_validación

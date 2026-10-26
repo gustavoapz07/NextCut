@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plan-implementacion.md"
 type: "concept"
-community: "Stack, hosting y antiabuso"
+community: "Avisos y panel del barbero"
 location: "L53"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Stack_hosting_y_antiabuso
+  - community/Avisos_y_panel_del_barbero
 ---
 
 # Resend (SMTP de Auth)
@@ -16,4 +16,4 @@ tags:
 - [[Sprint 3 · Barbero, TV y avisos]] - `conceptually_related_to` [EXTRACTED]
 - [[Stack v0.1 con versiones]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Stack_hosting_y_antiabuso
+#graphify/concept #graphify/EXTRACTED #community/Avisos_y_panel_del_barbero

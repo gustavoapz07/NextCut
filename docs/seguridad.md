@@ -1,6 +1,6 @@
 # Seguridad: auditoría del diseño
 
-**Proyecto:** [Siguiente](../README.md) · **Fecha:** 25 de octubre de 2026 · **Fase:** diseño (sin código todavía)
+**Proyecto:** [NextCut](../README.md) · **Fecha:** 25 de octubre de 2026 · **Fase:** diseño (sin código todavía)
 **Relacionado:** [Decisiones](decisiones.md) · [Investigación](investigacion.md) · [Plan de implementación](plan-implementacion.md) · [Bitácora](bitacora.md)
 
 El diseño se revisó contra los 10 fallos de seguridad más comunes en apps con APIs y agentes. Cada control tiene una **prueba** que debe pasar antes de lanzar. El estado se actualiza en cada fase.

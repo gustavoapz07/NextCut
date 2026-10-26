@@ -1,7 +1,7 @@
 // Hosting de la PWA en Cloudflare Workers como recursos estáticos (ADR-005).
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "siguiente",
+  "name": "nextcut",
   "compatibility_date": "2026-10-26",
   "assets": {
     "directory": "./dist",

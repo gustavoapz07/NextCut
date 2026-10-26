@@ -1,5 +1,5 @@
 {
-  "name": "siguiente",
+  "name": "nextcut",
   "version": "0.0.0",
   "private": true,
   "description": "Fila virtual para barberías que atienden por orden de llegada",

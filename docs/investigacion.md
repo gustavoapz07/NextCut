@@ -1,6 +1,6 @@
 # Investigación: qué problema de las barberías vale la pena resolver
 
-**Proyecto:** [Siguiente](../README.md) · **Autor:** Gustavo Pérez · **Fecha:** 25 de octubre de 2026
+**Proyecto:** [NextCut](../README.md) · **Autor:** Gustavo Pérez · **Fecha:** 25 de octubre de 2026
 **Relacionado:** [Validación de campo](validacion-campo.md) · [Decisiones](decisiones.md) · [Seguridad](seguridad.md) · [Bitácora](bitacora.md)
 
 ---

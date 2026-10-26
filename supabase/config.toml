@@ -2,7 +2,7 @@
 # https://supabase.com/docs/guides/local-development/cli/config
 # A string used to distinguish different Supabase projects on the same host. Defaults to the
 # working directory name when running `supabase init`.
-project_id = "siguiente"
+project_id = "nextcut"
 
 [api]
 enabled = true
@@ -20,7 +20,7 @@ max_rows = 1000
 # `postgres` are reachable through the Data API roles (`anon`, `authenticated`, `service_role`)
 # without explicit GRANTs, matching the cloud default. Set to `false` to require explicit GRANTs
 # instead. Left unset, a fresh project falls back to `true`.
-# Siguiente: nada queda expuesto sin un GRANT explícito (fallo 2 de docs/seguridad.md).
+# NextCut: nada queda expuesto sin un GRANT explícito (fallo 2 de docs/seguridad.md).
 auto_expose_new_tables = false
 
 [api.tls]
@@ -115,7 +115,7 @@ port = 54324
 # sender_name = "Admin"
 
 [storage]
-# Siguiente no guarda archivos en el MVP.
+# NextCut no guarda archivos en el MVP.
 enabled = false
 # The maximum file size allowed (e.g. "5MB", "500KB").
 file_size_limit = "50MiB"

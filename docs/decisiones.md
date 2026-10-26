@@ -1,6 +1,6 @@
 # Registro de decisiones (ADR)
 
-**Proyecto:** [Siguiente](../README.md)
+**Proyecto:** [NextCut](../README.md)
 **Relacionado:** [Investigación](investigacion.md) · [Seguridad](seguridad.md) · [Plan de implementación](plan-implementacion.md) · [Bitácora](bitacora.md)
 
 Cada decisión importante queda aquí con su contexto, las alternativas consideradas y sus consecuencias. Si una decisión cambia, no se borra: se marca como reemplazada y se agrega una nueva.
@@ -88,3 +88,15 @@ Cada decisión importante queda aquí con su contexto, las alternativas consider
   - Las Edge Functions se prueban desplegadas y la lógica pura (como `eta.ts`) con Vitest.
   - Las pruebas de la base dependen de CI, así que el repositorio tiene que estar en GitHub antes del Sprint 1.
   - Antes del piloto hará falta otro espacio gratuito para producción: pausar otro proyecto o pagar Pro.
+
+## ADR-009 · Nombre del producto: NextCut
+
+- **Fecha:** 26/10/2026 · **Estado:** aceptada
+- **Contexto:** "Siguiente" era un nombre provisional, tomado del "¡siguiente!" que se oye en toda barbería. El autor creó el repositorio público `gustavoapz07/NextCut` y eligió ese nombre para el software.
+- **Decisión:** el producto se llama **NextCut** ("el siguiente corte"). Cambian el README, la documentación, la interfaz, `package.json`, el nombre del Worker de Cloudflare (`nextcut`) y el `project_id` local de Supabase.
+  - El proyecto de Supabase en la nube conserva el nombre `siguiente-pruebas`: es solo una etiqueta y su referencia no cambia.
+  - Las entradas pasadas de la [bitácora](bitacora.md) no se reescriben, porque registran lo que pasó en su momento.
+- **Alternativas:** mantener el nombre provisional.
+- **Consecuencias:**
+  - El nombre está en inglés para un mercado hispanohablante; conviene ver cómo lo reciben los dueños en las entrevistas de [validación](validacion-campo.md).
+  - Una búsqueda del 26/10/2026 encontró posibles usos de "NextCut" en el mismo sector: una plataforma de citas para barberías en Düsseldorf (dato de un directorio de empresas, sin verificar) y una app de reservas para salones en el portafolio de una agencia. Antes de invertir en marca (dominio, registro de marca en Honduras, material impreso), hay que revisar disponibilidad.

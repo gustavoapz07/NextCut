@@ -1,6 +1,6 @@
 # Plan de implementación (v0.1)
 
-**Proyecto:** [Siguiente](../README.md) · **Fecha:** 26 de octubre de 2026 · **Estado:** propuesto
+**Proyecto:** [NextCut](../README.md) · **Fecha:** 26 de octubre de 2026 · **Estado:** propuesto
 **Relacionado:** [Decisiones](decisiones.md) · [Seguridad](seguridad.md) · [Validación de campo](validacion-campo.md) · [Bitácora](bitacora.md)
 
 Este es el plan principal para pasar del diseño al MVP. Define el stack con sus versiones, las herramientas de trabajo, la arquitectura detallada, el orden de construcción por semanas y las pruebas que tiene que pasar cada parte antes del piloto.
@@ -288,7 +288,7 @@ No construye funciones del producto. Prepara el entorno y prueba lo que podría 
 - Instalación presencial antes del primer sábado; el QR en la puerta y en la bio de Instagram.
 - Conteo en sitio con la [hoja de observación](validacion-campo.md#3-hoja-de-observación-sábado) para comparar el abandono con la línea base.
 - Revisión diaria de errores, alertas y métricas de éxito; cada hallazgo a la bitácora.
-- **Condición para pasar a la v0.2:** la barbería usa Siguiente 2 sábados seguidos ([hoja de ruta](../README.md#hoja-de-ruta)).
+- **Condición para pasar a la v0.2:** la barbería usa NextCut 2 sábados seguidos ([hoja de ruta](../README.md#hoja-de-ruta)).
 
 ---
 
@@ -370,5 +370,6 @@ Fuentes: [Supabase Pricing](https://supabase.com/pricing), [Cloudflare: migrar d
 - [ ] **Dominio:** `workers.dev` gratis o dominio propio, antes de imprimir el QR del piloto.
 - [ ] **Espacio para producción:** la cuenta de Supabase ya usa sus 2 proyectos gratuitos (`siguiente-pruebas` y `cms-opalo`). Antes del piloto hay que pausar otro proyecto o pagar Pro.
 - [ ] **Plazo de borrado de teléfonos:** 90 días propuestos, a confirmar con los dueños ([fallo 5](seguridad.md#5-datos-sensibles--)).
-- [ ] **Repositorio público o privado:** público da minutos ilimitados de CI y sirve de portafolio; los secretos nunca están en el código de todos modos.
+- [x] **Repositorio público o privado:** público, en [gustavoapz07/NextCut](https://github.com/gustavoapz07/NextCut), con los commits firmados con el correo privado de GitHub.
+- [ ] **Disponibilidad del nombre NextCut:** revisar dominio y marca antes de imprimir material ([ADR-009](decisiones.md#adr-009--nombre-del-producto-nextcut)).
 - [ ] **Términos de uso comercial** de los planes gratuitos de Cloudflare y Supabase, antes de cobrar.

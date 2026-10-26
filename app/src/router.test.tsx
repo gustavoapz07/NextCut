@@ -10,7 +10,7 @@ function abrir(ruta: string) {
 describe("rutas", () => {
   it("muestra el inicio en /", () => {
     abrir("/");
-    expect(screen.getByRole("heading", { level: 1, name: "Siguiente" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1, name: "NextCut" })).toBeInTheDocument();
   });
 
   it("muestra la página de no encontrado en una ruta desconocida", () => {

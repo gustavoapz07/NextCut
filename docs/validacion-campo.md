@@ -1,6 +1,6 @@
 # Validación de campo
 
-**Proyecto:** [Siguiente](../README.md) · **Fecha:** 25 de octubre de 2026 · **Estado:** pendiente
+**Proyecto:** [NextCut](../README.md) · **Fecha:** 25 de octubre de 2026 · **Estado:** pendiente
 **Relacionado:** [Investigación](investigacion.md#8-lo-que-no-sabemos-y-cómo-lo-vamos-a-medir) · [Decisiones](decisiones.md) · [Plan de implementación](plan-implementacion.md) · [Bitácora](bitacora.md)
 
 La investigación encontró evidencia fuerte del **mecanismo** (una fila larga y de duración desconocida espanta clientes), pero ningún dato de **cuánto** pasa en barberías hondureñas. Este plan cubre ese vacío en dos semanas y antes de escribir código.
@@ -46,7 +46,7 @@ La investigación encontró evidencia fuerte del **mecanismo** (una fila larga y
 **Números**
 12. ¿Cuánto cuesta el corte que más vende? ¿Cuántos cortes hacen en un sábado normal?
 
-**Precio** (solo al final, después de describir Siguiente en dos frases)
+**Precio** (solo al final, después de describir NextCut en dos frases)
 13. ¿A qué precio al mes le parecería tan barato que dudaría de que funcione?
 14. ¿A qué precio le parecería barato?
 15. ¿A qué precio le parecería caro, pero lo pagaría?

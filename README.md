@@ -1,13 +1,13 @@
-# Siguiente · fila virtual para barberías
+# NextCut · fila virtual para barberías
 
 > Que ningún cliente se vaya por no saber cuánto le falta.
 
 **Estado:** investigación terminada · [plan de implementación](docs/plan-implementacion.md) listo · Sprint 0 en curso (base del proyecto lista) · validación de campo pendiente
 **Última actualización:** 26 de octubre de 2026
 
-Siguiente es un SaaS para barberías que atienden por orden de llegada. Convierte la fila física en una fila virtual: el cliente escanea un QR o abre un enlace, ve cuántas personas hay y cuánto falta, se anota desde donde esté y recibe un aviso cuando le toca. El barbero pasa los turnos desde el celular. El dueño ve, por primera vez, cuántos clientes atendió cada barbero, cuánto esperaron y cuántos se fueron sin cortarse.
+NextCut es un SaaS para barberías que atienden por orden de llegada. Convierte la fila física en una fila virtual: el cliente escanea un QR o abre un enlace, ve cuántas personas hay y cuánto falta, se anota desde donde esté y recibe un aviso cuando le toca. El barbero pasa los turnos desde el celular. El dueño ve, por primera vez, cuántos clientes atendió cada barbero, cuánto esperaron y cuántos se fueron sin cortarse.
 
-El nombre viene del "¡siguiente!" que se oye en toda barbería. Es provisional.
+NextCut ("el siguiente corte") reemplazó el 26/10/2026 al nombre provisional "Siguiente", que venía del "¡siguiente!" que se oye en toda barbería ([ADR-009](docs/decisiones.md#adr-009--nombre-del-producto-nextcut)).
 
 ---
 
@@ -36,7 +36,7 @@ Comparamos cuatro problemas recurrentes con una matriz ponderada (frecuencia, co
 | Inasistencias a citas (no-shows) | 3.45 |
 | Captación y retención de clientes | 2.85 |
 
-La fila gana en todos los escenarios de sensibilidad. Las inasistencias ya las resuelven Booksy, Fresha y AgendaPro, y sus dos remedios (recordatorios por WhatsApp y depósitos) tienen costo variable en Honduras. El control de caja no tiene ni una cifra pública, así que no se puede elegir sin inventar. Aun así, Siguiente lo cubre en parte: cada turno cerrado registra barbero, servicio y monto.
+La fila gana en todos los escenarios de sensibilidad. Las inasistencias ya las resuelven Booksy, Fresha y AgendaPro, y sus dos remedios (recordatorios por WhatsApp y depósitos) tienen costo variable en Honduras. El control de caja no tiene ni una cifra pública, así que no se puede elegir sin inventar. Aun así, NextCut lo cubre en parte: cada turno cerrado registra barbero, servicio y monto.
 
 ---
 
@@ -139,7 +139,7 @@ La API oficial de WhatsApp llegará como complemento pagado, con el costo de Met
 | "No llegó" en turnos remotos | % de turnos remotos que no se presentan | Riesgo de abuso |
 | Atendidos por barbero al día | Conteo de turnos `atendido` | Valor directo para el dueño |
 
-**Límite honesto:** la persona que mira la fila desde la puerta y se va sin anotarse no aparece en el sistema. Ese abandono se mide en la validación de campo, contando en sitio antes y después de instalar Siguiente.
+**Límite honesto:** la persona que mira la fila desde la puerta y se va sin anotarse no aparece en el sistema. Ese abandono se mide en la validación de campo, contando en sitio antes y después de instalar NextCut.
 
 ---
 
@@ -205,7 +205,7 @@ Se consideró PHP + MySQL, el stack que el autor ya conoce. Se descartó para el
 
 El diseño se auditó contra los 10 fallos más comunes en apps con APIs y agentes. El detalle, con amenazas, controles y pruebas, está en [docs/seguridad.md](docs/seguridad.md).
 
-| # | Fallo | Control en Siguiente |
+| # | Fallo | Control en NextCut |
 |---|---|---|
 | 1 | API keys en el código | Solo la clave publicable va al frontend. Las secretas viven en los secretos de Supabase. `gitleaks` en pre-commit y CI |
 | 2 | Endpoints expuestos | RLS activo en todas las tablas. El público solo llama a 3 funciones RPC y a una vista sin teléfonos ni nombres completos; para anotarse pasa por una Edge Function con Turnstile |
@@ -277,9 +277,9 @@ VITE_SENTRY_DSN=
 
 ## Modelo de negocio (hipótesis a validar)
 
-- **Gratis:** 1 barbero, con "Hecho con Siguiente" en la página pública. Cada cliente que escanea el QR ve la marca, así que el plan gratis también sirve de canal de adquisición.
+- **Gratis:** 1 barbero, con "Hecho con NextCut" en la página pública. Cada cliente que escanea el QR ve la marca, así que el plan gratis también sirve de canal de adquisición.
 - **Barbería:** tarifa plana al mes **sin cobro por barbero**. Booksy cobra USD 20 por cada barbero adicional y Fresha alrededor de USD 14.95 por miembro.
-- **Precio objetivo:** menos que el valor de 2 cortes al mes. Si Siguiente evita más de 2 abandonos al mes, se paga solo. El precio exacto sale de las entrevistas.
+- **Precio objetivo:** menos que el valor de 2 cortes al mes. Si NextCut evita más de 2 abandonos al mes, se paga solo. El precio exacto sale de las entrevistas.
 - **Complemento WhatsApp:** costo de Meta más un margen, con un tope mensual que define el dueño.
 
 ## Validación antes de programar

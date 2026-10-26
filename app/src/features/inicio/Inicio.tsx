@@ -20,7 +20,7 @@ export function Inicio() {
         <p className="flex items-center gap-2 text-sm font-semibold tracking-wide text-marca-oscuro uppercase dark:text-marca">
           <span aria-hidden="true">›</span> Fila virtual para barberías
         </p>
-        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">Siguiente</h1>
+        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">NextCut</h1>
         <p className="text-lg text-zinc-600 dark:text-zinc-400">
           Que ningún cliente se vaya por no saber cuánto le falta.
         </p>

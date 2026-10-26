@@ -1,0 +1,5 @@
+# Saltos de línea LF en todo el repositorio (CI en Linux y Biome los esperan)
+* text=auto eol=lf
+
+# Fusión de dos grafos de graphify sin conflictos (lo registra `graphify hook install`)
+graphify-out/graph.json merge=graphify

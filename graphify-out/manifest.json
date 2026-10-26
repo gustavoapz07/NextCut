@@ -1,0 +1,44 @@
+{
+  "README.md": {
+    "mtime": 1793019842.7968392,
+    "seen": 1793020552.0063035,
+    "ast_hash": "af06ff70c193b825fb316ab45be64e57",
+    "semantic_hash": "af06ff70c193b825fb316ab45be64e57"
+  },
+  "docs/bitacora.md": {
+    "mtime": 1793019864.7635012,
+    "seen": 1793020552.0063238,
+    "ast_hash": "61d9d3268e76d128ba40ee8e14e62d45",
+    "semantic_hash": "61d9d3268e76d128ba40ee8e14e62d45"
+  },
+  "docs/decisiones.md": {
+    "mtime": 1793019806.7902422,
+    "seen": 1793020552.006333,
+    "ast_hash": "7fc46c56204bfb27dc7f508bf4fa07ca",
+    "semantic_hash": "7fc46c56204bfb27dc7f508bf4fa07ca"
+  },
+  "docs/investigacion.md": {
+    "mtime": 1792988542.318203,
+    "seen": 1793019160.8363566,
+    "ast_hash": "9b646f0595ff271817c23a7f9e544a01",
+    "semantic_hash": "9b646f0595ff271817c23a7f9e544a01"
+  },
+  "docs/seguridad.md": {
+    "mtime": 1793020512.7449152,
+    "seen": 1793020552.0063457,
+    "ast_hash": "e097e696aa17b10cb6ee07f0ac8aaaa0",
+    "semantic_hash": "e097e696aa17b10cb6ee07f0ac8aaaa0"
+  },
+  "docs/validacion-campo.md": {
+    "mtime": 1793019865.236026,
+    "seen": 1793020552.006352,
+    "ast_hash": "bf1f279eda165cca94d589caf5d70b6e",
+    "semantic_hash": "bf1f279eda165cca94d589caf5d70b6e"
+  },
+  "docs/plan-implementacion.md": {
+    "mtime": 1793019766.268692,
+    "seen": 1793020552.0063388,
+    "ast_hash": "9e8bdab2f52f93a3ed7a044291b75d50",
+    "semantic_hash": "9e8bdab2f52f93a3ed7a044291b75d50"
+  }
+}

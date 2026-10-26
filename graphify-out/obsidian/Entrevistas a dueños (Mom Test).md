@@ -1,12 +1,12 @@
 ---
 source_file: "docs/validacion-campo.md"
 type: "concept"
-community: "Problema, evidencia y validación"
+community: "Problema, evidencia y mercado"
 location: "L17"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Problema_evidencia_y_validación
+  - community/Problema_evidencia_y_mercado
 ---
 
 # Entrevistas a dueños (Mom Test)
@@ -22,4 +22,4 @@ tags:
 - [[Registro por entrevista]] - `references` [EXTRACTED]
 - [[Validación de campo]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Problema_evidencia_y_validación
+#graphify/concept #graphify/EXTRACTED #community/Problema_evidencia_y_mercado

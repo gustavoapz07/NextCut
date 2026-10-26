@@ -247,16 +247,18 @@ La estructura completa está en el [plan de implementación](docs/plan-implement
 
 ## Desarrollo local
 
-Requisitos: Node.js 24 LTS y, para la base local, Docker Desktop. La CLI de Supabase, Wrangler, Biome y Lefthook se instalan con el proyecto.
+Requisitos: Node.js 24 LTS. No hace falta Docker: la app se desarrolla contra el proyecto de Supabase de pruebas en la nube ([ADR-008](docs/decisiones.md#adr-008--desarrollo-contra-supabase-en-la-nube-sin-docker-local)). La CLI de Supabase, Wrangler, Biome y Lefthook se instalan con el proyecto.
 
 ```bash
 npm install
-npm run dev             # app en http://localhost:5173
+npm run dev             # app en http://localhost:5173, conectada al proyecto de pruebas
 npm run check           # lint, tipos, pruebas y build (lo mismo que corre CI)
-npx supabase start      # Postgres, Auth, Realtime y Edge Functions locales (requiere Docker)
-npx supabase db reset   # aplica migraciones y datos de prueba
-npx supabase test db    # pruebas de RLS: un barbero de A no ve la fila de B
+npx supabase login      # una sola vez: abre el navegador
+npx supabase link --project-ref bquvluxsqfacleumlnmi
+npx supabase db push    # aplica las migraciones al proyecto de pruebas
 ```
+
+Las pruebas de RLS con pgTAP (un barbero de A no ve la fila de B) corren en CI, que levanta Supabase en su propio runner.
 
 Antes de cada commit, Lefthook corre Biome y gitleaks; antes de cada push, los tipos y las pruebas.
 

@@ -1,12 +1,12 @@
 ---
 source_file: "docs/bitacora.md"
 type: "document"
-community: "Documentación y decisiones"
+community: "Documentación, decisiones y piloto"
 location: "L9"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Documentación_y_decisiones
+  - community/Documentación_decisiones_y_piloto
 ---
 
 # 2026-10-25 · Investigación inicial
@@ -21,4 +21,4 @@ tags:
 - [[Seguridad]] - `references` [EXTRACTED]
 - [[Validación de campo]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Documentación_y_decisiones
+#graphify/document #graphify/EXTRACTED #community/Documentación_decisiones_y_piloto

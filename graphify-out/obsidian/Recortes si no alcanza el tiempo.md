@@ -1,21 +1,20 @@
 ---
 source_file: "docs/plan-implementacion.md"
-type: "rationale"
-community: "Stack, arquitectura y Sprint 0"
-location: "L342"
+type: "document"
+community: "Herramientas y entorno de desarrollo"
+location: "L344"
 tags:
-  - graphify/rationale
+  - graphify/document
   - graphify/EXTRACTED
-  - community/Stack_arquitectura_y_Sprint_0
+  - community/Herramientas_y_entorno_de_desarrollo
 ---
 
 # Recortes si no alcanza el tiempo
 
 ## Connections
 - [[Calendario de 8 semanas]] - `references` [EXTRACTED]
-- [[Cloudflare Turnstile]] - `conceptually_related_to` [EXTRACTED]
-- [[Pruebas pgTAP]] - `conceptually_related_to` [INFERRED]
+- [[Plan de implementación]] - `references` [EXTRACTED]
 - [[Riesgos técnicos]] - `references` [EXTRACTED]
-- [[Web Push (PWA)]] - `conceptually_related_to` [EXTRACTED]
+- [[Row Level Security (RLS)]] - `conceptually_related_to` [INFERRED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Stack_arquitectura_y_Sprint_0
+#graphify/document #graphify/EXTRACTED #community/Herramientas_y_entorno_de_desarrollo

@@ -1,12 +1,12 @@
 ---
 source_file: "docs/seguridad.md"
 type: "concept"
-community: "Problema, evidencia y validación"
+community: "Base de datos, seguridad y tiempo real"
 location: "L19"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Problema_evidencia_y_validación
+  - community/Base_de_datos_seguridad_y_tiempo_real
 ---
 
 # Turnos fantasma
@@ -15,4 +15,4 @@ tags:
 - [[Amenazas propias de una fila virtual]] - `references` [EXTRACTED]
 - [[P1 Inasistencias (no-shows)]] - `semantically_similar_to` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Problema_evidencia_y_validación
+#graphify/concept #graphify/EXTRACTED #community/Base_de_datos_seguridad_y_tiempo_real

@@ -1,12 +1,12 @@
 ---
 source_file: "docs/seguridad.md"
 type: "concept"
-community: "Base de datos y seguridad"
+community: "Base de datos, seguridad y tiempo real"
 location: "L85"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Base_de_datos_y_seguridad
+  - community/Base_de_datos_seguridad_y_tiempo_real
 ---
 
 # Fallo 7 · Permisos excesivos
@@ -23,7 +23,7 @@ tags:
 - [[Pruebas pgTAP]] - `references` [EXTRACTED]
 - [[Roles dueno y barbero]] - `references` [EXTRACTED]
 - [[Seguridad]] - `references` [EXTRACTED]
-- [[Sprint 1 · Base de datos y seguridad]] - `conceptually_related_to` [EXTRACTED]
+- [[Sprint 1 · Base de datos y seguridad]] - `references` [EXTRACTED]
 - [[Vista fila_publica]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Base_de_datos_y_seguridad
+#graphify/concept #graphify/EXTRACTED #community/Base_de_datos_seguridad_y_tiempo_real

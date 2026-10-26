@@ -1,12 +1,12 @@
 ---
 source_file: "docs/validacion-campo.md"
 type: "concept"
-community: "Problema, evidencia y validación"
+community: "Problema, evidencia y mercado"
 location: "L73"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Problema_evidencia_y_validación
+  - community/Problema_evidencia_y_mercado
 ---
 
 # Hoja de observación de sábado
@@ -18,4 +18,4 @@ tags:
 - [[Piloto (2 sábados en 1 barbería)]] - `references` [EXTRACTED]
 - [[Validación de campo]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Problema_evidencia_y_validación
+#graphify/concept #graphify/EXTRACTED #community/Problema_evidencia_y_mercado

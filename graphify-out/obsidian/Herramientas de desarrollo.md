@@ -1,25 +1,27 @@
 ---
 source_file: "docs/plan-implementacion.md"
-type: "concept"
-community: "Stack, arquitectura y Sprint 0"
+type: "document"
+community: "Herramientas y entorno de desarrollo"
 location: "L63"
 tags:
-  - graphify/concept
+  - graphify/document
   - graphify/EXTRACTED
-  - community/Stack_arquitectura_y_Sprint_0
+  - community/Herramientas_y_entorno_de_desarrollo
 ---
 
 # Herramientas de desarrollo
 
 ## Connections
-- [[ADR-006 · Herramientas de desarrollo y pruebas]] - `conceptually_related_to` [INFERRED]
-- [[Biome (lint y formato)]] - `references` [EXTRACTED]
-- [[Desarrollo local]] - `conceptually_related_to` [INFERRED]
+- [[2026-10-26 · Sprint 0 base del proyecto]] - `conceptually_related_to` [INFERRED]
+- [[ADR-006 · Herramientas de desarrollo y pruebas]] - `references` [EXTRACTED]
+- [[ADR-008 · Desarrollo contra Supabase en la nube, sin Docker local]] - `references` [EXTRACTED]
+- [[Biome 2.6 (lint y formato)]] - `references` [EXTRACTED]
 - [[Lefthook (hooks de git)]] - `references` [EXTRACTED]
 - [[Plan de implementación]] - `references` [EXTRACTED]
 - [[Playwright + axe]] - `references` [EXTRACTED]
-- [[Pruebas pgTAP]] - `references` [EXTRACTED]
+- [[Proyecto siguiente-pruebas (Supabase en la nube)]] - `references` [EXTRACTED]
+- [[Pruebas pgTAP]] - `references` [INFERRED]
 - [[Vitest + Testing Library]] - `references` [EXTRACTED]
-- [[gitleaks]] - `references` [EXTRACTED]
+- [[gitleaks (secretos)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Stack_arquitectura_y_Sprint_0
+#graphify/document #graphify/EXTRACTED #community/Herramientas_y_entorno_de_desarrollo

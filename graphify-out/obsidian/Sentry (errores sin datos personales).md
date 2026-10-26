@@ -1,20 +1,18 @@
 ---
 source_file: "README.md"
 type: "concept"
-community: "Stack, arquitectura y Sprint 0"
+community: "Herramientas y entorno de desarrollo"
 location: "L182"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Stack_arquitectura_y_Sprint_0
+  - community/Herramientas_y_entorno_de_desarrollo
 ---
 
 # Sentry (errores sin datos personales)
 
 ## Connections
-- [[Arquitectura]] - `references` [EXTRACTED]
-- [[Sprint 4 · Dueño, antiabuso y lanzamiento]] - `references` [EXTRACTED]
-- [[Stack v0.1 con versiones]] - `references` [EXTRACTED]
-- [[Variables de entorno (.env.local)]] - `shares_data_with` [EXTRACTED]
+- [[Arquitectura]] - `conceptually_related_to` [EXTRACTED]
+- [[Variables de entorno (.env.local)]] - `shares_data_with` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Stack_arquitectura_y_Sprint_0
+#graphify/concept #graphify/EXTRACTED #community/Herramientas_y_entorno_de_desarrollo

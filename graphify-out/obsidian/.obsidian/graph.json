@@ -1,21 +1,21 @@
 {
   "colorGroups": [
     {
-      "query": "tag:#community/Stack_arquitectura_y_Sprint_0",
+      "query": "tag:#community/Base_de_datos_seguridad_y_tiempo_real",
       "color": {
         "a": 1,
         "rgb": 5142951
       }
     },
     {
-      "query": "tag:#community/Problema_evidencia_y_validaci\u00f3n",
+      "query": "tag:#community/Problema_evidencia_y_mercado",
       "color": {
         "a": 1,
         "rgb": 15896107
       }
     },
     {
-      "query": "tag:#community/Base_de_datos_y_seguridad",
+      "query": "tag:#community/Herramientas_y_entorno_de_desarrollo",
       "color": {
         "a": 1,
         "rgb": 14767961
@@ -29,35 +29,35 @@
       }
     },
     {
-      "query": "tag:#community/Documentaci\u00f3n_y_decisiones",
+      "query": "tag:#community/Stack_arquitectura_y_sprints",
       "color": {
         "a": 1,
         "rgb": 5873999
       }
     },
     {
-      "query": "tag:#community/Antiabuso_y_monitoreo",
+      "query": "tag:#community/Documentaci\u00f3n_decisiones_y_piloto",
       "color": {
         "a": 1,
         "rgb": 15583560
       }
     },
     {
-      "query": "tag:#community/Avisos_y_panel_del_barbero",
+      "query": "tag:#community/Cliente_de_Supabase_y_prueba_de_riesgo",
       "color": {
         "a": 1,
         "rgb": 11565729
       }
     },
     {
-      "query": "tag:#community/Herramientas_de_desarrollo",
+      "query": "tag:#community/Panel_del_barbero_y_errores",
       "color": {
         "a": 1,
         "rgb": 16752039
       }
     },
     {
-      "query": "tag:#community/Competencia_y_mercado",
+      "query": "tag:#community/Variables_de_entorno",
       "color": {
         "a": 1,
         "rgb": 10253663

@@ -1,20 +1,23 @@
 ---
 source_file: "README.md"
 type: "rationale"
-community: "Avisos y panel del barbero"
+community: "Documentación, decisiones y piloto"
 location: "L119"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Avisos_y_panel_del_barbero
+  - community/Documentación_decisiones_y_piloto
 ---
 
 # Notificaciones sin costo variable
 
 ## Connections
-- [[ADR-003 · Notificaciones sin API de WhatsApp]] - `conceptually_related_to` [INFERRED]
-- [[Botón wa.me]] - `references` [EXTRACTED]
+- [[ADR-003 · Notificaciones sin API de WhatsApp]] - `references` [EXTRACTED]
+- [[Alcance del MVP (v0.1)]] - `conceptually_related_to` [INFERRED]
+- [[Botón wa.me]] - `conceptually_related_to` [EXTRACTED]
+- [[Investigación]] - `references` [EXTRACTED]
 - [[Modelo de negocio (hipótesis)]] - `conceptually_related_to` [INFERRED]
-- [[Web Push (PWA)]] - `references` [EXTRACTED]
+- [[README de Siguiente]] - `references` [EXTRACTED]
+- [[Web Push (PWA)]] - `conceptually_related_to` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Avisos_y_panel_del_barbero
+#graphify/rationale #graphify/EXTRACTED #community/Documentación_decisiones_y_piloto

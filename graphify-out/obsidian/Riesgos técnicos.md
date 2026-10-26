@@ -1,23 +1,23 @@
 ---
 source_file: "docs/plan-implementacion.md"
-type: "concept"
-community: "Stack, arquitectura y Sprint 0"
-location: "L330"
+type: "document"
+community: "Herramientas y entorno de desarrollo"
+location: "L331"
 tags:
-  - graphify/concept
+  - graphify/document
   - graphify/EXTRACTED
-  - community/Stack_arquitectura_y_Sprint_0
+  - community/Herramientas_y_entorno_de_desarrollo
 ---
 
 # Riesgos técnicos
 
 ## Connections
-- [[Botón wa.me]] - `conceptually_related_to` [EXTRACTED]
-- [[Decisiones pendientes]] - `conceptually_related_to` [INFERRED]
+- [[ADR-008 · Desarrollo contra Supabase en la nube, sin Docker local]] - `conceptually_related_to` [INFERRED]
 - [[Plan de implementación]] - `references` [EXTRACTED]
+- [[Proyecto siguiente-pruebas (Supabase en la nube)]] - `references` [EXTRACTED]
+- [[Prueba de riesgo 1 · Broadcast público]] - `references` [EXTRACTED]
 - [[Recortes si no alcanza el tiempo]] - `references` [EXTRACTED]
-- [[Tiempo real solo con señales (Broadcast)]] - `conceptually_related_to` [EXTRACTED]
-- [[TypeScript 7 (compilador nativo)]] - `conceptually_related_to` [EXTRACTED]
-- [[Web Push (PWA)]] - `conceptually_related_to` [EXTRACTED]
+- [[TypeScript 7 (compilador nativo)]] - `references` [EXTRACTED]
+- [[Web Push (PWA)]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Stack_arquitectura_y_Sprint_0
+#graphify/document #graphify/EXTRACTED #community/Herramientas_y_entorno_de_desarrollo

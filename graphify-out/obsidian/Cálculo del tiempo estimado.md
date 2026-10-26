@@ -1,19 +1,20 @@
 ---
 source_file: "README.md"
 type: "rationale"
-community: "Stack, arquitectura y Sprint 0"
+community: "Problema, evidencia y mercado"
 location: "L111"
 tags:
   - graphify/rationale
-  - graphify/INFERRED
-  - community/Stack_arquitectura_y_Sprint_0
+  - graphify/EXTRACTED
+  - community/Problema_evidencia_y_mercado
 ---
 
 # Cálculo del tiempo estimado
 
 ## Connections
-- [[Métricas de éxito]] - `conceptually_related_to` [INFERRED]
-- [[Módulo eta.ts compartido]] - `implements` [INFERRED]
-- [[Tabla turnos (codigo_publico aleatorio)]] - `shares_data_with` [INFERRED]
+- [[P2 Fila física incierta]] - `conceptually_related_to` [INFERRED]
+- [[Panel del barbero]] - `conceptually_related_to` [EXTRACTED]
+- [[README de Siguiente]] - `references` [EXTRACTED]
+- [[Reporte del día para el dueño]] - `conceptually_related_to` [EXTRACTED]
 
-#graphify/rationale #graphify/INFERRED #community/Stack_arquitectura_y_Sprint_0
+#graphify/rationale #graphify/EXTRACTED #community/Problema_evidencia_y_mercado

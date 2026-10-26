@@ -1,12 +1,12 @@
 ---
 source_file: "docs/seguridad.md"
 type: "concept"
-community: "Base de datos y seguridad"
+community: "Base de datos, seguridad y tiempo real"
 location: "L12"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Base_de_datos_y_seguridad
+  - community/Base_de_datos_seguridad_y_tiempo_real
 ---
 
 # Amenazas propias de una fila virtual
@@ -20,4 +20,4 @@ tags:
 - [[Seguridad]] - `references` [EXTRACTED]
 - [[Turnos fantasma]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Base_de_datos_y_seguridad
+#graphify/concept #graphify/EXTRACTED #community/Base_de_datos_seguridad_y_tiempo_real

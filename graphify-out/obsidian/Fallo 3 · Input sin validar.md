@@ -1,12 +1,12 @@
 ---
 source_file: "docs/seguridad.md"
 type: "concept"
-community: "Stack, arquitectura y Sprint 0"
+community: "Stack, arquitectura y sprints"
 location: "L52"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Stack_arquitectura_y_Sprint_0
+  - community/Stack_arquitectura_y_sprints
 ---
 
 # Fallo 3 · Input sin validar
@@ -19,4 +19,4 @@ tags:
 - [[Sprint 2 · Cliente fila pública y turno en vivo]] - `references` [EXTRACTED]
 - [[Validación con zod y dentro de la función]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Stack_arquitectura_y_Sprint_0
+#graphify/concept #graphify/EXTRACTED #community/Stack_arquitectura_y_sprints

@@ -1,27 +1,22 @@
 ---
 source_file: "docs/decisiones.md"
 type: "rationale"
-community: "Problema, evidencia y validación"
+community: "Problema, evidencia y mercado"
 location: "L10"
 tags:
   - graphify/rationale
-  - graphify/INFERRED
-  - community/Problema_evidencia_y_validación
+  - graphify/EXTRACTED
+  - community/Problema_evidencia_y_mercado
 ---
 
 # ADR-001 · Problema: fila física incierta
 
 ## Connections
 - [[Criterios seguir  ajustar  detener]] - `conceptually_related_to` [INFERRED]
-- [[Fila virtual híbrida]] - `references` [INFERRED]
-- [[Matriz de decisión ponderada]] - `cites` [EXTRACTED]
-- [[P1 Inasistencias (no-shows)]] - `references` [INFERRED]
-- [[P2 Fila física incierta]] - `references` [INFERRED]
-- [[P3 Caja y comisiones]] - `references` [INFERRED]
-- [[P4 Captación y retención]] - `references` [INFERRED]
+- [[Investigación]] - `references` [EXTRACTED]
+- [[P2 Fila física incierta]] - `conceptually_related_to` [INFERRED]
 - [[Problema elegido]] - `conceptually_related_to` [INFERRED]
 - [[Registro de decisiones]] - `references` [EXTRACTED]
-- [[Tasa de abandono]] - `conceptually_related_to` [INFERRED]
 - [[Validación de campo]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/INFERRED #community/Problema_evidencia_y_validación
+#graphify/rationale #graphify/EXTRACTED #community/Problema_evidencia_y_mercado

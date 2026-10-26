@@ -1,12 +1,12 @@
 ---
 source_file: "docs/seguridad.md"
 type: "document"
-community: "Documentación y decisiones"
+community: "Documentación, decisiones y piloto"
 location: "L1"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Documentación_y_decisiones
+  - community/Documentación_decisiones_y_piloto
 ---
 
 # Seguridad
@@ -29,10 +29,11 @@ tags:
 - [[Fallo 8 · Manejo de errores]] - `references` [EXTRACTED]
 - [[Fallo 9 · Rate limiting]] - `references` [EXTRACTED]
 - [[Investigación]] - `references` [EXTRACTED]
+- [[Pausa de la fila remota]] - `conceptually_related_to` [INFERRED]
 - [[Pendientes antes del piloto]] - `references` [EXTRACTED]
 - [[Plan de implementación]] - `references` [EXTRACTED]
 - [[README de Siguiente]] - `references` [EXTRACTED]
 - [[Registro de decisiones]] - `references` [EXTRACTED]
 - [[Sprint 4 · Dueño, antiabuso y lanzamiento]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Documentación_y_decisiones
+#graphify/document #graphify/EXTRACTED #community/Documentación_decisiones_y_piloto

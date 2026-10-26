@@ -1,22 +1,21 @@
 ---
 source_file: "README.md"
 type: "concept"
-community: "Problema, evidencia y validación"
-location: "L287"
+community: "Documentación, decisiones y piloto"
+location: "L289"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Problema_evidencia_y_validación
+  - community/Documentación_decisiones_y_piloto
 ---
 
 # Hoja de ruta v0.1–v0.3
 
 ## Connections
-- [[Fila virtual híbrida]] - `references` [EXTRACTED]
-- [[Piloto (2 sábados en 1 barbería)]] - `references` [EXTRACTED]
-- [[Plan de implementación]] - `conceptually_related_to` [EXTRACTED]
-- [[Siguiente (producto)]] - `references` [EXTRACTED]
-- [[Tasa de abandono]] - `references` [EXTRACTED]
-- [[Validación de campo]] - `references` [INFERRED]
+- [[Alcance del MVP (v0.1)]] - `conceptually_related_to` [EXTRACTED]
+- [[Fila virtual híbrida]] - `conceptually_related_to` [EXTRACTED]
+- [[README de Siguiente]] - `references` [EXTRACTED]
+- [[Tasa de abandono]] - `conceptually_related_to` [EXTRACTED]
+- [[Validación de campo]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Problema_evidencia_y_validación
+#graphify/concept #graphify/EXTRACTED #community/Documentación_decisiones_y_piloto

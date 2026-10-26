@@ -1,11 +1,11 @@
 ---
 source_file: "docs/investigacion.md"
 type: "document"
-community: "Competencia y mercado"
+community: "Problema, evidencia y mercado"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Competencia_y_mercado
+  - community/Problema_evidencia_y_mercado
 ---
 
 # DataReportal Digital 2026 Honduras
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Contexto Honduras 2026]] - `cites` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Competencia_y_mercado
+#graphify/document #graphify/EXTRACTED #community/Problema_evidencia_y_mercado

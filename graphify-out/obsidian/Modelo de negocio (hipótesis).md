@@ -1,19 +1,18 @@
 ---
 source_file: "README.md"
-type: "rationale"
-community: "Avisos y panel del barbero"
-location: "L276"
+type: "concept"
+community: "Documentación, decisiones y piloto"
+location: "L278"
 tags:
-  - graphify/rationale
-  - graphify/INFERRED
-  - community/Avisos_y_panel_del_barbero
+  - graphify/concept
+  - graphify/EXTRACTED
+  - community/Documentación_decisiones_y_piloto
 ---
 
 # Modelo de negocio (hipótesis)
 
 ## Connections
 - [[Notificaciones sin costo variable]] - `conceptually_related_to` [INFERRED]
-- [[Siguiente (producto)]] - `references` [EXTRACTED]
-- [[Tasa de abandono]] - `conceptually_related_to` [INFERRED]
+- [[README de Siguiente]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/INFERRED #community/Avisos_y_panel_del_barbero
+#graphify/concept #graphify/EXTRACTED #community/Documentación_decisiones_y_piloto

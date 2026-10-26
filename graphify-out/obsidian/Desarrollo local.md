@@ -1,23 +1,24 @@
 ---
 source_file: "README.md"
-type: "document"
-community: "Stack, arquitectura y Sprint 0"
+type: "concept"
+community: "Herramientas y entorno de desarrollo"
 location: "L248"
 tags:
-  - graphify/document
+  - graphify/concept
   - graphify/INFERRED
-  - community/Stack_arquitectura_y_Sprint_0
+  - community/Herramientas_y_entorno_de_desarrollo
 ---
 
 # Desarrollo local
 
 ## Connections
-- [[2026-10-26 · Sprint 0 base del proyecto]] - `conceptually_related_to` [INFERRED]
-- [[Herramientas de desarrollo]] - `conceptually_related_to` [INFERRED]
-- [[Lefthook (hooks de git)]] - `references` [INFERRED]
+- [[2026-10-26 · Desarrollo sin Docker y prueba de riesgo 1]] - `conceptually_related_to` [INFERRED]
+- [[ADR-008 · Desarrollo contra Supabase en la nube, sin Docker local]] - `conceptually_related_to` [INFERRED]
+- [[Lefthook (hooks de git)]] - `conceptually_related_to` [INFERRED]
+- [[Proyecto siguiente-pruebas (Supabase en la nube)]] - `conceptually_related_to` [INFERRED]
 - [[Pruebas pgTAP]] - `conceptually_related_to` [INFERRED]
 - [[README de Siguiente]] - `references` [EXTRACTED]
-- [[Supabase (Postgres, Auth, Realtime, Edge Functions)]] - `references` [EXTRACTED]
-- [[Variables de entorno (.env.local)]] - `references` [EXTRACTED]
+- [[Supabase (Postgres, Auth, Realtime, Edge Functions)]] - `conceptually_related_to` [EXTRACTED]
+- [[Variables de entorno (.env.local)]] - `conceptually_related_to` [EXTRACTED]
 
-#graphify/document #graphify/INFERRED #community/Stack_arquitectura_y_Sprint_0
+#graphify/concept #graphify/INFERRED #community/Herramientas_y_entorno_de_desarrollo

@@ -1,17 +1,16 @@
 ---
 source_file: "docs/investigacion.md"
 type: "concept"
-community: "Problema, evidencia y validación"
+community: "Problema, evidencia y mercado"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Problema_evidencia_y_validación
+  - community/Problema_evidencia_y_mercado
 ---
 
 # P3 Caja y comisiones
 
 ## Connections
-- [[ADR-001 · Problema fila física incierta]] - `references` [INFERRED]
 - [[AgendaPro]] - `cites` [EXTRACTED]
 - [[Criterios seguir  ajustar  detener]] - `references` [INFERRED]
 - [[Entrevistas a dueños (Mom Test)]] - `references` [INFERRED]
@@ -20,4 +19,4 @@ tags:
 - [[Montos alterados por el barbero]] - `references` [INFERRED]
 - [[Reporte del día para el dueño]] - `conceptually_related_to` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Problema_evidencia_y_validación
+#graphify/concept #graphify/EXTRACTED #community/Problema_evidencia_y_mercado

@@ -1,12 +1,12 @@
 ---
 source_file: "docs/seguridad.md"
 type: "concept"
-community: "Base de datos y seguridad"
+community: "Base de datos, seguridad y tiempo real"
 location: "L45"
 tags:
   - graphify/concept
   - graphify/INFERRED
-  - community/Base_de_datos_y_seguridad
+  - community/Base_de_datos_seguridad_y_tiempo_real
 ---
 
 # cancelar_turno(codigo, secreto)
@@ -16,4 +16,4 @@ tags:
 - [[Fallo 2 · Endpoints expuestos]] - `references` [EXTRACTED]
 - [[codigo_publico aleatorio]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/INFERRED #community/Base_de_datos_y_seguridad
+#graphify/concept #graphify/INFERRED #community/Base_de_datos_seguridad_y_tiempo_real

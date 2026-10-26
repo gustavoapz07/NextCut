@@ -1,12 +1,12 @@
 ---
 source_file: "docs/seguridad.md"
 type: "document"
-community: "Herramientas de desarrollo"
+community: "Base de datos, seguridad y tiempo real"
 location: "L125"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Herramientas_de_desarrollo
+  - community/Base_de_datos_seguridad_y_tiempo_real
 ---
 
 # Pendientes antes del piloto
@@ -19,4 +19,4 @@ tags:
 - [[Seguridad]] - `references` [EXTRACTED]
 - [[gitleaks]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Herramientas_de_desarrollo
+#graphify/document #graphify/EXTRACTED #community/Base_de_datos_seguridad_y_tiempo_real

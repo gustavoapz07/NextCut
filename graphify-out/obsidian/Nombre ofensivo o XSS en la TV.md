@@ -1,12 +1,12 @@
 ---
 source_file: "docs/seguridad.md"
 type: "concept"
-community: "Stack, arquitectura y Sprint 0"
+community: "Base de datos, seguridad y tiempo real"
 location: "L21"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Stack_arquitectura_y_Sprint_0
+  - community/Base_de_datos_seguridad_y_tiempo_real
 ---
 
 # Nombre ofensivo o XSS en la TV
@@ -15,4 +15,4 @@ tags:
 - [[Amenazas propias de una fila virtual]] - `references` [EXTRACTED]
 - [[Fallo 3 · Input sin validar]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Stack_arquitectura_y_Sprint_0
+#graphify/concept #graphify/EXTRACTED #community/Base_de_datos_seguridad_y_tiempo_real

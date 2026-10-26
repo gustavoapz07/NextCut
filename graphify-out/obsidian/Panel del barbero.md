@@ -1,22 +1,22 @@
 ---
 source_file: "README.md"
 type: "concept"
-community: "Avisos y panel del barbero"
+community: "Panel del barbero y errores"
 location: "L53"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Avisos_y_panel_del_barbero
+  - community/Panel_del_barbero_y_errores
 ---
 
 # Panel del barbero
 
 ## Connections
-- [[Botón wa.me]] - `references` [EXTRACTED]
+- [[Botón wa.me]] - `conceptually_related_to` [EXTRACTED]
+- [[Cálculo del tiempo estimado]] - `conceptually_related_to` [EXTRACTED]
 - [[Fallo 8 · Manejo de errores]] - `conceptually_related_to` [INFERRED]
+- [[Límites del plan gratuito de Supabase]] - `conceptually_related_to` [EXTRACTED]
 - [[Roles dueno y barbero]] - `conceptually_related_to` [INFERRED]
-- [[Siguiente (producto)]] - `references` [EXTRACTED]
-- [[Sprint 3 · Barbero, TV y avisos]] - `references` [EXTRACTED]
-- [[Tabla turnos (codigo_publico aleatorio)]] - `shares_data_with` [INFERRED]
+- [[Siguiente (producto)]] - `conceptually_related_to` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Avisos_y_panel_del_barbero
+#graphify/concept #graphify/EXTRACTED #community/Panel_del_barbero_y_errores

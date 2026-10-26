@@ -1,12 +1,12 @@
 ---
 source_file: "docs/seguridad.md"
 type: "concept"
-community: "Antiabuso y monitoreo"
+community: "Base de datos, seguridad y tiempo real"
 location: "L113"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Antiabuso_y_monitoreo
+  - community/Base_de_datos_seguridad_y_tiempo_real
 ---
 
 # Fallo 10 · Monitoreo, logs y alertas
@@ -20,4 +20,4 @@ tags:
 - [[Sentry]] - `references` [EXTRACTED]
 - [[Sprint 4 · Dueño, antiabuso y lanzamiento]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Antiabuso_y_monitoreo
+#graphify/concept #graphify/EXTRACTED #community/Base_de_datos_seguridad_y_tiempo_real

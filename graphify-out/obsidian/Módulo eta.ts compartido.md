@@ -1,21 +1,20 @@
 ---
 source_file: "docs/plan-implementacion.md"
-type: "concept"
-community: "Stack, arquitectura y Sprint 0"
+type: "rationale"
+community: "Stack, arquitectura y sprints"
 location: "L153"
 tags:
-  - graphify/concept
+  - graphify/rationale
   - graphify/EXTRACTED
-  - community/Stack_arquitectura_y_Sprint_0
+  - community/Stack_arquitectura_y_sprints
 ---
 
 # Módulo eta.ts compartido
 
 ## Connections
 - [[Arquitectura detallada]] - `references` [EXTRACTED]
-- [[Cálculo del tiempo estimado]] - `implements` [INFERRED]
-- [[Edge Function avisos]] - `references` [EXTRACTED]
+- [[Edge Function avisos]] - `shares_data_with` [EXTRACTED]
 - [[Sprint 2 · Cliente fila pública y turno en vivo]] - `references` [EXTRACTED]
-- [[Vitest + Testing Library]] - `conceptually_related_to` [EXTRACTED]
+- [[Vitest + Testing Library]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Stack_arquitectura_y_Sprint_0
+#graphify/rationale #graphify/EXTRACTED #community/Stack_arquitectura_y_sprints

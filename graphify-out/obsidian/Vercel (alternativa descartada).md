@@ -1,12 +1,12 @@
 ---
 source_file: "docs/decisiones.md"
 type: "concept"
-community: "Documentación y decisiones"
+community: "Stack, arquitectura y sprints"
 location: "L28"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Documentación_y_decisiones
+  - community/Stack_arquitectura_y_sprints
 ---
 
 # Vercel (alternativa descartada)
@@ -15,4 +15,4 @@ tags:
 - [[ADR-002 · Stack Supabase + Cloudflare Pages]] - `references` [EXTRACTED]
 - [[ADR-005 · Hosting en Cloudflare Workers]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Documentación_y_decisiones
+#graphify/concept #graphify/EXTRACTED #community/Stack_arquitectura_y_sprints

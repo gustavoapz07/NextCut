@@ -1,17 +1,16 @@
 ---
 source_file: "docs/investigacion.md"
 type: "rationale"
-community: "Problema, evidencia y validación"
+community: "Problema, evidencia y mercado"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Problema_evidencia_y_validación
+  - community/Problema_evidencia_y_mercado
 ---
 
 # Matriz de decisión ponderada
 
 ## Connections
-- [[ADR-001 · Problema fila física incierta]] - `cites` [EXTRACTED]
 - [[Análisis de sensibilidad]] - `references` [EXTRACTED]
 - [[Escala de calidad de evidencia (A–O)]] - `conceptually_related_to` [INFERRED]
 - [[Investigación]] - `references` [EXTRACTED]
@@ -21,4 +20,4 @@ tags:
 - [[P4 Captación y retención]] - `references` [EXTRACTED]
 - [[Problema elegido]] - `rationale_for` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Problema_evidencia_y_validación
+#graphify/rationale #graphify/EXTRACTED #community/Problema_evidencia_y_mercado

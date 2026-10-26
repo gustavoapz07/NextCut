@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plan-implementacion.md"
-type: "concept"
-community: "Stack, arquitectura y Sprint 0"
+type: "document"
+community: "Stack, arquitectura y sprints"
 location: "L250"
 tags:
-  - graphify/concept
+  - graphify/document
   - graphify/EXTRACTED
-  - community/Stack_arquitectura_y_Sprint_0
+  - community/Stack_arquitectura_y_sprints
 ---
 
 # Sprint 2 · Cliente: fila pública y turno en vivo
@@ -16,6 +16,7 @@ tags:
 - [[Esquemas zod compartidos (react-hook-form + zod)]] - `references` [EXTRACTED]
 - [[Fallo 3 · Input sin validar]] - `references` [EXTRACTED]
 - [[Módulo eta.ts compartido]] - `references` [EXTRACTED]
-- [[Playwright + axe]] - `conceptually_related_to` [EXTRACTED]
+- [[Plan de implementación]] - `references` [EXTRACTED]
+- [[Playwright + axe]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Stack_arquitectura_y_Sprint_0
+#graphify/document #graphify/EXTRACTED #community/Stack_arquitectura_y_sprints

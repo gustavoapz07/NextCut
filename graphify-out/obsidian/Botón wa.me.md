@@ -1,21 +1,18 @@
 ---
 source_file: "README.md"
 type: "concept"
-community: "Avisos y panel del barbero"
+community: "Panel del barbero y errores"
 location: "L125"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Avisos_y_panel_del_barbero
+  - community/Panel_del_barbero_y_errores
 ---
 
 # Botón wa.me
 
 ## Connections
-- [[ADR-003 · Notificaciones sin API de WhatsApp]] - `references` [INFERRED]
-- [[Notificaciones sin costo variable]] - `references` [EXTRACTED]
-- [[Panel del barbero]] - `references` [EXTRACTED]
-- [[Riesgos técnicos]] - `conceptually_related_to` [EXTRACTED]
-- [[Sprint 3 · Barbero, TV y avisos]] - `references` [EXTRACTED]
+- [[Notificaciones sin costo variable]] - `conceptually_related_to` [EXTRACTED]
+- [[Panel del barbero]] - `conceptually_related_to` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Avisos_y_panel_del_barbero
+#graphify/concept #graphify/EXTRACTED #community/Panel_del_barbero_y_errores

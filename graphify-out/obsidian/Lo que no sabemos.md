@@ -1,11 +1,11 @@
 ---
 source_file: "docs/investigacion.md"
 type: "concept"
-community: "Documentación y decisiones"
+community: "Problema, evidencia y mercado"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Documentación_y_decisiones
+  - community/Problema_evidencia_y_mercado
 ---
 
 # Lo que no sabemos
@@ -14,4 +14,4 @@ tags:
 - [[Investigación]] - `references` [EXTRACTED]
 - [[Validación de campo]] - `cites` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Documentación_y_decisiones
+#graphify/concept #graphify/EXTRACTED #community/Problema_evidencia_y_mercado

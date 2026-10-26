@@ -1,12 +1,12 @@
 ---
 source_file: "docs/validacion-campo.md"
 type: "concept"
-community: "Problema, evidencia y validación"
+community: "Problema, evidencia y mercado"
 location: "L100"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Problema_evidencia_y_validación
+  - community/Problema_evidencia_y_mercado
 ---
 
 # Fórmula de pérdida mensual
@@ -18,4 +18,4 @@ tags:
 - [[Preguntas de precio]] - `conceptually_related_to` [INFERRED]
 - [[Validación de campo]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Problema_evidencia_y_validación
+#graphify/concept #graphify/EXTRACTED #community/Problema_evidencia_y_mercado

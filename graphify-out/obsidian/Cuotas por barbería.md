@@ -1,12 +1,12 @@
 ---
 source_file: "docs/seguridad.md"
 type: "concept"
-community: "Avisos y panel del barbero"
+community: "Documentación, decisiones y piloto"
 location: "L82"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Avisos_y_panel_del_barbero
+  - community/Documentación_decisiones_y_piloto
 ---
 
 # Cuotas por barbería
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Fallo 6 · Sin límite de tokens]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Avisos_y_panel_del_barbero
+#graphify/concept #graphify/EXTRACTED #community/Documentación_decisiones_y_piloto

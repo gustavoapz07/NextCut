@@ -1,22 +1,20 @@
 ---
 source_file: "docs/plan-implementacion.md"
-type: "concept"
-community: "Documentación y decisiones"
-location: "L320"
+type: "document"
+community: "Documentación, decisiones y piloto"
+location: "L321"
 tags:
-  - graphify/concept
+  - graphify/document
   - graphify/EXTRACTED
-  - community/Documentación_y_decisiones
+  - community/Documentación_decisiones_y_piloto
 ---
 
 # Definición de terminado
 
 ## Connections
 - [[Bitácora de cambios]] - `references` [EXTRACTED]
-- [[Costos en planes gratuitos]] - `conceptually_related_to` [INFERRED]
-- [[Criterios seguir  ajustar  detener]] - `semantically_similar_to` [INFERRED]
 - [[Plan de implementación]] - `references` [EXTRACTED]
 - [[Seguridad]] - `references` [EXTRACTED]
-- [[graphify (grafo de conocimiento)]] - `references` [EXTRACTED]
+- [[graphify (grafo de conocimiento)]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Documentación_y_decisiones
+#graphify/document #graphify/EXTRACTED #community/Documentación_decisiones_y_piloto

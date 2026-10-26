@@ -1,18 +1,19 @@
 ---
 source_file: "docs/decisiones.md"
 type: "concept"
-community: "Herramientas de desarrollo"
+community: "Herramientas y entorno de desarrollo"
 location: "L59"
 tags:
   - graphify/concept
-  - graphify/EXTRACTED
-  - community/Herramientas_de_desarrollo
+  - graphify/INFERRED
+  - community/Herramientas_y_entorno_de_desarrollo
 ---
 
 # Husky (alternativa descartada)
 
 ## Connections
 - [[ADR-006 · Herramientas de desarrollo y pruebas]] - `references` [EXTRACTED]
-- [[Graphify automático (hooks de git y graphify_sync.py)]] - `conceptually_related_to` [EXTRACTED]
+- [[Lefthook (revisiones antes de cada commit)]] - `semantically_similar_to` [INFERRED]
+- [[graphify (grafo de conocimiento)]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Herramientas_de_desarrollo
+#graphify/concept #graphify/INFERRED #community/Herramientas_y_entorno_de_desarrollo

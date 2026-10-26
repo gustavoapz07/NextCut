@@ -1,20 +1,20 @@
 ---
 source_file: "docs/plan-implementacion.md"
-type: "concept"
-community: "Documentación y decisiones"
-location: "L351"
+type: "document"
+community: "Herramientas y entorno de desarrollo"
+location: "L353"
 tags:
-  - graphify/concept
-  - graphify/EXTRACTED
-  - community/Documentación_y_decisiones
+  - graphify/document
+  - graphify/INFERRED
+  - community/Herramientas_y_entorno_de_desarrollo
 ---
 
 # Costos en planes gratuitos
 
 ## Connections
-- [[Definición de terminado]] - `conceptually_related_to` [INFERRED]
+- [[ADR-002 · Stack Supabase + Cloudflare Pages]] - `conceptually_related_to` [INFERRED]
+- [[Decisiones pendientes]] - `conceptually_related_to` [INFERRED]
 - [[Plan de implementación]] - `references` [EXTRACTED]
-- [[Resend (SMTP de Auth)]] - `references` [EXTRACTED]
-- [[Supabase (Postgres, Auth, Realtime, Edge Functions)]] - `references` [EXTRACTED]
+- [[Supabase Pro a USD 25 al mes (alternativa descartada)]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Documentación_y_decisiones
+#graphify/document #graphify/INFERRED #community/Herramientas_y_entorno_de_desarrollo

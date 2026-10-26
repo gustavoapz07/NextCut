@@ -68,9 +68,9 @@ Versiones vigentes al 26/10/2026 (consultadas en npm). Las exactas quedan fijada
 | Lint y formato | Biome 2.6 | Editor, pre-commit y CI | Reemplaza ESLint + Prettier en una herramienta. No depende de la API de TypeScript |
 | Tipos | `tsc --noEmit` (TypeScript 7) | Pre-push y CI | Tipos de la base generados con `supabase gen types` |
 | Pruebas unitarias | Vitest 5 + Testing Library | Local y CI | Cálculo del tiempo estimado, esquemas zod y componentes |
-| Pruebas de la base | pgTAP con `supabase test db` | Local y CI | RLS, permisos y funciones ([seguridad](seguridad.md)) |
+| Pruebas de la base | pgTAP con `supabase test db` | CI | RLS, permisos y funciones ([seguridad](seguridad.md)) |
 | Pruebas de punta a punta | Playwright 1.64 + axe | CI | Flujos completos en viewport de celular y accesibilidad |
-| Base local | Supabase CLI 2.122 + Docker Desktop | Local | `supabase start` levanta Postgres, Auth, Realtime y Functions |
+| Base de desarrollo | Proyecto `siguiente-pruebas` + Supabase CLI 2.122 | Nube | Sin Docker local ([ADR-008](decisiones.md#adr-008--desarrollo-contra-supabase-en-la-nube-sin-docker-local)): `db push --linked`, `gen types` y `functions deploy --use-api` |
 | Hooks de git | Lefthook 2 | Local | Biome y gitleaks antes de cada commit. Convive con los hooks de graphify (ver sección 5) |
 | Secretos | gitleaks | Pre-commit y CI | Fallo 1: ninguna clave entra al repositorio |
 | CI/CD | GitHub Actions | GitHub | Pruebas en cada PR; despliegue al fusionar en `main` |
@@ -78,7 +78,7 @@ Versiones vigentes al 26/10/2026 (consultadas en npm). Las exactas quedan fijada
 | Disponibilidad | UptimeRobot (plan gratis) | Nube | Consulta el endpoint de salud cada 5 minutos |
 | Analítica de visitas | Cloudflare Web Analytics | Nube | Sin cookies; cuenta escaneos del QR. Las métricas del producto salen de la base |
 
-**Por instalar en la máquina de desarrollo** (hoy no están): Docker Desktop (con WSL2), gitleaks y, opcionalmente, la CLI de GitHub (`gh`). La CLI de Supabase y Wrangler se instalan como dependencias del proyecto, sin instalación global.
+**Por instalar en la máquina de desarrollo:** gitleaks y, opcionalmente, la CLI de GitHub (`gh`). Docker no hace falta ([ADR-008](decisiones.md#adr-008--desarrollo-contra-supabase-en-la-nube-sin-docker-local)). La CLI de Supabase y Wrangler se instalan como dependencias del proyecto, sin instalación global.
 
 ## 5. Herramientas de trabajo con IA
 
@@ -224,12 +224,12 @@ Cada sprint termina con su criterio de salida en verde. Si no se cumple, no se e
 
 No construye funciones del producto. Prepara el entorno y prueba lo que podría obligar a cambiar el diseño.
 
-- [ ] Instalar Docker Desktop y gitleaks; crear el repositorio en GitHub.
-- [ ] Crear el proyecto Vite (React + TypeScript 7 + Tailwind 4) con Biome, Vitest y Lefthook.
-- [ ] `supabase init` y `supabase start` en local; generar tipos.
-- [ ] CI mínimo: Biome, `tsc`, Vitest, gitleaks y build.
-- [ ] Crear los dos proyectos de Supabase (pruebas y producción) con claves nuevas, y el Worker en Cloudflare con `workers.dev`.
-- [ ] **Prueba de riesgo 1 · Broadcast público:** un trigger publica en un canal público y una página sin sesión recibe la señal. La documentación no deja claro si aplica RLS a canales públicos.
+- [ ] Instalar gitleaks y crear el repositorio en GitHub.
+- [x] Crear el proyecto Vite (React + TypeScript 7 + Tailwind 4) con Biome, Vitest y Lefthook.
+- [x] `supabase init`, crear el proyecto `siguiente-pruebas` en la nube y generar tipos desde él ([ADR-008](decisiones.md#adr-008--desarrollo-contra-supabase-en-la-nube-sin-docker-local)).
+- [x] CI mínimo: Biome, `tsc`, Vitest, gitleaks y build.
+- [ ] Crear el proyecto de producción y el Worker en Cloudflare con `workers.dev`, y desactivar las claves heredadas (`anon` y `service_role`) en ambos proyectos.
+- [x] **Prueba de riesgo 1 · Broadcast público:** superada el 26/10/2026. Una señal enviada con `realtime.send(..., private => false)` llega a un cliente anónimo con la clave publicable, y ese cliente es rechazado en un canal privado (`scripts/spikes/broadcast-publico.mjs`).
 - [ ] **Prueba de riesgo 2 · Web Push:** una Edge Function envía un aviso con VAPID que llega a Chrome en Android y a un iPhone con la página agregada a la pantalla de inicio.
 - [ ] **Prueba de riesgo 3 · Turnstile + IP:** la Edge Function verifica el token y obtiene la IP real del cliente.
 
@@ -308,8 +308,9 @@ No construye funciones del producto. Prepara el entorno y prueba lo que podría 
 
 | Entorno | Frontend | Backend | Para qué |
 |---|---|---|---|
-| Local | `vite` | `supabase start` (Docker) | Desarrollo y pruebas |
-| Vista previa | URL por PR (`wrangler versions upload`) | Proyecto de Supabase de pruebas (el segundo proyecto gratuito) | Revisar cambios en el celular sin tocar datos reales |
+| Local | `vite` | Proyecto de Supabase de pruebas (en la nube, sin Docker) | Desarrollo |
+| CI | — | `supabase start` en el runner de GitHub | Pruebas pgTAP aisladas en cada PR |
+| Vista previa | URL por PR (`wrangler versions upload`) | Proyecto de Supabase de pruebas | Revisar cambios en el celular sin tocar datos reales |
 | Producción | `wrangler deploy` al fusionar en `main` | Proyecto de Supabase | Piloto |
 
 - **CI (cada PR):** Biome → `tsc` → Vitest → Supabase local + pgTAP → script de concurrencia → Playwright → gitleaks → build.
@@ -331,7 +332,8 @@ Una tarea está terminada cuando:
 
 | Riesgo | Probabilidad | Mitigación |
 |---|---|---|
-| El Broadcast público no llega a clientes sin sesión | Media | Prueba de riesgo 1. Alternativa: consultar cada 10–20 s, que ya existe como respaldo |
+| El Broadcast público no llega a clientes sin sesión | Resuelto | La prueba de riesgo 1 confirmó que llega (26/10/2026) |
+| Un `db reset` borra el proyecto de pruebas, que comparten el desarrollo y las vistas previas | Media | Es solo de pruebas y `seed.sql` lo reconstruye; producción va en otro proyecto |
 | Web Push no funciona en iPhone sin instalar la PWA | Alta (conocido) | La página en vivo y el botón `wa.me` son el canal principal; el push es un extra |
 | Se superan las 200 conexiones de tiempo real | Baja en el piloto | Realtime solo en pantalla visible; alerta en el panel de Supabase |
 | El proyecto gratuito se pausa tras una semana sin actividad | Media fuera del piloto | El monitor de disponibilidad consulta la base a diario (verificar que cuenta como actividad) |
@@ -366,6 +368,7 @@ Fuentes: [Supabase Pricing](https://supabase.com/pricing), [Cloudflare: migrar d
 
 - [ ] **Resultado de la validación de campo:** confirma o cambia el alcance de los sprints 2 a 4.
 - [ ] **Dominio:** `workers.dev` gratis o dominio propio, antes de imprimir el QR del piloto.
+- [ ] **Espacio para producción:** la cuenta de Supabase ya usa sus 2 proyectos gratuitos (`siguiente-pruebas` y `cms-opalo`). Antes del piloto hay que pausar otro proyecto o pagar Pro.
 - [ ] **Plazo de borrado de teléfonos:** 90 días propuestos, a confirmar con los dueños ([fallo 5](seguridad.md#5-datos-sensibles--)).
 - [ ] **Repositorio público o privado:** público da minutos ilimitados de CI y sirve de portafolio; los secretos nunca están en el código de todos modos.
 - [ ] **Términos de uso comercial** de los planes gratuitos de Cloudflare y Supabase, antes de cobrar.

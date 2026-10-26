@@ -7,7 +7,14 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**", "!graphify-out", "!.claude", "!supabase/.temp", "!**/*.md"]
+    "includes": [
+      "**",
+      "!graphify-out",
+      "!.claude",
+      "!supabase/.temp",
+      "!**/*.md",
+      "!app/src/lib/database.types.ts"
+    ]
   },
   "formatter": {
     "enabled": true,

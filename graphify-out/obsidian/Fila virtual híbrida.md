@@ -1,19 +1,20 @@
 ---
 source_file: "README.md"
-type: "concept"
-community: "Competencia y mercado"
-location: "L293"
+type: "rationale"
+community: "Problema, evidencia y mercado"
+location: "L8"
 tags:
-  - graphify/concept
-  - graphify/INFERRED
-  - community/Competencia_y_mercado
+  - graphify/rationale
+  - graphify/EXTRACTED
+  - community/Problema_evidencia_y_mercado
 ---
 
 # Fila virtual híbrida
 
 ## Connections
-- [[ADR-001 · Problema fila física incierta]] - `references` [INFERRED]
-- [[Hoja de ruta v0.1–v0.3]] - `references` [EXTRACTED]
+- [[Hoja de ruta v0.1–v0.3]] - `conceptually_related_to` [EXTRACTED]
+- [[P2 Fila física incierta]] - `conceptually_related_to` [INFERRED]
+- [[Siguiente (producto)]] - `implements` [EXTRACTED]
 - [[Waitwhile]] - `semantically_similar_to` [INFERRED]
 
-#graphify/concept #graphify/INFERRED #community/Competencia_y_mercado
+#graphify/rationale #graphify/EXTRACTED #community/Problema_evidencia_y_mercado

@@ -1,22 +1,19 @@
 ---
 source_file: "README.md"
 type: "concept"
-community: "Problema, evidencia y validación"
+community: "Problema, evidencia y mercado"
 location: "L131"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Problema_evidencia_y_validación
+  - community/Problema_evidencia_y_mercado
 ---
 
 # Métricas de éxito
 
 ## Connections
-- [[Cálculo del tiempo estimado]] - `conceptually_related_to` [INFERRED]
 - [[Fórmula de pérdida mensual]] - `conceptually_related_to` [INFERRED]
-- [[Piloto (2 sábados en 1 barbería)]] - `references` [EXTRACTED]
-- [[Siguiente (producto)]] - `references` [EXTRACTED]
-- [[Tasa de abandono]] - `references` [EXTRACTED]
-- [[Validación de campo]] - `conceptually_related_to` [INFERRED]
+- [[README de Siguiente]] - `references` [EXTRACTED]
+- [[Tasa de abandono]] - `conceptually_related_to` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Problema_evidencia_y_validación
+#graphify/concept #graphify/EXTRACTED #community/Problema_evidencia_y_mercado

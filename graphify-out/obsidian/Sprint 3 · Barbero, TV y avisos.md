@@ -1,20 +1,22 @@
 ---
 source_file: "docs/plan-implementacion.md"
-type: "concept"
-community: "Avisos y panel del barbero"
+type: "document"
+community: "Stack, arquitectura y sprints"
 location: "L261"
 tags:
-  - graphify/concept
+  - graphify/document
   - graphify/EXTRACTED
-  - community/Avisos_y_panel_del_barbero
+  - community/Stack_arquitectura_y_sprints
 ---
 
 # Sprint 3 · Barbero, TV y avisos
 
 ## Connections
-- [[Botón wa.me]] - `references` [EXTRACTED]
 - [[Edge Function avisos]] - `references` [EXTRACTED]
-- [[Panel del barbero]] - `references` [EXTRACTED]
-- [[Resend (SMTP de Auth)]] - `conceptually_related_to` [EXTRACTED]
+- [[Plan de implementación]] - `references` [EXTRACTED]
+- [[Playwright + axe]] - `references` [EXTRACTED]
+- [[Resend (SMTP de Auth)]] - `references` [EXTRACTED]
+- [[Web Push (PWA)]] - `conceptually_related_to` [INFERRED]
+- [[pg_cron + pg_net]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Avisos_y_panel_del_barbero
+#graphify/document #graphify/EXTRACTED #community/Stack_arquitectura_y_sprints

@@ -1,21 +1,23 @@
 ---
 source_file: "docs/plan-implementacion.md"
 type: "rationale"
-community: "Stack, arquitectura y Sprint 0"
+community: "Base de datos, seguridad y tiempo real"
 location: "L152"
 tags:
   - graphify/rationale
-  - graphify/EXTRACTED
-  - community/Stack_arquitectura_y_Sprint_0
+  - graphify/INFERRED
+  - community/Base_de_datos_seguridad_y_tiempo_real
 ---
 
 # Tiempo real solo con señales (Broadcast)
 
 ## Connections
-- [[ADR-007 · Anotarse por Edge Function y tiempo real solo con señales]] - `references` [EXTRACTED]
 - [[Arquitectura detallada]] - `references` [EXTRACTED]
+- [[Canal público filabarberia_id (señal vacía)]] - `conceptually_related_to` [INFERRED]
 - [[Fallo 5 · Datos sensibles]] - `conceptually_related_to` [INFERRED]
-- [[Riesgos técnicos]] - `conceptually_related_to` [EXTRACTED]
-- [[Sprint 0 · Entorno y pruebas de riesgo]] - `conceptually_related_to` [EXTRACTED]
+- [[Prueba de riesgo 1 superada (Broadcast público con clave publicable)]] - `conceptually_related_to` [INFERRED]
+- [[Prueba de riesgo 1 · Broadcast público]] - `conceptually_related_to` [INFERRED]
+- [[Pruebas de riesgo del Sprint 0 (Broadcast público, Web Push, Turnstile con IP)]] - `conceptually_related_to` [INFERRED]
+- [[Sprint 1 · Base de datos y seguridad]] - `conceptually_related_to` [INFERRED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Stack_arquitectura_y_Sprint_0
+#graphify/rationale #graphify/INFERRED #community/Base_de_datos_seguridad_y_tiempo_real

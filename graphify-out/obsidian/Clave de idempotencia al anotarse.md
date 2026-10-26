@@ -1,12 +1,12 @@
 ---
 source_file: "docs/seguridad.md"
 type: "concept"
-community: "Antiabuso y monitoreo"
+community: "Panel del barbero y errores"
 location: "L100"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Antiabuso_y_monitoreo
+  - community/Panel_del_barbero_y_errores
 ---
 
 # Clave de idempotencia al anotarse
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Fallo 8 · Manejo de errores]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Antiabuso_y_monitoreo
+#graphify/concept #graphify/EXTRACTED #community/Panel_del_barbero_y_errores

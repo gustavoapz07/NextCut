@@ -1,26 +1,24 @@
 ---
 source_file: "docs/decisiones.md"
 type: "rationale"
-community: "Documentación y decisiones"
+community: "Stack, arquitectura y sprints"
 location: "L21"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Documentación_y_decisiones
+  - community/Stack_arquitectura_y_sprints
 ---
 
 # ADR-002 · Stack Supabase + Cloudflare Pages
 
 ## Connections
 - [[2026-10-25 · Investigación inicial]] - `references` [EXTRACTED]
-- [[2026-10-26 · Plan de implementación y graphify automático]] - `references` [EXTRACTED]
 - [[ADR-005 · Hosting en Cloudflare Workers]] - `references` [EXTRACTED]
-- [[Claves nuevas de Supabase (sb_publishable  sb_secret)]] - `references` [EXTRACTED]
+- [[Costos en planes gratuitos]] - `conceptually_related_to` [INFERRED]
 - [[PHP + MySQL (alternativa descartada)]] - `references` [EXTRACTED]
 - [[Registro de decisiones]] - `references` [EXTRACTED]
-- [[Row Level Security (RLS)]] - `references` [INFERRED]
-- [[Supabase (Postgres, Auth, Realtime, Edge Functions)]] - `references` [INFERRED]
+- [[Stack v0.1 con versiones]] - `references` [EXTRACTED]
+- [[Supabase (Postgres, Auth, Realtime, Edge Functions)]] - `conceptually_related_to` [INFERRED]
 - [[Vercel (alternativa descartada)]] - `references` [EXTRACTED]
-- [[Workers en lugar de Pages]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Documentación_y_decisiones
+#graphify/rationale #graphify/EXTRACTED #community/Stack_arquitectura_y_sprints

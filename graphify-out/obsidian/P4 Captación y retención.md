@@ -1,19 +1,18 @@
 ---
 source_file: "docs/investigacion.md"
 type: "concept"
-community: "Problema, evidencia y validación"
+community: "Problema, evidencia y mercado"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Problema_evidencia_y_validación
+  - community/Problema_evidencia_y_mercado
 ---
 
 # P4 Captación y retención
 
 ## Connections
-- [[ADR-001 · Problema fila física incierta]] - `references` [INFERRED]
 - [[Investigación]] - `references` [EXTRACTED]
 - [[Matriz de decisión ponderada]] - `references` [EXTRACTED]
 - [[Zenoti Benchmark 2026]] - `cites` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Problema_evidencia_y_validación
+#graphify/concept #graphify/EXTRACTED #community/Problema_evidencia_y_mercado

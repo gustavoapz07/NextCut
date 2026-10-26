@@ -1,11 +1,11 @@
 ---
 source_file: "docs/investigacion.md"
 type: "concept"
-community: "Competencia y mercado"
+community: "Problema, evidencia y mercado"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Competencia_y_mercado
+  - community/Problema_evidencia_y_mercado
 ---
 
 # Fresha
@@ -14,4 +14,4 @@ tags:
 - [[Competencia]] - `references` [EXTRACTED]
 - [[Contexto Honduras 2026]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Competencia_y_mercado
+#graphify/concept #graphify/EXTRACTED #community/Problema_evidencia_y_mercado

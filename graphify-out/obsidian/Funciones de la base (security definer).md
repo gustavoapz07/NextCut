@@ -1,25 +1,23 @@
 ---
 source_file: "docs/plan-implementacion.md"
-type: "concept"
-community: "Base de datos y seguridad"
+type: "rationale"
+community: "Base de datos, seguridad y tiempo real"
 location: "L198"
 tags:
-  - graphify/concept
+  - graphify/rationale
   - graphify/EXTRACTED
-  - community/Base_de_datos_y_seguridad
+  - community/Base_de_datos_seguridad_y_tiempo_real
 ---
 
 # Funciones de la base (security definer)
 
 ## Connections
-- [[Edge Function unirse-a-fila]] - `references` [EXTRACTED]
+- [[Edge Function unirse-a-fila]] - `conceptually_related_to` [INFERRED]
 - [[Fallo 7 · Permisos excesivos]] - `references` [EXTRACTED]
-- [[Fallo 8 · Manejo de errores]] - `conceptually_related_to` [INFERRED]
-- [[Modelo de datos]] - `conceptually_related_to` [INFERRED]
-- [[Pausa de la fila remota]] - `conceptually_related_to` [EXTRACTED]
 - [[Plan de implementación]] - `references` [EXTRACTED]
-- [[Reporte del día para el dueño]] - `conceptually_related_to` [INFERRED]
+- [[Row Level Security (RLS)]] - `conceptually_related_to` [INFERRED]
 - [[Sprint 1 · Base de datos y seguridad]] - `references` [EXTRACTED]
-- [[pg_cron + pg_net]] - `conceptually_related_to` [EXTRACTED]
+- [[pg_cron + pg_net]] - `references` [EXTRACTED]
+- [[suscribir_push(codigo, secreto, suscripcion)]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Base_de_datos_y_seguridad
+#graphify/rationale #graphify/EXTRACTED #community/Base_de_datos_seguridad_y_tiempo_real

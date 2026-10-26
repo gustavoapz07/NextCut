@@ -1,18 +1,16 @@
 ---
 source_file: "docs/investigacion.md"
 type: "concept"
-community: "Problema, evidencia y validación"
+community: "Problema, evidencia y mercado"
 tags:
   - graphify/concept
-  - graphify/INFERRED
-  - community/Problema_evidencia_y_validación
+  - graphify/EXTRACTED
+  - community/Problema_evidencia_y_mercado
 ---
 
 # P1 Inasistencias (no-shows)
 
 ## Connections
-- [[ADR-001 · Problema fila física incierta]] - `references` [INFERRED]
-- [[ADR-004 · Sin pagos en línea en el MVP]] - `conceptually_related_to` [INFERRED]
 - [[Cambio de precios de WhatsApp (1102026)]] - `conceptually_related_to` [INFERRED]
 - [[Cochrane 2013 · recordatorios por SMS]] - `cites` [EXTRACTED]
 - [[Criterios seguir  ajustar  detener]] - `references` [INFERRED]
@@ -22,4 +20,4 @@ tags:
 - [[Turnos fantasma]] - `semantically_similar_to` [INFERRED]
 - [[Zenoti Benchmark 2026]] - `cites` [EXTRACTED]
 
-#graphify/concept #graphify/INFERRED #community/Problema_evidencia_y_validación
+#graphify/concept #graphify/EXTRACTED #community/Problema_evidencia_y_mercado

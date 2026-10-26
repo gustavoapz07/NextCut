@@ -1,12 +1,12 @@
 ---
 source_file: "docs/seguridad.md"
 type: "concept"
-community: "Base de datos y seguridad"
+community: "Base de datos, seguridad y tiempo real"
 location: "L33"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Base_de_datos_y_seguridad
+  - community/Base_de_datos_seguridad_y_tiempo_real
 ---
 
 # Clave publicable y clave secreta de Supabase
@@ -16,4 +16,4 @@ tags:
 - [[Fallo 7 · Permisos excesivos]] - `references` [EXTRACTED]
 - [[Row Level Security (RLS)]] - `conceptually_related_to` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Base_de_datos_y_seguridad
+#graphify/concept #graphify/EXTRACTED #community/Base_de_datos_seguridad_y_tiempo_real

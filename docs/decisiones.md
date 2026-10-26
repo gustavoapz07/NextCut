@@ -57,11 +57,11 @@ Cada decisión importante queda aquí con su contexto, las alternativas consider
 - **Contexto:** el autor desarrolla solo y con asistentes de IA, así que necesita pocas herramientas, rápidas y que atrapen errores antes de producción. TypeScript 7 (julio de 2026) trae un compilador nativo mucho más rápido, pero todavía no expone API para otras herramientas, y typescript-eslint depende de ella.
 - **Decisión:** npm con un solo `package.json`; TypeScript 7 para revisar tipos; **Biome** para lint y formato; Vitest para pruebas unitarias; pgTAP (`supabase test db`) para RLS y funciones; Playwright con axe de punta a punta; Lefthook y gitleaks antes de cada commit; GitHub Actions para CI y despliegue. Detalle en el [plan de implementación](plan-implementacion.md#4-herramientas-de-desarrollo).
 - **Alternativas:** *ESLint + Prettier:* dos herramientas y, con reglas de tipos, dependen de la API que TypeScript 7 no tiene. *Husky:* cambia la carpeta de hooks de git y chocaría con los hooks de graphify. *pnpm:* no aporta lo suficiente en un solo paquete.
-- **Consecuencias:** si alguna herramienta necesita la API de TypeScript, se usa un alias a `@typescript/typescript6` solo para ella. Hace falta Docker Desktop para correr Supabase en local.
+- **Consecuencias:** si alguna herramienta necesita la API de TypeScript, se usa un alias a `@typescript/typescript6` solo para ella. Supabase en local exigía Docker Desktop; [ADR-008](#adr-008--desarrollo-contra-supabase-en-la-nube-sin-docker-local) lo reemplaza por un proyecto en la nube.
 
 ## ADR-007 · Anotarse pasa por una Edge Function y el tiempo real solo manda señales
 
-- **Fecha:** 26/10/2026 · **Estado:** aceptada (sujeta a las pruebas de riesgo del Sprint 0)
+- **Fecha:** 26/10/2026 · **Estado:** aceptada · prueba de riesgo 1 superada el 26/10/2026: el Broadcast público llega a un cliente anónimo y el canal privado lo rechaza
 - **Contexto:** el diseño de [seguridad](seguridad.md) dejaba que el público llamara `unirse_a_fila` directo. Turnstile se verifica en una Edge Function, así que cualquiera podría saltárselo llamando a la API. Además, el público no puede leer la tabla `turnos`, así que no puede suscribirse a sus cambios en tiempo real.
 - **Decisión:**
   1. `unirse_a_fila` solo la ejecuta la clave secreta. El formulario llama a la Edge Function `unirse-a-fila`, que verifica Turnstile y el límite por IP antes de llamarla.
@@ -69,4 +69,22 @@ Cada decisión importante queda aquí con su contexto, las alternativas consider
   3. La pantalla de TV usa la vista pública y no lleva token, porque esa vista no tiene datos privados.
   4. Se agrega `suscribir_push(codigo, secreto, suscripcion)` para que el cliente guarde su suscripción de Web Push.
 - **Alternativas:** *validar Turnstile dentro de Postgres:* exigiría llamadas HTTP síncronas desde la base. *Mandar los datos de la fila por el canal:* expondría nombres a cualquiera que escuche.
-- **Consecuencias:** anotarse cuesta una invocación de Edge Function (500,000 al mes en el plan gratuito). Si el Broadcast público no llega a clientes sin sesión (prueba de riesgo 1), la página consulta cada 10–20 segundos, que ya existe como respaldo.
+- **Consecuencias:** anotarse cuesta una invocación de Edge Function (500,000 al mes en el plan gratuito). La consulta cada 10–20 segundos queda como respaldo cuando la página no está visible o se cae la conexión.
+
+## ADR-008 · Desarrollo contra Supabase en la nube, sin Docker local
+
+- **Fecha:** 26/10/2026 · **Estado:** aceptada · cambia el entorno de desarrollo de [ADR-006](#adr-006--herramientas-de-desarrollo-y-pruebas) y del [plan](plan-implementacion.md#11-integración-y-despliegue)
+- **Contexto:** Supabase en local necesita Docker Desktop. En la laptop de desarrollo (Windows 11 Home) eso exige instalar WSL con permisos de administrador, aceptar el acuerdo de Docker y reservar varios GB de imágenes y memoria. La cuenta gratuita de Supabase permite 2 proyectos activos, y ya los ocupaban otros proyectos del autor.
+- **Decisión:** se desarrolla contra el proyecto `siguiente-pruebas` (us-east-1, plan gratuito). Para liberar el espacio se pausó el proyecto `melarlab`, que conserva sus datos y se puede reactivar.
+  - Las migraciones siguen siendo archivos en `supabase/migrations/` y se aplican con `supabase db push --linked`.
+  - Los tipos se generan desde el proyecto (`supabase gen types --project-id`).
+  - Las Edge Functions se despliegan con `supabase functions deploy --use-api`, que empaqueta en los servidores de Supabase.
+  - Las pruebas pgTAP corren en CI, donde los runners de GitHub sí tienen Docker (`supabase start` + `supabase test db`).
+- **Alternativas:** *Docker local:* más pesado y con más pasos en esta máquina. *Plan Pro (USD 25 al mes):* contradice el costo cero del MVP. *Otra cuenta de Supabase para saltar el límite:* probablemente va contra los términos de uso.
+- **Consecuencias:**
+  - Hace falta internet para desarrollar.
+  - `supabase db reset --linked` borra el proyecto de pruebas; se acepta porque es solo de pruebas y `seed.sql` lo reconstruye.
+  - El proyecto gratuito se pausa tras una semana sin uso y hay que reactivarlo desde el panel.
+  - Las Edge Functions se prueban desplegadas y la lógica pura (como `eta.ts`) con Vitest.
+  - Las pruebas de la base dependen de CI, así que el repositorio tiene que estar en GitHub antes del Sprint 1.
+  - Antes del piloto hará falta otro espacio gratuito para producción: pausar otro proyecto o pagar Pro.

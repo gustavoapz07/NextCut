@@ -1,21 +1,23 @@
 ---
 source_file: "docs/bitacora.md"
 type: "concept"
-community: "Stack, arquitectura y Sprint 0"
+community: "Base de datos, seguridad y tiempo real"
 location: "L46"
 tags:
   - graphify/concept
-  - graphify/EXTRACTED
-  - community/Stack_arquitectura_y_Sprint_0
+  - graphify/INFERRED
+  - community/Base_de_datos_seguridad_y_tiempo_real
 ---
 
 # Pruebas de riesgo del Sprint 0 (Broadcast público, Web Push, Turnstile con IP)
 
 ## Connections
-- [[2026-10-26 · Sprint 0 base del proyecto]] - `references` [EXTRACTED]
-- [[ADR-007 · Anotarse por Edge Function y tiempo real solo con señales]] - `conceptually_related_to` [INFERRED]
-- [[Cloudflare Turnstile]] - `references` [EXTRACTED]
+- [[2026-10-26 · Desarrollo sin Docker y prueba de riesgo 1]] - `conceptually_related_to` [EXTRACTED]
+- [[2026-10-26 · Sprint 0 base del proyecto]] - `conceptually_related_to` [EXTRACTED]
+- [[Cloudflare Turnstile]] - `conceptually_related_to` [INFERRED]
+- [[Prueba de riesgo 1 superada (Broadcast público con clave publicable)]] - `conceptually_related_to` [EXTRACTED]
 - [[Sprint 0 · Entorno y pruebas de riesgo]] - `conceptually_related_to` [INFERRED]
-- [[Web Push (PWA)]] - `references` [EXTRACTED]
+- [[Tiempo real solo con señales (Broadcast)]] - `conceptually_related_to` [INFERRED]
+- [[Web Push (PWA)]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Stack_arquitectura_y_Sprint_0
+#graphify/concept #graphify/INFERRED #community/Base_de_datos_seguridad_y_tiempo_real

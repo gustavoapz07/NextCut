@@ -1,23 +1,22 @@
 ---
 source_file: "docs/decisiones.md"
 type: "rationale"
-community: "Avisos y panel del barbero"
+community: "Documentación, decisiones y piloto"
 location: "L31"
 tags:
   - graphify/rationale
-  - graphify/INFERRED
-  - community/Avisos_y_panel_del_barbero
+  - graphify/EXTRACTED
+  - community/Documentación_decisiones_y_piloto
 ---
 
 # ADR-003 · Notificaciones sin API de WhatsApp
 
 ## Connections
 - [[2026-10-25 · Investigación inicial]] - `references` [EXTRACTED]
-- [[Botón wa.me]] - `references` [INFERRED]
-- [[Cambio de precios de WhatsApp (1102026)]] - `cites` [INFERRED]
+- [[Cambio de precios de WhatsApp (1102026)]] - `conceptually_related_to` [INFERRED]
 - [[Fallo 6 · Sin límite de tokens]] - `conceptually_related_to` [INFERRED]
-- [[Notificaciones sin costo variable]] - `conceptually_related_to` [INFERRED]
+- [[Notificaciones sin costo variable]] - `references` [EXTRACTED]
 - [[Registro de decisiones]] - `references` [EXTRACTED]
-- [[Web Push (PWA)]] - `references` [INFERRED]
+- [[Web Push (PWA)]] - `conceptually_related_to` [INFERRED]
 
-#graphify/rationale #graphify/INFERRED #community/Avisos_y_panel_del_barbero
+#graphify/rationale #graphify/EXTRACTED #community/Documentación_decisiones_y_piloto

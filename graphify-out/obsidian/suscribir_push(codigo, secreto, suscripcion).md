@@ -1,12 +1,12 @@
 ---
 source_file: "docs/decisiones.md"
 type: "concept"
-community: "Base de datos y seguridad"
+community: "Base de datos, seguridad y tiempo real"
 location: "L70"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Base_de_datos_y_seguridad
+  - community/Base_de_datos_seguridad_y_tiempo_real
 ---
 
 # suscribir_push(codigo, secreto, suscripcion)
@@ -14,6 +14,7 @@ tags:
 ## Connections
 - [[ADR-007 · Anotarse por Edge Function y tiempo real solo con señales]] - `references` [EXTRACTED]
 - [[Fallo 2 · Endpoints expuestos]] - `references` [EXTRACTED]
-- [[Web Push (PWA)]] - `references` [INFERRED]
+- [[Funciones de la base (security definer)]] - `conceptually_related_to` [INFERRED]
+- [[Web Push (PWA)]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Base_de_datos_y_seguridad
+#graphify/concept #graphify/EXTRACTED #community/Base_de_datos_seguridad_y_tiempo_real

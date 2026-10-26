@@ -1,23 +1,23 @@
 ---
 source_file: "docs/plan-implementacion.md"
-type: "concept"
-community: "Antiabuso y monitoreo"
+type: "document"
+community: "Documentación, decisiones y piloto"
 location: "L272"
 tags:
-  - graphify/concept
-  - graphify/EXTRACTED
-  - community/Antiabuso_y_monitoreo
+  - graphify/document
+  - graphify/INFERRED
+  - community/Documentación_decisiones_y_piloto
 ---
 
 # Sprint 4 · Dueño, antiabuso y lanzamiento
 
 ## Connections
+- [[Claves nuevas de Supabase (sb_publishable  sb_secret)]] - `conceptually_related_to` [INFERRED]
 - [[Fallo 10 · Monitoreo, logs y alertas]] - `conceptually_related_to` [INFERRED]
 - [[Fallo 9 · Rate limiting]] - `conceptually_related_to` [INFERRED]
-- [[Pausa de la fila remota]] - `references` [EXTRACTED]
-- [[Reporte del día para el dueño]] - `references` [EXTRACTED]
+- [[Plan de implementación]] - `references` [EXTRACTED]
 - [[Seguridad]] - `references` [EXTRACTED]
-- [[Sentry (errores sin datos personales)]] - `references` [EXTRACTED]
 - [[Supabase MCP]] - `conceptually_related_to` [INFERRED]
+- [[pg_cron + pg_net]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Antiabuso_y_monitoreo
+#graphify/document #graphify/INFERRED #community/Documentación_decisiones_y_piloto

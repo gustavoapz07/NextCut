@@ -6,15 +6,15 @@
     "semantic_hash": "55ba7d5ab3fc038543733f892cdf8a23"
   },
   "docs/bitacora.md": {
-    "mtime": 1793107340.1950657,
-    "seen": 1793107347.9341683,
-    "ast_hash": "873222490b07b042d9df3356548e4d12",
+    "mtime": 1793111459.153566,
+    "seen": 1793111467.6859083,
+    "ast_hash": "67214df41cceabfb6ce179aedc5c48ba",
     "semantic_hash": ""
   },
   "docs/decisiones.md": {
-    "mtime": 1793105979.0805612,
-    "seen": 1793105988.813538,
-    "ast_hash": "4d50415df85e571bb8248fad3b3019d5",
+    "mtime": 1793111459.152326,
+    "seen": 1793111467.6859107,
+    "ast_hash": "7afdf5ec9353727fa6c90e8c7c9277bd",
     "semantic_hash": ""
   },
   "docs/investigacion.md": {
@@ -24,10 +24,10 @@
     "semantic_hash": "a03e6054d92f2b3847ff257819adb86d"
   },
   "docs/seguridad.md": {
-    "mtime": 1793031025.5103712,
-    "seen": 1793068108.8892515,
-    "ast_hash": "6d62fa9fef3f0e5c4f2e147022165c57",
-    "semantic_hash": "6d62fa9fef3f0e5c4f2e147022165c57"
+    "mtime": 1793111434.82173,
+    "seen": 1793111467.6859164,
+    "ast_hash": "b4cd834c22a64593ad618f7dbea5941b",
+    "semantic_hash": ""
   },
   "docs/validacion-campo.md": {
     "mtime": 1793031025.715576,
@@ -36,10 +36,10 @@
     "semantic_hash": "fce8b9c4ac2e58b20c5f98526ae1e804"
   },
   "docs/plan-implementacion.md": {
-    "mtime": 1793031025.304502,
-    "seen": 1793068108.8892431,
-    "ast_hash": "d5f83dd377ac2fbdf7eb821f5ebc66f3",
-    "semantic_hash": "d5f83dd377ac2fbdf7eb821f5ebc66f3"
+    "mtime": 1793111434.82173,
+    "seen": 1793111467.6859145,
+    "ast_hash": "765921780a5971750f2f2ab67a3ab364",
+    "semantic_hash": ""
   },
   "app/src/components/ErrorDeRuta.tsx": {
     "mtime": 1793105646.8680816,
@@ -84,10 +84,10 @@
     "semantic_hash": ""
   },
   "supabase/seed.sql": {
-    "mtime": 1793021773.7951815,
-    "seen": 1793022456.2014658,
-    "ast_hash": "4fa30c10f1fb7293f2a76d0aa99bf8f2",
-    "semantic_hash": "4fa30c10f1fb7293f2a76d0aa99bf8f2"
+    "mtime": 1793111250.1996522,
+    "seen": 1793111467.6858954,
+    "ast_hash": "bddc700f4eba6aa3bffb81fde5005c75",
+    "semantic_hash": ""
   },
   "vite.config.ts": {
     "mtime": 1793021448.7297187,
@@ -96,10 +96,10 @@
     "semantic_hash": "78a38ea596a0edeb7389f95c1078250d"
   },
   "app/src/lib/database.types.ts": {
-    "mtime": 1793027925.9859667,
-    "seen": 1793028481.3882916,
-    "ast_hash": "b555052ea68dca5dd5d0a2db00cb248c",
-    "semantic_hash": "b555052ea68dca5dd5d0a2db00cb248c"
+    "mtime": 1793111363.3794916,
+    "seen": 1793111467.685857,
+    "ast_hash": "3322bab8bc8c48cc1d861b69d91e0694",
+    "semantic_hash": ""
   },
   "app/src/lib/supabase.ts": {
     "mtime": 1793027926.3397474,
@@ -237,6 +237,42 @@
     "mtime": 1793069705.0139475,
     "seen": 1793105988.8135128,
     "ast_hash": "13de800e6db5ff22ec6ec8a660e7477c",
+    "semantic_hash": ""
+  },
+  "scripts/concurrencia.mjs": {
+    "mtime": 1793111385.486703,
+    "seen": 1793111467.6858847,
+    "ast_hash": "8e512235ed785b1a2252270b0b29b769",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/20261027140203_base_de_datos.sql": {
+    "mtime": 1793109217.4273183,
+    "seen": 1793111467.6858897,
+    "ast_hash": "74735f11b81a7011709b98d517055db2",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/20261027142713_senal_sin_realtime.sql": {
+    "mtime": 1793111231.7569482,
+    "seen": 1793111467.685892,
+    "ast_hash": "d6f402d3e814940e90dde857128b6531",
+    "semantic_hash": ""
+  },
+  "supabase/tests/database/01_permisos.test.sql": {
+    "mtime": 1793109394.2338512,
+    "seen": 1793111467.685897,
+    "ast_hash": "e103f4bb637bb06f8210b20417873569",
+    "semantic_hash": ""
+  },
+  "supabase/tests/database/02_aislamiento.test.sql": {
+    "mtime": 1793109860.3842952,
+    "seen": 1793111467.6858993,
+    "ast_hash": "2092f74d44ff025437ffeb0df724bf3c",
+    "semantic_hash": ""
+  },
+  "supabase/tests/database/03_funciones.test.sql": {
+    "mtime": 1793109520.356022,
+    "seen": 1793111467.6859012,
+    "ast_hash": "23282daf91f27e9350c28e1ba327e17e",
     "semantic_hash": ""
   }
 }

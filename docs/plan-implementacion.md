@@ -237,13 +237,13 @@ No construye funciones del producto. Prepara el entorno y prueba lo que podría 
 
 ### Sprint 1 · Base de datos y seguridad (semana 3)
 
-- [ ] Migraciones: tablas del [modelo de datos](../README.md#modelo-de-datos-primer-borrador), `CHECK` en columnas (nombre 2–40, teléfono `^\+504[0-9]{8}$`, montos ≥ 0) y RLS con denegación por defecto.
-- [ ] Funciones de la sección 8, con validación dentro de cada una.
-- [ ] `eventos_turno` de solo inserción, alimentada por triggers en cada cambio de estado.
-- [ ] Trigger de señal de Broadcast y contador de turnos por IP.
-- [ ] `seed.sql` con 2 barberías, 3 barberos y servicios.
-- [ ] Pruebas pgTAP: el público no lee `turnos`; la barbería A no ve ni toca la B; un barbero no cierra el turno de otro ni edita uno `atendido`; `fila_publica` y `ver_turno` no devuelven teléfonos.
-- [ ] Script de concurrencia: dos barberos llaman al siguiente a la vez y cada uno recibe un cliente distinto.
+- [x] Migraciones: tablas del [modelo de datos](../README.md#modelo-de-datos-primer-borrador), `CHECK` en columnas (nombre 2–40, teléfono `^\+504[0-9]{8}$`, montos ≥ 0) y RLS con denegación por defecto.
+- [x] Funciones de la sección 8, con validación dentro de cada una.
+- [x] `eventos_turno` de solo inserción, alimentada por triggers en cada cambio de estado.
+- [x] Trigger de señal de Broadcast y contador de turnos por IP.
+- [x] `seed.sql` con 2 barberías, 3 barberos y servicios.
+- [x] Pruebas pgTAP: el público no lee `turnos`; la barbería A no ve ni toca la B; un barbero no cierra el turno de otro ni edita uno `atendido`; `fila_publica` y `ver_turno` no devuelven teléfonos.
+- [x] Script de concurrencia: dos barberos llaman al siguiente a la vez y cada uno recibe un cliente distinto.
 
 **Salida:** `supabase test db` y el script de concurrencia en verde en CI. Fallos 2, 7 y 8 pasan a 🟩 en [seguridad](seguridad.md).
 

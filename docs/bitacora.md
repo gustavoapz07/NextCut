@@ -82,3 +82,18 @@ Cada cambio del proyecto queda aquí, enlazado al documento que afecta. El grafo
 - **Navegación entre pantallas:** desaparecen la pestaña lateral (tapaba texto) y la barra del simulador del turno. El menú con todas las pantallas se abre tocando el logo de NextCut, y cada estado del turno tiene su acceso directo (`/t/K7P2Q?estado=fila|casi|llamado|silla|listo|cancelado`); sin el parámetro el turno sigue avanzando solo.
 - **Letras cortadas:** un script revisó cada pantalla en iframes de 320, 360 y 375 px, la TV en 1280×720, 1920×1080 y 1024×768, y el escritorio en 1280×800, buscando texto recortado por un contenedor, truncado con "…" o fuera de la pantalla. Se corrigieron "SIGUIENTE" (login), "CANCELADO", "¡QUEDASTE FINO!" y "DISFRUTA" (turno), que no cabían a 360 px; los campos de hora de Configuración, que ensanchaban la página; las pestañas de Configuración, que se cortaban en el borde; el confeti y el halo de "TÚ", que generaban scroll lateral; los nombres y apodos truncados; y el interlineado de todos los titulares, que sube de 0.78–0.85 a 0.9. Las cintas en movimiento se desvanecen en los bordes. Resultado final: ningún hallazgo.
 - **Pruebas:** 15 pruebas de rutas, incluidos los estados del turno; `npm run check` pasa.
+
+## 2026-10-27 · Sprint 1: base de datos y seguridad
+
+- **Qué:** la base de la v0.1 con sus reglas de acceso, funciones y pruebas ([plan](plan-implementacion.md#sprint-1--base-de-datos-y-seguridad-semana-3), [ADR-011](decisiones.md#adr-011--detalles-de-la-base-de-datos-del-sprint-1)).
+- **Migraciones** (`supabase/migrations/`, aplicadas en `siguiente-pruebas`):
+  - `20261027140203_base_de_datos`: tablas del modelo de datos con sus `CHECK`, RLS con denegación por defecto en todas, funciones del público, del barbero, del dueño y de las tareas programadas, bitácora de solo inserción con triggers, señal de tiempo real y límites (5 turnos por IP cada 10 minutos, un turno activo por teléfono, tamaño máximo de la fila y fila remota pausada).
+  - `20261027142713_senal_sin_realtime`: la señal se omite si Realtime todavía no está listo (local).
+- **Datos de prueba** (`supabase/seed.sql`, solo local y CI): La Navaja con Carlos, Jorge y Kevin, y El Faro con un barbero, para probar el aislamiento.
+- **Pruebas:** 101 pruebas pgTAP en `supabase/tests/database/`, todas en verde contra el proyecto de pruebas dentro de una transacción que se deshizo (no quedó ningún dato). Cubren permisos, aislamiento entre barberías, validación de datos, privacidad de las pantallas públicas, idempotencia, límites, el flujo del barbero, la bitácora y las tareas programadas. El script `scripts/concurrencia.mjs` prueba "llamar siguiente" con varios barberos a la vez y el doble envío; necesita dos conexiones reales, así que corre en el CI.
+- **CI:** nuevo trabajo "Base de datos (pgTAP y concurrencia)" con Supabase local en el runner de GitHub. Todavía no corrió: arranca con el próximo push.
+- **Security Advisor:** sin errores. Los avisos que quedan son parte del diseño (ADR-011, punto 8). El de rendimiento solo marca índices sin uso, porque la base está vacía.
+- **Seguridad:** los fallos 2 y 7 pasan a 🟩; 3, 5, 8, 9 y 10 a 🟨 ([seguridad](seguridad.md)).
+- **Tipos:** `app/src/lib/database.types.ts` regenerado desde la base.
+- **Dependencia nueva:** `pg` (desarrollo), para el script de concurrencia.
+- **Siguiente paso:** subir los cambios para que el CI corra pgTAP y la concurrencia con Supabase local; luego el Sprint 2 (conectar la fila pública, anotarse con Turnstile y el turno en vivo).

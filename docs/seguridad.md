@@ -1,6 +1,6 @@
 # Seguridad: auditoría del diseño
 
-**Proyecto:** [NextCut](../README.md) · **Fecha:** 25 de octubre de 2026 · **Fase:** diseño (sin código todavía)
+**Proyecto:** [NextCut](../README.md) · **Fecha:** 25 de octubre de 2026 · **Fase:** Sprint 1 · base de datos (actualizado el 27/10/2026)
 **Relacionado:** [Decisiones](decisiones.md) · [Investigación](investigacion.md) · [Plan de implementación](plan-implementacion.md) · [Bitácora](bitacora.md)
 
 El diseño se revisó contra los 10 fallos de seguridad más comunes en apps con APIs y agentes. Cada control tiene una **prueba** que debe pasar antes de lanzar. El estado se actualiza en cada fase.
@@ -37,7 +37,7 @@ Antes de la lista general, estos son los abusos más probables en este producto:
   - Si una clave se filtra, se rota de inmediato y se registra en la bitácora.
 - **Prueba:** `gitleaks detect` pasa en CI. Buscar en el build de producción que no aparezca `service_role` ni `sb_secret`.
 
-### 2. Endpoints expuestos en la web pública · 🟦
+### 2. Endpoints expuestos en la web pública · 🟩
 
 - **Riesgo:** con la API de Supabase, cualquier tabla sin RLS queda abierta a internet.
 - **Controles:**
@@ -49,7 +49,7 @@ Antes de la lista general, estos son los abusos más probables en este producto:
   - Revisión con el Security Advisor de Supabase antes de cada despliegue.
 - **Prueba (pgTAP):** `anon` no puede hacer `select` en `turnos`; un usuario de la barbería A no lee ni modifica filas de la barbería B.
 
-### 3. Input sin validar · 🟦
+### 3. Input sin validar · 🟨 (base probada; falta zod en el formulario, Sprint 2)
 
 - **Riesgo:** datos basura, inyección o XSS en la pantalla del local.
 - **Controles:**
@@ -64,7 +64,7 @@ Antes de la lista general, estos son los abusos más probables en este producto:
 - **Estado:** el MVP no usa IA.
 - **Regla para cuando la haya** (por ejemplo, un asistente que responda "¿cuánta gente hay?"): prompt de sistema con un rol cerrado; el modelo solo recibe datos de **una** barbería; herramientas de solo lectura y en lista blanca; respuestas validadas contra un esquema; batería de pruebas de inyección de prompt antes de activarlo.
 
-### 5. Datos sensibles · 🟦
+### 5. Datos sensibles · 🟨 (pantallas públicas probadas; falta programar el borrado a los 90 días)
 
 - **Riesgo:** exponer teléfonos o hábitos de los clientes.
 - **Controles:**
@@ -82,7 +82,7 @@ Antes de la lista general, estos son los abusos más probables en este producto:
 - **Controles:** cuotas por barbería (turnos por día según el plan y tamaño máximo de la fila), máximo de 2 avisos push por turno y, en el complemento de WhatsApp, presupuesto mensual con alerta al 80 % y corte al 100 %. Con IA: `max_tokens` por solicitud y presupuesto mensual por barbería.
 - **Prueba:** crear turnos hasta superar la cuota; el sistema debe rechazar con un mensaje claro.
 
-### 7. Permisos excesivos · 🟦
+### 7. Permisos excesivos · 🟩
 
 - **Controles:**
   - Roles: `dueno` (todo en su barbería) y `barbero` (solo sus turnos y su pausa). La pantalla de TV usa la vista pública sin token, porque esa vista no tiene datos privados ([ADR-007](decisiones.md#adr-007--anotarse-pasa-por-una-edge-function-y-el-tiempo-real-solo-manda-señales)).
@@ -91,7 +91,7 @@ Antes de la lista general, estos son los abusos más probables en este producto:
   - Funciones `security definer` con `search_path` fijo y `revoke all ... from public`; solo se concede `execute` al rol que la necesita.
 - **Prueba (pgTAP):** un barbero no puede cerrar el turno de otro ni editar un turno `atendido`; el público no puede ejecutar `unirse_a_fila` directo ni escribir en ninguna tabla.
 
-### 8. Manejo de errores · 🟦
+### 8. Manejo de errores · 🟨 (bloqueo e idempotencia hechos; la prueba de concurrencia corre en el CI)
 
 - **Controles:**
   - El usuario ve mensajes genéricos ("No pudimos anotarte, intenta de nuevo") con un código corto; el detalle va a los logs.
@@ -100,7 +100,7 @@ Antes de la lista general, estos son los abusos más probables en este producto:
   - Clave de idempotencia al anotarse, para que un doble toque no cree dos turnos.
 - **Prueba:** dos barberos presionan "Llamar siguiente" a la vez y cada uno recibe un cliente distinto; un doble envío del formulario crea un solo turno.
 
-### 9. Rate limiting · 🟦
+### 9. Rate limiting · 🟨 (límites por IP, teléfono y tamaño de la fila probados; faltan Turnstile y la pausa automática)
 
 - **Controles:**
   - Cloudflare Turnstile en el formulario, verificado en una Edge Function.
@@ -110,7 +110,7 @@ Antes de la lista general, estos son los abusos más probables en este producto:
   - **Pausa automática** de la fila remota si entran más turnos de lo normal en 5 minutos, con aviso al dueño.
 - **Prueba:** un script que intenta 50 turnos en un minuto; deben pasar como máximo los permitidos y debe saltar la alerta.
 
-### 10. Monitoreo, logs y alertas · 🟦
+### 10. Monitoreo, logs y alertas · 🟨 (bitácora probada; faltan Sentry, salud y alertas)
 
 - **Controles:**
   - Tabla `eventos_turno` como bitácora de solo inserción (quién, qué y cuándo).
@@ -124,7 +124,7 @@ Antes de la lista general, estos son los abusos más probables en este producto:
 
 ## Pendientes antes del piloto
 
-- [ ] Escribir las pruebas pgTAP de RLS (#2 y #7).
+- [x] Escribir las pruebas pgTAP de RLS (#2 y #7): `supabase/tests/database/`, 101 pruebas en verde el 27/10/2026.
 - [ ] Configurar `gitleaks` en pre-commit y CI (#1).
 - [ ] Prueba de carga del formulario con límites activos (#9).
 - [ ] Confirmar con los dueños el plazo de borrado de teléfonos (#5).

@@ -1,5 +1,6 @@
 # Revisiones de cada PR y de cada push a main (docs/plan-implementacion.md, sección 11).
-# Las pruebas pgTAP de la base, la concurrencia y Playwright se suman en los sprints 1 y 2.
+# Las pruebas de la base (pgTAP y concurrencia) corren con Supabase local; Playwright llega en el
+# Sprint 2.
 name: CI
 
 on:
@@ -55,6 +56,44 @@ jobs:
             echo "::error::El build contiene una clave secreta o una referencia a service_role."
             exit 1
           fi
+
+  base:
+    name: Base de datos (pgTAP y concurrencia)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+        env:
+          LEFTHOOK: 0
+
+      - uses: supabase/setup-cli@v1
+        with:
+          version: 2.122.0
+
+      # Solo lo que usan las pruebas: Postgres, Auth, Realtime y la API (ADR-008: sin Docker en
+      # la laptop, pero los runners de GitHub sí lo tienen).
+      - name: Levantar Supabase local
+        run: >-
+          supabase start
+          -x studio,imgproxy,storage-api,edge-runtime,logflare,vector,mailpit,supavisor,postgres-meta
+
+      - name: Pruebas de la base (pgTAP, fallos 2, 3, 5, 7, 9 y 10)
+        run: supabase test db
+
+      - name: Concurrencia (fallo 8)
+        run: npm run test:concurrencia
+
+      - name: Apagar Supabase
+        if: always()
+        run: supabase stop --no-backup
 
   secretos:
     name: Secretos (gitleaks)

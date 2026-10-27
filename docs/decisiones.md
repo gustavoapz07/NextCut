@@ -114,3 +114,20 @@ Cada decisión importante queda aquí con su contexto, las alternativas consider
 - **Consecuencias:**
   - Las pantallas quedan listas para conectarlas a Supabase en los sprints 1 a 4, pero el riesgo de construir algo que las barberías no usen sigue abierto mientras no haya validación.
   - `motion` suma unos 50 kB comprimidos al JavaScript del cliente; cada pantalla se carga por separado para que el cliente no descargue el panel ni el reporte.
+
+## ADR-011 · Detalles de la base de datos del Sprint 1
+
+- **Fecha:** 27/10/2026 · **Estado:** aceptada · ajusta la [sección 8 del plan](plan-implementacion.md#8-funciones-de-la-base-y-quién-las-ejecuta)
+- **Contexto:** al escribir la migración aparecieron decisiones que el plan no fijaba, y el Security Advisor de Supabase marca como riesgo algunas que son parte del diseño.
+- **Decisión:**
+  1. **`fila_publica(slug)` es una función, no una vista.** Una vista que salta RLS es un error para el Security Advisor, y la función exige el slug: nadie puede listar las filas de todas las barberías con una sola consulta. Devuelve en una llamada todo lo que necesitan la página pública y la TV (barbería, barberos, servicios y fila), sin teléfonos y con "Óscar L." en vez del nombre completo.
+  2. **El cliente genera el secreto para cancelar** y la base solo guarda su hash SHA-256. Así un doble envío del formulario devuelve el mismo turno (idempotencia) sin que el cliente pierda su secreto.
+  3. **La Edge Function manda el hash de la IP, nunca la IP.** El límite de 5 turnos cada 10 minutos cuenta sobre ese hash.
+  4. **`barberos.user_id` liga cada silla con su cuenta.** Por eso `pausar_barbero` recibe el id del barbero: lo puede usar el propio barbero o el dueño.
+  5. **Se guarda `estimado_min` al anotarse**, para que el reporte del día mida el error del estimado.
+  6. **Reglas que se cumplen aunque alguien escriba directo en la tabla:** los estados solo avanzan en orden, un turno cerrado no se edita (solo se le puede borrar el teléfono), un barbero tiene una sola persona en mano y un teléfono tiene un solo turno activo por barbería.
+  7. **La señal de tiempo real se omite si `realtime.send` todavía no existe**, como pasa en Supabase local mientras carga los datos de prueba. En la nube siempre existe.
+  8. **Avisos del Security Advisor aceptados:** las funciones `security definer` que ejecutan `anon` y `authenticated` son la API pública a propósito ([ADR-007](#adr-007--anotarse-pasa-por-una-edge-function-y-el-tiempo-real-solo-manda-señales)) y cada una valida por dentro; `suscripciones_push` no tiene políticas porque solo la lee la clave secreta.
+  9. **Las migraciones se aplicaron con el MCP de Supabase**, porque la CLI no quedó instalada en la laptop (npm 11 bloqueó su script de instalación). Cada archivo lleva la misma versión que registró la base, para que la CLI no vea diferencias después. En CI se usa la acción oficial `supabase/setup-cli`.
+- **Alternativas:** *vista `fila_publica` con `security_invoker`:* el público tendría que leer `turnos` directo. *Secreto generado por la base:* rompe la idempotencia o obliga a guardar el secreto en claro.
+- **Consecuencias:** el frontend llama a funciones RPC en vez de leer tablas (salvo el personal, que lee su barbería con RLS). Los tipos generados (`app/src/lib/database.types.ts`) ya incluyen todas las funciones.

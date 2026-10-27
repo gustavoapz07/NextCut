@@ -1,45 +1,45 @@
 {
   "README.md": {
-    "mtime": 1793028084.6759503,
-    "seen": 1793028481.3883133,
-    "ast_hash": "cf19615b60da6b057fca996a353ed058",
-    "semantic_hash": "cf19615b60da6b057fca996a353ed058"
+    "mtime": 1793031023.019501,
+    "seen": 1793068108.8892093,
+    "ast_hash": "55ba7d5ab3fc038543733f892cdf8a23",
+    "semantic_hash": "55ba7d5ab3fc038543733f892cdf8a23"
   },
   "docs/bitacora.md": {
-    "mtime": 1793028084.992393,
-    "seen": 1793028481.3883152,
-    "ast_hash": "571a4d17170395aa049228ce8151d448",
-    "semantic_hash": "571a4d17170395aa049228ce8151d448"
+    "mtime": 1793067524.1931825,
+    "seen": 1793068108.88922,
+    "ast_hash": "b32889300b52c76c3f9759395de2c6ff",
+    "semantic_hash": "b32889300b52c76c3f9759395de2c6ff"
   },
   "docs/decisiones.md": {
-    "mtime": 1793028035.232877,
-    "seen": 1793028481.388317,
-    "ast_hash": "9f9a9b526194d928f2bdd4820fbd5290",
-    "semantic_hash": "9f9a9b526194d928f2bdd4820fbd5290"
+    "mtime": 1793031024.893932,
+    "seen": 1793068108.8892276,
+    "ast_hash": "22a80dd74a108c29dc32e3fe413ac844",
+    "semantic_hash": "22a80dd74a108c29dc32e3fe413ac844"
   },
   "docs/investigacion.md": {
-    "mtime": 1792988542.318203,
-    "seen": 1793019160.8363566,
-    "ast_hash": "9b646f0595ff271817c23a7f9e544a01",
-    "semantic_hash": "9b646f0595ff271817c23a7f9e544a01"
+    "mtime": 1793031025.0976996,
+    "seen": 1793068108.889234,
+    "ast_hash": "a03e6054d92f2b3847ff257819adb86d",
+    "semantic_hash": "a03e6054d92f2b3847ff257819adb86d"
   },
   "docs/seguridad.md": {
-    "mtime": 1793020512.7449152,
-    "seen": 1793020552.0063457,
-    "ast_hash": "e097e696aa17b10cb6ee07f0ac8aaaa0",
-    "semantic_hash": "e097e696aa17b10cb6ee07f0ac8aaaa0"
+    "mtime": 1793031025.5103712,
+    "seen": 1793068108.8892515,
+    "ast_hash": "6d62fa9fef3f0e5c4f2e147022165c57",
+    "semantic_hash": "6d62fa9fef3f0e5c4f2e147022165c57"
   },
   "docs/validacion-campo.md": {
-    "mtime": 1793019865.236026,
-    "seen": 1793020552.006352,
-    "ast_hash": "bf1f279eda165cca94d589caf5d70b6e",
-    "semantic_hash": "bf1f279eda165cca94d589caf5d70b6e"
+    "mtime": 1793031025.715576,
+    "seen": 1793068108.8892584,
+    "ast_hash": "fce8b9c4ac2e58b20c5f98526ae1e804",
+    "semantic_hash": "fce8b9c4ac2e58b20c5f98526ae1e804"
   },
   "docs/plan-implementacion.md": {
-    "mtime": 1793028066.0927982,
-    "seen": 1793028481.3883193,
-    "ast_hash": "65ebfc3c8c785a4e01c694e0f9fca596",
-    "semantic_hash": "65ebfc3c8c785a4e01c694e0f9fca596"
+    "mtime": 1793031025.304502,
+    "seen": 1793068108.8892431,
+    "ast_hash": "d5f83dd377ac2fbdf7eb821f5ebc66f3",
+    "semantic_hash": "d5f83dd377ac2fbdf7eb821f5ebc66f3"
   },
   "app/src/components/ErrorDeRuta.tsx": {
     "mtime": 1793021536.4254127,
@@ -54,10 +54,10 @@
     "semantic_hash": "f882271a37360b74d6460d5f3b68e29b"
   },
   "app/src/features/inicio/Inicio.tsx": {
-    "mtime": 1793021529.9832892,
-    "seen": 1793022456.2014306,
-    "ast_hash": "214751f0f6342704ad3e0166fb2ca16b",
-    "semantic_hash": "214751f0f6342704ad3e0166fb2ca16b"
+    "mtime": 1793031024.2425892,
+    "seen": 1793068108.8891206,
+    "ast_hash": "9804f5d21907aa03fa83dd374d00a0d3",
+    "semantic_hash": "9804f5d21907aa03fa83dd374d00a0d3"
   },
   "app/src/main.tsx": {
     "mtime": 1793021524.8177502,
@@ -66,10 +66,10 @@
     "semantic_hash": "f8ff36b9f401346106e3b1a16286ff59"
   },
   "app/src/router.test.tsx": {
-    "mtime": 1793021543.299822,
-    "seen": 1793022456.2014456,
-    "ast_hash": "eaabd3313e5f80d44ee2af3755be4392",
-    "semantic_hash": "eaabd3313e5f80d44ee2af3755be4392"
+    "mtime": 1793031024.488864,
+    "seen": 1793068108.8891487,
+    "ast_hash": "406880776999026209f38916ec382078",
+    "semantic_hash": "406880776999026209f38916ec382078"
   },
   "app/src/router.tsx": {
     "mtime": 1793021527.3777103,

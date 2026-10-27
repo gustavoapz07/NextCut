@@ -1,19 +1,22 @@
 ---
 source_file: "README.md"
 type: "concept"
-community: "Documentación, decisiones y piloto"
-location: "L105"
+community: "Problema, evidencia y mercado"
+location: "L105-L109"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Documentación_decisiones_y_piloto
+  - community/Problema_evidencia_y_mercado
 ---
 
 # Alcance del MVP (v0.1)
 
 ## Connections
-- [[Hoja de ruta v0.1–v0.3]] - `conceptually_related_to` [EXTRACTED]
-- [[Notificaciones sin costo variable]] - `conceptually_related_to` [INFERRED]
-- [[README de Siguiente]] - `references` [EXTRACTED]
+- [[Cálculo del tiempo estimado]] - `references` [EXTRACTED]
+- [[Hoja de ruta v0.1–v0.3]] - `references` [EXTRACTED]
+- [[Notificaciones sin costo variable]] - `references` [EXTRACTED]
+- [[Panel del barbero]] - `references` [EXTRACTED]
+- [[README de NextCut]] - `references` [EXTRACTED]
+- [[Reporte del día para el dueño]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Documentación_decisiones_y_piloto
+#graphify/concept #graphify/EXTRACTED #community/Problema_evidencia_y_mercado

@@ -1,14 +1,14 @@
 {
   "colorGroups": [
     {
-      "query": "tag:#community/Base_de_datos_seguridad_y_tiempo_real",
+      "query": "tag:#community/Problema_evidencia_y_mercado",
       "color": {
         "a": 1,
         "rgb": 5142951
       }
     },
     {
-      "query": "tag:#community/Problema_evidencia_y_mercado",
+      "query": "tag:#community/Base_de_datos_seguridad_y_tiempo_real",
       "color": {
         "a": 1,
         "rgb": 15896107
@@ -29,14 +29,14 @@
       }
     },
     {
-      "query": "tag:#community/Stack_arquitectura_y_sprints",
+      "query": "tag:#community/Bit\u00e1cora_decisiones_y_nombre",
       "color": {
         "a": 1,
         "rgb": 5873999
       }
     },
     {
-      "query": "tag:#community/Documentaci\u00f3n_decisiones_y_piloto",
+      "query": "tag:#community/Avisos_arquitectura_y_sprints",
       "color": {
         "a": 1,
         "rgb": 15583560
@@ -50,24 +50,31 @@
       }
     },
     {
-      "query": "tag:#community/Panel_del_barbero_y_errores",
+      "query": "tag:#community/Antiabuso_errores_y_lanzamiento",
       "color": {
         "a": 1,
         "rgb": 16752039
       }
     },
     {
-      "query": "tag:#community/Variables_de_entorno",
+      "query": "tag:#community/Stack_hosting_y_costos",
       "color": {
         "a": 1,
         "rgb": 10253663
       }
     },
     {
-      "query": "tag:#community/Datos_de_prueba",
+      "query": "tag:#community/Variables_de_entorno",
       "color": {
         "a": 1,
         "rgb": 12234924
+      }
+    },
+    {
+      "query": "tag:#community/Datos_de_prueba",
+      "color": {
+        "a": 1,
+        "rgb": 5142951
       }
     }
   ]

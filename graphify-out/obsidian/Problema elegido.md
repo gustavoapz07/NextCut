@@ -11,7 +11,7 @@ tags:
 # Problema elegido
 
 ## Connections
-- [[ADR-001 · Problema fila física incierta]] - `conceptually_related_to` [INFERRED]
+- [[ADR-001 · Problema fila física incierta]] - `references` [INFERRED]
 - [[Calendario de 8 semanas]] - `references` [EXTRACTED]
 - [[Investigación]] - `references` [EXTRACTED]
 - [[Matriz de decisión ponderada]] - `rationale_for` [EXTRACTED]

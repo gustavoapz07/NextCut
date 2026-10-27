@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plan-implementacion.md"
-type: "document"
-community: "Documentación, decisiones y piloto"
+type: "rationale"
+community: "Bitácora, decisiones y nombre"
 location: "L321"
 tags:
-  - graphify/document
+  - graphify/rationale
   - graphify/EXTRACTED
-  - community/Documentación_decisiones_y_piloto
+  - community/Bitácora_decisiones_y_nombre
 ---
 
 # Definición de terminado
@@ -17,4 +17,4 @@ tags:
 - [[Seguridad]] - `references` [EXTRACTED]
 - [[graphify (grafo de conocimiento)]] - `conceptually_related_to` [INFERRED]
 
-#graphify/document #graphify/EXTRACTED #community/Documentación_decisiones_y_piloto
+#graphify/rationale #graphify/EXTRACTED #community/Bitácora_decisiones_y_nombre

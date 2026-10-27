@@ -1,12 +1,12 @@
 ---
 source_file: "docs/seguridad.md"
 type: "concept"
-community: "Documentación, decisiones y piloto"
+community: "Bitácora, decisiones y nombre"
 location: "L62"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Documentación_decisiones_y_piloto
+  - community/Bitácora_decisiones_y_nombre
 ---
 
 # Fallo 4 · Prompt débil
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Seguridad]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Documentación_decisiones_y_piloto
+#graphify/concept #graphify/EXTRACTED #community/Bitácora_decisiones_y_nombre

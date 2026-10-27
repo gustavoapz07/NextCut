@@ -1,18 +1,18 @@
 ---
 source_file: "README.md"
 type: "concept"
-community: "Herramientas y entorno de desarrollo"
+community: "Base de datos, seguridad y tiempo real"
 location: "L182"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Herramientas_y_entorno_de_desarrollo
+  - community/Base_de_datos_seguridad_y_tiempo_real
 ---
 
 # Sentry (errores sin datos personales)
 
 ## Connections
-- [[Arquitectura]] - `conceptually_related_to` [EXTRACTED]
-- [[Variables de entorno (.env.local)]] - `shares_data_with` [INFERRED]
+- [[Arquitectura]] - `references` [EXTRACTED]
+- [[Fallo 5 · Datos sensibles]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Herramientas_y_entorno_de_desarrollo
+#graphify/concept #graphify/EXTRACTED #community/Base_de_datos_seguridad_y_tiempo_real

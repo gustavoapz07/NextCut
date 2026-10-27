@@ -2,7 +2,7 @@
 source_file: "README.md"
 type: "rationale"
 community: "Problema, evidencia y mercado"
-location: "L111"
+location: "L111-L117"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
@@ -12,9 +12,7 @@ tags:
 # Cálculo del tiempo estimado
 
 ## Connections
-- [[P2 Fila física incierta]] - `conceptually_related_to` [INFERRED]
-- [[Panel del barbero]] - `conceptually_related_to` [EXTRACTED]
-- [[README de Siguiente]] - `references` [EXTRACTED]
-- [[Reporte del día para el dueño]] - `conceptually_related_to` [EXTRACTED]
+- [[Alcance del MVP (v0.1)]] - `references` [EXTRACTED]
+- [[Reporte del día para el dueño]] - `references` [EXTRACTED]
 
 #graphify/rationale #graphify/EXTRACTED #community/Problema_evidencia_y_mercado

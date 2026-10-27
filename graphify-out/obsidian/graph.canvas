@@ -3,424 +3,18 @@
     {
       "id": "g0",
       "type": "group",
-      "label": "Base de datos, seguridad y tiempo real",
+      "label": "Problema, evidencia y mercado",
       "x": 0,
       "y": 0,
       "width": 1540,
-      "height": 820,
-      "color": "1"
-    },
-    {
-      "id": "n_docs_bitacora_sin_docker_prueba_riesgo_1",
-      "type": "file",
-      "file": "2026-10-26 \u00b7 Desarrollo sin Docker y prueba de riesgo 1.md",
-      "x": 20,
-      "y": 80,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_decisiones_adr_004",
-      "type": "file",
-      "file": "ADR-004 \u00b7 Sin pagos en l\u00ednea en el MVP.md",
-      "x": 220,
-      "y": 80,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_decisiones_adr_007",
-      "type": "file",
-      "file": "ADR-007 \u00b7 Anotarse por Edge Function y tiempo real solo con se\u00f1ales.md",
-      "x": 420,
-      "y": 80,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_adivinar_codigos",
-      "type": "file",
-      "file": "Adivinar c\u00f3digos de turno.md",
-      "x": 620,
-      "y": 80,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_amenazas_fila",
-      "type": "file",
-      "file": "Amenazas propias de una fila virtual.md",
-      "x": 820,
-      "y": 80,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_bitacora_eventos_turno",
-      "type": "file",
-      "file": "Bit\u00e1cora de eventos (eventos_turno).md",
-      "x": 1020,
-      "y": 80,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_borrado_telefonos_90_dias",
-      "type": "file",
-      "file": "Borrado de tel\u00e9fonos a los 90 d\u00edas.md",
-      "x": 1220,
-      "y": 80,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_decisiones_canal_fila_broadcast",
-      "type": "file",
-      "file": "Canal p\u00fablico filabarberia_id (se\u00f1al vac\u00eda).md",
-      "x": 20,
-      "y": 160,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_claves_supabase",
-      "type": "file",
-      "file": "Clave publicable y clave secreta de Supabase.md",
-      "x": 220,
-      "y": 160,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_readme_cloudflare_turnstile",
-      "type": "file",
-      "file": "Cloudflare Turnstile.md",
-      "x": 420,
-      "y": 160,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_decisiones_edge_function_unirse_a_fila",
-      "type": "file",
-      "file": "Edge Function unirse-a-fila.md",
-      "x": 620,
-      "y": 160,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_readme_estados_turno",
-      "type": "file",
-      "file": "Estados de un turno.md",
-      "x": 820,
-      "y": 160,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_f10_monitoreo",
-      "type": "file",
-      "file": "Fallo 10 \u00b7 Monitoreo, logs y alertas.md",
-      "x": 1020,
-      "y": 160,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_f02_endpoints_expuestos",
-      "type": "file",
-      "file": "Fallo 2 \u00b7 Endpoints expuestos.md",
-      "x": 1220,
-      "y": 160,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_f05_datos_sensibles",
-      "type": "file",
-      "file": "Fallo 5 \u00b7 Datos sensibles.md",
-      "x": 20,
-      "y": 240,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_f07_permisos_excesivos",
-      "type": "file",
-      "file": "Fallo 7 \u00b7 Permisos excesivos.md",
-      "x": 220,
-      "y": 240,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_f09_rate_limiting",
-      "type": "file",
-      "file": "Fallo 9 \u00b7 Rate limiting.md",
-      "x": 420,
-      "y": 240,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_fuga_entre_barberias",
-      "type": "file",
-      "file": "Fuga de datos entre barber\u00edas.md",
-      "x": 620,
-      "y": 240,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_plan_implementacion_funciones_base",
-      "type": "file",
-      "file": "Funciones de la base (security definer).md",
-      "x": 820,
-      "y": 240,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_security_definer",
-      "type": "file",
-      "file": "Funciones security definer con search_path fijo.md",
-      "x": 1020,
-      "y": 240,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_unirse_a_fila",
-      "type": "file",
-      "file": "Funci\u00f3n unirse_a_fila.md",
-      "x": 1220,
-      "y": 240,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_inundar_fila",
-      "type": "file",
-      "file": "Inundaci\u00f3n de la fila.md",
-      "x": 20,
-      "y": 320,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_ley_datos_honduras",
-      "type": "file",
-      "file": "Ley de protecci\u00f3n de datos de Honduras (pendiente).md",
-      "x": 220,
-      "y": 320,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_readme_modelo_datos",
-      "type": "file",
-      "file": "Modelo de datos.md",
-      "x": 420,
-      "y": 320,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_montos_alterados",
-      "type": "file",
-      "file": "Montos alterados por el barbero.md",
-      "x": 620,
-      "y": 320,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_nombre_ofensivo_tv",
-      "type": "file",
-      "file": "Nombre ofensivo o XSS en la TV.md",
-      "x": 820,
-      "y": 320,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_pausa_automatica",
-      "type": "file",
-      "file": "Pausa autom\u00e1tica de la fila remota.md",
-      "x": 1020,
-      "y": 320,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_pendientes_piloto",
-      "type": "file",
-      "file": "Pendientes antes del piloto.md",
-      "x": 1220,
-      "y": 320,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_bitacora_prueba_riesgo_1_broadcast",
-      "type": "file",
-      "file": "Prueba de riesgo 1 superada (Broadcast p\u00fablico con clave publicable).md",
-      "x": 20,
-      "y": 400,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_plan_implementacion_prueba_riesgo_1",
-      "type": "file",
-      "file": "Prueba de riesgo 1 \u00b7 Broadcast p\u00fablico.md",
-      "x": 220,
-      "y": 400,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_bitacora_pruebas_riesgo_sprint_0",
-      "type": "file",
-      "file": "Pruebas de riesgo del Sprint 0 (Broadcast p\u00fablico, Web Push, Turnstile con IP).md",
-      "x": 420,
-      "y": 400,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_pruebas_pgtap",
-      "type": "file",
-      "file": "Pruebas pgTAP.md",
-      "x": 620,
-      "y": 400,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_rls",
-      "type": "file",
-      "file": "Row Level Security (RLS).md",
-      "x": 820,
-      "y": 400,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_security_advisor",
-      "type": "file",
-      "file": "Security Advisor de Supabase.md",
-      "x": 1020,
-      "y": 400,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_plan_implementacion_sprint_1",
-      "type": "file",
-      "file": "Sprint 1 \u00b7 Base de datos y seguridad.md",
-      "x": 1220,
-      "y": 400,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_readme_tabla_turnos",
-      "type": "file",
-      "file": "Tabla turnos (codigo_publico aleatorio).md",
-      "x": 20,
-      "y": 480,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_plan_implementacion_broadcast_senales",
-      "type": "file",
-      "file": "Tiempo real solo con se\u00f1ales (Broadcast).md",
-      "x": 220,
-      "y": 480,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_turnos_fantasma",
-      "type": "file",
-      "file": "Turnos fantasma.md",
-      "x": 420,
-      "y": 480,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_vista_fila_publica",
-      "type": "file",
-      "file": "Vista fila_publica.md",
-      "x": 620,
-      "y": 480,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_cancelar_turno",
-      "type": "file",
-      "file": "cancelar_turno(codigo, secreto).md",
-      "x": 820,
-      "y": 480,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_codigo_publico",
-      "type": "file",
-      "file": "codigo_publico aleatorio.md",
-      "x": 1020,
-      "y": 480,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_gitleaks",
-      "type": "file",
-      "file": "gitleaks.md",
-      "x": 1220,
-      "y": 480,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_decisiones_suscribir_push",
-      "type": "file",
-      "file": "suscribir_push(codigo, secreto, suscripcion).md",
-      "x": 20,
-      "y": 560,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_ver_turno",
-      "type": "file",
-      "file": "ver_turno(codigo).md",
-      "x": 220,
-      "y": 560,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "g1",
-      "type": "group",
-      "label": "Problema, evidencia y mercado",
-      "x": 1620,
-      "y": 0,
-      "width": 1540,
       "height": 720,
-      "color": "2"
+      "color": "1"
     },
     {
       "id": "n_docs_decisiones_adr_001",
       "type": "file",
       "file": "ADR-001 \u00b7 Problema fila f\u00edsica incierta.md",
-      "x": 1640,
+      "x": 20,
       "y": 80,
       "width": 180,
       "height": 60
@@ -429,7 +23,16 @@
       "id": "n_docs_investigacion_agendapro",
       "type": "file",
       "file": "AgendaPro.md",
-      "x": 1840,
+      "x": 220,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_alcance_mvp",
+      "type": "file",
+      "file": "Alcance del MVP (v0.1).md",
+      "x": 420,
       "y": 80,
       "width": 180,
       "height": 60
@@ -438,7 +41,7 @@
       "id": "n_docs_investigacion_analisis_sensibilidad",
       "type": "file",
       "file": "An\u00e1lisis de sensibilidad.md",
-      "x": 2040,
+      "x": 620,
       "y": 80,
       "width": 180,
       "height": 60
@@ -447,7 +50,7 @@
       "id": "n_docs_investigacion_booksy",
       "type": "file",
       "file": "Booksy.md",
-      "x": 2240,
+      "x": 820,
       "y": 80,
       "width": 180,
       "height": 60
@@ -456,7 +59,7 @@
       "id": "n_docs_investigacion_cochrane_cd007458",
       "type": "file",
       "file": "Cochrane 2013 \u00b7 recordatorios por SMS.md",
-      "x": 2440,
+      "x": 1020,
       "y": 80,
       "width": 180,
       "height": 60
@@ -465,7 +68,7 @@
       "id": "n_docs_investigacion_competencia",
       "type": "file",
       "file": "Competencia.md",
-      "x": 2640,
+      "x": 1220,
       "y": 80,
       "width": 180,
       "height": 60
@@ -474,8 +77,8 @@
       "id": "n_docs_investigacion_contexto_honduras",
       "type": "file",
       "file": "Contexto Honduras 2026.md",
-      "x": 2840,
-      "y": 80,
+      "x": 20,
+      "y": 160,
       "width": 180,
       "height": 60
     },
@@ -483,7 +86,7 @@
       "id": "n_docs_validacion_campo_criterios_decision",
       "type": "file",
       "file": "Criterios seguir  ajustar  detener.md",
-      "x": 1640,
+      "x": 220,
       "y": 160,
       "width": 180,
       "height": 60
@@ -492,7 +95,7 @@
       "id": "n_readme_tiempo_estimado",
       "type": "file",
       "file": "C\u00e1lculo del tiempo estimado.md",
-      "x": 1840,
+      "x": 420,
       "y": 160,
       "width": 180,
       "height": 60
@@ -501,7 +104,7 @@
       "id": "n_docs_investigacion_datareportal_2026",
       "type": "file",
       "file": "DataReportal Digital 2026 Honduras.md",
-      "x": 2040,
+      "x": 620,
       "y": 160,
       "width": 180,
       "height": 60
@@ -510,7 +113,7 @@
       "id": "n_docs_validacion_campo_definicion_abandono",
       "type": "file",
       "file": "Definici\u00f3n de abandono.md",
-      "x": 2240,
+      "x": 820,
       "y": 160,
       "width": 180,
       "height": 60
@@ -519,7 +122,7 @@
       "id": "n_docs_validacion_campo_entrevistas_duenos",
       "type": "file",
       "file": "Entrevistas a due\u00f1os (Mom Test).md",
-      "x": 2440,
+      "x": 1020,
       "y": 160,
       "width": 180,
       "height": 60
@@ -528,7 +131,7 @@
       "id": "n_docs_investigacion_escala_calidad_evidencia",
       "type": "file",
       "file": "Escala de calidad de evidencia (A\u2013O).md",
-      "x": 2640,
+      "x": 1220,
       "y": 160,
       "width": 180,
       "height": 60
@@ -537,8 +140,8 @@
       "id": "n_readme_fila_virtual_hibrida",
       "type": "file",
       "file": "Fila virtual h\u00edbrida.md",
-      "x": 2840,
-      "y": 160,
+      "x": 20,
+      "y": 240,
       "width": 180,
       "height": 60
     },
@@ -546,7 +149,7 @@
       "id": "n_docs_investigacion_fresha",
       "type": "file",
       "file": "Fresha.md",
-      "x": 1640,
+      "x": 220,
       "y": 240,
       "width": 180,
       "height": 60
@@ -555,7 +158,7 @@
       "id": "n_docs_validacion_campo_formula_perdida",
       "type": "file",
       "file": "F\u00f3rmula de p\u00e9rdida mensual.md",
-      "x": 1840,
+      "x": 420,
       "y": 240,
       "width": 180,
       "height": 60
@@ -564,7 +167,16 @@
       "id": "n_docs_validacion_campo_hoja_observacion",
       "type": "file",
       "file": "Hoja de observaci\u00f3n de s\u00e1bado.md",
-      "x": 2040,
+      "x": 620,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_hoja_ruta",
+      "type": "file",
+      "file": "Hoja de ruta v0.1\u2013v0.3.md",
+      "x": 820,
       "y": 240,
       "width": 180,
       "height": 60
@@ -573,7 +185,7 @@
       "id": "n_docs_investigacion_documento",
       "type": "file",
       "file": "Investigaci\u00f3n.md",
-      "x": 2240,
+      "x": 1020,
       "y": 240,
       "width": 180,
       "height": 60
@@ -582,7 +194,7 @@
       "id": "n_docs_investigacion_vacios_evidencia",
       "type": "file",
       "file": "Lo que no sabemos.md",
-      "x": 2440,
+      "x": 1220,
       "y": 240,
       "width": 180,
       "height": 60
@@ -591,8 +203,8 @@
       "id": "n_docs_investigacion_lu_et_al_2013",
       "type": "file",
       "file": "Lu et al. 2013 \u00b7 efecto de las filas en las compras.md",
-      "x": 2640,
-      "y": 240,
+      "x": 20,
+      "y": 320,
       "width": 180,
       "height": 60
     },
@@ -600,8 +212,8 @@
       "id": "n_docs_investigacion_maister_psicologia_filas",
       "type": "file",
       "file": "Maister \u00b7 psicolog\u00eda de las filas.md",
-      "x": 2840,
-      "y": 240,
+      "x": 220,
+      "y": 320,
       "width": 180,
       "height": 60
     },
@@ -609,7 +221,7 @@
       "id": "n_docs_investigacion_matriz_decision",
       "type": "file",
       "file": "Matriz de decisi\u00f3n ponderada.md",
-      "x": 1640,
+      "x": 420,
       "y": 320,
       "width": 180,
       "height": 60
@@ -618,7 +230,7 @@
       "id": "n_readme_metricas_exito",
       "type": "file",
       "file": "M\u00e9tricas de \u00e9xito.md",
-      "x": 1840,
+      "x": 620,
       "y": 320,
       "width": 180,
       "height": 60
@@ -627,7 +239,7 @@
       "id": "n_docs_investigacion_p1_inasistencias",
       "type": "file",
       "file": "P1 Inasistencias (no-shows).md",
-      "x": 2040,
+      "x": 820,
       "y": 320,
       "width": 180,
       "height": 60
@@ -636,7 +248,7 @@
       "id": "n_docs_investigacion_p2_fila_incierta",
       "type": "file",
       "file": "P2 Fila f\u00edsica incierta.md",
-      "x": 2240,
+      "x": 1020,
       "y": 320,
       "width": 180,
       "height": 60
@@ -645,7 +257,7 @@
       "id": "n_docs_investigacion_p3_caja_comisiones",
       "type": "file",
       "file": "P3 Caja y comisiones.md",
-      "x": 2440,
+      "x": 1220,
       "y": 320,
       "width": 180,
       "height": 60
@@ -654,8 +266,8 @@
       "id": "n_docs_investigacion_p4_captacion_retencion",
       "type": "file",
       "file": "P4 Captaci\u00f3n y retenci\u00f3n.md",
-      "x": 2640,
-      "y": 320,
+      "x": 20,
+      "y": 400,
       "width": 180,
       "height": 60
     },
@@ -663,8 +275,8 @@
       "id": "n_docs_validacion_campo_piloto_gratis",
       "type": "file",
       "file": "Piloto gratis de un mes.md",
-      "x": 2840,
-      "y": 320,
+      "x": 220,
+      "y": 400,
       "width": 180,
       "height": 60
     },
@@ -672,7 +284,7 @@
       "id": "n_docs_validacion_campo_preguntas_precio",
       "type": "file",
       "file": "Preguntas de precio.md",
-      "x": 1640,
+      "x": 420,
       "y": 400,
       "width": 180,
       "height": 60
@@ -681,7 +293,7 @@
       "id": "n_docs_investigacion_problema_elegido",
       "type": "file",
       "file": "Problema elegido.md",
-      "x": 1840,
+      "x": 620,
       "y": 400,
       "width": 180,
       "height": 60
@@ -690,7 +302,7 @@
       "id": "n_docs_validacion_campo_registro_entrevista",
       "type": "file",
       "file": "Registro por entrevista.md",
-      "x": 2040,
+      "x": 820,
       "y": 400,
       "width": 180,
       "height": 60
@@ -699,7 +311,7 @@
       "id": "n_readme_reporte_dueno",
       "type": "file",
       "file": "Reporte del d\u00eda para el due\u00f1o.md",
-      "x": 2240,
+      "x": 1020,
       "y": 400,
       "width": 180,
       "height": 60
@@ -708,7 +320,7 @@
       "id": "n_docs_investigacion_squire",
       "type": "file",
       "file": "Squire.md",
-      "x": 2440,
+      "x": 1220,
       "y": 400,
       "width": 180,
       "height": 60
@@ -717,17 +329,8 @@
       "id": "n_readme_tasa_abandono",
       "type": "file",
       "file": "Tasa de abandono.md",
-      "x": 2640,
-      "y": 400,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_validacion_campo_documento",
-      "type": "file",
-      "file": "Validaci\u00f3n de campo.md",
-      "x": 2840,
-      "y": 400,
+      "x": 20,
+      "y": 480,
       "width": 180,
       "height": 60
     },
@@ -735,7 +338,7 @@
       "id": "n_docs_investigacion_waitwhile",
       "type": "file",
       "file": "Waitwhile.md",
-      "x": 1640,
+      "x": 220,
       "y": 480,
       "width": 180,
       "height": 60
@@ -744,7 +347,7 @@
       "id": "n_docs_investigacion_zenoti_benchmark_2026",
       "type": "file",
       "file": "Zenoti Benchmark 2026.md",
-      "x": 1840,
+      "x": 420,
       "y": 480,
       "width": 180,
       "height": 60
@@ -753,7 +356,341 @@
       "id": "n_docs_investigacion_zenoti_encuesta_2025",
       "type": "file",
       "file": "Zenoti encuesta a clientes 2025.md",
+      "x": 620,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g1",
+      "type": "group",
+      "label": "Base de datos, seguridad y tiempo real",
+      "x": 1620,
+      "y": 0,
+      "width": 1320,
+      "height": 720,
+      "color": "2"
+    },
+    {
+      "id": "n_docs_decisiones_adr_004",
+      "type": "file",
+      "file": "ADR-004 \u00b7 Sin pagos en l\u00ednea en el MVP.md",
+      "x": 1640,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_decisiones_adr_007",
+      "type": "file",
+      "file": "ADR-007 \u00b7 Anotarse por Edge Function y tiempo real solo con se\u00f1ales.md",
+      "x": 1840,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_adivinar_codigos",
+      "type": "file",
+      "file": "Adivinar c\u00f3digos de turno.md",
       "x": 2040,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_amenazas_fila",
+      "type": "file",
+      "file": "Amenazas propias de una fila virtual.md",
+      "x": 2240,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_arquitectura",
+      "type": "file",
+      "file": "Arquitectura.md",
+      "x": 2440,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_bitacora_eventos_turno",
+      "type": "file",
+      "file": "Bit\u00e1cora de eventos (eventos_turno).md",
+      "x": 2640,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_decisiones_canal_fila_broadcast",
+      "type": "file",
+      "file": "Canal p\u00fablico filabarberia_id (se\u00f1al vac\u00eda).md",
+      "x": 1640,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_claves_supabase",
+      "type": "file",
+      "file": "Clave publicable y clave secreta de Supabase.md",
+      "x": 1840,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_cloudflare_turnstile",
+      "type": "file",
+      "file": "Cloudflare Turnstile.md",
+      "x": 2040,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_decisiones_edge_function_unirse_a_fila",
+      "type": "file",
+      "file": "Edge Function unirse-a-fila.md",
+      "x": 2240,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_estados_turno",
+      "type": "file",
+      "file": "Estados de un turno.md",
+      "x": 2440,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_f02_endpoints_expuestos",
+      "type": "file",
+      "file": "Fallo 2 \u00b7 Endpoints expuestos.md",
+      "x": 2640,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_f05_datos_sensibles",
+      "type": "file",
+      "file": "Fallo 5 \u00b7 Datos sensibles.md",
+      "x": 1640,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_f07_permisos_excesivos",
+      "type": "file",
+      "file": "Fallo 7 \u00b7 Permisos excesivos.md",
+      "x": 1840,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_fuga_entre_barberias",
+      "type": "file",
+      "file": "Fuga de datos entre barber\u00edas.md",
+      "x": 2040,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_plan_implementacion_funciones_base",
+      "type": "file",
+      "file": "Funciones de la base (security definer).md",
+      "x": 2240,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_security_definer",
+      "type": "file",
+      "file": "Funciones security definer con search_path fijo.md",
+      "x": 2440,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_unirse_a_fila",
+      "type": "file",
+      "file": "Funci\u00f3n unirse_a_fila.md",
+      "x": 2640,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_ley_datos_honduras",
+      "type": "file",
+      "file": "Ley de protecci\u00f3n de datos de Honduras (pendiente).md",
+      "x": 1640,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_modelo_datos",
+      "type": "file",
+      "file": "Modelo de datos.md",
+      "x": 1840,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_montos_alterados",
+      "type": "file",
+      "file": "Montos alterados por el barbero.md",
+      "x": 2040,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_pausa_fila_remota",
+      "type": "file",
+      "file": "Pausa de la fila remota.md",
+      "x": 2240,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_bitacora_prueba_riesgo_1_broadcast",
+      "type": "file",
+      "file": "Prueba de riesgo 1 superada (Broadcast p\u00fablico con clave publicable).md",
+      "x": 2440,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_plan_implementacion_prueba_riesgo_3",
+      "type": "file",
+      "file": "Prueba de riesgo 3 \u00b7 Turnstile + IP.md",
+      "x": 2640,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_bitacora_pruebas_riesgo_sprint_0",
+      "type": "file",
+      "file": "Pruebas de riesgo del Sprint 0 (Broadcast p\u00fablico, Web Push, Turnstile con IP).md",
+      "x": 1640,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_rls",
+      "type": "file",
+      "file": "Row Level Security (RLS).md",
+      "x": 1840,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_sentry",
+      "type": "file",
+      "file": "Sentry (errores sin datos personales).md",
+      "x": 2040,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_plan_implementacion_sprint_1",
+      "type": "file",
+      "file": "Sprint 1 \u00b7 Base de datos y seguridad.md",
+      "x": 2240,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_tabla_turnos",
+      "type": "file",
+      "file": "Tabla turnos (codigo_publico aleatorio).md",
+      "x": 2440,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_plan_implementacion_broadcast_senales",
+      "type": "file",
+      "file": "Tiempo real solo con se\u00f1ales (Broadcast).md",
+      "x": 2640,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_turnos_fantasma",
+      "type": "file",
+      "file": "Turnos fantasma.md",
+      "x": 1640,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_vista_fila_publica",
+      "type": "file",
+      "file": "Vista fila_publica.md",
+      "x": 1840,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_cancelar_turno",
+      "type": "file",
+      "file": "cancelar_turno(codigo, secreto).md",
+      "x": 2040,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_codigo_publico",
+      "type": "file",
+      "file": "codigo_publico aleatorio.md",
+      "x": 2240,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_decisiones_suscribir_push",
+      "type": "file",
+      "file": "suscribir_push(codigo, secreto, suscripcion).md",
+      "x": 2440,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_ver_turno",
+      "type": "file",
+      "file": "ver_turno(codigo).md",
+      "x": 2640,
       "y": 480,
       "width": 180,
       "height": 60
@@ -762,17 +699,35 @@
       "id": "g2",
       "type": "group",
       "label": "Herramientas y entorno de desarrollo",
-      "x": 3240,
+      "x": 3020,
       "y": 0,
       "width": 1320,
       "height": 720,
       "color": "3"
     },
     {
+      "id": "n_docs_bitacora_sin_docker_prueba_riesgo_1",
+      "type": "file",
+      "file": "2026-10-26 \u00b7 Desarrollo sin Docker y prueba de riesgo 1.md",
+      "x": 3040,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_bitacora_sprint_0_base_proyecto",
+      "type": "file",
+      "file": "2026-10-26 \u00b7 Sprint 0 base del proyecto.md",
+      "x": 3240,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
       "id": "n_docs_decisiones_adr_006",
       "type": "file",
       "file": "ADR-006 \u00b7 Herramientas de desarrollo y pruebas.md",
-      "x": 3260,
+      "x": 3440,
       "y": 80,
       "width": 180,
       "height": 60
@@ -781,7 +736,16 @@
       "id": "n_docs_decisiones_adr_008",
       "type": "file",
       "file": "ADR-008 \u00b7 Desarrollo contra Supabase en la nube, sin Docker local.md",
-      "x": 3460,
+      "x": 3640,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_bitacora_arreglo_ci_gitleaks",
+      "type": "file",
+      "file": "Arreglo del CI gitleaks en historia nueva (escaneo manual y semanal).md",
+      "x": 3840,
       "y": 80,
       "width": 180,
       "height": 60
@@ -790,7 +754,7 @@
       "id": "n_docs_decisiones_biome",
       "type": "file",
       "file": "Biome (lint y formato).md",
-      "x": 3660,
+      "x": 4040,
       "y": 80,
       "width": 180,
       "height": 60
@@ -799,34 +763,16 @@
       "id": "n_docs_plan_implementacion_biome",
       "type": "file",
       "file": "Biome 2.6 (lint y formato).md",
-      "x": 3860,
-      "y": 80,
+      "x": 3040,
+      "y": 160,
       "width": 180,
       "height": 60
     },
     {
-      "id": "n_docs_plan_implementacion_calendario",
+      "id": "n_docs_plan_implementacion_claves_nuevas_supabase",
       "type": "file",
-      "file": "Calendario de 8 semanas.md",
-      "x": 4060,
-      "y": 80,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_plan_implementacion_costos",
-      "type": "file",
-      "file": "Costos en planes gratuitos.md",
-      "x": 4260,
-      "y": 80,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_plan_implementacion_decisiones_pendientes",
-      "type": "file",
-      "file": "Decisiones pendientes.md",
-      "x": 3260,
+      "file": "Claves nuevas de Supabase (sb_publishable  sb_secret).md",
+      "x": 3240,
       "y": 160,
       "width": 180,
       "height": 60
@@ -835,7 +781,7 @@
       "id": "n_readme_desarrollo_local",
       "type": "file",
       "file": "Desarrollo local.md",
-      "x": 3460,
+      "x": 3440,
       "y": 160,
       "width": 180,
       "height": 60
@@ -844,7 +790,7 @@
       "id": "n_docs_decisiones_docker_local",
       "type": "file",
       "file": "Docker local (alternativa descartada).md",
-      "x": 3660,
+      "x": 3640,
       "y": 160,
       "width": 180,
       "height": 60
@@ -853,7 +799,7 @@
       "id": "n_docs_decisiones_eslint_prettier",
       "type": "file",
       "file": "ESLint + Prettier (alternativa descartada).md",
-      "x": 3860,
+      "x": 3840,
       "y": 160,
       "width": 180,
       "height": 60
@@ -862,16 +808,7 @@
       "id": "n_docs_seguridad_f01_api_keys",
       "type": "file",
       "file": "Fallo 1 \u00b7 API keys en el c\u00f3digo.md",
-      "x": 4060,
-      "y": 160,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_bitacora_graphify_automatico",
-      "type": "file",
-      "file": "Graphify autom\u00e1tico (hooks de git y graphify_sync.py).md",
-      "x": 4260,
+      "x": 4040,
       "y": 160,
       "width": 180,
       "height": 60
@@ -880,7 +817,7 @@
       "id": "n_docs_bitacora_clave_anon_heredada",
       "type": "file",
       "file": "Hallazgo clave heredada anon activa.md",
-      "x": 3260,
+      "x": 3040,
       "y": 240,
       "width": 180,
       "height": 60
@@ -889,7 +826,7 @@
       "id": "n_docs_plan_implementacion_herramientas_desarrollo",
       "type": "file",
       "file": "Herramientas de desarrollo.md",
-      "x": 3460,
+      "x": 3240,
       "y": 240,
       "width": 180,
       "height": 60
@@ -898,7 +835,16 @@
       "id": "n_docs_decisiones_husky",
       "type": "file",
       "file": "Husky (alternativa descartada).md",
-      "x": 3660,
+      "x": 3440,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_plan_implementacion_entornos_despliegue",
+      "type": "file",
+      "file": "Integraci\u00f3n y despliegue (local, vista previa, producci\u00f3n).md",
+      "x": 3640,
       "y": 240,
       "width": 180,
       "height": 60
@@ -907,7 +853,7 @@
       "id": "n_docs_plan_implementacion_lefthook",
       "type": "file",
       "file": "Lefthook (hooks de git).md",
-      "x": 3860,
+      "x": 3840,
       "y": 240,
       "width": 180,
       "height": 60
@@ -916,7 +862,7 @@
       "id": "n_docs_decisiones_lefthook",
       "type": "file",
       "file": "Lefthook (revisiones antes de cada commit).md",
-      "x": 4060,
+      "x": 4040,
       "y": 240,
       "width": 180,
       "height": 60
@@ -925,16 +871,7 @@
       "id": "n_docs_decisiones_otra_cuenta_supabase",
       "type": "file",
       "file": "Otra cuenta de Supabase (alternativa descartada).md",
-      "x": 4260,
-      "y": 240,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_plan_implementacion_playwright",
-      "type": "file",
-      "file": "Playwright + axe.md",
-      "x": 3260,
+      "x": 3040,
       "y": 320,
       "width": 180,
       "height": 60
@@ -943,7 +880,7 @@
       "id": "n_docs_plan_implementacion_proyecto_pruebas",
       "type": "file",
       "file": "Proyecto siguiente-pruebas (Supabase en la nube).md",
-      "x": 3460,
+      "x": 3240,
       "y": 320,
       "width": 180,
       "height": 60
@@ -952,7 +889,34 @@
       "id": "n_docs_decisiones_proyecto_siguiente_pruebas",
       "type": "file",
       "file": "Proyecto siguiente-pruebas (us-east-1, plan gratuito).md",
-      "x": 3660,
+      "x": 3440,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_plan_implementacion_prueba_riesgo_1",
+      "type": "file",
+      "file": "Prueba de riesgo 1 \u00b7 Broadcast p\u00fablico.md",
+      "x": 3640,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_plan_implementacion_prueba_riesgo_2",
+      "type": "file",
+      "file": "Prueba de riesgo 2 \u00b7 Web Push.md",
+      "x": 3840,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_pruebas_pgtap",
+      "type": "file",
+      "file": "Pruebas pgTAP.md",
+      "x": 4040,
       "y": 320,
       "width": 180,
       "height": 60
@@ -961,8 +925,8 @@
       "id": "n_docs_plan_implementacion_recortes",
       "type": "file",
       "file": "Recortes si no alcanza el tiempo.md",
-      "x": 3860,
-      "y": 320,
+      "x": 3040,
+      "y": 400,
       "width": 180,
       "height": 60
     },
@@ -970,17 +934,8 @@
       "id": "n_docs_plan_implementacion_riesgos_tecnicos",
       "type": "file",
       "file": "Riesgos t\u00e9cnicos.md",
-      "x": 4060,
-      "y": 320,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_readme_sentry",
-      "type": "file",
-      "file": "Sentry (errores sin datos personales).md",
-      "x": 4260,
-      "y": 320,
+      "x": 3240,
+      "y": 400,
       "width": 180,
       "height": 60
     },
@@ -988,16 +943,7 @@
       "id": "n_docs_plan_implementacion_sprint_0",
       "type": "file",
       "file": "Sprint 0 \u00b7 Entorno y pruebas de riesgo.md",
-      "x": 3260,
-      "y": 400,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_decisiones_plan_pro",
-      "type": "file",
-      "file": "Supabase Pro a USD 25 al mes (alternativa descartada).md",
-      "x": 3460,
+      "x": 3440,
       "y": 400,
       "width": 180,
       "height": 60
@@ -1006,7 +952,7 @@
       "id": "n_docs_decisiones_typescript_7",
       "type": "file",
       "file": "TypeScript 7.md",
-      "x": 3660,
+      "x": 3640,
       "y": 400,
       "width": 180,
       "height": 60
@@ -1015,7 +961,7 @@
       "id": "n_docs_plan_implementacion_typescript_7",
       "type": "file",
       "file": "TypeScript 7 (compilador nativo).md",
-      "x": 3860,
+      "x": 3840,
       "y": 400,
       "width": 180,
       "height": 60
@@ -1024,16 +970,7 @@
       "id": "n_readme_variables_entorno",
       "type": "file",
       "file": "Variables de entorno (.env.local).md",
-      "x": 4060,
-      "y": 400,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_plan_implementacion_vitest",
-      "type": "file",
-      "file": "Vitest + Testing Library.md",
-      "x": 4260,
+      "x": 4040,
       "y": 400,
       "width": 180,
       "height": 60
@@ -1042,16 +979,16 @@
       "id": "n_docs_plan_implementacion_gitleaks",
       "type": "file",
       "file": "gitleaks (secretos).md",
-      "x": 3260,
+      "x": 3040,
       "y": 480,
       "width": 180,
       "height": 60
     },
     {
-      "id": "n_docs_plan_implementacion_graphify",
+      "id": "n_docs_decisiones_pnpm",
       "type": "file",
-      "file": "graphify (grafo de conocimiento).md",
-      "x": 3460,
+      "file": "pnpm (alternativa descartada).md",
+      "x": 3240,
       "y": 480,
       "width": 180,
       "height": 60
@@ -1060,7 +997,7 @@
       "id": "g3",
       "type": "group",
       "label": "C\u00f3digo de la app",
-      "x": 4640,
+      "x": 4420,
       "y": 0,
       "width": 1320,
       "height": 620,
@@ -1070,7 +1007,7 @@
       "id": "n_app_src_components_errorderuta_errorderuta",
       "type": "file",
       "file": "ErrorDeRuta().md",
-      "x": 4660,
+      "x": 4440,
       "y": 80,
       "width": 180,
       "height": 60
@@ -1079,7 +1016,7 @@
       "id": "n_app_src_components_errorderuta",
       "type": "file",
       "file": "ErrorDeRuta.tsx.md",
-      "x": 4860,
+      "x": 4640,
       "y": 80,
       "width": 180,
       "height": 60
@@ -1088,7 +1025,7 @@
       "id": "n_app_src_features_inicio_inicio_inicio",
       "type": "file",
       "file": "Inicio().md",
-      "x": 5060,
+      "x": 4840,
       "y": 80,
       "width": 180,
       "height": 60
@@ -1097,7 +1034,7 @@
       "id": "n_app_src_features_inicio_inicio",
       "type": "file",
       "file": "Inicio.tsx.md",
-      "x": 5260,
+      "x": 5040,
       "y": 80,
       "width": 180,
       "height": 60
@@ -1106,7 +1043,7 @@
       "id": "n_app_src_components_noencontrado_noencontrado",
       "type": "file",
       "file": "NoEncontrado().md",
-      "x": 5460,
+      "x": 5240,
       "y": 80,
       "width": 180,
       "height": 60
@@ -1115,7 +1052,7 @@
       "id": "n_app_src_components_noencontrado",
       "type": "file",
       "file": "NoEncontrado.tsx.md",
-      "x": 5660,
+      "x": 5440,
       "y": 80,
       "width": 180,
       "height": 60
@@ -1124,7 +1061,7 @@
       "id": "n_app_src_router_test_abrir",
       "type": "file",
       "file": "abrir().md",
-      "x": 4660,
+      "x": 4440,
       "y": 160,
       "width": 180,
       "height": 60
@@ -1133,7 +1070,7 @@
       "id": "n_app_src_index",
       "type": "file",
       "file": "app_src_index.md",
-      "x": 4860,
+      "x": 4640,
       "y": 160,
       "width": 180,
       "height": 60
@@ -1142,7 +1079,7 @@
       "id": "n_app_src_main",
       "type": "file",
       "file": "main.tsx.md",
-      "x": 5060,
+      "x": 4840,
       "y": 160,
       "width": 180,
       "height": 60
@@ -1151,7 +1088,7 @@
       "id": "n_app_src_main_raiz",
       "type": "file",
       "file": "raiz.md",
-      "x": 5260,
+      "x": 5040,
       "y": 160,
       "width": 180,
       "height": 60
@@ -1160,7 +1097,7 @@
       "id": "n_vite_config_raiz",
       "type": "file",
       "file": "raiz().md",
-      "x": 5460,
+      "x": 5240,
       "y": 160,
       "width": 180,
       "height": 60
@@ -1169,7 +1106,7 @@
       "id": "n_ref_node_url",
       "type": "file",
       "file": "ref_node_url.md",
-      "x": 5660,
+      "x": 5440,
       "y": 160,
       "width": 180,
       "height": 60
@@ -1178,7 +1115,7 @@
       "id": "n_ref_react",
       "type": "file",
       "file": "ref_react.md",
-      "x": 4660,
+      "x": 4440,
       "y": 240,
       "width": 180,
       "height": 60
@@ -1187,7 +1124,7 @@
       "id": "n_ref_react_dom",
       "type": "file",
       "file": "ref_react_dom.md",
-      "x": 4860,
+      "x": 4640,
       "y": 240,
       "width": 180,
       "height": 60
@@ -1196,7 +1133,7 @@
       "id": "n_ref_react_router",
       "type": "file",
       "file": "ref_react_router.md",
-      "x": 5060,
+      "x": 4840,
       "y": 240,
       "width": 180,
       "height": 60
@@ -1205,7 +1142,7 @@
       "id": "n_ref_tailwindcss_vite",
       "type": "file",
       "file": "ref_tailwindcss_vite.md",
-      "x": 5260,
+      "x": 5040,
       "y": 240,
       "width": 180,
       "height": 60
@@ -1214,7 +1151,7 @@
       "id": "n_ref_testing_library_jest_dom",
       "type": "file",
       "file": "ref_testing_library_jest_dom.md",
-      "x": 5460,
+      "x": 5240,
       "y": 240,
       "width": 180,
       "height": 60
@@ -1223,7 +1160,7 @@
       "id": "n_ref_testing_library_react",
       "type": "file",
       "file": "ref_testing_library_react.md",
-      "x": 5660,
+      "x": 5440,
       "y": 240,
       "width": 180,
       "height": 60
@@ -1232,7 +1169,7 @@
       "id": "n_ref_vitejs_plugin_react",
       "type": "file",
       "file": "ref_vitejs_plugin_react.md",
-      "x": 4660,
+      "x": 4440,
       "y": 320,
       "width": 180,
       "height": 60
@@ -1241,7 +1178,7 @@
       "id": "n_ref_vitest",
       "type": "file",
       "file": "ref_vitest.md",
-      "x": 4860,
+      "x": 4640,
       "y": 320,
       "width": 180,
       "height": 60
@@ -1250,7 +1187,7 @@
       "id": "n_app_src_features_inicio_inicio_roles",
       "type": "file",
       "file": "roles.md",
-      "x": 5060,
+      "x": 4840,
       "y": 320,
       "width": 180,
       "height": 60
@@ -1259,7 +1196,7 @@
       "id": "n_app_src_router_test",
       "type": "file",
       "file": "router.test.tsx.md",
-      "x": 5260,
+      "x": 5040,
       "y": 320,
       "width": 180,
       "height": 60
@@ -1268,7 +1205,7 @@
       "id": "n_app_src_router",
       "type": "file",
       "file": "router.tsx.md",
-      "x": 5460,
+      "x": 5240,
       "y": 320,
       "width": 180,
       "height": 60
@@ -1277,7 +1214,7 @@
       "id": "n_app_src_router_rutas",
       "type": "file",
       "file": "rutas.md",
-      "x": 5660,
+      "x": 5440,
       "y": 320,
       "width": 180,
       "height": 60
@@ -1286,7 +1223,7 @@
       "id": "n_app_src_test_setup",
       "type": "file",
       "file": "setup.ts.md",
-      "x": 4660,
+      "x": 4440,
       "y": 400,
       "width": 180,
       "height": 60
@@ -1295,7 +1232,7 @@
       "id": "n_vite_config",
       "type": "file",
       "file": "vite.config.ts.md",
-      "x": 4860,
+      "x": 4640,
       "y": 400,
       "width": 180,
       "height": 60
@@ -1303,227 +1240,28 @@
     {
       "id": "g4",
       "type": "group",
-      "label": "Stack, arquitectura y sprints",
+      "label": "Bit\u00e1cora, decisiones y nombre",
       "x": 0,
-      "y": 900,
+      "y": 800,
       "width": 1100,
       "height": 620,
       "color": "5"
     },
     {
-      "id": "n_docs_bitacora_sprint_0_base_proyecto",
-      "type": "file",
-      "file": "2026-10-26 \u00b7 Sprint 0 base del proyecto.md",
-      "x": 20,
-      "y": 980,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_decisiones_adr_002",
-      "type": "file",
-      "file": "ADR-002 \u00b7 Stack Supabase + Cloudflare Pages.md",
-      "x": 220,
-      "y": 980,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_decisiones_adr_005",
-      "type": "file",
-      "file": "ADR-005 \u00b7 Hosting en Cloudflare Workers.md",
-      "x": 420,
-      "y": 980,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_readme_arquitectura",
-      "type": "file",
-      "file": "Arquitectura.md",
-      "x": 620,
-      "y": 980,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_plan_implementacion_arquitectura_detallada",
-      "type": "file",
-      "file": "Arquitectura detallada.md",
-      "x": 820,
-      "y": 980,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_readme_cloudflare_workers",
-      "type": "file",
-      "file": "Cloudflare Workers (hosting est\u00e1tico).md",
-      "x": 20,
-      "y": 1060,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_plan_implementacion_edge_function_avisos",
-      "type": "file",
-      "file": "Edge Function avisos.md",
-      "x": 220,
-      "y": 1060,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_plan_implementacion_zod",
-      "type": "file",
-      "file": "Esquemas zod compartidos (react-hook-form + zod).md",
-      "x": 420,
-      "y": 1060,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_f03_input_sin_validar",
-      "type": "file",
-      "file": "Fallo 3 \u00b7 Input sin validar.md",
-      "x": 620,
-      "y": 1060,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_plan_implementacion_entornos_despliegue",
-      "type": "file",
-      "file": "Integraci\u00f3n y despliegue (local, vista previa, producci\u00f3n).md",
-      "x": 820,
-      "y": 1060,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_plan_implementacion_modulo_eta",
-      "type": "file",
-      "file": "M\u00f3dulo eta.ts compartido.md",
-      "x": 20,
-      "y": 1140,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_decisiones_php_mysql",
-      "type": "file",
-      "file": "PHP + MySQL (alternativa descartada).md",
-      "x": 220,
-      "y": 1140,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_plan_implementacion_resend",
-      "type": "file",
-      "file": "Resend (SMTP de Auth).md",
-      "x": 420,
-      "y": 1140,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_plan_implementacion_sprint_2",
-      "type": "file",
-      "file": "Sprint 2 \u00b7 Cliente fila p\u00fablica y turno en vivo.md",
-      "x": 620,
-      "y": 1140,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_plan_implementacion_sprint_3",
-      "type": "file",
-      "file": "Sprint 3 \u00b7 Barbero, TV y avisos.md",
-      "x": 820,
-      "y": 1140,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_plan_implementacion_stack",
-      "type": "file",
-      "file": "Stack v0.1 con versiones.md",
-      "x": 20,
-      "y": 1220,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_readme_supabase",
-      "type": "file",
-      "file": "Supabase (Postgres, Auth, Realtime, Edge Functions).md",
-      "x": 220,
-      "y": 1220,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_validacion_zod",
-      "type": "file",
-      "file": "Validaci\u00f3n con zod y dentro de la funci\u00f3n.md",
-      "x": 420,
-      "y": 1220,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_decisiones_vercel",
-      "type": "file",
-      "file": "Vercel (alternativa descartada).md",
-      "x": 620,
-      "y": 1220,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_readme_web_push",
-      "type": "file",
-      "file": "Web Push (PWA).md",
-      "x": 820,
-      "y": 1220,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_plan_implementacion_workers_en_lugar_de_pages",
-      "type": "file",
-      "file": "Workers en lugar de Pages.md",
-      "x": 20,
-      "y": 1300,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_plan_implementacion_pg_cron",
-      "type": "file",
-      "file": "pg_cron + pg_net.md",
-      "x": 220,
-      "y": 1300,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "g5",
-      "type": "group",
-      "label": "Documentaci\u00f3n, decisiones y piloto",
-      "x": 1620,
-      "y": 900,
-      "width": 1100,
-      "height": 620,
-      "color": "6"
-    },
-    {
       "id": "n_docs_bitacora_entrada_2026_10_25",
       "type": "file",
       "file": "2026-10-25 \u00b7 Investigaci\u00f3n inicial.md",
-      "x": 1640,
-      "y": 980,
+      "x": 20,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_bitacora_nextcut_repositorio",
+      "type": "file",
+      "file": "2026-10-26 \u00b7 El producto pasa a llamarse NextCut y se publica el repositorio.md",
+      "x": 220,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -1531,26 +1269,17 @@
       "id": "n_docs_bitacora_entrada_2026_10_26",
       "type": "file",
       "file": "2026-10-26 \u00b7 Plan de implementaci\u00f3n y graphify autom\u00e1tico.md",
-      "x": 1840,
-      "y": 980,
+      "x": 420,
+      "y": 880,
       "width": 180,
       "height": 60
     },
     {
-      "id": "n_docs_decisiones_adr_003",
+      "id": "n_docs_decisiones_adr_009",
       "type": "file",
-      "file": "ADR-003 \u00b7 Notificaciones sin API de WhatsApp.md",
-      "x": 2040,
-      "y": 980,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_readme_alcance_mvp",
-      "type": "file",
-      "file": "Alcance del MVP (v0.1).md",
-      "x": 2240,
-      "y": 980,
+      "file": "ADR-009 \u00b7 Nombre del producto NextCut.md",
+      "x": 620,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -1558,35 +1287,17 @@
       "id": "n_docs_bitacora_documento",
       "type": "file",
       "file": "Bit\u00e1cora de cambios.md",
-      "x": 2440,
-      "y": 980,
+      "x": 820,
+      "y": 880,
       "width": 180,
       "height": 60
     },
     {
-      "id": "n_docs_investigacion_precio_whatsapp_2026",
+      "id": "n_docs_plan_implementacion_decisiones_pendientes",
       "type": "file",
-      "file": "Cambio de precios de WhatsApp (1102026).md",
-      "x": 1640,
-      "y": 1060,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_plan_implementacion_claves_nuevas_supabase",
-      "type": "file",
-      "file": "Claves nuevas de Supabase (sb_publishable  sb_secret).md",
-      "x": 1840,
-      "y": 1060,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_docs_seguridad_cuotas_por_barberia",
-      "type": "file",
-      "file": "Cuotas por barber\u00eda.md",
-      "x": 2040,
-      "y": 1060,
+      "file": "Decisiones pendientes.md",
+      "x": 20,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -1594,8 +1305,17 @@
       "id": "n_docs_plan_implementacion_definicion_terminado",
       "type": "file",
       "file": "Definici\u00f3n de terminado.md",
-      "x": 2240,
-      "y": 1060,
+      "x": 220,
+      "y": 960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_plan_implementacion_disponibilidad_nombre_nextcut",
+      "type": "file",
+      "file": "Disponibilidad del nombre NextCut (dominio y marca).md",
+      "x": 420,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -1603,26 +1323,17 @@
       "id": "n_docs_seguridad_f04_prompt_debil",
       "type": "file",
       "file": "Fallo 4 \u00b7 Prompt d\u00e9bil.md",
-      "x": 2440,
-      "y": 1060,
+      "x": 620,
+      "y": 960,
       "width": 180,
       "height": 60
     },
     {
-      "id": "n_docs_seguridad_f06_limite_tokens",
+      "id": "n_docs_bitacora_graphify_automatico",
       "type": "file",
-      "file": "Fallo 6 \u00b7 Sin l\u00edmite de tokens.md",
-      "x": 1640,
-      "y": 1140,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_readme_hoja_ruta",
-      "type": "file",
-      "file": "Hoja de ruta v0.1\u2013v0.3.md",
-      "x": 1840,
-      "y": 1140,
+      "file": "Graphify autom\u00e1tico (hooks de git y graphify_sync.py).md",
+      "x": 820,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -1630,17 +1341,26 @@
       "id": "n_readme_modelo_negocio",
       "type": "file",
       "file": "Modelo de negocio (hip\u00f3tesis).md",
-      "x": 2040,
-      "y": 1140,
+      "x": 20,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
     {
-      "id": "n_readme_notificaciones_sin_costo",
+      "id": "n_readme_siguiente",
       "type": "file",
-      "file": "Notificaciones sin costo variable.md",
-      "x": 2240,
-      "y": 1140,
+      "file": "NextCut (producto).md",
+      "x": 220,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_decisiones_nombre_provisional_siguiente",
+      "type": "file",
+      "file": "Nombre provisional Siguiente (alternativa descartada).md",
+      "x": 420,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -1648,8 +1368,8 @@
       "id": "n_docs_plan_implementacion_piloto",
       "type": "file",
       "file": "Piloto (2 s\u00e1bados en 1 barber\u00eda).md",
-      "x": 2440,
-      "y": 1140,
+      "x": 620,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -1657,17 +1377,26 @@
       "id": "n_docs_plan_implementacion_documento",
       "type": "file",
       "file": "Plan de implementaci\u00f3n.md",
-      "x": 1640,
-      "y": 1220,
+      "x": 820,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_decisiones_usos_previos_nextcut",
+      "type": "file",
+      "file": "Posibles usos previos de NextCut en el sector.md",
+      "x": 20,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
     {
       "id": "n_readme_documento",
       "type": "file",
-      "file": "README de Siguiente.md",
-      "x": 1840,
-      "y": 1220,
+      "file": "README de NextCut.md",
+      "x": 220,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -1675,8 +1404,17 @@
       "id": "n_docs_decisiones_documento",
       "type": "file",
       "file": "Registro de decisiones.md",
-      "x": 2040,
-      "y": 1220,
+      "x": 420,
+      "y": 1120,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_decisiones_repositorio_nextcut",
+      "type": "file",
+      "file": "Repositorio p\u00fablico gustavoapz07NextCut.md",
+      "x": 620,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -1684,26 +1422,216 @@
       "id": "n_docs_seguridad_documento",
       "type": "file",
       "file": "Seguridad.md",
-      "x": 2240,
-      "y": 1220,
+      "x": 820,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
     {
-      "id": "n_docs_plan_implementacion_sprint_4",
+      "id": "n_docs_validacion_campo_documento",
       "type": "file",
-      "file": "Sprint 4 \u00b7 Due\u00f1o, antiabuso y lanzamiento.md",
-      "x": 2440,
-      "y": 1220,
+      "file": "Validaci\u00f3n de campo.md",
+      "x": 20,
+      "y": 1200,
       "width": 180,
       "height": 60
     },
     {
-      "id": "n_docs_plan_implementacion_supabase_mcp",
+      "id": "n_docs_plan_implementacion_graphify",
       "type": "file",
-      "file": "Supabase MCP.md",
+      "file": "graphify (grafo de conocimiento).md",
+      "x": 220,
+      "y": 1200,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g5",
+      "type": "group",
+      "label": "Avisos, arquitectura y sprints",
+      "x": 1620,
+      "y": 800,
+      "width": 1100,
+      "height": 520,
+      "color": "6"
+    },
+    {
+      "id": "n_docs_decisiones_adr_003",
+      "type": "file",
+      "file": "ADR-003 \u00b7 Notificaciones sin API de WhatsApp.md",
       "x": 1640,
-      "y": 1300,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_plan_implementacion_arquitectura_detallada",
+      "type": "file",
+      "file": "Arquitectura detallada.md",
+      "x": 1840,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_boton_wa_me",
+      "type": "file",
+      "file": "Bot\u00f3n wa.me.md",
+      "x": 2040,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_plan_implementacion_calendario",
+      "type": "file",
+      "file": "Calendario de 8 semanas.md",
+      "x": 2240,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_investigacion_precio_whatsapp_2026",
+      "type": "file",
+      "file": "Cambio de precios de WhatsApp (1102026).md",
+      "x": 2440,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_cuotas_por_barberia",
+      "type": "file",
+      "file": "Cuotas por barber\u00eda.md",
+      "x": 1640,
+      "y": 960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_plan_implementacion_edge_function_avisos",
+      "type": "file",
+      "file": "Edge Function avisos.md",
+      "x": 1840,
+      "y": 960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_plan_implementacion_zod",
+      "type": "file",
+      "file": "Esquemas zod compartidos (react-hook-form + zod).md",
+      "x": 2040,
+      "y": 960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_f03_input_sin_validar",
+      "type": "file",
+      "file": "Fallo 3 \u00b7 Input sin validar.md",
+      "x": 2240,
+      "y": 960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_f06_limite_tokens",
+      "type": "file",
+      "file": "Fallo 6 \u00b7 Sin l\u00edmite de tokens.md",
+      "x": 2440,
+      "y": 960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_plan_implementacion_modulo_eta",
+      "type": "file",
+      "file": "M\u00f3dulo eta.ts compartido.md",
+      "x": 1640,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_nombre_ofensivo_tv",
+      "type": "file",
+      "file": "Nombre ofensivo o XSS en la TV.md",
+      "x": 1840,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_notificaciones_sin_costo",
+      "type": "file",
+      "file": "Notificaciones sin costo variable.md",
+      "x": 2040,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_plan_implementacion_playwright",
+      "type": "file",
+      "file": "Playwright + axe.md",
+      "x": 2240,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_plan_implementacion_sprint_2",
+      "type": "file",
+      "file": "Sprint 2 \u00b7 Cliente fila p\u00fablica y turno en vivo.md",
+      "x": 2440,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_plan_implementacion_sprint_3",
+      "type": "file",
+      "file": "Sprint 3 \u00b7 Barbero, TV y avisos.md",
+      "x": 1640,
+      "y": 1120,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_validacion_zod",
+      "type": "file",
+      "file": "Validaci\u00f3n con zod y dentro de la funci\u00f3n.md",
+      "x": 1840,
+      "y": 1120,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_plan_implementacion_vitest",
+      "type": "file",
+      "file": "Vitest + Testing Library.md",
+      "x": 2040,
+      "y": 1120,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_web_push",
+      "type": "file",
+      "file": "Web Push (PWA).md",
+      "x": 2240,
+      "y": 1120,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_plan_implementacion_pg_cron",
+      "type": "file",
+      "file": "pg_cron + pg_net.md",
+      "x": 2440,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -1711,8 +1639,8 @@
       "id": "g6",
       "type": "group",
       "label": "Cliente de Supabase y prueba de riesgo",
-      "x": 3240,
-      "y": 900,
+      "x": 3020,
+      "y": 800,
       "width": 1100,
       "height": 520,
       "color": "1"
@@ -1721,8 +1649,8 @@
       "id": "n_app_src_lib_database_types_compositetypes",
       "type": "file",
       "file": "CompositeTypes.md",
-      "x": 3260,
-      "y": 980,
+      "x": 3040,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -1730,8 +1658,8 @@
       "id": "n_app_src_lib_database_types_constants",
       "type": "file",
       "file": "Constants.md",
-      "x": 3460,
-      "y": 980,
+      "x": 3240,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -1739,8 +1667,8 @@
       "id": "n_app_src_lib_database_types_database",
       "type": "file",
       "file": "Database.md",
-      "x": 3660,
-      "y": 980,
+      "x": 3440,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -1748,8 +1676,8 @@
       "id": "n_app_src_lib_database_types_databasewithoutinternals",
       "type": "file",
       "file": "DatabaseWithoutInternals.md",
-      "x": 3860,
-      "y": 980,
+      "x": 3640,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -1757,8 +1685,8 @@
       "id": "n_app_src_lib_database_types_defaultschema",
       "type": "file",
       "file": "DefaultSchema.md",
-      "x": 4060,
-      "y": 980,
+      "x": 3840,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -1766,8 +1694,8 @@
       "id": "n_app_src_lib_database_types_enums",
       "type": "file",
       "file": "Enums.md",
-      "x": 3260,
-      "y": 1060,
+      "x": 3040,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -1775,8 +1703,8 @@
       "id": "n_app_src_lib_database_types_json",
       "type": "file",
       "file": "Json.md",
-      "x": 3460,
-      "y": 1060,
+      "x": 3240,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -1784,8 +1712,8 @@
       "id": "n_app_src_lib_database_types_tables",
       "type": "file",
       "file": "Tables.md",
-      "x": 3660,
-      "y": 1060,
+      "x": 3440,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -1793,8 +1721,8 @@
       "id": "n_app_src_lib_database_types_tablesinsert",
       "type": "file",
       "file": "TablesInsert.md",
-      "x": 3860,
-      "y": 1060,
+      "x": 3640,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -1802,8 +1730,8 @@
       "id": "n_app_src_lib_database_types_tablesupdate",
       "type": "file",
       "file": "TablesUpdate.md",
-      "x": 4060,
-      "y": 1060,
+      "x": 3840,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -1811,8 +1739,8 @@
       "id": "n_scripts_spikes_broadcast_publico",
       "type": "file",
       "file": "broadcast-publico.mjs.md",
-      "x": 3260,
-      "y": 1140,
+      "x": 3040,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -1820,8 +1748,8 @@
       "id": "n_app_src_lib_database_types",
       "type": "file",
       "file": "database.types.ts.md",
-      "x": 3460,
-      "y": 1140,
+      "x": 3240,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -1829,8 +1757,8 @@
       "id": "n_ref_supabase_supabase_js",
       "type": "file",
       "file": "ref_supabase_supabase_js.md",
-      "x": 3660,
-      "y": 1140,
+      "x": 3440,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -1838,8 +1766,8 @@
       "id": "n_scripts_spikes_broadcast_publico_resultado",
       "type": "file",
       "file": "resultado.md",
-      "x": 3860,
-      "y": 1140,
+      "x": 3640,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -1847,8 +1775,8 @@
       "id": "n_app_src_lib_supabase_supabase",
       "type": "file",
       "file": "supabase.md",
-      "x": 4060,
-      "y": 1140,
+      "x": 3840,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -1856,8 +1784,8 @@
       "id": "n_scripts_spikes_broadcast_publico_supabase",
       "type": "file",
       "file": "supabase_1.md",
-      "x": 3260,
-      "y": 1220,
+      "x": 3040,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -1865,8 +1793,8 @@
       "id": "n_app_src_lib_supabase",
       "type": "file",
       "file": "supabase.ts.md",
-      "x": 3460,
-      "y": 1220,
+      "x": 3240,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
@@ -1874,27 +1802,27 @@
       "id": "n_scripts_spikes_broadcast_publico_terminar",
       "type": "file",
       "file": "terminar().md",
-      "x": 3660,
-      "y": 1220,
+      "x": 3440,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
     {
       "id": "g7",
       "type": "group",
-      "label": "Panel del barbero y errores",
-      "x": 4640,
-      "y": 900,
+      "label": "Antiabuso, errores y lanzamiento",
+      "x": 4420,
+      "y": 800,
       "width": 880,
-      "height": 420,
+      "height": 520,
       "color": "2"
     },
     {
-      "id": "n_readme_boton_wa_me",
+      "id": "n_docs_seguridad_borrado_telefonos_90_dias",
       "type": "file",
-      "file": "Bot\u00f3n wa.me.md",
-      "x": 4660,
-      "y": 980,
+      "file": "Borrado de tel\u00e9fonos a los 90 d\u00edas.md",
+      "x": 4440,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -1902,8 +1830,17 @@
       "id": "n_docs_seguridad_clave_idempotencia",
       "type": "file",
       "file": "Clave de idempotencia al anotarse.md",
-      "x": 4860,
-      "y": 980,
+      "x": 4640,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_f10_monitoreo",
+      "type": "file",
+      "file": "Fallo 10 \u00b7 Monitoreo, logs y alertas.md",
+      "x": 4840,
+      "y": 880,
       "width": 180,
       "height": 60
     },
@@ -1911,8 +1848,26 @@
       "id": "n_docs_seguridad_f08_manejo_errores",
       "type": "file",
       "file": "Fallo 8 \u00b7 Manejo de errores.md",
-      "x": 5060,
-      "y": 980,
+      "x": 5040,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_f09_rate_limiting",
+      "type": "file",
+      "file": "Fallo 9 \u00b7 Rate limiting.md",
+      "x": 4440,
+      "y": 960,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_inundar_fila",
+      "type": "file",
+      "file": "Inundaci\u00f3n de la fila.md",
+      "x": 4640,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -1920,17 +1875,8 @@
       "id": "n_docs_seguridad_llamar_siguiente_skip_locked",
       "type": "file",
       "file": "Llamar siguiente con FOR UPDATE SKIP LOCKED.md",
-      "x": 5260,
-      "y": 980,
-      "width": 180,
-      "height": 60
-    },
-    {
-      "id": "n_readme_limites_plan_gratuito_supabase",
-      "type": "file",
-      "file": "L\u00edmites del plan gratuito de Supabase.md",
-      "x": 4660,
-      "y": 1060,
+      "x": 4840,
+      "y": 960,
       "width": 180,
       "height": 60
     },
@@ -1938,17 +1884,26 @@
       "id": "n_readme_panel_barbero",
       "type": "file",
       "file": "Panel del barbero.md",
-      "x": 4860,
-      "y": 1060,
+      "x": 5040,
+      "y": 960,
       "width": 180,
       "height": 60
     },
     {
-      "id": "n_readme_pausa_fila_remota",
+      "id": "n_docs_seguridad_pausa_automatica",
       "type": "file",
-      "file": "Pausa de la fila remota.md",
-      "x": 5060,
-      "y": 1060,
+      "file": "Pausa autom\u00e1tica de la fila remota.md",
+      "x": 4440,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_pendientes_piloto",
+      "type": "file",
+      "file": "Pendientes antes del piloto.md",
+      "x": 4640,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -1956,8 +1911,17 @@
       "id": "n_docs_seguridad_roles_dueno_barbero",
       "type": "file",
       "file": "Roles dueno y barbero.md",
-      "x": 5260,
-      "y": 1060,
+      "x": 4840,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_security_advisor",
+      "type": "file",
+      "file": "Security Advisor de Supabase.md",
+      "x": 5040,
+      "y": 1040,
       "width": 180,
       "height": 60
     },
@@ -1965,36 +1929,172 @@
       "id": "n_docs_seguridad_sentry",
       "type": "file",
       "file": "Sentry.md",
-      "x": 4660,
-      "y": 1140,
+      "x": 4440,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
     {
-      "id": "n_readme_siguiente",
+      "id": "n_docs_plan_implementacion_sprint_4",
       "type": "file",
-      "file": "Siguiente (producto).md",
-      "x": 4860,
-      "y": 1140,
+      "file": "Sprint 4 \u00b7 Due\u00f1o, antiabuso y lanzamiento.md",
+      "x": 4640,
+      "y": 1120,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_plan_implementacion_supabase_mcp",
+      "type": "file",
+      "file": "Supabase MCP.md",
+      "x": 4840,
+      "y": 1120,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_seguridad_gitleaks",
+      "type": "file",
+      "file": "gitleaks.md",
+      "x": 5040,
+      "y": 1120,
       "width": 180,
       "height": 60
     },
     {
       "id": "g8",
       "type": "group",
-      "label": "Variables de entorno",
+      "label": "Stack, hosting y costos",
       "x": 0,
-      "y": 1600,
+      "y": 1500,
+      "width": 880,
+      "height": 420,
+      "color": "3"
+    },
+    {
+      "id": "n_docs_decisiones_adr_002",
+      "type": "file",
+      "file": "ADR-002 \u00b7 Stack Supabase + Cloudflare Pages.md",
+      "x": 20,
+      "y": 1580,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_decisiones_adr_005",
+      "type": "file",
+      "file": "ADR-005 \u00b7 Hosting en Cloudflare Workers.md",
+      "x": 220,
+      "y": 1580,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_cloudflare_workers",
+      "type": "file",
+      "file": "Cloudflare Workers (hosting est\u00e1tico).md",
+      "x": 420,
+      "y": 1580,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_plan_implementacion_costos",
+      "type": "file",
+      "file": "Costos en planes gratuitos.md",
+      "x": 620,
+      "y": 1580,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_limites_plan_gratuito_supabase",
+      "type": "file",
+      "file": "L\u00edmites del plan gratuito de Supabase.md",
+      "x": 20,
+      "y": 1660,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_decisiones_php_mysql",
+      "type": "file",
+      "file": "PHP + MySQL (alternativa descartada).md",
+      "x": 220,
+      "y": 1660,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_plan_implementacion_resend",
+      "type": "file",
+      "file": "Resend (SMTP de Auth).md",
+      "x": 420,
+      "y": 1660,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_plan_implementacion_stack",
+      "type": "file",
+      "file": "Stack v0.1 con versiones.md",
+      "x": 620,
+      "y": 1660,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_readme_supabase",
+      "type": "file",
+      "file": "Supabase (Postgres, Auth, Realtime, Edge Functions).md",
+      "x": 20,
+      "y": 1740,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_decisiones_plan_pro",
+      "type": "file",
+      "file": "Supabase Pro a USD 25 al mes (alternativa descartada).md",
+      "x": 220,
+      "y": 1740,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_decisiones_vercel",
+      "type": "file",
+      "file": "Vercel (alternativa descartada).md",
+      "x": 420,
+      "y": 1740,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_docs_plan_implementacion_workers_en_lugar_de_pages",
+      "type": "file",
+      "file": "Workers en lugar de Pages.md",
+      "x": 620,
+      "y": 1740,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g9",
+      "type": "group",
+      "label": "Variables de entorno",
+      "x": 1620,
+      "y": 1500,
       "width": 600,
       "height": 400,
-      "color": "3"
+      "color": "4"
     },
     {
       "id": "n_app_src_vite_env_d_importmeta",
       "type": "file",
       "file": "ImportMeta.md",
-      "x": 20,
-      "y": 1680,
+      "x": 1640,
+      "y": 1580,
       "width": 180,
       "height": 60
     },
@@ -2002,8 +2102,8 @@
       "id": "n_app_src_vite_env_d_importmetaenv",
       "type": "file",
       "file": "ImportMetaEnv.md",
-      "x": 220,
-      "y": 1680,
+      "x": 1840,
+      "y": 1580,
       "width": 180,
       "height": 60
     },
@@ -2011,27 +2111,27 @@
       "id": "n_app_src_vite_env_d",
       "type": "file",
       "file": "vite-env.d.ts.md",
-      "x": 20,
-      "y": 1760,
+      "x": 1640,
+      "y": 1660,
       "width": 180,
       "height": 60
     },
     {
-      "id": "g9",
+      "id": "g10",
       "type": "group",
       "label": "Datos de prueba",
-      "x": 1620,
-      "y": 1600,
+      "x": 3020,
+      "y": 1500,
       "width": 600,
       "height": 400,
-      "color": "4"
+      "color": "5"
     },
     {
       "id": "n_supabase_seed",
       "type": "file",
       "file": "seed.sql.md",
-      "x": 1640,
-      "y": 1680,
+      "x": 3040,
+      "y": 1580,
       "width": 180,
       "height": 60
     }
@@ -2368,70 +2468,646 @@
       "label": "contains [EXTRACTED]"
     },
     {
-      "id": "e_docs_bitacora_prueba_riesgo_1_broadcast_docs_bitacora_pruebas_riesgo_sprint_0",
-      "fromNode": "n_docs_bitacora_prueba_riesgo_1_broadcast",
-      "toNode": "n_docs_bitacora_pruebas_riesgo_sprint_0",
+      "id": "e_docs_investigacion_p3_caja_comisiones_docs_investigacion_agendapro",
+      "fromNode": "n_docs_investigacion_p3_caja_comisiones",
+      "toNode": "n_docs_investigacion_agendapro",
+      "label": "cites [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_investigacion_competencia_docs_investigacion_agendapro",
+      "fromNode": "n_docs_investigacion_competencia",
+      "toNode": "n_docs_investigacion_agendapro",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_investigacion_competencia_docs_investigacion_booksy",
+      "fromNode": "n_docs_investigacion_competencia",
+      "toNode": "n_docs_investigacion_booksy",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_investigacion_competencia_docs_investigacion_fresha",
+      "fromNode": "n_docs_investigacion_competencia",
+      "toNode": "n_docs_investigacion_fresha",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_investigacion_competencia_docs_investigacion_squire",
+      "fromNode": "n_docs_investigacion_competencia",
+      "toNode": "n_docs_investigacion_squire",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_investigacion_competencia_docs_investigacion_waitwhile",
+      "fromNode": "n_docs_investigacion_competencia",
+      "toNode": "n_docs_investigacion_waitwhile",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_investigacion_documento_docs_investigacion_competencia",
+      "fromNode": "n_docs_investigacion_documento",
+      "toNode": "n_docs_investigacion_competencia",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_decisiones_usos_previos_nextcut_docs_investigacion_competencia",
+      "fromNode": "n_docs_decisiones_usos_previos_nextcut",
+      "toNode": "n_docs_investigacion_competencia",
+      "label": "conceptually_related_to [INFERRED]"
+    },
+    {
+      "id": "e_docs_decisiones_adr_001_docs_investigacion_competencia",
+      "fromNode": "n_docs_decisiones_adr_001",
+      "toNode": "n_docs_investigacion_competencia",
+      "label": "conceptually_related_to [INFERRED]"
+    },
+    {
+      "id": "e_readme_modelo_negocio_docs_investigacion_competencia",
+      "fromNode": "n_readme_modelo_negocio",
+      "toNode": "n_docs_investigacion_competencia",
+      "label": "references [INFERRED]"
+    },
+    {
+      "id": "e_docs_investigacion_contexto_honduras_docs_investigacion_datareportal_2026",
+      "fromNode": "n_docs_investigacion_contexto_honduras",
+      "toNode": "n_docs_investigacion_datareportal_2026",
+      "label": "cites [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_investigacion_contexto_honduras_docs_investigacion_fresha",
+      "fromNode": "n_docs_investigacion_contexto_honduras",
+      "toNode": "n_docs_investigacion_fresha",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_investigacion_contexto_honduras_docs_investigacion_precio_whatsapp_2026",
+      "fromNode": "n_docs_investigacion_contexto_honduras",
+      "toNode": "n_docs_investigacion_precio_whatsapp_2026",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_investigacion_documento_docs_investigacion_contexto_honduras",
+      "fromNode": "n_docs_investigacion_documento",
+      "toNode": "n_docs_investigacion_contexto_honduras",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_investigacion_documento_docs_investigacion_escala_calidad_evidencia",
+      "fromNode": "n_docs_investigacion_documento",
+      "toNode": "n_docs_investigacion_escala_calidad_evidencia",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_investigacion_escala_calidad_evidencia_docs_investigacion_matriz_decision",
+      "fromNode": "n_docs_investigacion_escala_calidad_evidencia",
+      "toNode": "n_docs_investigacion_matriz_decision",
+      "label": "conceptually_related_to [INFERRED]"
+    },
+    {
+      "id": "e_docs_investigacion_p1_inasistencias_docs_investigacion_cochrane_cd007458",
+      "fromNode": "n_docs_investigacion_p1_inasistencias",
+      "toNode": "n_docs_investigacion_cochrane_cd007458",
+      "label": "cites [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_investigacion_p1_inasistencias_docs_investigacion_zenoti_benchmark_2026",
+      "fromNode": "n_docs_investigacion_p1_inasistencias",
+      "toNode": "n_docs_investigacion_zenoti_benchmark_2026",
+      "label": "cites [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_investigacion_documento_docs_investigacion_p1_inasistencias",
+      "fromNode": "n_docs_investigacion_documento",
+      "toNode": "n_docs_investigacion_p1_inasistencias",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_investigacion_matriz_decision_docs_investigacion_p1_inasistencias",
+      "fromNode": "n_docs_investigacion_matriz_decision",
+      "toNode": "n_docs_investigacion_p1_inasistencias",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_seguridad_turnos_fantasma_docs_investigacion_p1_inasistencias",
+      "fromNode": "n_docs_seguridad_turnos_fantasma",
+      "toNode": "n_docs_investigacion_p1_inasistencias",
+      "label": "semantically_similar_to [INFERRED]"
+    },
+    {
+      "id": "e_docs_investigacion_p1_inasistencias_docs_investigacion_precio_whatsapp_2026",
+      "fromNode": "n_docs_investigacion_p1_inasistencias",
+      "toNode": "n_docs_investigacion_precio_whatsapp_2026",
+      "label": "conceptually_related_to [INFERRED]"
+    },
+    {
+      "id": "e_docs_validacion_campo_criterios_decision_docs_investigacion_p1_inasistencias",
+      "fromNode": "n_docs_validacion_campo_criterios_decision",
+      "toNode": "n_docs_investigacion_p1_inasistencias",
+      "label": "references [INFERRED]"
+    },
+    {
+      "id": "e_docs_validacion_campo_entrevistas_duenos_docs_investigacion_p1_inasistencias",
+      "fromNode": "n_docs_validacion_campo_entrevistas_duenos",
+      "toNode": "n_docs_investigacion_p1_inasistencias",
+      "label": "references [INFERRED]"
+    },
+    {
+      "id": "e_docs_investigacion_p2_fila_incierta_docs_investigacion_lu_et_al_2013",
+      "fromNode": "n_docs_investigacion_p2_fila_incierta",
+      "toNode": "n_docs_investigacion_lu_et_al_2013",
+      "label": "cites [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_investigacion_p2_fila_incierta_docs_investigacion_maister_psicologia_filas",
+      "fromNode": "n_docs_investigacion_p2_fila_incierta",
+      "toNode": "n_docs_investigacion_maister_psicologia_filas",
+      "label": "cites [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_investigacion_p2_fila_incierta_docs_investigacion_zenoti_benchmark_2026",
+      "fromNode": "n_docs_investigacion_p2_fila_incierta",
+      "toNode": "n_docs_investigacion_zenoti_benchmark_2026",
+      "label": "cites [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_investigacion_p2_fila_incierta_docs_investigacion_zenoti_encuesta_2025",
+      "fromNode": "n_docs_investigacion_p2_fila_incierta",
+      "toNode": "n_docs_investigacion_zenoti_encuesta_2025",
+      "label": "cites [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_investigacion_p2_fila_incierta_docs_investigacion_problema_elegido",
+      "fromNode": "n_docs_investigacion_p2_fila_incierta",
+      "toNode": "n_docs_investigacion_problema_elegido",
       "label": "conceptually_related_to [EXTRACTED]"
     },
     {
-      "id": "e_docs_bitacora_sin_docker_prueba_riesgo_1_docs_bitacora_prueba_riesgo_1_broadcast",
-      "fromNode": "n_docs_bitacora_sin_docker_prueba_riesgo_1",
-      "toNode": "n_docs_bitacora_prueba_riesgo_1_broadcast",
+      "id": "e_docs_investigacion_documento_docs_investigacion_p2_fila_incierta",
+      "fromNode": "n_docs_investigacion_documento",
+      "toNode": "n_docs_investigacion_p2_fila_incierta",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_investigacion_matriz_decision_docs_investigacion_p2_fila_incierta",
+      "fromNode": "n_docs_investigacion_matriz_decision",
+      "toNode": "n_docs_investigacion_p2_fila_incierta",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_readme_tasa_abandono_docs_investigacion_p2_fila_incierta",
+      "fromNode": "n_readme_tasa_abandono",
+      "toNode": "n_docs_investigacion_p2_fila_incierta",
+      "label": "conceptually_related_to [INFERRED]"
+    },
+    {
+      "id": "e_docs_decisiones_adr_001_docs_investigacion_p2_fila_incierta",
+      "fromNode": "n_docs_decisiones_adr_001",
+      "toNode": "n_docs_investigacion_p2_fila_incierta",
+      "label": "references [INFERRED]"
+    },
+    {
+      "id": "e_docs_validacion_campo_entrevistas_duenos_docs_investigacion_p2_fila_incierta",
+      "fromNode": "n_docs_validacion_campo_entrevistas_duenos",
+      "toNode": "n_docs_investigacion_p2_fila_incierta",
+      "label": "references [INFERRED]"
+    },
+    {
+      "id": "e_docs_investigacion_p3_caja_comisiones_readme_reporte_dueno",
+      "fromNode": "n_docs_investigacion_p3_caja_comisiones",
+      "toNode": "n_readme_reporte_dueno",
       "label": "conceptually_related_to [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_investigacion_documento_docs_investigacion_p3_caja_comisiones",
+      "fromNode": "n_docs_investigacion_documento",
+      "toNode": "n_docs_investigacion_p3_caja_comisiones",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_investigacion_matriz_decision_docs_investigacion_p3_caja_comisiones",
+      "fromNode": "n_docs_investigacion_matriz_decision",
+      "toNode": "n_docs_investigacion_p3_caja_comisiones",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_seguridad_montos_alterados_docs_investigacion_p3_caja_comisiones",
+      "fromNode": "n_docs_seguridad_montos_alterados",
+      "toNode": "n_docs_investigacion_p3_caja_comisiones",
+      "label": "references [INFERRED]"
+    },
+    {
+      "id": "e_docs_validacion_campo_criterios_decision_docs_investigacion_p3_caja_comisiones",
+      "fromNode": "n_docs_validacion_campo_criterios_decision",
+      "toNode": "n_docs_investigacion_p3_caja_comisiones",
+      "label": "references [INFERRED]"
+    },
+    {
+      "id": "e_docs_validacion_campo_entrevistas_duenos_docs_investigacion_p3_caja_comisiones",
+      "fromNode": "n_docs_validacion_campo_entrevistas_duenos",
+      "toNode": "n_docs_investigacion_p3_caja_comisiones",
+      "label": "references [INFERRED]"
+    },
+    {
+      "id": "e_docs_investigacion_p4_captacion_retencion_docs_investigacion_zenoti_benchmark_2026",
+      "fromNode": "n_docs_investigacion_p4_captacion_retencion",
+      "toNode": "n_docs_investigacion_zenoti_benchmark_2026",
+      "label": "cites [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_investigacion_documento_docs_investigacion_p4_captacion_retencion",
+      "fromNode": "n_docs_investigacion_documento",
+      "toNode": "n_docs_investigacion_p4_captacion_retencion",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_investigacion_matriz_decision_docs_investigacion_p4_captacion_retencion",
+      "fromNode": "n_docs_investigacion_matriz_decision",
+      "toNode": "n_docs_investigacion_p4_captacion_retencion",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_investigacion_matriz_decision_docs_investigacion_problema_elegido",
+      "fromNode": "n_docs_investigacion_matriz_decision",
+      "toNode": "n_docs_investigacion_problema_elegido",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_investigacion_documento_docs_investigacion_problema_elegido",
+      "fromNode": "n_docs_investigacion_documento",
+      "toNode": "n_docs_investigacion_problema_elegido",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_plan_implementacion_calendario_docs_investigacion_problema_elegido",
+      "fromNode": "n_docs_plan_implementacion_calendario",
+      "toNode": "n_docs_investigacion_problema_elegido",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_decisiones_adr_001_docs_investigacion_problema_elegido",
+      "fromNode": "n_docs_decisiones_adr_001",
+      "toNode": "n_docs_investigacion_problema_elegido",
+      "label": "references [INFERRED]"
+    },
+    {
+      "id": "e_docs_investigacion_documento_docs_investigacion_vacios_evidencia",
+      "fromNode": "n_docs_investigacion_documento",
+      "toNode": "n_docs_investigacion_vacios_evidencia",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_validacion_campo_documento_docs_investigacion_vacios_evidencia",
+      "fromNode": "n_docs_validacion_campo_documento",
+      "toNode": "n_docs_investigacion_vacios_evidencia",
+      "label": "cites [INFERRED]"
+    },
+    {
+      "id": "e_docs_investigacion_waitwhile_readme_fila_virtual_hibrida",
+      "fromNode": "n_docs_investigacion_waitwhile",
+      "toNode": "n_readme_fila_virtual_hibrida",
+      "label": "semantically_similar_to [INFERRED]"
+    },
+    {
+      "id": "e_docs_validacion_campo_hoja_observacion_docs_validacion_campo_definicion_abandono",
+      "fromNode": "n_docs_validacion_campo_hoja_observacion",
+      "toNode": "n_docs_validacion_campo_definicion_abandono",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_validacion_campo_definicion_abandono_readme_tasa_abandono",
+      "fromNode": "n_docs_validacion_campo_definicion_abandono",
+      "toNode": "n_readme_tasa_abandono",
+      "label": "conceptually_related_to [INFERRED]"
+    },
+    {
+      "id": "e_docs_validacion_campo_criterios_decision_docs_validacion_campo_entrevistas_duenos",
+      "fromNode": "n_docs_validacion_campo_criterios_decision",
+      "toNode": "n_docs_validacion_campo_entrevistas_duenos",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_validacion_campo_documento_docs_validacion_campo_entrevistas_duenos",
+      "fromNode": "n_docs_validacion_campo_documento",
+      "toNode": "n_docs_validacion_campo_entrevistas_duenos",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_validacion_campo_entrevistas_duenos_docs_validacion_campo_preguntas_precio",
+      "fromNode": "n_docs_validacion_campo_entrevistas_duenos",
+      "toNode": "n_docs_validacion_campo_preguntas_precio",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_validacion_campo_entrevistas_duenos_docs_validacion_campo_piloto_gratis",
+      "fromNode": "n_docs_validacion_campo_entrevistas_duenos",
+      "toNode": "n_docs_validacion_campo_piloto_gratis",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_validacion_campo_entrevistas_duenos_docs_validacion_campo_registro_entrevista",
+      "fromNode": "n_docs_validacion_campo_entrevistas_duenos",
+      "toNode": "n_docs_validacion_campo_registro_entrevista",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_validacion_campo_formula_perdida_docs_validacion_campo_entrevistas_duenos",
+      "fromNode": "n_docs_validacion_campo_formula_perdida",
+      "toNode": "n_docs_validacion_campo_entrevistas_duenos",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_decisiones_adr_009_docs_validacion_campo_entrevistas_duenos",
+      "fromNode": "n_docs_decisiones_adr_009",
+      "toNode": "n_docs_validacion_campo_entrevistas_duenos",
+      "label": "conceptually_related_to [INFERRED]"
+    },
+    {
+      "id": "e_docs_validacion_campo_documento_docs_validacion_campo_formula_perdida",
+      "fromNode": "n_docs_validacion_campo_documento",
+      "toNode": "n_docs_validacion_campo_formula_perdida",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_validacion_campo_formula_perdida_docs_validacion_campo_hoja_observacion",
+      "fromNode": "n_docs_validacion_campo_formula_perdida",
+      "toNode": "n_docs_validacion_campo_hoja_observacion",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_validacion_campo_formula_perdida_readme_metricas_exito",
+      "fromNode": "n_docs_validacion_campo_formula_perdida",
+      "toNode": "n_readme_metricas_exito",
+      "label": "conceptually_related_to [INFERRED]"
+    },
+    {
+      "id": "e_docs_validacion_campo_formula_perdida_docs_validacion_campo_preguntas_precio",
+      "fromNode": "n_docs_validacion_campo_formula_perdida",
+      "toNode": "n_docs_validacion_campo_preguntas_precio",
+      "label": "conceptually_related_to [INFERRED]"
+    },
+    {
+      "id": "e_docs_plan_implementacion_piloto_docs_validacion_campo_hoja_observacion",
+      "fromNode": "n_docs_plan_implementacion_piloto",
+      "toNode": "n_docs_validacion_campo_hoja_observacion",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_validacion_campo_criterios_decision_docs_validacion_campo_hoja_observacion",
+      "fromNode": "n_docs_validacion_campo_criterios_decision",
+      "toNode": "n_docs_validacion_campo_hoja_observacion",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_validacion_campo_documento_docs_validacion_campo_hoja_observacion",
+      "fromNode": "n_docs_validacion_campo_documento",
+      "toNode": "n_docs_validacion_campo_hoja_observacion",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_validacion_campo_criterios_decision_docs_validacion_campo_piloto_gratis",
+      "fromNode": "n_docs_validacion_campo_criterios_decision",
+      "toNode": "n_docs_validacion_campo_piloto_gratis",
+      "label": "references [INFERRED]"
+    },
+    {
+      "id": "e_readme_alcance_mvp_readme_panel_barbero",
+      "fromNode": "n_readme_alcance_mvp",
+      "toNode": "n_readme_panel_barbero",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_readme_alcance_mvp_readme_reporte_dueno",
+      "fromNode": "n_readme_alcance_mvp",
+      "toNode": "n_readme_reporte_dueno",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_readme_alcance_mvp_readme_tiempo_estimado",
+      "fromNode": "n_readme_alcance_mvp",
+      "toNode": "n_readme_tiempo_estimado",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_readme_alcance_mvp_readme_notificaciones_sin_costo",
+      "fromNode": "n_readme_alcance_mvp",
+      "toNode": "n_readme_notificaciones_sin_costo",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_readme_documento_readme_alcance_mvp",
+      "fromNode": "n_readme_documento",
+      "toNode": "n_readme_alcance_mvp",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_readme_hoja_ruta_readme_alcance_mvp",
+      "fromNode": "n_readme_hoja_ruta",
+      "toNode": "n_readme_alcance_mvp",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_readme_documento_readme_hoja_ruta",
+      "fromNode": "n_readme_documento",
+      "toNode": "n_readme_hoja_ruta",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_readme_hoja_ruta_readme_fila_virtual_hibrida",
+      "fromNode": "n_readme_hoja_ruta",
+      "toNode": "n_readme_fila_virtual_hibrida",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_readme_hoja_ruta_readme_tasa_abandono",
+      "fromNode": "n_readme_hoja_ruta",
+      "toNode": "n_readme_tasa_abandono",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_readme_documento_readme_metricas_exito",
+      "fromNode": "n_readme_documento",
+      "toNode": "n_readme_metricas_exito",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_readme_metricas_exito_readme_tasa_abandono",
+      "fromNode": "n_readme_metricas_exito",
+      "toNode": "n_readme_tasa_abandono",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_readme_tiempo_estimado_readme_reporte_dueno",
+      "fromNode": "n_readme_tiempo_estimado",
+      "toNode": "n_readme_reporte_dueno",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_readme_reporte_dueno_readme_tasa_abandono",
+      "fromNode": "n_readme_reporte_dueno",
+      "toNode": "n_readme_tasa_abandono",
+      "label": "references [INFERRED]"
+    },
+    {
+      "id": "e_readme_tasa_abandono_docs_validacion_campo_documento",
+      "fromNode": "n_readme_tasa_abandono",
+      "toNode": "n_docs_validacion_campo_documento",
+      "label": "references [INFERRED]"
+    },
+    {
+      "id": "e_readme_tasa_abandono_readme_estados_turno",
+      "fromNode": "n_readme_tasa_abandono",
+      "toNode": "n_readme_estados_turno",
+      "label": "shares_data_with [INFERRED]"
+    },
+    {
+      "id": "e_docs_decisiones_adr_001_docs_investigacion_documento",
+      "fromNode": "n_docs_decisiones_adr_001",
+      "toNode": "n_docs_investigacion_documento",
+      "label": "cites [EXTRACTED]"
+    },
+    {
+      "id": "e_readme_documento_docs_investigacion_documento",
+      "fromNode": "n_readme_documento",
+      "toNode": "n_docs_investigacion_documento",
+      "label": "cites [EXTRACTED]"
+    },
+    {
+      "id": "e_readme_notificaciones_sin_costo_docs_investigacion_documento",
+      "fromNode": "n_readme_notificaciones_sin_costo",
+      "toNode": "n_docs_investigacion_documento",
+      "label": "cites [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_bitacora_entrada_2026_10_25_docs_investigacion_documento",
+      "fromNode": "n_docs_bitacora_entrada_2026_10_25",
+      "toNode": "n_docs_investigacion_documento",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_decisiones_documento_docs_investigacion_documento",
+      "fromNode": "n_docs_decisiones_documento",
+      "toNode": "n_docs_investigacion_documento",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_investigacion_documento_docs_investigacion_matriz_decision",
+      "fromNode": "n_docs_investigacion_documento",
+      "toNode": "n_docs_investigacion_matriz_decision",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_seguridad_documento_docs_investigacion_documento",
+      "fromNode": "n_docs_seguridad_documento",
+      "toNode": "n_docs_investigacion_documento",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_validacion_campo_documento_docs_investigacion_documento",
+      "fromNode": "n_docs_validacion_campo_documento",
+      "toNode": "n_docs_investigacion_documento",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_investigacion_lu_et_al_2013_docs_investigacion_maister_psicologia_filas",
+      "fromNode": "n_docs_investigacion_lu_et_al_2013",
+      "toNode": "n_docs_investigacion_maister_psicologia_filas",
+      "label": "semantically_similar_to [INFERRED]"
+    },
+    {
+      "id": "e_docs_decisiones_adr_001_docs_validacion_campo_documento",
+      "fromNode": "n_docs_decisiones_adr_001",
+      "toNode": "n_docs_validacion_campo_documento",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_decisiones_documento_docs_decisiones_adr_001",
+      "fromNode": "n_docs_decisiones_documento",
+      "toNode": "n_docs_decisiones_adr_001",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_validacion_campo_criterios_decision_docs_decisiones_adr_001",
+      "fromNode": "n_docs_validacion_campo_criterios_decision",
+      "toNode": "n_docs_decisiones_adr_001",
+      "label": "conceptually_related_to [INFERRED]"
+    },
+    {
+      "id": "e_docs_investigacion_analisis_sensibilidad_docs_investigacion_matriz_decision",
+      "fromNode": "n_docs_investigacion_analisis_sensibilidad",
+      "toNode": "n_docs_investigacion_matriz_decision",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_plan_implementacion_documento_docs_validacion_campo_criterios_decision",
+      "fromNode": "n_docs_plan_implementacion_documento",
+      "toNode": "n_docs_validacion_campo_criterios_decision",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_validacion_campo_documento_docs_validacion_campo_criterios_decision",
+      "fromNode": "n_docs_validacion_campo_documento",
+      "toNode": "n_docs_validacion_campo_criterios_decision",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_readme_siguiente_readme_fila_virtual_hibrida",
+      "fromNode": "n_readme_siguiente",
+      "toNode": "n_readme_fila_virtual_hibrida",
+      "label": "implements [EXTRACTED]"
     },
     {
       "id": "e_docs_bitacora_prueba_riesgo_1_broadcast_docs_decisiones_adr_007",
       "fromNode": "n_docs_bitacora_prueba_riesgo_1_broadcast",
       "toNode": "n_docs_decisiones_adr_007",
+      "label": "cites [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_bitacora_sin_docker_prueba_riesgo_1_docs_bitacora_prueba_riesgo_1_broadcast",
+      "fromNode": "n_docs_bitacora_sin_docker_prueba_riesgo_1",
+      "toNode": "n_docs_bitacora_prueba_riesgo_1_broadcast",
       "label": "references [EXTRACTED]"
     },
     {
       "id": "e_docs_bitacora_prueba_riesgo_1_broadcast_docs_decisiones_canal_fila_broadcast",
       "fromNode": "n_docs_bitacora_prueba_riesgo_1_broadcast",
       "toNode": "n_docs_decisiones_canal_fila_broadcast",
-      "label": "conceptually_related_to [INFERRED]"
+      "label": "references [INFERRED]"
+    },
+    {
+      "id": "e_docs_bitacora_prueba_riesgo_1_broadcast_docs_bitacora_pruebas_riesgo_sprint_0",
+      "fromNode": "n_docs_bitacora_prueba_riesgo_1_broadcast",
+      "toNode": "n_docs_bitacora_pruebas_riesgo_sprint_0",
+      "label": "implements [INFERRED]"
     },
     {
       "id": "e_docs_bitacora_prueba_riesgo_1_broadcast_docs_plan_implementacion_broadcast_senales",
       "fromNode": "n_docs_bitacora_prueba_riesgo_1_broadcast",
       "toNode": "n_docs_plan_implementacion_broadcast_senales",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_docs_bitacora_sin_docker_prueba_riesgo_1_docs_bitacora_pruebas_riesgo_sprint_0",
-      "fromNode": "n_docs_bitacora_sin_docker_prueba_riesgo_1",
-      "toNode": "n_docs_bitacora_pruebas_riesgo_sprint_0",
-      "label": "conceptually_related_to [EXTRACTED]"
+      "label": "references [INFERRED]"
     },
     {
       "id": "e_docs_bitacora_sprint_0_base_proyecto_docs_bitacora_pruebas_riesgo_sprint_0",
       "fromNode": "n_docs_bitacora_sprint_0_base_proyecto",
       "toNode": "n_docs_bitacora_pruebas_riesgo_sprint_0",
-      "label": "conceptually_related_to [EXTRACTED]"
+      "label": "references [EXTRACTED]"
     },
     {
-      "id": "e_docs_bitacora_pruebas_riesgo_sprint_0_docs_plan_implementacion_broadcast_senales",
-      "fromNode": "n_docs_bitacora_pruebas_riesgo_sprint_0",
-      "toNode": "n_docs_plan_implementacion_broadcast_senales",
+      "id": "e_readme_cloudflare_turnstile_docs_bitacora_pruebas_riesgo_sprint_0",
+      "fromNode": "n_readme_cloudflare_turnstile",
+      "toNode": "n_docs_bitacora_pruebas_riesgo_sprint_0",
       "label": "conceptually_related_to [INFERRED]"
     },
     {
-      "id": "e_docs_bitacora_pruebas_riesgo_sprint_0_readme_cloudflare_turnstile",
-      "fromNode": "n_docs_bitacora_pruebas_riesgo_sprint_0",
-      "toNode": "n_readme_cloudflare_turnstile",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_docs_bitacora_pruebas_riesgo_sprint_0_readme_web_push",
-      "fromNode": "n_docs_bitacora_pruebas_riesgo_sprint_0",
-      "toNode": "n_readme_web_push",
+      "id": "e_readme_web_push_docs_bitacora_pruebas_riesgo_sprint_0",
+      "fromNode": "n_readme_web_push",
+      "toNode": "n_docs_bitacora_pruebas_riesgo_sprint_0",
       "label": "conceptually_related_to [INFERRED]"
     },
     {
       "id": "e_docs_bitacora_pruebas_riesgo_sprint_0_docs_plan_implementacion_sprint_0",
       "fromNode": "n_docs_bitacora_pruebas_riesgo_sprint_0",
       "toNode": "n_docs_plan_implementacion_sprint_0",
-      "label": "conceptually_related_to [INFERRED]"
+      "label": "references [INFERRED]"
     },
     {
       "id": "e_docs_decisiones_adr_007_docs_decisiones_canal_fila_broadcast",
@@ -2452,21 +3128,33 @@
       "label": "conceptually_related_to [INFERRED]"
     },
     {
-      "id": "e_docs_plan_implementacion_broadcast_senales_docs_decisiones_canal_fila_broadcast",
-      "fromNode": "n_docs_plan_implementacion_broadcast_senales",
-      "toNode": "n_docs_decisiones_canal_fila_broadcast",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
       "id": "e_docs_seguridad_f02_endpoints_expuestos_docs_decisiones_canal_fila_broadcast",
       "fromNode": "n_docs_seguridad_f02_endpoints_expuestos",
       "toNode": "n_docs_decisiones_canal_fila_broadcast",
       "label": "references [INFERRED]"
     },
     {
+      "id": "e_docs_plan_implementacion_broadcast_senales_docs_decisiones_canal_fila_broadcast",
+      "fromNode": "n_docs_plan_implementacion_broadcast_senales",
+      "toNode": "n_docs_decisiones_canal_fila_broadcast",
+      "label": "semantically_similar_to [INFERRED]"
+    },
+    {
       "id": "e_docs_decisiones_adr_007_docs_decisiones_edge_function_unirse_a_fila",
       "fromNode": "n_docs_decisiones_adr_007",
       "toNode": "n_docs_decisiones_edge_function_unirse_a_fila",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_decisiones_edge_function_unirse_a_fila_readme_cloudflare_turnstile",
+      "fromNode": "n_docs_decisiones_edge_function_unirse_a_fila",
+      "toNode": "n_readme_cloudflare_turnstile",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_decisiones_edge_function_unirse_a_fila_docs_plan_implementacion_funciones_base",
+      "fromNode": "n_docs_decisiones_edge_function_unirse_a_fila",
+      "toNode": "n_docs_plan_implementacion_funciones_base",
       "label": "references [EXTRACTED]"
     },
     {
@@ -2482,21 +3170,27 @@
       "label": "references [EXTRACTED]"
     },
     {
+      "id": "e_docs_decisiones_edge_function_unirse_a_fila_docs_seguridad_f02_endpoints_expuestos",
+      "fromNode": "n_docs_decisiones_edge_function_unirse_a_fila",
+      "toNode": "n_docs_seguridad_f02_endpoints_expuestos",
+      "label": "conceptually_related_to [INFERRED]"
+    },
+    {
       "id": "e_docs_decisiones_edge_function_unirse_a_fila_docs_seguridad_f09_rate_limiting",
       "fromNode": "n_docs_decisiones_edge_function_unirse_a_fila",
       "toNode": "n_docs_seguridad_f09_rate_limiting",
       "label": "conceptually_related_to [INFERRED]"
     },
     {
-      "id": "e_docs_decisiones_edge_function_unirse_a_fila_readme_cloudflare_turnstile",
+      "id": "e_docs_decisiones_edge_function_unirse_a_fila_docs_plan_implementacion_claves_nuevas_supabase",
       "fromNode": "n_docs_decisiones_edge_function_unirse_a_fila",
-      "toNode": "n_readme_cloudflare_turnstile",
+      "toNode": "n_docs_plan_implementacion_claves_nuevas_supabase",
       "label": "conceptually_related_to [INFERRED]"
     },
     {
-      "id": "e_docs_decisiones_edge_function_unirse_a_fila_docs_plan_implementacion_funciones_base",
-      "fromNode": "n_docs_decisiones_edge_function_unirse_a_fila",
-      "toNode": "n_docs_plan_implementacion_funciones_base",
+      "id": "e_docs_plan_implementacion_prueba_riesgo_3_docs_decisiones_edge_function_unirse_a_fila",
+      "fromNode": "n_docs_plan_implementacion_prueba_riesgo_3",
+      "toNode": "n_docs_decisiones_edge_function_unirse_a_fila",
       "label": "conceptually_related_to [INFERRED]"
     },
     {
@@ -2515,43 +3209,103 @@
       "id": "e_docs_decisiones_suscribir_push_readme_web_push",
       "fromNode": "n_docs_decisiones_suscribir_push",
       "toNode": "n_readme_web_push",
-      "label": "conceptually_related_to [INFERRED]"
+      "label": "references [INFERRED]"
     },
     {
       "id": "e_docs_plan_implementacion_funciones_base_docs_decisiones_suscribir_push",
       "fromNode": "n_docs_plan_implementacion_funciones_base",
       "toNode": "n_docs_decisiones_suscribir_push",
-      "label": "conceptually_related_to [INFERRED]"
+      "label": "references [INFERRED]"
     },
     {
-      "id": "e_docs_plan_implementacion_riesgos_tecnicos_docs_plan_implementacion_prueba_riesgo_1",
-      "fromNode": "n_docs_plan_implementacion_riesgos_tecnicos",
-      "toNode": "n_docs_plan_implementacion_prueba_riesgo_1",
+      "id": "e_docs_plan_implementacion_documento_docs_plan_implementacion_funciones_base",
+      "fromNode": "n_docs_plan_implementacion_documento",
+      "toNode": "n_docs_plan_implementacion_funciones_base",
       "label": "references [EXTRACTED]"
     },
     {
-      "id": "e_docs_plan_implementacion_sprint_0_docs_plan_implementacion_prueba_riesgo_1",
+      "id": "e_docs_plan_implementacion_funciones_base_docs_seguridad_f07_permisos_excesivos",
+      "fromNode": "n_docs_plan_implementacion_funciones_base",
+      "toNode": "n_docs_seguridad_f07_permisos_excesivos",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_plan_implementacion_funciones_base_docs_plan_implementacion_pg_cron",
+      "fromNode": "n_docs_plan_implementacion_funciones_base",
+      "toNode": "n_docs_plan_implementacion_pg_cron",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_plan_implementacion_sprint_1_docs_plan_implementacion_funciones_base",
+      "fromNode": "n_docs_plan_implementacion_sprint_1",
+      "toNode": "n_docs_plan_implementacion_funciones_base",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_plan_implementacion_funciones_base_docs_seguridad_rls",
+      "fromNode": "n_docs_plan_implementacion_funciones_base",
+      "toNode": "n_docs_seguridad_rls",
+      "label": "conceptually_related_to [INFERRED]"
+    },
+    {
+      "id": "e_docs_plan_implementacion_sprint_0_docs_plan_implementacion_prueba_riesgo_3",
       "fromNode": "n_docs_plan_implementacion_sprint_0",
-      "toNode": "n_docs_plan_implementacion_prueba_riesgo_1",
+      "toNode": "n_docs_plan_implementacion_prueba_riesgo_3",
       "label": "references [EXTRACTED]"
     },
     {
-      "id": "e_docs_plan_implementacion_prueba_riesgo_1_docs_bitacora_sin_docker_prueba_riesgo_1",
-      "fromNode": "n_docs_plan_implementacion_prueba_riesgo_1",
-      "toNode": "n_docs_bitacora_sin_docker_prueba_riesgo_1",
-      "label": "conceptually_related_to [INFERRED]"
+      "id": "e_docs_plan_implementacion_prueba_riesgo_3_readme_cloudflare_turnstile",
+      "fromNode": "n_docs_plan_implementacion_prueba_riesgo_3",
+      "toNode": "n_readme_cloudflare_turnstile",
+      "label": "references [INFERRED]"
     },
     {
-      "id": "e_docs_decisiones_adr_007_docs_plan_implementacion_prueba_riesgo_1",
-      "fromNode": "n_docs_decisiones_adr_007",
-      "toNode": "n_docs_plan_implementacion_prueba_riesgo_1",
-      "label": "conceptually_related_to [INFERRED]"
+      "id": "e_docs_plan_implementacion_calendario_docs_plan_implementacion_sprint_1",
+      "fromNode": "n_docs_plan_implementacion_calendario",
+      "toNode": "n_docs_plan_implementacion_sprint_1",
+      "label": "references [EXTRACTED]"
     },
     {
-      "id": "e_docs_plan_implementacion_prueba_riesgo_1_docs_plan_implementacion_broadcast_senales",
-      "fromNode": "n_docs_plan_implementacion_prueba_riesgo_1",
+      "id": "e_docs_plan_implementacion_sprint_1_docs_seguridad_f02_endpoints_expuestos",
+      "fromNode": "n_docs_plan_implementacion_sprint_1",
+      "toNode": "n_docs_seguridad_f02_endpoints_expuestos",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_plan_implementacion_sprint_1_docs_seguridad_f07_permisos_excesivos",
+      "fromNode": "n_docs_plan_implementacion_sprint_1",
+      "toNode": "n_docs_seguridad_f07_permisos_excesivos",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_plan_implementacion_sprint_1_docs_seguridad_f08_manejo_errores",
+      "fromNode": "n_docs_plan_implementacion_sprint_1",
+      "toNode": "n_docs_seguridad_f08_manejo_errores",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_docs_plan_implementacion_sprint_1_docs_seguridad_rls",
+      "fromNode": "n_docs_plan_implementacion_sprint_1",
+      "toNode": "n_docs_seguridad_rls",
+      "label": "references [INFERRED]"
+    },
+    {
+      "id": "e_docs_plan_implementacion_sprint_1_docs_seguridad_bitacora_eventos_turno",
+      "fromNode": "n_docs_plan_implementacion_sprint_1",
+      "toNode": "n_docs_seguridad_bitacora_eventos_turno",
+      "label": "references [INFERRED]"
+    },
+    {
+      "id": "e_docs_plan_implementacion_sprint_1_docs_plan_implementacion_broadcast_senales",
+      "fromNode": "n_docs_plan_implementacion_sprint_1",
       "toNode": "n_docs_plan_implementacion_broadcast_senales",
-      "label": "conceptually_related_to [INFERRED]"
+      "label": "references [INFERRED]"
+    },
+    {
+      "id": "e_docs_plan_implementacion_sprint_1_docs_seguridad_pruebas_pgtap",
+      "fromNode": "n_docs_plan_implementacion_sprint_1",
+      "toNode": "n_docs_seguridad_pruebas_pgtap",
+      "label": "references [INFERRED]"
     },
     {
       "id": "e_docs_seguridad_adivinar_codigos_docs_seguridad_f02_endpoints_expuestos",
@@ -2582,660 +3336,6 @@
       "fromNode": "n_docs_seguridad_adivinar_codigos",
       "toNode": "n_docs_seguridad_codigo_publico",
       "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_docs_seguridad_amenazas_fila_docs_seguridad_inundar_fila",
-      "fromNode": "n_docs_seguridad_amenazas_fila",
-      "toNode": "n_docs_seguridad_inundar_fila",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_amenazas_fila_docs_seguridad_turnos_fantasma",
-      "fromNode": "n_docs_seguridad_amenazas_fila",
-      "toNode": "n_docs_seguridad_turnos_fantasma",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_amenazas_fila_docs_seguridad_nombre_ofensivo_tv",
-      "fromNode": "n_docs_seguridad_amenazas_fila",
-      "toNode": "n_docs_seguridad_nombre_ofensivo_tv",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_amenazas_fila_docs_seguridad_montos_alterados",
-      "fromNode": "n_docs_seguridad_amenazas_fila",
-      "toNode": "n_docs_seguridad_montos_alterados",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_amenazas_fila_docs_seguridad_fuga_entre_barberias",
-      "fromNode": "n_docs_seguridad_amenazas_fila",
-      "toNode": "n_docs_seguridad_fuga_entre_barberias",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_documento_docs_seguridad_amenazas_fila",
-      "fromNode": "n_docs_seguridad_documento",
-      "toNode": "n_docs_seguridad_amenazas_fila",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_f10_monitoreo_docs_seguridad_bitacora_eventos_turno",
-      "fromNode": "n_docs_seguridad_f10_monitoreo",
-      "toNode": "n_docs_seguridad_bitacora_eventos_turno",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_montos_alterados_docs_seguridad_bitacora_eventos_turno",
-      "fromNode": "n_docs_seguridad_montos_alterados",
-      "toNode": "n_docs_seguridad_bitacora_eventos_turno",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_f07_permisos_excesivos_docs_seguridad_bitacora_eventos_turno",
-      "fromNode": "n_docs_seguridad_f07_permisos_excesivos",
-      "toNode": "n_docs_seguridad_bitacora_eventos_turno",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_docs_plan_implementacion_sprint_1_docs_seguridad_bitacora_eventos_turno",
-      "fromNode": "n_docs_plan_implementacion_sprint_1",
-      "toNode": "n_docs_seguridad_bitacora_eventos_turno",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_docs_seguridad_f05_datos_sensibles_docs_seguridad_borrado_telefonos_90_dias",
-      "fromNode": "n_docs_seguridad_f05_datos_sensibles",
-      "toNode": "n_docs_seguridad_borrado_telefonos_90_dias",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_pendientes_piloto_docs_seguridad_borrado_telefonos_90_dias",
-      "fromNode": "n_docs_seguridad_pendientes_piloto",
-      "toNode": "n_docs_seguridad_borrado_telefonos_90_dias",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_f02_endpoints_expuestos_docs_seguridad_cancelar_turno",
-      "fromNode": "n_docs_seguridad_f02_endpoints_expuestos",
-      "toNode": "n_docs_seguridad_cancelar_turno",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_cancelar_turno_docs_seguridad_codigo_publico",
-      "fromNode": "n_docs_seguridad_cancelar_turno",
-      "toNode": "n_docs_seguridad_codigo_publico",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_docs_seguridad_claves_supabase_docs_seguridad_rls",
-      "fromNode": "n_docs_seguridad_claves_supabase",
-      "toNode": "n_docs_seguridad_rls",
-      "label": "conceptually_related_to [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_f01_api_keys_docs_seguridad_claves_supabase",
-      "fromNode": "n_docs_seguridad_f01_api_keys",
-      "toNode": "n_docs_seguridad_claves_supabase",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_f07_permisos_excesivos_docs_seguridad_claves_supabase",
-      "fromNode": "n_docs_seguridad_f07_permisos_excesivos",
-      "toNode": "n_docs_seguridad_claves_supabase",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_f02_endpoints_expuestos_docs_seguridad_codigo_publico",
-      "fromNode": "n_docs_seguridad_f02_endpoints_expuestos",
-      "toNode": "n_docs_seguridad_codigo_publico",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_ver_turno_docs_seguridad_codigo_publico",
-      "fromNode": "n_docs_seguridad_ver_turno",
-      "toNode": "n_docs_seguridad_codigo_publico",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_docs_bitacora_sprint_0_base_proyecto_docs_seguridad_f02_endpoints_expuestos",
-      "fromNode": "n_docs_bitacora_sprint_0_base_proyecto",
-      "toNode": "n_docs_seguridad_f02_endpoints_expuestos",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_plan_implementacion_sprint_1_docs_seguridad_f02_endpoints_expuestos",
-      "fromNode": "n_docs_plan_implementacion_sprint_1",
-      "toNode": "n_docs_seguridad_f02_endpoints_expuestos",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_documento_docs_seguridad_f02_endpoints_expuestos",
-      "fromNode": "n_docs_seguridad_documento",
-      "toNode": "n_docs_seguridad_f02_endpoints_expuestos",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_f02_endpoints_expuestos_docs_seguridad_rls",
-      "fromNode": "n_docs_seguridad_f02_endpoints_expuestos",
-      "toNode": "n_docs_seguridad_rls",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_f02_endpoints_expuestos_docs_seguridad_ver_turno",
-      "fromNode": "n_docs_seguridad_f02_endpoints_expuestos",
-      "toNode": "n_docs_seguridad_ver_turno",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_f02_endpoints_expuestos_docs_seguridad_vista_fila_publica",
-      "fromNode": "n_docs_seguridad_f02_endpoints_expuestos",
-      "toNode": "n_docs_seguridad_vista_fila_publica",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_f02_endpoints_expuestos_docs_decisiones_adr_007",
-      "fromNode": "n_docs_seguridad_f02_endpoints_expuestos",
-      "toNode": "n_docs_decisiones_adr_007",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_f02_endpoints_expuestos_docs_seguridad_unirse_a_fila",
-      "fromNode": "n_docs_seguridad_f02_endpoints_expuestos",
-      "toNode": "n_docs_seguridad_unirse_a_fila",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_f02_endpoints_expuestos_docs_seguridad_security_advisor",
-      "fromNode": "n_docs_seguridad_f02_endpoints_expuestos",
-      "toNode": "n_docs_seguridad_security_advisor",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_f02_endpoints_expuestos_docs_seguridad_pruebas_pgtap",
-      "fromNode": "n_docs_seguridad_f02_endpoints_expuestos",
-      "toNode": "n_docs_seguridad_pruebas_pgtap",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_fuga_entre_barberias_docs_seguridad_f02_endpoints_expuestos",
-      "fromNode": "n_docs_seguridad_fuga_entre_barberias",
-      "toNode": "n_docs_seguridad_f02_endpoints_expuestos",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_readme_cloudflare_turnstile_docs_seguridad_f02_endpoints_expuestos",
-      "fromNode": "n_readme_cloudflare_turnstile",
-      "toNode": "n_docs_seguridad_f02_endpoints_expuestos",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_docs_seguridad_f02_endpoints_expuestos_readme_tabla_turnos",
-      "fromNode": "n_docs_seguridad_f02_endpoints_expuestos",
-      "toNode": "n_readme_tabla_turnos",
-      "label": "references [INFERRED]"
-    },
-    {
-      "id": "e_docs_plan_implementacion_decisiones_pendientes_docs_seguridad_f05_datos_sensibles",
-      "fromNode": "n_docs_plan_implementacion_decisiones_pendientes",
-      "toNode": "n_docs_seguridad_f05_datos_sensibles",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_documento_docs_seguridad_f05_datos_sensibles",
-      "fromNode": "n_docs_seguridad_documento",
-      "toNode": "n_docs_seguridad_f05_datos_sensibles",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_f05_datos_sensibles_docs_seguridad_ley_datos_honduras",
-      "fromNode": "n_docs_seguridad_f05_datos_sensibles",
-      "toNode": "n_docs_seguridad_ley_datos_honduras",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_f05_datos_sensibles_docs_seguridad_ver_turno",
-      "fromNode": "n_docs_seguridad_f05_datos_sensibles",
-      "toNode": "n_docs_seguridad_ver_turno",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_f05_datos_sensibles_docs_seguridad_vista_fila_publica",
-      "fromNode": "n_docs_seguridad_f05_datos_sensibles",
-      "toNode": "n_docs_seguridad_vista_fila_publica",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_decisiones_adr_004_docs_seguridad_f05_datos_sensibles",
-      "fromNode": "n_docs_decisiones_adr_004",
-      "toNode": "n_docs_seguridad_f05_datos_sensibles",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_docs_plan_implementacion_broadcast_senales_docs_seguridad_f05_datos_sensibles",
-      "fromNode": "n_docs_plan_implementacion_broadcast_senales",
-      "toNode": "n_docs_seguridad_f05_datos_sensibles",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_docs_plan_implementacion_funciones_base_docs_seguridad_f07_permisos_excesivos",
-      "fromNode": "n_docs_plan_implementacion_funciones_base",
-      "toNode": "n_docs_seguridad_f07_permisos_excesivos",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_plan_implementacion_sprint_1_docs_seguridad_f07_permisos_excesivos",
-      "fromNode": "n_docs_plan_implementacion_sprint_1",
-      "toNode": "n_docs_seguridad_f07_permisos_excesivos",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_documento_docs_seguridad_f07_permisos_excesivos",
-      "fromNode": "n_docs_seguridad_documento",
-      "toNode": "n_docs_seguridad_f07_permisos_excesivos",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_f07_permisos_excesivos_docs_decisiones_adr_007",
-      "fromNode": "n_docs_seguridad_f07_permisos_excesivos",
-      "toNode": "n_docs_decisiones_adr_007",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_f07_permisos_excesivos_docs_seguridad_roles_dueno_barbero",
-      "fromNode": "n_docs_seguridad_f07_permisos_excesivos",
-      "toNode": "n_docs_seguridad_roles_dueno_barbero",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_f07_permisos_excesivos_docs_seguridad_vista_fila_publica",
-      "fromNode": "n_docs_seguridad_f07_permisos_excesivos",
-      "toNode": "n_docs_seguridad_vista_fila_publica",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_f07_permisos_excesivos_docs_seguridad_security_definer",
-      "fromNode": "n_docs_seguridad_f07_permisos_excesivos",
-      "toNode": "n_docs_seguridad_security_definer",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_f07_permisos_excesivos_docs_seguridad_pruebas_pgtap",
-      "fromNode": "n_docs_seguridad_f07_permisos_excesivos",
-      "toNode": "n_docs_seguridad_pruebas_pgtap",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_f07_permisos_excesivos_docs_seguridad_unirse_a_fila",
-      "fromNode": "n_docs_seguridad_f07_permisos_excesivos",
-      "toNode": "n_docs_seguridad_unirse_a_fila",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_fuga_entre_barberias_docs_seguridad_f07_permisos_excesivos",
-      "fromNode": "n_docs_seguridad_fuga_entre_barberias",
-      "toNode": "n_docs_seguridad_f07_permisos_excesivos",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_montos_alterados_docs_seguridad_f07_permisos_excesivos",
-      "fromNode": "n_docs_seguridad_montos_alterados",
-      "toNode": "n_docs_seguridad_f07_permisos_excesivos",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_documento_docs_seguridad_f09_rate_limiting",
-      "fromNode": "n_docs_seguridad_documento",
-      "toNode": "n_docs_seguridad_f09_rate_limiting",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_f09_rate_limiting_docs_seguridad_pausa_automatica",
-      "fromNode": "n_docs_seguridad_f09_rate_limiting",
-      "toNode": "n_docs_seguridad_pausa_automatica",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_inundar_fila_docs_seguridad_f09_rate_limiting",
-      "fromNode": "n_docs_seguridad_inundar_fila",
-      "toNode": "n_docs_seguridad_f09_rate_limiting",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_pendientes_piloto_docs_seguridad_f09_rate_limiting",
-      "fromNode": "n_docs_seguridad_pendientes_piloto",
-      "toNode": "n_docs_seguridad_f09_rate_limiting",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_plan_implementacion_sprint_4_docs_seguridad_f09_rate_limiting",
-      "fromNode": "n_docs_plan_implementacion_sprint_4",
-      "toNode": "n_docs_seguridad_f09_rate_limiting",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_docs_seguridad_documento_docs_seguridad_f10_monitoreo",
-      "fromNode": "n_docs_seguridad_documento",
-      "toNode": "n_docs_seguridad_f10_monitoreo",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_f10_monitoreo_docs_seguridad_sentry",
-      "fromNode": "n_docs_seguridad_f10_monitoreo",
-      "toNode": "n_docs_seguridad_sentry",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_f10_monitoreo_docs_seguridad_security_advisor",
-      "fromNode": "n_docs_seguridad_f10_monitoreo",
-      "toNode": "n_docs_seguridad_security_advisor",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_montos_alterados_docs_seguridad_f10_monitoreo",
-      "fromNode": "n_docs_seguridad_montos_alterados",
-      "toNode": "n_docs_seguridad_f10_monitoreo",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_plan_implementacion_sprint_4_docs_seguridad_f10_monitoreo",
-      "fromNode": "n_docs_plan_implementacion_sprint_4",
-      "toNode": "n_docs_seguridad_f10_monitoreo",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_docs_seguridad_f10_monitoreo_docs_seguridad_pausa_automatica",
-      "fromNode": "n_docs_seguridad_f10_monitoreo",
-      "toNode": "n_docs_seguridad_pausa_automatica",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_docs_seguridad_fuga_entre_barberias_docs_seguridad_rls",
-      "fromNode": "n_docs_seguridad_fuga_entre_barberias",
-      "toNode": "n_docs_seguridad_rls",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_pendientes_piloto_docs_seguridad_gitleaks",
-      "fromNode": "n_docs_seguridad_pendientes_piloto",
-      "toNode": "n_docs_seguridad_gitleaks",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_inundar_fila_docs_seguridad_pausa_automatica",
-      "fromNode": "n_docs_seguridad_inundar_fila",
-      "toNode": "n_docs_seguridad_pausa_automatica",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_inundar_fila_readme_cloudflare_turnstile",
-      "fromNode": "n_docs_seguridad_inundar_fila",
-      "toNode": "n_readme_cloudflare_turnstile",
-      "label": "references [INFERRED]"
-    },
-    {
-      "id": "e_docs_seguridad_montos_alterados_docs_investigacion_p3_caja_comisiones",
-      "fromNode": "n_docs_seguridad_montos_alterados",
-      "toNode": "n_docs_investigacion_p3_caja_comisiones",
-      "label": "references [INFERRED]"
-    },
-    {
-      "id": "e_docs_seguridad_nombre_ofensivo_tv_docs_seguridad_f03_input_sin_validar",
-      "fromNode": "n_docs_seguridad_nombre_ofensivo_tv",
-      "toNode": "n_docs_seguridad_f03_input_sin_validar",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_pausa_automatica_readme_pausa_fila_remota",
-      "fromNode": "n_docs_seguridad_pausa_automatica",
-      "toNode": "n_readme_pausa_fila_remota",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_docs_seguridad_pendientes_piloto_docs_seguridad_pruebas_pgtap",
-      "fromNode": "n_docs_seguridad_pendientes_piloto",
-      "toNode": "n_docs_seguridad_pruebas_pgtap",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_pruebas_pgtap_docs_seguridad_rls",
-      "fromNode": "n_docs_seguridad_pruebas_pgtap",
-      "toNode": "n_docs_seguridad_rls",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_decisiones_adr_006_docs_seguridad_pruebas_pgtap",
-      "fromNode": "n_docs_decisiones_adr_006",
-      "toNode": "n_docs_seguridad_pruebas_pgtap",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_docs_decisiones_adr_008_docs_seguridad_pruebas_pgtap",
-      "fromNode": "n_docs_decisiones_adr_008",
-      "toNode": "n_docs_seguridad_pruebas_pgtap",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_readme_desarrollo_local_docs_seguridad_pruebas_pgtap",
-      "fromNode": "n_readme_desarrollo_local",
-      "toNode": "n_docs_seguridad_pruebas_pgtap",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_docs_plan_implementacion_entornos_despliegue_docs_seguridad_pruebas_pgtap",
-      "fromNode": "n_docs_plan_implementacion_entornos_despliegue",
-      "toNode": "n_docs_seguridad_pruebas_pgtap",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_docs_plan_implementacion_herramientas_desarrollo_docs_seguridad_pruebas_pgtap",
-      "fromNode": "n_docs_plan_implementacion_herramientas_desarrollo",
-      "toNode": "n_docs_seguridad_pruebas_pgtap",
-      "label": "references [INFERRED]"
-    },
-    {
-      "id": "e_docs_plan_implementacion_sprint_1_docs_seguridad_pruebas_pgtap",
-      "fromNode": "n_docs_plan_implementacion_sprint_1",
-      "toNode": "n_docs_seguridad_pruebas_pgtap",
-      "label": "references [INFERRED]"
-    },
-    {
-      "id": "e_docs_plan_implementacion_funciones_base_docs_seguridad_rls",
-      "fromNode": "n_docs_plan_implementacion_funciones_base",
-      "toNode": "n_docs_seguridad_rls",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_docs_plan_implementacion_recortes_docs_seguridad_rls",
-      "fromNode": "n_docs_plan_implementacion_recortes",
-      "toNode": "n_docs_seguridad_rls",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_docs_seguridad_rls_readme_supabase",
-      "fromNode": "n_docs_seguridad_rls",
-      "toNode": "n_readme_supabase",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_docs_seguridad_turnos_fantasma_docs_investigacion_p1_inasistencias",
-      "fromNode": "n_docs_seguridad_turnos_fantasma",
-      "toNode": "n_docs_investigacion_p1_inasistencias",
-      "label": "semantically_similar_to [INFERRED]"
-    },
-    {
-      "id": "e_docs_seguridad_unirse_a_fila_readme_tabla_turnos",
-      "fromNode": "n_docs_seguridad_unirse_a_fila",
-      "toNode": "n_readme_tabla_turnos",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_docs_seguridad_vista_fila_publica_readme_modelo_datos",
-      "fromNode": "n_docs_seguridad_vista_fila_publica",
-      "toNode": "n_readme_modelo_datos",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_readme_arquitectura_readme_cloudflare_turnstile",
-      "fromNode": "n_readme_arquitectura",
-      "toNode": "n_readme_cloudflare_turnstile",
-      "label": "conceptually_related_to [EXTRACTED]"
-    },
-    {
-      "id": "e_readme_variables_entorno_readme_cloudflare_turnstile",
-      "fromNode": "n_readme_variables_entorno",
-      "toNode": "n_readme_cloudflare_turnstile",
-      "label": "shares_data_with [INFERRED]"
-    },
-    {
-      "id": "e_readme_documento_readme_estados_turno",
-      "fromNode": "n_readme_documento",
-      "toNode": "n_readme_estados_turno",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_readme_tasa_abandono_readme_estados_turno",
-      "fromNode": "n_readme_tasa_abandono",
-      "toNode": "n_readme_estados_turno",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_readme_tabla_turnos_readme_estados_turno",
-      "fromNode": "n_readme_tabla_turnos",
-      "toNode": "n_readme_estados_turno",
-      "label": "shares_data_with [INFERRED]"
-    },
-    {
-      "id": "e_readme_modelo_datos_readme_tabla_turnos",
-      "fromNode": "n_readme_modelo_datos",
-      "toNode": "n_readme_tabla_turnos",
-      "label": "conceptually_related_to [EXTRACTED]"
-    },
-    {
-      "id": "e_readme_documento_readme_modelo_datos",
-      "fromNode": "n_readme_documento",
-      "toNode": "n_readme_modelo_datos",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_readme_pausa_fila_remota_readme_modelo_datos",
-      "fromNode": "n_readme_pausa_fila_remota",
-      "toNode": "n_readme_modelo_datos",
-      "label": "shares_data_with [INFERRED]"
-    },
-    {
-      "id": "e_docs_bitacora_sin_docker_prueba_riesgo_1_docs_bitacora_clave_anon_heredada",
-      "fromNode": "n_docs_bitacora_sin_docker_prueba_riesgo_1",
-      "toNode": "n_docs_bitacora_clave_anon_heredada",
-      "label": "conceptually_related_to [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_bitacora_documento_docs_bitacora_sin_docker_prueba_riesgo_1",
-      "fromNode": "n_docs_bitacora_documento",
-      "toNode": "n_docs_bitacora_sin_docker_prueba_riesgo_1",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_bitacora_sin_docker_prueba_riesgo_1_readme_supabase",
-      "fromNode": "n_docs_bitacora_sin_docker_prueba_riesgo_1",
-      "toNode": "n_readme_supabase",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_docs_bitacora_sin_docker_prueba_riesgo_1_docs_bitacora_sprint_0_base_proyecto",
-      "fromNode": "n_docs_bitacora_sin_docker_prueba_riesgo_1",
-      "toNode": "n_docs_bitacora_sprint_0_base_proyecto",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_docs_bitacora_sin_docker_prueba_riesgo_1_readme_desarrollo_local",
-      "fromNode": "n_docs_bitacora_sin_docker_prueba_riesgo_1",
-      "toNode": "n_readme_desarrollo_local",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_docs_decisiones_adr_007_docs_bitacora_sin_docker_prueba_riesgo_1",
-      "fromNode": "n_docs_decisiones_adr_007",
-      "toNode": "n_docs_bitacora_sin_docker_prueba_riesgo_1",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_docs_decisiones_adr_008_docs_bitacora_sin_docker_prueba_riesgo_1",
-      "fromNode": "n_docs_decisiones_adr_008",
-      "toNode": "n_docs_bitacora_sin_docker_prueba_riesgo_1",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_docs_bitacora_sin_docker_prueba_riesgo_1_docs_plan_implementacion_proyecto_pruebas",
-      "fromNode": "n_docs_bitacora_sin_docker_prueba_riesgo_1",
-      "toNode": "n_docs_plan_implementacion_proyecto_pruebas",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_docs_plan_implementacion_documento_docs_plan_implementacion_sprint_1",
-      "fromNode": "n_docs_plan_implementacion_documento",
-      "toNode": "n_docs_plan_implementacion_sprint_1",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_plan_implementacion_sprint_1_readme_documento",
-      "fromNode": "n_docs_plan_implementacion_sprint_1",
-      "toNode": "n_readme_documento",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_plan_implementacion_sprint_1_docs_plan_implementacion_funciones_base",
-      "fromNode": "n_docs_plan_implementacion_sprint_1",
-      "toNode": "n_docs_plan_implementacion_funciones_base",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_plan_implementacion_sprint_1_docs_seguridad_f08_manejo_errores",
-      "fromNode": "n_docs_plan_implementacion_sprint_1",
-      "toNode": "n_docs_seguridad_f08_manejo_errores",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_plan_implementacion_sprint_1_docs_plan_implementacion_broadcast_senales",
-      "fromNode": "n_docs_plan_implementacion_sprint_1",
-      "toNode": "n_docs_plan_implementacion_broadcast_senales",
-      "label": "conceptually_related_to [INFERRED]"
-    },
-    {
-      "id": "e_docs_seguridad_documento_docs_seguridad_pendientes_piloto",
-      "fromNode": "n_docs_seguridad_documento",
-      "toNode": "n_docs_seguridad_pendientes_piloto",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_seguridad_pendientes_piloto_docs_decisiones_adr_005",
-      "fromNode": "n_docs_seguridad_pendientes_piloto",
-      "toNode": "n_docs_decisiones_adr_005",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_decisiones_documento_docs_decisiones_adr_004",
-      "fromNode": "n_docs_decisiones_documento",
-      "toNode": "n_docs_decisiones_adr_004",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_bitacora_entrada_2026_10_26_docs_decisiones_adr_007",
-      "fromNode": "n_docs_bitacora_entrada_2026_10_26",
-      "toNode": "n_docs_decisiones_adr_007",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_decisiones_adr_007_docs_seguridad_documento",
-      "fromNode": "n_docs_decisiones_adr_007",
-      "toNode": "n_docs_seguridad_documento",
-      "label": "references [EXTRACTED]"
-    },
-    {
-      "id": "e_docs_decisiones_documento_docs_decisiones_adr_007",
-      "fromNode": "n_docs_decisiones_documento",
-      "toNode": "n_docs_decisiones_adr_007",
-      "label": "references [EXTRACTED]"
     }
   ]
 }

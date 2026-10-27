@@ -1,12 +1,12 @@
 ---
 source_file: "docs/seguridad.md"
 type: "concept"
-community: "Panel del barbero y errores"
+community: "Antiabuso, errores y lanzamiento"
 location: "L98"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Panel_del_barbero_y_errores
+  - community/Antiabuso_errores_y_lanzamiento
 ---
 
 # Sentry
@@ -15,4 +15,4 @@ tags:
 - [[Fallo 10 · Monitoreo, logs y alertas]] - `references` [EXTRACTED]
 - [[Fallo 8 · Manejo de errores]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Panel_del_barbero_y_errores
+#graphify/concept #graphify/EXTRACTED #community/Antiabuso_errores_y_lanzamiento

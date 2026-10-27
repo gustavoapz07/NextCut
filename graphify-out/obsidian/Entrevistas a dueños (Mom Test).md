@@ -12,6 +12,7 @@ tags:
 # Entrevistas a dueños (Mom Test)
 
 ## Connections
+- [[ADR-009 · Nombre del producto NextCut]] - `conceptually_related_to` [INFERRED]
 - [[Criterios seguir  ajustar  detener]] - `references` [EXTRACTED]
 - [[Fórmula de pérdida mensual]] - `references` [EXTRACTED]
 - [[P1 Inasistencias (no-shows)]] - `references` [INFERRED]

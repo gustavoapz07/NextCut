@@ -13,8 +13,7 @@ tags:
 
 ## Connections
 - [[ADR-006 · Herramientas de desarrollo y pruebas]] - `references` [EXTRACTED]
-- [[Biome (lint y formato)]] - `rationale_for` [EXTRACTED]
 - [[ESLint + Prettier (alternativa descartada)]] - `conceptually_related_to` [EXTRACTED]
-- [[TypeScript 7 (compilador nativo)]] - `conceptually_related_to` [INFERRED]
+- [[TypeScript 7 (compilador nativo)]] - `semantically_similar_to` [INFERRED]
 
 #graphify/concept #graphify/EXTRACTED #community/Herramientas_y_entorno_de_desarrollo

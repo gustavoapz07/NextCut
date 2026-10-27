@@ -12,6 +12,6 @@ tags:
 # Docker local (alternativa descartada)
 
 ## Connections
-- [[ADR-008 · Desarrollo contra Supabase en la nube, sin Docker local]] - `references` [EXTRACTED]
+- [[ADR-008 · Desarrollo contra Supabase en la nube, sin Docker local]] - `conceptually_related_to` [EXTRACTED]
 
 #graphify/concept #graphify/EXTRACTED #community/Herramientas_y_entorno_de_desarrollo

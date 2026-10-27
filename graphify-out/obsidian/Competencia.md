@@ -11,10 +11,13 @@ tags:
 # Competencia
 
 ## Connections
+- [[ADR-001 · Problema fila física incierta]] - `conceptually_related_to` [INFERRED]
 - [[AgendaPro]] - `references` [EXTRACTED]
 - [[Booksy]] - `references` [EXTRACTED]
 - [[Fresha]] - `references` [EXTRACTED]
 - [[Investigación]] - `references` [EXTRACTED]
+- [[Modelo de negocio (hipótesis)]] - `references` [INFERRED]
+- [[Posibles usos previos de NextCut en el sector]] - `conceptually_related_to` [INFERRED]
 - [[Squire]] - `references` [EXTRACTED]
 - [[Waitwhile]] - `references` [EXTRACTED]
 

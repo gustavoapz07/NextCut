@@ -1,19 +1,20 @@
 ---
 source_file: "docs/plan-implementacion.md"
-type: "document"
-community: "Documentación, decisiones y piloto"
+type: "concept"
+community: "Bitácora, decisiones y nombre"
 location: "L286"
 tags:
-  - graphify/document
+  - graphify/concept
   - graphify/EXTRACTED
-  - community/Documentación_decisiones_y_piloto
+  - community/Bitácora_decisiones_y_nombre
 ---
 
 # Piloto (2 sábados en 1 barbería)
 
 ## Connections
+- [[Bitácora de cambios]] - `references` [EXTRACTED]
+- [[Calendario de 8 semanas]] - `references` [EXTRACTED]
 - [[Hoja de observación de sábado]] - `references` [EXTRACTED]
-- [[Plan de implementación]] - `references` [EXTRACTED]
-- [[README de Siguiente]] - `references` [EXTRACTED]
+- [[NextCut (producto)]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Documentación_decisiones_y_piloto
+#graphify/concept #graphify/EXTRACTED #community/Bitácora_decisiones_y_nombre

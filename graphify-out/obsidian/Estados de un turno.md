@@ -2,7 +2,7 @@
 source_file: "README.md"
 type: "concept"
 community: "Base de datos, seguridad y tiempo real"
-location: "L86"
+location: "L86-L101"
 tags:
   - graphify/concept
   - graphify/INFERRED
@@ -12,8 +12,8 @@ tags:
 # Estados de un turno
 
 ## Connections
-- [[README de Siguiente]] - `references` [EXTRACTED]
+- [[README de NextCut]] - `references` [EXTRACTED]
 - [[Tabla turnos (codigo_publico aleatorio)]] - `shares_data_with` [INFERRED]
-- [[Tasa de abandono]] - `conceptually_related_to` [INFERRED]
+- [[Tasa de abandono]] - `shares_data_with` [INFERRED]
 
 #graphify/concept #graphify/INFERRED #community/Base_de_datos_seguridad_y_tiempo_real

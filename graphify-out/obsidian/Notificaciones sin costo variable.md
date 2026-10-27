@@ -1,23 +1,21 @@
 ---
 source_file: "README.md"
 type: "rationale"
-community: "Documentación, decisiones y piloto"
-location: "L119"
+community: "Avisos, arquitectura y sprints"
+location: "L119-L127"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Documentación_decisiones_y_piloto
+  - community/Avisos_arquitectura_y_sprints
 ---
 
 # Notificaciones sin costo variable
 
 ## Connections
-- [[ADR-003 · Notificaciones sin API de WhatsApp]] - `references` [EXTRACTED]
-- [[Alcance del MVP (v0.1)]] - `conceptually_related_to` [INFERRED]
-- [[Botón wa.me]] - `conceptually_related_to` [EXTRACTED]
-- [[Investigación]] - `references` [EXTRACTED]
-- [[Modelo de negocio (hipótesis)]] - `conceptually_related_to` [INFERRED]
-- [[README de Siguiente]] - `references` [EXTRACTED]
-- [[Web Push (PWA)]] - `conceptually_related_to` [EXTRACTED]
+- [[ADR-003 · Notificaciones sin API de WhatsApp]] - `cites` [EXTRACTED]
+- [[Alcance del MVP (v0.1)]] - `references` [EXTRACTED]
+- [[Botón wa.me]] - `references` [EXTRACTED]
+- [[Investigación]] - `cites` [EXTRACTED]
+- [[Web Push (PWA)]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Documentación_decisiones_y_piloto
+#graphify/rationale #graphify/EXTRACTED #community/Avisos_arquitectura_y_sprints

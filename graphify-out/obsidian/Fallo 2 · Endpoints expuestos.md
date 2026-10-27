@@ -17,6 +17,7 @@ tags:
 - [[Adivinar códigos de turno]] - `references` [EXTRACTED]
 - [[Canal público filabarberia_id (señal vacía)]] - `references` [INFERRED]
 - [[Cloudflare Turnstile]] - `conceptually_related_to` [INFERRED]
+- [[Edge Function unirse-a-fila]] - `conceptually_related_to` [INFERRED]
 - [[Fuga de datos entre barberías]] - `references` [EXTRACTED]
 - [[Función unirse_a_fila]] - `references` [EXTRACTED]
 - [[Pruebas pgTAP]] - `references` [EXTRACTED]

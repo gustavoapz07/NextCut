@@ -1,26 +1,26 @@
 ---
 source_file: "README.md"
 type: "concept"
-community: "Stack, arquitectura y sprints"
-location: "L146"
+community: "Base de datos, seguridad y tiempo real"
+location: "L146-L188"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Stack_arquitectura_y_sprints
+  - community/Base_de_datos_seguridad_y_tiempo_real
 ---
 
 # Arquitectura
 
 ## Connections
+- [[ADR-002 · Stack Supabase + Cloudflare Pages]] - `cites` [EXTRACTED]
+- [[ADR-007 · Anotarse por Edge Function y tiempo real solo con señales]] - `implements` [INFERRED]
 - [[Arquitectura detallada]] - `conceptually_related_to` [INFERRED]
 - [[Canal público filabarberia_id (señal vacía)]] - `conceptually_related_to` [INFERRED]
-- [[Cloudflare Turnstile]] - `conceptually_related_to` [EXTRACTED]
-- [[Cloudflare Workers (hosting estático)]] - `conceptually_related_to` [EXTRACTED]
-- [[Plan de implementación]] - `references` [EXTRACTED]
-- [[README de Siguiente]] - `references` [EXTRACTED]
-- [[Sentry (errores sin datos personales)]] - `conceptually_related_to` [EXTRACTED]
-- [[Stack v0.1 con versiones]] - `conceptually_related_to` [INFERRED]
-- [[Supabase (Postgres, Auth, Realtime, Edge Functions)]] - `conceptually_related_to` [EXTRACTED]
-- [[Web Push (PWA)]] - `conceptually_related_to` [EXTRACTED]
+- [[Cloudflare Turnstile]] - `references` [EXTRACTED]
+- [[Cloudflare Workers (hosting estático)]] - `references` [EXTRACTED]
+- [[README de NextCut]] - `references` [EXTRACTED]
+- [[Sentry (errores sin datos personales)]] - `references` [EXTRACTED]
+- [[Stack v0.1 con versiones]] - `references` [INFERRED]
+- [[Supabase (Postgres, Auth, Realtime, Edge Functions)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Stack_arquitectura_y_sprints
+#graphify/concept #graphify/EXTRACTED #community/Base_de_datos_seguridad_y_tiempo_real

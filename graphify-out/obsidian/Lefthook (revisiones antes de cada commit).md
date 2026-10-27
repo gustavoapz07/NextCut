@@ -5,7 +5,7 @@ community: "Herramientas y entorno de desarrollo"
 location: "L58"
 tags:
   - graphify/concept
-  - graphify/INFERRED
+  - graphify/EXTRACTED
   - community/Herramientas_y_entorno_de_desarrollo
 ---
 
@@ -13,7 +13,6 @@ tags:
 
 ## Connections
 - [[ADR-006 · Herramientas de desarrollo y pruebas]] - `references` [EXTRACTED]
-- [[Husky (alternativa descartada)]] - `semantically_similar_to` [INFERRED]
-- [[Lefthook (hooks de git)]] - `conceptually_related_to` [INFERRED]
+- [[Lefthook (hooks de git)]] - `semantically_similar_to` [INFERRED]
 
-#graphify/concept #graphify/INFERRED #community/Herramientas_y_entorno_de_desarrollo
+#graphify/concept #graphify/EXTRACTED #community/Herramientas_y_entorno_de_desarrollo

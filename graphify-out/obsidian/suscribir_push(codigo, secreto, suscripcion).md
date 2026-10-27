@@ -14,7 +14,7 @@ tags:
 ## Connections
 - [[ADR-007 · Anotarse por Edge Function y tiempo real solo con señales]] - `references` [EXTRACTED]
 - [[Fallo 2 · Endpoints expuestos]] - `references` [EXTRACTED]
-- [[Funciones de la base (security definer)]] - `conceptually_related_to` [INFERRED]
-- [[Web Push (PWA)]] - `conceptually_related_to` [INFERRED]
+- [[Funciones de la base (security definer)]] - `references` [INFERRED]
+- [[Web Push (PWA)]] - `references` [INFERRED]
 
 #graphify/concept #graphify/EXTRACTED #community/Base_de_datos_seguridad_y_tiempo_real

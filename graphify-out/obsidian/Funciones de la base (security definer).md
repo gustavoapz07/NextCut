@@ -1,10 +1,10 @@
 ---
 source_file: "docs/plan-implementacion.md"
-type: "rationale"
+type: "concept"
 community: "Base de datos, seguridad y tiempo real"
 location: "L198"
 tags:
-  - graphify/rationale
+  - graphify/concept
   - graphify/EXTRACTED
   - community/Base_de_datos_seguridad_y_tiempo_real
 ---
@@ -12,12 +12,12 @@ tags:
 # Funciones de la base (security definer)
 
 ## Connections
-- [[Edge Function unirse-a-fila]] - `conceptually_related_to` [INFERRED]
+- [[Edge Function unirse-a-fila]] - `references` [EXTRACTED]
 - [[Fallo 7 · Permisos excesivos]] - `references` [EXTRACTED]
 - [[Plan de implementación]] - `references` [EXTRACTED]
 - [[Row Level Security (RLS)]] - `conceptually_related_to` [INFERRED]
 - [[Sprint 1 · Base de datos y seguridad]] - `references` [EXTRACTED]
 - [[pg_cron + pg_net]] - `references` [EXTRACTED]
-- [[suscribir_push(codigo, secreto, suscripcion)]] - `conceptually_related_to` [INFERRED]
+- [[suscribir_push(codigo, secreto, suscripcion)]] - `references` [INFERRED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Base_de_datos_seguridad_y_tiempo_real
+#graphify/concept #graphify/EXTRACTED #community/Base_de_datos_seguridad_y_tiempo_real

@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plan-implementacion.md"
 type: "concept"
-community: "Stack, arquitectura y sprints"
-location: "L113"
+community: "Avisos, arquitectura y sprints"
+location: "L154"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Stack_arquitectura_y_sprints
+  - community/Avisos_arquitectura_y_sprints
 ---
 
 # Edge Function avisos
@@ -14,9 +14,9 @@ tags:
 ## Connections
 - [[Arquitectura detallada]] - `references` [EXTRACTED]
 - [[Fallo 6 · Sin límite de tokens]] - `references` [EXTRACTED]
-- [[Módulo eta.ts compartido]] - `shares_data_with` [EXTRACTED]
+- [[Módulo eta.ts compartido]] - `references` [EXTRACTED]
 - [[Sprint 3 · Barbero, TV y avisos]] - `references` [EXTRACTED]
-- [[Web Push (PWA)]] - `conceptually_related_to` [INFERRED]
-- [[pg_cron + pg_net]] - `conceptually_related_to` [EXTRACTED]
+- [[Web Push (PWA)]] - `references` [INFERRED]
+- [[pg_cron + pg_net]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Stack_arquitectura_y_sprints
+#graphify/concept #graphify/EXTRACTED #community/Avisos_arquitectura_y_sprints

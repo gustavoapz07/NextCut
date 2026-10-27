@@ -1,20 +1,19 @@
 ---
 source_file: "docs/plan-implementacion.md"
 type: "rationale"
-community: "Stack, arquitectura y sprints"
+community: "Stack, hosting y costos"
 location: "L60"
 tags:
   - graphify/rationale
-  - graphify/EXTRACTED
-  - community/Stack_arquitectura_y_sprints
+  - graphify/INFERRED
+  - community/Stack_hosting_y_costos
 ---
 
 # Workers en lugar de Pages
 
 ## Connections
-- [[ADR-005 · Hosting en Cloudflare Workers]] - `references` [EXTRACTED]
+- [[ADR-005 · Hosting en Cloudflare Workers]] - `references` [INFERRED]
 - [[Cloudflare Workers (hosting estático)]] - `conceptually_related_to` [INFERRED]
-- [[Integración y despliegue (local, vista previa, producción)]] - `conceptually_related_to` [INFERRED]
 - [[Stack v0.1 con versiones]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Stack_arquitectura_y_sprints
+#graphify/rationale #graphify/INFERRED #community/Stack_hosting_y_costos

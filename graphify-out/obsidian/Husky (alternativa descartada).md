@@ -5,15 +5,14 @@ community: "Herramientas y entorno de desarrollo"
 location: "L59"
 tags:
   - graphify/concept
-  - graphify/INFERRED
+  - graphify/EXTRACTED
   - community/Herramientas_y_entorno_de_desarrollo
 ---
 
 # Husky (alternativa descartada)
 
 ## Connections
-- [[ADR-006 · Herramientas de desarrollo y pruebas]] - `references` [EXTRACTED]
-- [[Lefthook (revisiones antes de cada commit)]] - `semantically_similar_to` [INFERRED]
-- [[graphify (grafo de conocimiento)]] - `conceptually_related_to` [INFERRED]
+- [[ADR-006 · Herramientas de desarrollo y pruebas]] - `conceptually_related_to` [EXTRACTED]
+- [[graphify (grafo de conocimiento)]] - `conceptually_related_to` [EXTRACTED]
 
-#graphify/concept #graphify/INFERRED #community/Herramientas_y_entorno_de_desarrollo
+#graphify/concept #graphify/EXTRACTED #community/Herramientas_y_entorno_de_desarrollo

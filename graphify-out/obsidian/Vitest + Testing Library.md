@@ -1,20 +1,19 @@
 ---
 source_file: "docs/plan-implementacion.md"
 type: "concept"
-community: "Herramientas y entorno de desarrollo"
+community: "Avisos, arquitectura y sprints"
 location: "L70"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Herramientas_y_entorno_de_desarrollo
+  - community/Avisos_arquitectura_y_sprints
 ---
 
 # Vitest + Testing Library
 
 ## Connections
-- [[2026-10-26 · Sprint 0 base del proyecto]] - `conceptually_related_to` [INFERRED]
+- [[Esquemas zod compartidos (react-hook-form + zod)]] - `references` [EXTRACTED]
 - [[Herramientas de desarrollo]] - `references` [EXTRACTED]
 - [[Módulo eta.ts compartido]] - `references` [EXTRACTED]
-- [[Sprint 0 · Entorno y pruebas de riesgo]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Herramientas_y_entorno_de_desarrollo
+#graphify/concept #graphify/EXTRACTED #community/Avisos_arquitectura_y_sprints

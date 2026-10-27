@@ -1,18 +1,18 @@
 ---
 source_file: "README.md"
 type: "concept"
-community: "Panel del barbero y errores"
+community: "Avisos, arquitectura y sprints"
 location: "L125"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Panel_del_barbero_y_errores
+  - community/Avisos_arquitectura_y_sprints
 ---
 
 # Botón wa.me
 
 ## Connections
-- [[Notificaciones sin costo variable]] - `conceptually_related_to` [EXTRACTED]
-- [[Panel del barbero]] - `conceptually_related_to` [EXTRACTED]
+- [[Notificaciones sin costo variable]] - `references` [EXTRACTED]
+- [[Panel del barbero]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Panel_del_barbero_y_errores
+#graphify/concept #graphify/EXTRACTED #community/Avisos_arquitectura_y_sprints

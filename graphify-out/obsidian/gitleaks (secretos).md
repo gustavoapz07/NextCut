@@ -12,6 +12,8 @@ tags:
 # gitleaks (secretos)
 
 ## Connections
+- [[2026-10-26 · Sprint 0 base del proyecto]] - `implements` [INFERRED]
+- [[Arreglo del CI gitleaks en historia nueva (escaneo manual y semanal)]] - `references` [INFERRED]
 - [[Fallo 1 · API keys en el código]] - `references` [EXTRACTED]
 - [[Herramientas de desarrollo]] - `references` [EXTRACTED]
 - [[Lefthook (hooks de git)]] - `references` [EXTRACTED]

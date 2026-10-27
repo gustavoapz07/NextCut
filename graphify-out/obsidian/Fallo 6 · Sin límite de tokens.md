@@ -1,12 +1,12 @@
 ---
 source_file: "docs/seguridad.md"
 type: "concept"
-community: "Documentación, decisiones y piloto"
+community: "Avisos, arquitectura y sprints"
 location: "L79"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Documentación_decisiones_y_piloto
+  - community/Avisos_arquitectura_y_sprints
 ---
 
 # Fallo 6 · Sin límite de tokens
@@ -18,4 +18,4 @@ tags:
 - [[Edge Function avisos]] - `references` [EXTRACTED]
 - [[Seguridad]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Documentación_decisiones_y_piloto
+#graphify/concept #graphify/EXTRACTED #community/Avisos_arquitectura_y_sprints

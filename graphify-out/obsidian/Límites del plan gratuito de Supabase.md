@@ -1,18 +1,17 @@
 ---
 source_file: "README.md"
 type: "concept"
-community: "Panel del barbero y errores"
+community: "Stack, hosting y costos"
 location: "L186"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Panel_del_barbero_y_errores
+  - community/Stack_hosting_y_costos
 ---
 
 # Límites del plan gratuito de Supabase
 
 ## Connections
-- [[Panel del barbero]] - `conceptually_related_to` [EXTRACTED]
-- [[Supabase (Postgres, Auth, Realtime, Edge Functions)]] - `conceptually_related_to` [EXTRACTED]
+- [[Supabase (Postgres, Auth, Realtime, Edge Functions)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Panel_del_barbero_y_errores
+#graphify/concept #graphify/EXTRACTED #community/Stack_hosting_y_costos

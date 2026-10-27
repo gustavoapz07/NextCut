@@ -1,22 +1,21 @@
 ---
 source_file: "README.md"
 type: "concept"
-community: "Panel del barbero y errores"
-location: "L53"
+community: "Antiabuso, errores y lanzamiento"
+location: "L53-L57"
 tags:
   - graphify/concept
-  - graphify/EXTRACTED
-  - community/Panel_del_barbero_y_errores
+  - graphify/INFERRED
+  - community/Antiabuso_errores_y_lanzamiento
 ---
 
 # Panel del barbero
 
 ## Connections
-- [[Botón wa.me]] - `conceptually_related_to` [EXTRACTED]
-- [[Cálculo del tiempo estimado]] - `conceptually_related_to` [EXTRACTED]
+- [[Alcance del MVP (v0.1)]] - `references` [EXTRACTED]
+- [[Botón wa.me]] - `references` [EXTRACTED]
 - [[Fallo 8 · Manejo de errores]] - `conceptually_related_to` [INFERRED]
-- [[Límites del plan gratuito de Supabase]] - `conceptually_related_to` [EXTRACTED]
 - [[Roles dueno y barbero]] - `conceptually_related_to` [INFERRED]
-- [[Siguiente (producto)]] - `conceptually_related_to` [EXTRACTED]
+- [[Tabla turnos (codigo_publico aleatorio)]] - `shares_data_with` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Panel_del_barbero_y_errores
+#graphify/concept #graphify/INFERRED #community/Antiabuso_errores_y_lanzamiento

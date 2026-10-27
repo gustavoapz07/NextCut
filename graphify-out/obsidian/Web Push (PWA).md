@@ -1,25 +1,23 @@
 ---
 source_file: "README.md"
 type: "concept"
-community: "Stack, arquitectura y sprints"
+community: "Avisos, arquitectura y sprints"
 location: "L124"
 tags:
   - graphify/concept
   - graphify/INFERRED
-  - community/Stack_arquitectura_y_sprints
+  - community/Avisos_arquitectura_y_sprints
 ---
 
 # Web Push (PWA)
 
 ## Connections
-- [[ADR-003 · Notificaciones sin API de WhatsApp]] - `conceptually_related_to` [INFERRED]
-- [[Arquitectura]] - `conceptually_related_to` [EXTRACTED]
-- [[Edge Function avisos]] - `conceptually_related_to` [INFERRED]
-- [[Notificaciones sin costo variable]] - `conceptually_related_to` [EXTRACTED]
+- [[ADR-003 · Notificaciones sin API de WhatsApp]] - `references` [INFERRED]
+- [[Edge Function avisos]] - `references` [INFERRED]
+- [[Notificaciones sin costo variable]] - `references` [EXTRACTED]
+- [[Prueba de riesgo 2 · Web Push]] - `references` [INFERRED]
 - [[Pruebas de riesgo del Sprint 0 (Broadcast público, Web Push, Turnstile con IP)]] - `conceptually_related_to` [INFERRED]
-- [[Riesgos técnicos]] - `conceptually_related_to` [INFERRED]
-- [[Sprint 3 · Barbero, TV y avisos]] - `conceptually_related_to` [INFERRED]
-- [[Variables de entorno (.env.local)]] - `shares_data_with` [INFERRED]
-- [[suscribir_push(codigo, secreto, suscripcion)]] - `conceptually_related_to` [INFERRED]
+- [[Sprint 3 · Barbero, TV y avisos]] - `references` [INFERRED]
+- [[suscribir_push(codigo, secreto, suscripcion)]] - `references` [INFERRED]
 
-#graphify/concept #graphify/INFERRED #community/Stack_arquitectura_y_sprints
+#graphify/concept #graphify/INFERRED #community/Avisos_arquitectura_y_sprints

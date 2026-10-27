@@ -1,18 +1,19 @@
 ---
 source_file: "README.md"
 type: "concept"
-community: "Documentación, decisiones y piloto"
-location: "L278"
+community: "Bitácora, decisiones y nombre"
+location: "L278-L283"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Documentación_decisiones_y_piloto
+  - community/Bitácora_decisiones_y_nombre
 ---
 
 # Modelo de negocio (hipótesis)
 
 ## Connections
-- [[Notificaciones sin costo variable]] - `conceptually_related_to` [INFERRED]
-- [[README de Siguiente]] - `references` [EXTRACTED]
+- [[Competencia]] - `references` [INFERRED]
+- [[NextCut (producto)]] - `references` [EXTRACTED]
+- [[README de NextCut]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Documentación_decisiones_y_piloto
+#graphify/concept #graphify/EXTRACTED #community/Bitácora_decisiones_y_nombre

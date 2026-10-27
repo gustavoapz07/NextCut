@@ -13,6 +13,7 @@ tags:
 
 ## Connections
 - [[ADR-008 · Desarrollo contra Supabase en la nube, sin Docker local]] - `references` [EXTRACTED]
-- [[Proyecto siguiente-pruebas (Supabase en la nube)]] - `conceptually_related_to` [INFERRED]
+- [[ADR-009 · Nombre del producto NextCut]] - `references` [EXTRACTED]
+- [[Proyecto siguiente-pruebas (Supabase en la nube)]] - `semantically_similar_to` [INFERRED]
 
 #graphify/concept #graphify/EXTRACTED #community/Herramientas_y_entorno_de_desarrollo

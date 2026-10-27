@@ -1,12 +1,12 @@
 ---
 source_file: "docs/seguridad.md"
 type: "document"
-community: "Base de datos, seguridad y tiempo real"
+community: "Antiabuso, errores y lanzamiento"
 location: "L125"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Base_de_datos_seguridad_y_tiempo_real
+  - community/Antiabuso_errores_y_lanzamiento
 ---
 
 # Pendientes antes del piloto
@@ -19,4 +19,4 @@ tags:
 - [[Seguridad]] - `references` [EXTRACTED]
 - [[gitleaks]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Base_de_datos_seguridad_y_tiempo_real
+#graphify/document #graphify/EXTRACTED #community/Antiabuso_errores_y_lanzamiento

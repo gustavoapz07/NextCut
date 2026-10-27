@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plan-implementacion.md"
 type: "concept"
-community: "Documentación, decisiones y piloto"
+community: "Antiabuso, errores y lanzamiento"
 location: "L88"
 tags:
   - graphify/concept
   - graphify/INFERRED
-  - community/Documentación_decisiones_y_piloto
+  - community/Antiabuso_errores_y_lanzamiento
 ---
 
 # Supabase MCP
@@ -16,4 +16,4 @@ tags:
 - [[Proyecto siguiente-pruebas (Supabase en la nube)]] - `conceptually_related_to` [INFERRED]
 - [[Sprint 4 · Dueño, antiabuso y lanzamiento]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/INFERRED #community/Documentación_decisiones_y_piloto
+#graphify/concept #graphify/INFERRED #community/Antiabuso_errores_y_lanzamiento

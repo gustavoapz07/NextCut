@@ -1,17 +1,18 @@
 ---
 type: community
-cohesion: 0.10
-members: 38
+cohesion: 0.09
+members: 39
 ---
 
 # Problema, evidencia y mercado
 
-**Cohesion:** 0.10 - loosely connected
-**Members:** 38 nodes
+**Cohesion:** 0.09 - loosely connected
+**Members:** 39 nodes
 
 ## Members
 - [[ADR-001 · Problema fila física incierta]] - rationale - docs/decisiones.md
 - [[AgendaPro]] - concept - docs/investigacion.md
+- [[Alcance del MVP (v0.1)]] - concept - README.md
 - [[Análisis de sensibilidad]] - rationale - docs/investigacion.md
 - [[Booksy]] - concept - docs/investigacion.md
 - [[Cochrane 2013 · recordatorios por SMS]] - paper - docs/investigacion.md
@@ -27,6 +28,7 @@ members: 38
 - [[Fresha]] - concept - docs/investigacion.md
 - [[Fórmula de pérdida mensual]] - concept - docs/validacion-campo.md
 - [[Hoja de observación de sábado]] - concept - docs/validacion-campo.md
+- [[Hoja de ruta v0.1–v0.3]] - concept - README.md
 - [[Investigación]] - document - docs/investigacion.md
 - [[Lo que no sabemos]] - concept - docs/investigacion.md
 - [[Lu et al. 2013 · efecto de las filas en las compras]] - paper - docs/investigacion.md
@@ -44,7 +46,6 @@ members: 38
 - [[Reporte del día para el dueño]] - concept - README.md
 - [[Squire]] - concept - docs/investigacion.md
 - [[Tasa de abandono]] - concept - README.md
-- [[Validación de campo]] - document - docs/validacion-campo.md
 - [[Waitwhile]] - concept - docs/investigacion.md
 - [[Zenoti Benchmark 2026]] - document - docs/investigacion.md
 - [[Zenoti encuesta a clientes 2025]] - document - docs/investigacion.md
@@ -57,14 +58,14 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 20 edges to [[_COMMUNITY_Documentación, decisiones y piloto]]
+- 22 edges to [[_COMMUNITY_Bitácora, decisiones y nombre]]
+- 5 edges to [[_COMMUNITY_Avisos, arquitectura y sprints]]
 - 3 edges to [[_COMMUNITY_Base de datos, seguridad y tiempo real]]
-- 3 edges to [[_COMMUNITY_Panel del barbero y errores]]
-- 2 edges to [[_COMMUNITY_Herramientas y entorno de desarrollo]]
+- 1 edge to [[_COMMUNITY_Antiabuso, errores y lanzamiento]]
 
 ## Top bridge nodes
-- [[Validación de campo]] - degree 15, connects to 2 communities
+- [[Alcance del MVP (v0.1)]] - degree 6, connects to 3 communities
+- [[Investigación]] - degree 17, connects to 2 communities
 - [[P1 Inasistencias (no-shows)]] - degree 8, connects to 2 communities
-- [[Tasa de abandono]] - degree 6, connects to 2 communities
-- [[Fila virtual híbrida]] - degree 4, connects to 2 communities
-- [[Cálculo del tiempo estimado]] - degree 4, connects to 2 communities
+- [[Tasa de abandono]] - degree 7, connects to 2 communities
+- [[Entrevistas a dueños (Mom Test)]] - degree 10, connects to 1 community

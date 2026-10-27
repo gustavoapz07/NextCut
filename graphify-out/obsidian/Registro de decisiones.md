@@ -1,12 +1,12 @@
 ---
 source_file: "docs/decisiones.md"
 type: "document"
-community: "Documentación, decisiones y piloto"
+community: "Bitácora, decisiones y nombre"
 location: "L1"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Documentación_decisiones_y_piloto
+  - community/Bitácora_decisiones_y_nombre
 ---
 
 # Registro de decisiones
@@ -22,11 +22,13 @@ tags:
 - [[ADR-006 · Herramientas de desarrollo y pruebas]] - `references` [EXTRACTED]
 - [[ADR-007 · Anotarse por Edge Function y tiempo real solo con señales]] - `references` [EXTRACTED]
 - [[ADR-008 · Desarrollo contra Supabase en la nube, sin Docker local]] - `references` [EXTRACTED]
+- [[ADR-009 · Nombre del producto NextCut]] - `references` [EXTRACTED]
 - [[Bitácora de cambios]] - `references` [EXTRACTED]
 - [[Investigación]] - `references` [EXTRACTED]
+- [[NextCut (producto)]] - `references` [EXTRACTED]
 - [[Plan de implementación]] - `references` [EXTRACTED]
-- [[README de Siguiente]] - `references` [EXTRACTED]
+- [[README de NextCut]] - `references` [EXTRACTED]
 - [[Seguridad]] - `references` [EXTRACTED]
 - [[Validación de campo]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Documentación_decisiones_y_piloto
+#graphify/document #graphify/EXTRACTED #community/Bitácora_decisiones_y_nombre

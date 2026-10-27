@@ -1,12 +1,12 @@
 ---
 source_file: "docs/seguridad.md"
 type: "concept"
-community: "Base de datos, seguridad y tiempo real"
+community: "Antiabuso, errores y lanzamiento"
 location: "L36"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Base_de_datos_seguridad_y_tiempo_real
+  - community/Antiabuso_errores_y_lanzamiento
 ---
 
 # gitleaks
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Pendientes antes del piloto]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Base_de_datos_seguridad_y_tiempo_real
+#graphify/concept #graphify/EXTRACTED #community/Antiabuso_errores_y_lanzamiento

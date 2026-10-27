@@ -1,12 +1,12 @@
 ---
 source_file: "docs/seguridad.md"
 type: "concept"
-community: "Panel del barbero y errores"
+community: "Antiabuso, errores y lanzamiento"
 location: "L94"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Panel_del_barbero_y_errores
+  - community/Antiabuso_errores_y_lanzamiento
 ---
 
 # Fallo 8 · Manejo de errores
@@ -20,4 +20,4 @@ tags:
 - [[Sentry]] - `references` [EXTRACTED]
 - [[Sprint 1 · Base de datos y seguridad]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Panel_del_barbero_y_errores
+#graphify/concept #graphify/EXTRACTED #community/Antiabuso_errores_y_lanzamiento

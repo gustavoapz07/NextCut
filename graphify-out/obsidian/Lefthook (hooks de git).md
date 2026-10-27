@@ -12,13 +12,11 @@ tags:
 # Lefthook (hooks de git)
 
 ## Connections
-- [[2026-10-26 · Sprint 0 base del proyecto]] - `conceptually_related_to` [INFERRED]
+- [[2026-10-26 · Sprint 0 base del proyecto]] - `implements` [INFERRED]
 - [[Biome 2.6 (lint y formato)]] - `references` [EXTRACTED]
-- [[Desarrollo local]] - `conceptually_related_to` [INFERRED]
-- [[Graphify automático (hooks de git y graphify_sync.py)]] - `conceptually_related_to` [INFERRED]
+- [[Desarrollo local]] - `references` [INFERRED]
 - [[Herramientas de desarrollo]] - `references` [EXTRACTED]
-- [[Lefthook (revisiones antes de cada commit)]] - `conceptually_related_to` [INFERRED]
-- [[Sprint 0 · Entorno y pruebas de riesgo]] - `references` [EXTRACTED]
+- [[Lefthook (revisiones antes de cada commit)]] - `semantically_similar_to` [INFERRED]
 - [[gitleaks (secretos)]] - `references` [EXTRACTED]
 - [[graphify (grafo de conocimiento)]] - `conceptually_related_to` [EXTRACTED]
 

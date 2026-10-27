@@ -13,7 +13,6 @@ tags:
 
 ## Connections
 - [[ADR-006 · Herramientas de desarrollo y pruebas]] - `references` [EXTRACTED]
-- [[Biome 2.6 (lint y formato)]] - `conceptually_related_to` [INFERRED]
-- [[TypeScript 7]] - `rationale_for` [EXTRACTED]
+- [[Biome 2.6 (lint y formato)]] - `semantically_similar_to` [INFERRED]
 
 #graphify/concept #graphify/EXTRACTED #community/Herramientas_y_entorno_de_desarrollo

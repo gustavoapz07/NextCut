@@ -6,6 +6,11 @@ on:
   pull_request:
   push:
     branches: [main]
+  # En push y PR, gitleaks revisa solo los commits nuevos. La ejecución manual y la semanal
+  # (lunes 3:00 a. m. en Honduras) revisan todo el historial.
+  workflow_dispatch:
+  schedule:
+    - cron: "0 9 * * 1"
 
 permissions:
   contents: read

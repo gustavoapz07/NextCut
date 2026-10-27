@@ -91,7 +91,7 @@ Antes de la lista general, estos son los abusos más probables en este producto:
   - Funciones `security definer` con `search_path` fijo y `revoke all ... from public`; solo se concede `execute` al rol que la necesita.
 - **Prueba (pgTAP):** un barbero no puede cerrar el turno de otro ni editar un turno `atendido`; el público no puede ejecutar `unirse_a_fila` directo ni escribir en ninguna tabla.
 
-### 8. Manejo de errores · 🟨 (bloqueo e idempotencia hechos; la prueba de concurrencia corre en el CI)
+### 8. Manejo de errores · 🟩 (concurrencia e idempotencia probadas en el CI el 27/10/2026; los mensajes genéricos del formulario se revisan en el Sprint 2)
 
 - **Controles:**
   - El usuario ve mensajes genéricos ("No pudimos anotarte, intenta de nuevo") con un código corto; el detalle va a los logs.

@@ -91,9 +91,10 @@ Cada cambio del proyecto queda aquí, enlazado al documento que afecta. El grafo
   - `20261027142713_senal_sin_realtime`: la señal se omite si Realtime todavía no está listo (local).
 - **Datos de prueba** (`supabase/seed.sql`, solo local y CI): La Navaja con Carlos, Jorge y Kevin, y El Faro con un barbero, para probar el aislamiento.
 - **Pruebas:** 101 pruebas pgTAP en `supabase/tests/database/`, todas en verde contra el proyecto de pruebas dentro de una transacción que se deshizo (no quedó ningún dato). Cubren permisos, aislamiento entre barberías, validación de datos, privacidad de las pantallas públicas, idempotencia, límites, el flujo del barbero, la bitácora y las tareas programadas. El script `scripts/concurrencia.mjs` prueba "llamar siguiente" con varios barberos a la vez y el doble envío; necesita dos conexiones reales, así que corre en el CI.
-- **CI:** nuevo trabajo "Base de datos (pgTAP y concurrencia)" con Supabase local en el runner de GitHub. Todavía no corrió: arranca con el próximo push.
+- **CI:** nuevo trabajo "Base de datos (pgTAP y concurrencia)" con Supabase local en el runner de GitHub. Pasó en la [corrida #5](https://github.com/gustavoapz07/NextCut/actions/runs/40522147570) (commit `62c0ff1`, 1 min 40 s): Supabase levantó en 59 s, pgTAP tardó 16 s y la concurrencia pasó sus tres casos (un cliente en mano no se repite, seis barberos a la vez reciben seis clientes distintos y el doble envío crea un solo turno). El registro completo solo se ve con sesión de administrador en GitHub; el resultado se confirmó con el estado de cada paso en la API pública.
 - **Security Advisor:** sin errores. Los avisos que quedan son parte del diseño (ADR-011, punto 8). El de rendimiento solo marca índices sin uso, porque la base está vacía.
-- **Seguridad:** los fallos 2 y 7 pasan a 🟩; 3, 5, 8, 9 y 10 a 🟨 ([seguridad](seguridad.md)).
+- **Seguridad:** los fallos 2, 7 y 8 pasan a 🟩; 3, 5, 9 y 10 a 🟨 ([seguridad](seguridad.md)).
 - **Tipos:** `app/src/lib/database.types.ts` regenerado desde la base.
 - **Dependencia nueva:** `pg` (desarrollo), para el script de concurrencia.
-- **Siguiente paso:** subir los cambios para que el CI corra pgTAP y la concurrencia con Supabase local; luego el Sprint 2 (conectar la fila pública, anotarse con Turnstile y el turno en vivo).
+- **Avisos del CI:** la acción `supabase/setup-cli@v1` todavía usa Node 20, que GitHub está retirando, y `ubuntu-latest` pasa a Ubuntu 26. Por ahora no hay que hacer nada.
+- **Siguiente paso:** el Sprint 2 (conectar la fila pública, anotarse con Turnstile y el turno en vivo).

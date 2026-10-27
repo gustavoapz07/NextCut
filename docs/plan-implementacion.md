@@ -247,6 +247,8 @@ No construye funciones del producto. Prepara el entorno y prueba lo que podría 
 
 **Salida:** `supabase test db` y el script de concurrencia en verde en CI. Fallos 2, 7 y 8 pasan a 🟩 en [seguridad](seguridad.md).
 
+**Resultado:** salida cumplida el 27/10/2026 en la [corrida #5 del CI](https://github.com/gustavoapz07/NextCut/actions/runs/40522147570).
+
 ### Sprint 2 · Cliente: fila pública y turno en vivo (semana 4)
 
 - [ ] `eta.ts` con pruebas: duración configurada, promedio de los últimos 20 servicios cuando hay 5 o más, simulación por barbero, pausa y rango redondeado a 5 minutos.

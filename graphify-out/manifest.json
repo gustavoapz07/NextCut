@@ -6,9 +6,9 @@
     "semantic_hash": "55ba7d5ab3fc038543733f892cdf8a23"
   },
   "docs/bitacora.md": {
-    "mtime": 1793111459.153566,
-    "seen": 1793111467.6859083,
-    "ast_hash": "67214df41cceabfb6ce179aedc5c48ba",
+    "mtime": 1793111970.4954393,
+    "seen": 1793111977.703197,
+    "ast_hash": "0ffa60a260445671478c48478ce17d69",
     "semantic_hash": ""
   },
   "docs/decisiones.md": {
@@ -24,9 +24,9 @@
     "semantic_hash": "a03e6054d92f2b3847ff257819adb86d"
   },
   "docs/seguridad.md": {
-    "mtime": 1793111434.82173,
-    "seen": 1793111467.6859164,
-    "ast_hash": "b4cd834c22a64593ad618f7dbea5941b",
+    "mtime": 1793111970.4954393,
+    "seen": 1793111977.7032065,
+    "ast_hash": "d5948d4b1702a1e0fd861be65418dfe1",
     "semantic_hash": ""
   },
   "docs/validacion-campo.md": {
@@ -36,9 +36,9 @@
     "semantic_hash": "fce8b9c4ac2e58b20c5f98526ae1e804"
   },
   "docs/plan-implementacion.md": {
-    "mtime": 1793111434.82173,
-    "seen": 1793111467.6859145,
-    "ast_hash": "765921780a5971750f2f2ab67a3ab364",
+    "mtime": 1793111970.4981034,
+    "seen": 1793111977.7032046,
+    "ast_hash": "44afc2cf0f919b936e5e5e476f55dbde",
     "semantic_hash": ""
   },
   "app/src/components/ErrorDeRuta.tsx": {

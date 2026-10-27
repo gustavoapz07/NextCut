@@ -100,3 +100,17 @@ Cada decisión importante queda aquí con su contexto, las alternativas consider
 - **Consecuencias:**
   - El nombre está en inglés para un mercado hispanohablante; conviene ver cómo lo reciben los dueños en las entrevistas de [validación](validacion-campo.md).
   - Una búsqueda del 26/10/2026 encontró posibles usos de "NextCut" en el mismo sector: una plataforma de citas para barberías en Düsseldorf (dato de un directorio de empresas, sin verificar) y una app de reservas para salones en el portafolio de una agencia. Antes de invertir en marca (dominio, registro de marca en Honduras, material impreso), hay que revisar disponibilidad.
+
+## ADR-010 · Prototipo de diseño antes de la validación e identidad visual
+
+- **Fecha:** 27/10/2026 · **Estado:** aceptada · cambia el orden del [plan de implementación](plan-implementacion.md#9-sprints)
+- **Contexto:** el plan pedía validar en campo antes de construir. El autor decidió dejar por ahora la validación y el resto del Sprint 0, y concentrarse en diseñar y desarrollar, empezando por definir cómo se ve el producto.
+- **Decisión:**
+  1. Se construye un **prototipo navegable sin backend** de todas las pantallas de la v0.1: portada, fila pública (`/b/:slug`), anotarse (`/b/:slug/unirse`), turno en vivo (`/t/:codigo`), TV (`/b/:slug/tv`), entrar (`/entrar`), panel del barbero (`/panel`) y dueño (`/dueno`, `/dueno/configuracion`, `/dueno/qr`). Los datos son de ejemplo (`app/src/prototipo/`) y una simulación mueve la fila sola para mostrar el tiempo real.
+  2. **Identidad:** los tres colores del poste de barbería en tonos profundos (rojo `#b8312a`, azul `#2c4d96`) sobre papel hueso `#f3eee4` y tinta azul noche `#0d1430`, con modo oscuro. Las franjas del poste en movimiento son el motivo principal: logo, barras de progreso, bordes y transiciones.
+  3. **Tipografía:** Big Shoulders Display (condensada, de rótulo) para titulares, con contraste de pesos (black y light) como acento, y Bricolage Grotesque para el texto. Las dos van empaquetadas en la app con Fontsource, sin pedir nada a Google.
+  4. **Movimiento:** `motion` para contadores que ruedan, listas que se reordenan, pasos que se deslizan y celebraciones. Todo respeta "reducir movimiento" del sistema. Íconos con `lucide-react` y QR con `qrcode.react`.
+- **Alternativas:** *Instrument Serif como cursiva de acento:* se probó y se descartó; junto con el rojo y el azul eléctricos de la primera versión, el conjunto se veía chillón. *Diseñar en Figma primero:* más lento para probar animaciones y tiempo real.
+- **Consecuencias:**
+  - Las pantallas quedan listas para conectarlas a Supabase en los sprints 1 a 4, pero el riesgo de construir algo que las barberías no usen sigue abierto mientras no haya validación.
+  - `motion` suma unos 50 kB comprimidos al JavaScript del cliente; cada pantalla se carga por separado para que el cliente no descargue el panel ni el reporte.

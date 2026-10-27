@@ -1,21 +1,168 @@
 @import "tailwindcss";
 
+/*
+ * Identidad de NextCut: los tres colores del poste de barbería (rojo, blanco y azul)
+ * sobre papel hueso y tinta azul noche. Rojo y azul van en tonos profundos, de barbería
+ * clásica, para que el conjunto no se vea chillón.
+ * - Tokens semánticos (fondo, tinta, rojo, azul…): cambian en modo oscuro y sirven para texto.
+ * - Tokens fijos (poste-rojo, poste-azul, hueso, noche): rellenos que llevan texto blanco.
+ */
+:root {
+  --fondo: #f3eee4;
+  --superficie: #fffcf6;
+  --superficie-2: #e8e0d0;
+  --tinta: #0d1430;
+  --tenue: #565c7a;
+  --borde: rgb(13 20 48 / 0.14);
+  --rojo: #b8312a;
+  --azul: #2c4d96;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fondo: #0a0f24;
+    --superficie: #121a38;
+    --superficie-2: #1c2550;
+    --tinta: #f3eee4;
+    --tenue: #a3a9c6;
+    --borde: rgb(243 238 228 / 0.14);
+    --rojo: #e8736a;
+    --azul: #93a8e6;
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-fondo: var(--fondo);
+  --color-superficie: var(--superficie);
+  --color-superficie-2: var(--superficie-2);
+  --color-tinta: var(--tinta);
+  --color-tenue: var(--tenue);
+  --color-borde: var(--borde);
+  --color-rojo: var(--rojo);
+  --color-azul: var(--azul);
+}
+
 @theme {
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --color-marca: #fbbf24;
-  --color-marca-oscuro: #b45309;
+  --color-poste-rojo: #b8312a;
+  --color-poste-azul: #2c4d96;
+  --color-hueso: #f3eee4;
+  --color-noche: #0a0f24;
+  --color-noche-2: #141b3a;
+
+  --font-sans: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display:
+    "Big Shoulders Display Variable", "Bricolage Grotesque Variable", ui-sans-serif, sans-serif;
+
+  --animate-poste: poste var(--poste-vel, 1.6s) linear infinite;
+  --animate-poste-y: poste-y var(--poste-vel, 1.6s) linear infinite;
+  --animate-marquesina: marquesina var(--marquesina-vel, 30s) linear infinite;
+  --animate-latido: latido 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+
+  @keyframes poste {
+    to {
+      background-position: var(--franja-ciclo) 0;
+    }
+  }
+
+  @keyframes poste-y {
+    to {
+      background-position: 0 calc(var(--franja-ciclo) * -1);
+    }
+  }
+
+  @keyframes marquesina {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes latido {
+    0% {
+      transform: scale(1);
+      opacity: 0.75;
+    }
+    80%,
+    100% {
+      transform: scale(2.2);
+      opacity: 0;
+    }
+  }
+}
+
+/*
+ * Franjas del poste a 45°. El mosaico mide 4 franjas × √2 por lado para que
+ * se repita sin costuras y la animación avance exactamente un ciclo.
+ */
+@utility franjas {
+  --franja-ciclo: calc(var(--franja, 10px) * 5.656854);
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--color-poste-rojo) 0 var(--franja, 10px),
+    var(--franja-blanco, var(--color-hueso)) 0 calc(var(--franja, 10px) * 2),
+    var(--color-poste-azul) 0 calc(var(--franja, 10px) * 3),
+    var(--franja-blanco, var(--color-hueso)) 0 calc(var(--franja, 10px) * 4)
+  );
+  background-size: var(--franja-ciclo) var(--franja-ciclo);
+}
+
+/* Muescas del boleto: medio círculo recortado en las esquinas de la línea punteada. */
+@utility muesca-abajo {
+  mask:
+    radial-gradient(circle var(--muesca, 14px) at 0 100%, #0000 98%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle var(--muesca, 14px) at 100% 100%, #0000 98%, #000) right / 51% 100%
+    no-repeat;
+}
+
+@utility muesca-arriba {
+  mask:
+    radial-gradient(circle var(--muesca, 14px) at 0 0, #0000 98%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle var(--muesca, 14px) at 100% 0, #0000 98%, #000) right / 51% 100%
+    no-repeat;
 }
 
 html {
   -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  @apply bg-zinc-50 text-zinc-900 antialiased;
+  background-color: var(--fondo);
+  color: var(--tinta);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@media (prefers-color-scheme: dark) {
+::selection {
+  background-color: var(--color-poste-rojo);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 3px solid var(--azul);
+  outline-offset: 3px;
+}
+
+/* biome-ignore-start lint/complexity/noImportantStyles: apagar el movimiento debe ganarle a todo */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+/* biome-ignore-end lint/complexity/noImportantStyles: fin del bloque */
+
+@media print {
+  @page {
+    margin: 12mm;
+  }
+
   body {
-    @apply bg-zinc-950 text-zinc-100;
+    background: #fff;
   }
 }

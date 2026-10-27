@@ -11,3 +11,6 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+
+// Este paquete de tipografía solo trae CSS y no publica tipos (se importa en main.tsx).
+declare module "@fontsource-variable/big-shoulders-display";

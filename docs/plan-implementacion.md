@@ -251,8 +251,8 @@ No construye funciones del producto. Prepara el entorno y prueba lo que podría 
 
 ### Sprint 2 · Cliente: fila pública y turno en vivo (semana 4)
 
-- [ ] `eta.ts` con pruebas: duración configurada, promedio de los últimos 20 servicios cuando hay 5 o más, simulación por barbero, pausa y rango redondeado a 5 minutos.
-- [ ] Página `/b/:slug`: personas en fila y estimado por barbero.
+- [x] `eta.ts` con pruebas: duración configurada, promedio de los últimos 20 servicios cuando hay 5 o más, simulación por barbero, pausa y rango redondeado a 5 minutos ([ADR-012](decisiones.md#adr-012--cómo-se-calcula-el-estimado-de-espera)).
+- [x] Página `/b/:slug`: personas en fila y estimado por barbero, al día con la señal de tiempo real. Falta que `fila_publica` mande las duraciones recientes.
 - [ ] Formulario con zod, Turnstile y clave de idempotencia; aviso de privacidad corto.
 - [ ] Edge Function `unirse-a-fila` con mensajes de error genéricos y código corto.
 - [ ] Página `/t/:codigo`: posición y estimado en vivo (señal + recarga, o consulta cada 20 s si está oculta), sonido y vibración cuando toca, botón de cancelar.

@@ -131,3 +131,17 @@ Cada decisión importante queda aquí con su contexto, las alternativas consider
   9. **Las migraciones se aplicaron con el MCP de Supabase**, porque la CLI no quedó instalada en la laptop (npm 11 bloqueó su script de instalación). Cada archivo lleva la misma versión que registró la base, para que la CLI no vea diferencias después. En CI se usa la acción oficial `supabase/setup-cli`.
 - **Alternativas:** *vista `fila_publica` con `security_invoker`:* el público tendría que leer `turnos` directo. *Secreto generado por la base:* rompe la idempotencia o obliga a guardar el secreto en claro.
 - **Consecuencias:** el frontend llama a funciones RPC en vez de leer tablas (salvo el personal, que lee su barbería con RLS). Los tipos generados (`app/src/lib/database.types.ts`) ya incluyen todas las funciones.
+
+## ADR-012 · Cómo se calcula el estimado de espera
+
+- **Fecha:** 28/10/2026 · **Estado:** aceptada · detalla el punto 3 de la [sección 6 del plan](plan-implementacion.md#decisiones-de-diseño-de-esta-arquitectura)
+- **Contexto:** el plan pedía un solo módulo de estimado (`supabase/functions/_shared/eta.ts`) para la página del cliente y para la Edge Function `avisos`, pero no fijaba cómo simular la fila.
+- **Decisión:**
+  1. **Se simula la fila igual que la base.** Cuando un barbero queda libre, toma el turno más antiguo que sea suyo o de "el primero libre", como hace `llamar_siguiente`. Si dos quedan libres a la vez, gana la primera silla.
+  2. **Duración de cada servicio:** el promedio de los últimos 20 servicios de ese barbero con ese servicio, si hay al menos 5; si no, la duración configurada. Las duraciones fuera de 1–240 minutos no cuentan (un turno que nadie terminó a tiempo). Si el servicio ya no está activo, 30 minutos.
+  3. **Lo que le falta al barbero:** con alguien en la silla, la duración menos lo que ya pasó (nunca menos de 0). Con alguien llamado que todavía no se sienta, el servicio completo.
+  4. **Barberos en pausa:** no reciben a nadie. Quien eligió a un barbero en pausa o inactivo queda sin estimado (`barbero_no_disponible`), y "el primero libre" también, si todos están en pausa (`sin_barberos`). La página muestra "—" en vez de inventar un número.
+  5. **Rango que ve el cliente:** desde la espera redondeada hacia abajo a 5 minutos hasta la espera más un margen de 10 minutos o el 20 % (lo que sea mayor), redondeada hacia arriba a 5. Mientras más gente hay adelante, más ancho el rango. Las tarjetas de cada barbero muestran un solo número, redondeado a 5 minutos.
+  6. **El estimado para quien todavía no se anota** usa el primer servicio de la lista (el más barato, casi siempre el corte).
+- **Alternativas:** *sumar la fila de cada barbero, como el prototipo:* ignora que "el primero libre" reparte turnos entre todos. *Mediana en vez de promedio:* resiste mejor los errores de registro, pero el plan pedía promedio, y el filtro de 1–240 minutos ya quita los casos más graves.
+- **Consecuencias:** `fila_publica` todavía no manda las duraciones recientes, así que por ahora siempre se usa la duración configurada. El módulo ya las acepta (`recientes`); falta agregarlas a la función de la base. Las 29 pruebas de `eta.test.ts` cubren cada regla.

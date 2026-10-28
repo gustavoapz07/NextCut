@@ -98,3 +98,16 @@ Cada cambio del proyecto queda aquí, enlazado al documento que afecta. El grafo
 - **Dependencia nueva:** `pg` (desarrollo), para el script de concurrencia.
 - **Avisos del CI:** la acción `supabase/setup-cli@v1` todavía usa Node 20, que GitHub está retirando, y `ubuntu-latest` pasa a Ubuntu 26. Por ahora no hay que hacer nada.
 - **Siguiente paso:** el Sprint 2 (conectar la fila pública, anotarse con Turnstile y el turno en vivo).
+
+## 2026-10-28 · Sprint 2: estimado y fila pública conectada a la base
+
+- **Qué:** las dos primeras piezas del [Sprint 2](plan-implementacion.md#sprint-2--cliente-fila-pública-y-turno-en-vivo-semana-4): el módulo del estimado y la página `/b/:slug` con datos reales ([ADR-012](decisiones.md#adr-012--cómo-se-calcula-el-estimado-de-espera)).
+- **Estimado** (`supabase/functions/_shared/eta.ts`): simula la fila como `llamar_siguiente` (cada barbero que queda libre toma el turno más antiguo que sea suyo o de "el primero libre"), con promedio de los últimos 20 servicios desde 5, pausas, barberos inactivos y rango redondeado a 5 minutos. TypeScript sin dependencias, listo para la Edge Function `avisos`. 29 pruebas.
+- **Datos de la fila** (`app/src/lib/fila.ts`): esquema zod de lo que devuelve `fila_publica`, conversión al estimado y resumen por barbero.
+- **En vivo** (`app/src/lib/enVivo.ts`): escucha el canal público `fila:<id>` solo con la página visible, junta las señales seguidas en una recarga, recarga al reconectar y cada 60 s como respaldo, y descarta respuestas viejas que lleguen tarde. Con la página oculta se desconecta (y puede consultar cada cierto tiempo, para la página del turno).
+- **Página pública:** se separó en una vista que solo dibuja y dos fuentes: el prototipo (sigue en `/b/la-navaja`, con datos simulados) y la base (cualquier otro slug). Con datos reales muestra cargando, "no encontrado", error con botón de reintentar, fila vacía, barberos en pausa con "—" y la fila en línea pausada o llena (sin botón para anotarse).
+- **Ganchos:** `useIntervalo`, `useTitulo` y `useReloj` pasan de `prototipo/simulacion.ts` a `lib/ganchos.ts`, para que el código real no dependa del prototipo.
+- **Dependencia nueva:** `zod` 4.6, como pedía el plan. El paquete de la página pública pesa 84 kB comprimido (supabase-js y zod incluidos).
+- **Pruebas:** 53 en total. Las de rutas simulan Supabase (en el CI no hay `.env.local`) y cubren la fila real, la fila pausada y el error de conexión. `npm run check` pasa.
+- **Verificado en el navegador:** el prototipo se ve igual a 375 px y sin errores de consola. Una barbería que no existe consulta `fila_publica` en el proyecto de pruebas (respuesta 200) y muestra "no encontrado". La vista con datos reales no se revisó en pantalla porque el proyecto de pruebas no tiene barberías; la cubren las pruebas.
+- **Pendiente del Sprint 2:** duraciones recientes en `fila_publica`, formulario con zod y Turnstile, Edge Function `unirse-a-fila`, página `/t/:codigo` con datos reales, `?origen=qr` y la prueba de Playwright.

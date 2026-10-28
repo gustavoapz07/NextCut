@@ -6,15 +6,15 @@
     "semantic_hash": "55ba7d5ab3fc038543733f892cdf8a23"
   },
   "docs/bitacora.md": {
-    "mtime": 1793111970.4954393,
-    "seen": 1793111977.703197,
-    "ast_hash": "0ffa60a260445671478c48478ce17d69",
+    "mtime": 1793200405.7201264,
+    "seen": 1793200413.8139644,
+    "ast_hash": "a09b56d790e380a2c4c0da6dc65629aa",
     "semantic_hash": ""
   },
   "docs/decisiones.md": {
-    "mtime": 1793111459.152326,
-    "seen": 1793111467.6859107,
-    "ast_hash": "7afdf5ec9353727fa6c90e8c7c9277bd",
+    "mtime": 1793200390.8111486,
+    "seen": 1793200413.8139684,
+    "ast_hash": "a7163b8966d4f79f8830ca57176dac05",
     "semantic_hash": ""
   },
   "docs/investigacion.md": {
@@ -36,9 +36,9 @@
     "semantic_hash": "fce8b9c4ac2e58b20c5f98526ae1e804"
   },
   "docs/plan-implementacion.md": {
-    "mtime": 1793111970.4981034,
-    "seen": 1793111977.7032046,
-    "ast_hash": "44afc2cf0f919b936e5e5e476f55dbde",
+    "mtime": 1793200391.126406,
+    "seen": 1793200413.8139758,
+    "ast_hash": "a13c885ad62a7017c741e7cf7dba83b5",
     "semantic_hash": ""
   },
   "app/src/components/ErrorDeRuta.tsx": {
@@ -66,9 +66,9 @@
     "semantic_hash": ""
   },
   "app/src/router.test.tsx": {
-    "mtime": 1793107301.5238543,
-    "seen": 1793107347.9341502,
-    "ast_hash": "800acf289f75514b71d3a7b7eaef0d5d",
+    "mtime": 1793200307.929069,
+    "seen": 1793200413.8138916,
+    "ast_hash": "9bcd45a83f1bfa290423abc5d8a323cc",
     "semantic_hash": ""
   },
   "app/src/router.tsx": {
@@ -186,9 +186,9 @@
     "semantic_hash": ""
   },
   "app/src/features/fila/FilaPublica.tsx": {
-    "mtime": 1793106464.4887908,
-    "seen": 1793107347.9341207,
-    "ast_hash": "562c95ffc353dff3f4845e9c2ac8e299",
+    "mtime": 1793200307.9521832,
+    "seen": 1793200413.8138154,
+    "ast_hash": "0864d4f109d2a83728fa7974405e82bc",
     "semantic_hash": ""
   },
   "app/src/features/fila/Turno.tsx": {
@@ -234,9 +234,9 @@
     "semantic_hash": ""
   },
   "app/src/prototipo/simulacion.ts": {
-    "mtime": 1793069705.0139475,
-    "seen": 1793105988.8135128,
-    "ast_hash": "13de800e6db5ff22ec6ec8a660e7477c",
+    "mtime": 1793200307.9250472,
+    "seen": 1793200413.8138888,
+    "ast_hash": "a35045113f44014eb2606a605111a383",
     "semantic_hash": ""
   },
   "scripts/concurrencia.mjs": {
@@ -273,6 +273,48 @@
     "mtime": 1793109520.356022,
     "seen": 1793111467.6859012,
     "ast_hash": "23282daf91f27e9350c28e1ba327e17e",
+    "semantic_hash": ""
+  },
+  "app/src/lib/enVivo.ts": {
+    "mtime": 1793200307.9109588,
+    "seen": 1793200413.8138418,
+    "ast_hash": "eea7fe152c98a99b5247d85f6b08752e",
+    "semantic_hash": ""
+  },
+  "app/src/lib/fila.test.ts": {
+    "mtime": 1793200297.8660965,
+    "seen": 1793200413.8138454,
+    "ast_hash": "23503f0aae329689d846c9a4ab3401e8",
+    "semantic_hash": ""
+  },
+  "app/src/lib/fila.ts": {
+    "mtime": 1793200152.7553108,
+    "seen": 1793200413.8138523,
+    "ast_hash": "317aa1217fae554d74467bee3cae5a0e",
+    "semantic_hash": ""
+  },
+  "app/src/lib/ganchos.ts": {
+    "mtime": 1793200165.186311,
+    "seen": 1793200413.8138611,
+    "ast_hash": "52789aeb39588384bdd901f2e7d85178",
+    "semantic_hash": ""
+  },
+  "app/src/test/filaEjemplo.ts": {
+    "mtime": 1793200307.9250472,
+    "seen": 1793200413.8139005,
+    "ast_hash": "a0d251c405403741f91058eab09e0fb5",
+    "semantic_hash": ""
+  },
+  "supabase/functions/_shared/eta.test.ts": {
+    "mtime": 1793200062.772621,
+    "seen": 1793200413.8139215,
+    "ast_hash": "bc425617de2ae3a03dee05ee415db467",
+    "semantic_hash": ""
+  },
+  "supabase/functions/_shared/eta.ts": {
+    "mtime": 1793200029.7297616,
+    "seen": 1793200413.8139246,
+    "ast_hash": "20be11829b5cf7c082e7618d2fb8ba16",
     "semantic_hash": ""
   }
 }

@@ -11,21 +11,20 @@ import {
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import type { ReactNode } from "react";
-import { Link, useParams } from "react-router";
+import { Link, useParams, useSearchParams } from "react-router";
 import { BarraPoste, Franjas } from "@/components/Franjas";
 import { BotonMarca, Cargando } from "@/components/Marco";
 import { NoEncontrado } from "@/components/NoEncontrado";
 import { NumeroAnimado } from "@/components/NumeroAnimado";
 import { Avatar, EnlacePrincipal } from "@/components/Piezas";
+import { SinConexion } from "@/components/SinConexion";
 import { useFilaPublica } from "@/lib/enVivo";
-import { detalleBarbero, resumirFila } from "@/lib/fila";
+import { detalleBarbero, resumirFila, tonoDe } from "@/lib/fila";
 import { duracion, rango, redondear5 } from "@/lib/formato";
 import { useReloj, useTitulo } from "@/lib/ganchos";
 import { cx } from "@/lib/utilidades";
 import { barberia, estimar, nombreDe, type Tono } from "@/prototipo/datos";
 import { useFilaEnVivo } from "@/prototipo/simulacion";
-
-const TONOS: Tono[] = ["rojo", "azul", "tinta"];
 
 export function FilaPublica() {
   const { slug = "" } = useParams();
@@ -36,6 +35,10 @@ export function FilaPublica() {
 
 function FilaReal({ slug }: { slug: string }) {
   const { estado, recargar } = useFilaPublica(slug);
+  // El QR de la puerta lleva ?origen=qr: quien está en el local puede anotarse aunque la fila
+  // en línea esté pausada.
+  const [params] = useSearchParams();
+  const local = params.get("origen") === "qr";
   // El estimado depende de la hora aunque nadie toque nada.
   const ahora = useReloj(30_000);
   useTitulo(estado.tipo === "lista" ? `${estado.datos.barberia.nombre} · fila en vivo` : "Fila");
@@ -47,7 +50,7 @@ function FilaReal({ slug }: { slug: string }) {
   const { datos } = estado;
   const { porBarbero, primeroLibre, masRapido } = resumirFila(datos, ahora);
   const nombres = new Map(datos.barberos.map((b) => [b.id, b.nombre]));
-  const cerrada = !datos.barberia.fila_remota_activa
+  const cerrada = !(local || datos.barberia.fila_remota_activa)
     ? "pausada"
     : datos.fila.length >= datos.barberia.max_fila
       ? "llena"
@@ -66,7 +69,7 @@ function FilaReal({ slug }: { slug: string }) {
         id: barbero.id,
         nombre: barbero.nombre,
         detalle: detalleBarbero(barbero),
-        tono: TONOS[i % TONOS.length] ?? "tinta",
+        tono: tonoDe(i),
         enFila,
         minutos: estimado.minutos === null ? null : redondear5(estimado.minutos),
       }))}
@@ -77,6 +80,7 @@ function FilaReal({ slug }: { slug: string }) {
         barbero: t.barbero_id ? (nombres.get(t.barbero_id) ?? "Su barbero") : "El primero",
       }))}
       cerrada={cerrada}
+      local={local}
     />
   );
 }
@@ -150,6 +154,7 @@ function FilaPrototipo() {
         barbero: t.barbero === "cualquiera" ? "El primero" : nombreDe(t.barbero),
       }))}
       cerrada={null}
+      local={false}
     />
   );
 }
@@ -175,6 +180,8 @@ interface VistaFilaProps {
   fila: { numero: number; nombre: string; barbero: string }[];
   /** Por qué no se puede anotar desde el celular, si es el caso. */
   cerrada: "pausada" | "llena" | null;
+  /** Llegó por el QR de la puerta. */
+  local: boolean;
 }
 
 function VistaFila({
@@ -188,8 +195,16 @@ function VistaFila({
   barberos,
   fila,
   cerrada,
+  local,
 }: VistaFilaProps) {
   const abierta = cerrada === null;
+  const unirse = (barbero?: string) => {
+    const params = new URLSearchParams();
+    if (barbero) params.set("barbero", barbero);
+    if (local) params.set("origen", "qr");
+    const consulta = params.toString();
+    return consulta ? `unirse?${consulta}` : "unirse";
+  };
 
   return (
     <div className="min-h-dvh pb-36">
@@ -284,7 +299,7 @@ function VistaFila({
           <ul className="mt-5 grid gap-3">
             <li>
               <Tarjeta
-                to={abierta ? "unirse?barbero=cualquiera" : null}
+                to={abierta ? unirse("cualquiera") : null}
                 className="group relative flex items-center gap-4 overflow-hidden rounded-[1.75rem] bg-poste-azul p-4 pl-6 text-white transition active:scale-[0.98]"
               >
                 <Franjas vertical className="absolute inset-y-0 left-0 w-2" ancho={5} />
@@ -310,7 +325,7 @@ function VistaFila({
                 transition={{ delay: 0.25 + i * 0.08 }}
               >
                 <Tarjeta
-                  to={abierta ? `unirse?barbero=${barbero.id}` : null}
+                  to={abierta ? unirse(barbero.id) : null}
                   className="group flex items-center gap-4 rounded-[1.75rem] bg-superficie p-4 ring-1 ring-borde transition hover:ring-tinta active:scale-[0.98]"
                 >
                   <Avatar
@@ -385,7 +400,7 @@ function VistaFila({
         <div className="mx-auto max-w-lg">
           {abierta ? (
             <>
-              <EnlacePrincipal to="unirse">Anotarme en la fila</EnlacePrincipal>
+              <EnlacePrincipal to={unirse()}>Anotarme en la fila</EnlacePrincipal>
               <p className="mt-2 text-center text-xs text-tenue">
                 Gratis · sin descargar nada · sin crear cuenta
               </p>
@@ -426,23 +441,5 @@ function Tarjeta({
     <Link to={to} className={className}>
       {children}
     </Link>
-  );
-}
-
-function SinConexion({ alReintentar }: { alReintentar: () => void }) {
-  return (
-    <main className="mx-auto flex min-h-dvh max-w-lg flex-col justify-center gap-5 px-4 py-16">
-      <h1 className="font-display text-5xl leading-[0.9] font-black uppercase">
-        No pudimos cargar la fila
-      </h1>
-      <p className="text-lg text-tenue">Revisa tu conexión e inténtalo de nuevo.</p>
-      <button
-        type="button"
-        onClick={alReintentar}
-        className="w-fit rounded-full bg-tinta px-6 py-3.5 font-display text-lg font-bold tracking-wide text-fondo uppercase"
-      >
-        Reintentar
-      </button>
-    </main>
   );
 }

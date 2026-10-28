@@ -6,15 +6,15 @@
     "semantic_hash": "55ba7d5ab3fc038543733f892cdf8a23"
   },
   "docs/bitacora.md": {
-    "mtime": 1793200405.7201264,
-    "seen": 1793200413.8139644,
-    "ast_hash": "a09b56d790e380a2c4c0da6dc65629aa",
+    "mtime": 1793230003.4847405,
+    "seen": 1793230012.9541576,
+    "ast_hash": "8dbc687e120b4e57bb7f1b89a5f1727c",
     "semantic_hash": ""
   },
   "docs/decisiones.md": {
-    "mtime": 1793200390.8111486,
-    "seen": 1793200413.8139684,
-    "ast_hash": "a7163b8966d4f79f8830ca57176dac05",
+    "mtime": 1793230003.4836276,
+    "seen": 1793230012.9541595,
+    "ast_hash": "b57b5c2c0cd374e93df0a237cc61578b",
     "semantic_hash": ""
   },
   "docs/investigacion.md": {
@@ -24,9 +24,9 @@
     "semantic_hash": "a03e6054d92f2b3847ff257819adb86d"
   },
   "docs/seguridad.md": {
-    "mtime": 1793111970.4954393,
-    "seen": 1793111977.7032065,
-    "ast_hash": "d5948d4b1702a1e0fd861be65418dfe1",
+    "mtime": 1793230003.4814994,
+    "seen": 1793230012.954166,
+    "ast_hash": "5de235caccb04b8a8f0cf70cccfa9846",
     "semantic_hash": ""
   },
   "docs/validacion-campo.md": {
@@ -36,9 +36,9 @@
     "semantic_hash": "fce8b9c4ac2e58b20c5f98526ae1e804"
   },
   "docs/plan-implementacion.md": {
-    "mtime": 1793200391.126406,
-    "seen": 1793200413.8139758,
-    "ast_hash": "a13c885ad62a7017c741e7cf7dba83b5",
+    "mtime": 1793230003.480306,
+    "seen": 1793230012.954164,
+    "ast_hash": "69d786445d46ae556c769f70bbac9c62",
     "semantic_hash": ""
   },
   "app/src/components/ErrorDeRuta.tsx": {
@@ -66,9 +66,9 @@
     "semantic_hash": ""
   },
   "app/src/router.test.tsx": {
-    "mtime": 1793200307.929069,
-    "seen": 1793200413.8138916,
-    "ast_hash": "9bcd45a83f1bfa290423abc5d8a323cc",
+    "mtime": 1793229620.7326493,
+    "seen": 1793230012.954109,
+    "ast_hash": "c7a6a25ef1bbacbfc4c0a05856e39a28",
     "semantic_hash": ""
   },
   "app/src/router.tsx": {
@@ -78,9 +78,9 @@
     "semantic_hash": ""
   },
   "app/src/test/setup.ts": {
-    "mtime": 1793105943.5546415,
-    "seen": 1793105988.8135195,
-    "ast_hash": "63f8f7d2ecd3463b3f596992eccd9a87",
+    "mtime": 1793229402.2563038,
+    "seen": 1793230012.9541156,
+    "ast_hash": "5af1808fa1e74074e87d607e0dcb491e",
     "semantic_hash": ""
   },
   "supabase/seed.sql": {
@@ -186,9 +186,9 @@
     "semantic_hash": ""
   },
   "app/src/features/fila/FilaPublica.tsx": {
-    "mtime": 1793200307.9521832,
-    "seen": 1793200413.8138154,
-    "ast_hash": "0864d4f109d2a83728fa7974405e82bc",
+    "mtime": 1793229583.7364473,
+    "seen": 1793230012.9540663,
+    "ast_hash": "2997baaebeebc9eecc7d6a98d6804324",
     "semantic_hash": ""
   },
   "app/src/features/fila/Turno.tsx": {
@@ -198,9 +198,9 @@
     "semantic_hash": ""
   },
   "app/src/features/fila/Unirse.tsx": {
-    "mtime": 1793106464.4930506,
-    "seen": 1793107347.934125,
-    "ast_hash": "2dedfed5982c091ad5f9c01be18ecec9",
+    "mtime": 1793229583.7467136,
+    "seen": 1793230012.9540713,
+    "ast_hash": "171e73076e1a2a47ea550b3339d3c7a1",
     "semantic_hash": ""
   },
   "app/src/features/pantalla/PantallaTv.tsx": {
@@ -288,9 +288,9 @@
     "semantic_hash": ""
   },
   "app/src/lib/fila.ts": {
-    "mtime": 1793200152.7553108,
-    "seen": 1793200413.8138523,
-    "ast_hash": "317aa1217fae554d74467bee3cae5a0e",
+    "mtime": 1793229583.712299,
+    "seen": 1793230012.954086,
+    "ast_hash": "85051c2ae003307cf6e37985a202b0f7",
     "semantic_hash": ""
   },
   "app/src/lib/ganchos.ts": {
@@ -315,6 +315,54 @@
     "mtime": 1793200029.7297616,
     "seen": 1793200413.8139246,
     "ast_hash": "20be11829b5cf7c082e7618d2fb8ba16",
+    "semantic_hash": ""
+  },
+  "app/src/components/SinConexion.tsx": {
+    "mtime": 1793229583.7042449,
+    "seen": 1793230012.9540374,
+    "ast_hash": "0db5a490c0923bcd5e552211fa948751",
+    "semantic_hash": ""
+  },
+  "app/src/components/Turnstile.tsx": {
+    "mtime": 1793229479.179734,
+    "seen": 1793230012.954042,
+    "ast_hash": "d2ae3a36d47893ee844a55dc9a5675cb",
+    "semantic_hash": ""
+  },
+  "app/src/lib/unirse.ts": {
+    "mtime": 1793229583.7223642,
+    "seen": 1793230012.954095,
+    "ast_hash": "99eb556d0051a785b0b219b27426ee7a",
+    "semantic_hash": ""
+  },
+  "supabase/functions/_shared/filaPublica.ts": {
+    "mtime": 1793229402.2563038,
+    "seen": 1793230012.9541287,
+    "ast_hash": "9070339eabca656991fa529c94fd5b28",
+    "semantic_hash": ""
+  },
+  "supabase/functions/_shared/unirse.test.ts": {
+    "mtime": 1793229835.8193588,
+    "seen": 1793230012.9541306,
+    "ast_hash": "4ddb83a3d945249b5c6b55677d899cea",
+    "semantic_hash": ""
+  },
+  "supabase/functions/_shared/unirse.ts": {
+    "mtime": 1793229835.7811408,
+    "seen": 1793230012.9541328,
+    "ast_hash": "5346c93ec30bd0f6b3a484e75c6e9203",
+    "semantic_hash": ""
+  },
+  "supabase/functions/unirse-a-fila/deno.json": {
+    "mtime": 1793229419.2403338,
+    "seen": 1793230012.9541345,
+    "ast_hash": "ade40ccf61304df2683e04c96dbeaa38",
+    "semantic_hash": ""
+  },
+  "supabase/functions/unirse-a-fila/index.ts": {
+    "mtime": 1793229419.1276598,
+    "seen": 1793230012.9541364,
+    "ast_hash": "6aea5f0c31b02657adb104d0db144ec4",
     "semantic_hash": ""
   }
 }

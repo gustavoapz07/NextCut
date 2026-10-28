@@ -49,7 +49,7 @@ Antes de la lista general, estos son los abusos más probables en este producto:
   - Revisión con el Security Advisor de Supabase antes de cada despliegue.
 - **Prueba (pgTAP):** `anon` no puede hacer `select` en `turnos`; un usuario de la barbería A no lee ni modifica filas de la barbería B.
 
-### 3. Input sin validar · 🟨 (base probada; falta zod en el formulario, Sprint 2)
+### 3. Input sin validar · 🟨 (base, Edge Function y formulario probados con Vitest; falta la prueba de Playwright)
 
 - **Riesgo:** datos basura, inyección o XSS en la pantalla del local.
 - **Controles:**
@@ -100,7 +100,7 @@ Antes de la lista general, estos son los abusos más probables en este producto:
   - Clave de idempotencia al anotarse, para que un doble toque no cree dos turnos.
 - **Prueba:** dos barberos presionan "Llamar siguiente" a la vez y cada uno recibe un cliente distinto; un doble envío del formulario crea un solo turno.
 
-### 9. Rate limiting · 🟨 (límites por IP, teléfono y tamaño de la fila probados; faltan Turnstile y la pausa automática)
+### 9. Rate limiting · 🟨 (límites por IP, teléfono y tamaño de la fila probados; Turnstile listo en código pero sin probar en la nube; falta la pausa automática)
 
 - **Controles:**
   - Cloudflare Turnstile en el formulario, verificado en una Edge Function.

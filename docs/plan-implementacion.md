@@ -231,7 +231,7 @@ No construye funciones del producto. Prepara el entorno y prueba lo que podría 
 - [ ] Crear el proyecto de producción y el Worker en Cloudflare con `workers.dev`, y desactivar las claves heredadas (`anon` y `service_role`) en ambos proyectos.
 - [x] **Prueba de riesgo 1 · Broadcast público:** superada el 26/10/2026. Una señal enviada con `realtime.send(..., private => false)` llega a un cliente anónimo con la clave publicable, y ese cliente es rechazado en un canal privado (`scripts/spikes/broadcast-publico.mjs`).
 - [ ] **Prueba de riesgo 2 · Web Push:** una Edge Function envía un aviso con VAPID que llega a Chrome en Android y a un iPhone con la página agregada a la pantalla de inicio.
-- [ ] **Prueba de riesgo 3 · Turnstile + IP:** la Edge Function verifica el token y obtiene la IP real del cliente.
+- [ ] **Prueba de riesgo 3 · Turnstile + IP:** la Edge Function verifica el token y obtiene la IP real del cliente. La función ya está desplegada en `siguiente-pruebas` (28/10/2026); falta cargar `TURNSTILE_SECRET` para probarla de punta a punta ([ADR-013](decisiones.md#adr-013--detalles-de-anotarse-en-la-fila)).
 
 **Salida:** CI en verde con un "hola mundo" desplegado, y las 3 pruebas de riesgo con resultado documentado en la bitácora. Si alguna falla, se registra un ADR con la alternativa antes del Sprint 1.
 
@@ -253,10 +253,10 @@ No construye funciones del producto. Prepara el entorno y prueba lo que podría 
 
 - [x] `eta.ts` con pruebas: duración configurada, promedio de los últimos 20 servicios cuando hay 5 o más, simulación por barbero, pausa y rango redondeado a 5 minutos ([ADR-012](decisiones.md#adr-012--cómo-se-calcula-el-estimado-de-espera)).
 - [x] Página `/b/:slug`: personas en fila y estimado por barbero, al día con la señal de tiempo real. Falta que `fila_publica` mande las duraciones recientes.
-- [ ] Formulario con zod, Turnstile y clave de idempotencia; aviso de privacidad corto.
-- [ ] Edge Function `unirse-a-fila` con mensajes de error genéricos y código corto.
+- [x] Formulario con zod, Turnstile y clave de idempotencia; aviso de privacidad corto.
+- [x] Edge Function `unirse-a-fila` con mensajes de error genéricos y código corto ([ADR-013](decisiones.md#adr-013--detalles-de-anotarse-en-la-fila)).
 - [ ] Página `/t/:codigo`: posición y estimado en vivo (señal + recarga, o consulta cada 20 s si está oculta), sonido y vibración cuando toca, botón de cancelar.
-- [ ] El QR de la puerta lleva `?origen=qr` para distinguir turnos locales de remotos.
+- [x] El QR de la puerta lleva `?origen=qr` para distinguir turnos locales de remotos: la página pública lo pasa al formulario y el turno queda como `local`.
 
 **Salida:** Playwright: un cliente se anota en un celular simulado y ve su posición cambiar cuando otro turno avanza. Las pruebas del fallo 3 (nombres de 500 caracteres, `<script>`, emojis, teléfonos de otros países, servicio de otra barbería) pasan.
 

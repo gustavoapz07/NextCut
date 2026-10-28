@@ -1,19 +1,33 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { createMemoryRouter, RouterProvider } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { filaDeEjemplo } from "@/test/filaEjemplo";
 import { rutas } from "./router";
 
-// En las pruebas no hay Supabase: `rpc` responde lo que cada prueba necesita.
-const { rpc } = vi.hoisted(() => ({ rpc: vi.fn() }));
+// En las pruebas no hay Supabase: `rpc` e `invoke` responden lo que cada prueba necesita.
+const { rpc, invoke } = vi.hoisted(() => ({ rpc: vi.fn(), invoke: vi.fn() }));
 vi.mock("@/lib/supabase", () => {
   const canal = { on: () => canal, subscribe: () => canal };
-  return { supabase: { rpc, channel: () => canal, removeChannel: async () => "ok" } };
+  return {
+    supabase: { rpc, functions: { invoke }, channel: () => canal, removeChannel: async () => "ok" },
+  };
+});
+
+// Turnstile real necesita el script de Cloudflare; aquí entrega un token de una vez.
+vi.mock("@/components/Turnstile", async () => {
+  const { useEffect } = await import("react");
+  return {
+    Turnstile: ({ onToken }: { onToken: (token: string) => void }) => {
+      useEffect(() => onToken("token-de-prueba"), [onToken]);
+      return null;
+    },
+  };
 });
 
 beforeEach(() => {
   rpc.mockReset();
   rpc.mockResolvedValue({ data: null, error: null });
+  invoke.mockReset();
 });
 
 function abrir(ruta: string) {
@@ -97,6 +111,78 @@ describe("rutas", () => {
     expect(
       await screen.findByRole("heading", { level: 1, name: "No pudimos cargar la fila" }),
     ).toBeInTheDocument();
+  });
+
+  it("lleva el origen del QR de la fila al formulario", async () => {
+    rpc.mockResolvedValue({ data: filaDeEjemplo(), error: null });
+    abrir("/b/el-faro?origen=qr");
+    expect(await screen.findByRole("link", { name: /Anotarme en la fila/ })).toHaveAttribute(
+      "href",
+      "/b/el-faro/unirse?origen=qr",
+    );
+  });
+
+  it("con el QR de la puerta deja anotarse aunque la fila en línea esté pausada", async () => {
+    rpc.mockResolvedValue({ data: filaDeEjemplo({ fila_remota_activa: false }), error: null });
+    abrir("/b/el-faro?origen=qr");
+    expect(await screen.findByRole("link", { name: /Anotarme en la fila/ })).toBeInTheDocument();
+  });
+
+  it("anota a un cliente de una barbería real y lo lleva a su turno", async () => {
+    rpc.mockResolvedValue({ data: filaDeEjemplo(), error: null });
+    invoke.mockResolvedValue({ data: { codigo: "K7P2QM4XZA", numero: 7 }, error: null });
+    abrir("/b/el-faro/unirse?barbero=ana&origen=qr");
+
+    fireEvent.change(await screen.findByLabelText("Tu nombre"), {
+      target: { value: "Óscar López" },
+    });
+    expect(screen.getByText("Óscar L.")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Siguiente" }));
+    expect(await screen.findByRole("radio", { name: /Ana/ })).toBeChecked();
+    fireEvent.click(screen.getByRole("button", { name: "Siguiente" }));
+    fireEvent.click(await screen.findByRole("radio", { name: /Barba/ }));
+    expect(await screen.findByRole("heading", { name: /Confirma tu\s*turno/ })).toBeInTheDocument();
+
+    const tomar = screen.getByRole("button", { name: "Tomar mi turno" });
+    await waitFor(() => expect(tomar).toBeEnabled());
+    fireEvent.click(tomar);
+
+    expect(await screen.findByText("#7")).toBeInTheDocument();
+    expect(invoke).toHaveBeenCalledWith("unirse-a-fila", {
+      body: {
+        slug: "el-faro",
+        nombre: "Óscar López",
+        telefono: null,
+        barberoId: "ana",
+        servicioId: "barba",
+        origen: "local",
+        secreto: expect.stringMatching(/^[0-9a-f]{64}$/),
+        clave: expect.stringMatching(/^[0-9a-f-]{36}$/),
+        turnstile: "token-de-prueba",
+      },
+    });
+  });
+
+  it("explica por qué no se pudo tomar el turno", async () => {
+    rpc.mockResolvedValue({ data: filaDeEjemplo(), error: null });
+    const respuesta = new Response(JSON.stringify({ error: "telefono_con_turno" }), {
+      status: 409,
+    });
+    const { FunctionsHttpError } = await import("@supabase/supabase-js");
+    invoke.mockResolvedValue({ data: null, error: new FunctionsHttpError(respuesta) });
+    abrir("/b/el-faro/unirse?barbero=cualquiera");
+
+    fireEvent.change(await screen.findByLabelText("Tu nombre"), { target: { value: "Ana" } });
+    fireEvent.click(screen.getByRole("button", { name: "Siguiente" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Siguiente" }));
+    fireEvent.click(await screen.findByRole("radio", { name: /Corte/ }));
+    const tomar = await screen.findByRole("button", { name: "Tomar mi turno" });
+    await waitFor(() => expect(tomar).toBeEnabled());
+    fireEvent.click(tomar);
+
+    expect(await screen.findByRole("alert")).toHaveTextContent(
+      "Ese número ya tiene un turno activo en esta barbería.",
+    );
   });
 
   it("muestra los cuatro botones del panel del barbero", async () => {

@@ -145,3 +145,21 @@ Cada decisión importante queda aquí con su contexto, las alternativas consider
   6. **El estimado para quien todavía no se anota** usa el primer servicio de la lista (el más barato, casi siempre el corte).
 - **Alternativas:** *sumar la fila de cada barbero, como el prototipo:* ignora que "el primero libre" reparte turnos entre todos. *Mediana en vez de promedio:* resiste mejor los errores de registro, pero el plan pedía promedio, y el filtro de 1–240 minutos ya quita los casos más graves.
 - **Consecuencias:** `fila_publica` todavía no manda las duraciones recientes, así que por ahora siempre se usa la duración configurada. El módulo ya las acepta (`recientes`); falta agregarlas a la función de la base. Las 29 pruebas de `eta.test.ts` cubren cada regla.
+
+## ADR-013 · Detalles de anotarse en la fila
+
+- **Fecha:** 28/10/2026 · **Estado:** aceptada · detalla [ADR-007](#adr-007--anotarse-pasa-por-una-edge-function-y-el-tiempo-real-solo-manda-señales)
+- **Contexto:** al escribir la Edge Function `unirse-a-fila` y el formulario aparecieron decisiones que el plan no fijaba, y las claves nuevas de Supabase cambian cómo se protege una Edge Function.
+- **Decisión:**
+  1. **`verify_jwt = false`.** La clave publicable (`sb_publishable_…`) no es un JWT, y Supabase indica apagar esa revisión y autorizar dentro de la función. Aquí autoriza Turnstile, y todo lo demás lo valida zod y otra vez la base.
+  2. **La clave secreta se lee de `SUPABASE_SECRET_KEYS`** (el diccionario que Supabase pone en cada Edge Function, clave `default`). Las claves heredadas están desactivadas.
+  3. **La lógica vive en `supabase/functions/_shared/unirse.ts`**, sin nada de Deno, y se prueba con Vitest. `unirse-a-fila/index.ts` solo conecta los secretos. Los esquemas zod son los mismos para el formulario y la función.
+  4. **Falla cerrada.** Si falta `TURNSTILE_SECRET` o la clave secreta, la función rechaza todo con `{"error":"error"}`. El cliente solo ve códigos cortos (`fila_llena`, `limite_ip`, `telefono_con_turno`…), nunca el mensaje de la base.
+  5. **La IP se guarda como HMAC-SHA256** con la sal `IP_SALT` o, si no existe, con la clave secreta. Rotar esa clave solo reinicia la ventana de 10 minutos del límite por IP.
+  6. **CORS solo para los orígenes de `ORIGENES_PERMITIDOS`** (por defecto, `http://localhost:5173`). En producción hay que poner el dominio de la app.
+  7. **Turnstile usa la misma clave de idempotencia que el turno**, así un reintento del mismo envío vuelve a pasar la verificación. Si Turnstile falla, el formulario pide un token nuevo y cambia la clave.
+  8. **El secreto para cancelar se queda en el teléfono** (`localStorage`). Si el navegador lo bloquea, el turno existe igual, solo que no se puede cancelar desde ese teléfono.
+  9. **Quien llega por el QR de la puerta (`?origen=qr`) puede anotarse aunque la fila en línea esté pausada.** Cualquiera podría agregar `?origen=qr` a mano; se acepta porque la pausa es una herramienta de orden, no de seguridad, y los demás límites (IP, teléfono, tamaño de la fila) siguen igual.
+  10. **En desarrollo, sin `VITE_TURNSTILE_SITE_KEY`, el formulario usa la clave pública de prueba de Cloudflare** (siempre pasa). En producción, sin clave, el formulario no deja anotarse.
+- **Alternativas:** *`@supabase/server` (`withSupabase`):* resuelve las claves solo, pero la función no usa sesión de usuario y sumaría otra dependencia. *Guardar la IP en claro con borrado rápido:* más simple, pero contradice el fallo 5.
+- **Consecuencias:** para probar en la nube hay que cargar `TURNSTILE_SECRET` en Supabase (Edge Functions > Secrets). En el proyecto de pruebas sirve la clave secreta de prueba de Cloudflare. La prueba de riesgo 3 queda pendiente de eso.

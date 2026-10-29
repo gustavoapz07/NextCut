@@ -133,3 +133,15 @@ Cada cambio del proyecto queda aquí, enlazado al documento que afecta. El grafo
 - **Despliegue:** versión 3 de `unirse-a-fila`. La versión 2 falló porque Supabase reusó la ruta absoluta del mapa de imports de la versión 1; se arregla pasando `import_map_path: deno.json` en cada despliegue.
 - **Sprint 0:** las pruebas de riesgo 1 y 3 están superadas; falta la 2 (Web Push).
 - **Pendiente para producción:** crear el widget de Turnstile en Cloudflare y cargar sus claves reales.
+
+## 2026-10-28 · Sprint 2: la página del turno con datos reales
+
+- **Qué:** `/t/:codigo` muestra el turno real y se mantiene al día ([plan](plan-implementacion.md#sprint-2--cliente-fila-pública-y-turno-en-vivo-semana-4)). Con esto quedan hechas las seis tareas del Sprint 2; falta su criterio de salida (la prueba de Playwright).
+- **Datos** (`app/src/lib/turno.ts` y `useTurno` en `enVivo.ts`): esquema zod de `ver_turno`. Mientras el turno está activo también se pide `fila_publica`, que da el estimado (con `eta.ts`) y el canal de la barbería. Con la página visible escucha la señal; oculta, consulta cada 20 segundos. Un turno cerrado ya no pide la fila ni escucha nada.
+- **Pantallas:** en fila (con las iniciales de quienes van antes y "+N" si son más de tres), ya casi, te toca (con la cuenta regresiva desde la hora real en que lo llamaron y la tolerancia de la barbería), en la silla, listo (cuánto esperó y cuánto se estimó), cancelado, "se pasó tu turno" (`no_llego`) y "fila cerrada" (`abandono`).
+- **Te toca:** suena dos tonos y vibra una vez por llamada. Si la persona no ha tocado la página (abrió el enlace de cero), el navegador lo bloquea, así que ni se intenta.
+- **Cancelar:** mantener presionado llama a `cancelar_turno` con el secreto que guardó el formulario en el teléfono. Sin ese secreto (otro teléfono) la página explica dónde cancelar. El botón ya no se reinicia cuando la pantalla se redibuja cada segundo.
+- **Prototipo:** `/t/K7P2Q` sigue simulado, con sus estados por `?estado=`. El botón de avisos por Web Push y "Ya voy en camino" quedan solo ahí hasta el Sprint 3.
+- **Pruebas:** 97 en total; 6 nuevas de la página real (en fila, cancelar con secreto, sin secreto, te toca, se pasó el turno y código inexistente). `npm run check` pasa.
+- **Verificado en el navegador:** el prototipo se ve igual en "en fila" y "te toca", y un código real consulta `ver_turno` en el proyecto de pruebas y muestra "no encontrado".
+- **Siguiente:** la prueba de Playwright que cierra el Sprint 2 (necesita una barbería de prueba en `siguiente-pruebas` o Supabase local en el CI) y las duraciones recientes en `fila_publica`.

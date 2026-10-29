@@ -255,7 +255,7 @@ No construye funciones del producto. Prepara el entorno y prueba lo que podría 
 - [x] Página `/b/:slug`: personas en fila y estimado por barbero, al día con la señal de tiempo real. Falta que `fila_publica` mande las duraciones recientes.
 - [x] Formulario con zod, Turnstile y clave de idempotencia; aviso de privacidad corto.
 - [x] Edge Function `unirse-a-fila` con mensajes de error genéricos y código corto ([ADR-013](decisiones.md#adr-013--detalles-de-anotarse-en-la-fila)).
-- [ ] Página `/t/:codigo`: posición y estimado en vivo (señal + recarga, o consulta cada 20 s si está oculta), sonido y vibración cuando toca, botón de cancelar.
+- [x] Página `/t/:codigo`: posición y estimado en vivo (señal + recarga, o consulta cada 20 s si está oculta), sonido y vibración cuando toca, botón de cancelar.
 - [x] El QR de la puerta lleva `?origen=qr` para distinguir turnos locales de remotos: la página pública lo pasa al formulario y el turno queda como `local`.
 
 **Salida:** Playwright: un cliente se anota en un celular simulado y ve su posición cambiar cuando otro turno avanza. Las pruebas del fallo 3 (nombres de 500 caracteres, `<script>`, emojis, teléfonos de otros países, servicio de otra barbería) pasan.

@@ -1,13 +1,21 @@
+import { rangoDe, simular } from "@shared/eta";
+import type { FilaPublica } from "@shared/filaPublica";
 import { Armchair, BellRing, Check, Scissors } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useLocation, useParams, useSearchParams } from "react-router";
 import { BarraPoste, Poste } from "@/components/Franjas";
-import { BotonMarca } from "@/components/Marco";
+import { BotonMarca, Cargando } from "@/components/Marco";
 import { NoEncontrado } from "@/components/NoEncontrado";
 import { NumeroAnimado } from "@/components/NumeroAnimado";
 import { Boleto, Confeti } from "@/components/Piezas";
-import { lempiras, rango, reloj } from "@/lib/formato";
+import { SinConexion } from "@/components/SinConexion";
+import { useTurno } from "@/lib/enVivo";
+import { entradaEta } from "@/lib/fila";
+import { hora, lempiras, rango, reloj } from "@/lib/formato";
+import { useIntervalo, useReloj, useTitulo } from "@/lib/ganchos";
+import { avisarQueToca, cancelarTurno, type TurnoPublico } from "@/lib/turno";
+import { leerSecreto } from "@/lib/unirse";
 import { cx } from "@/lib/utilidades";
 import {
   barberia,
@@ -17,9 +25,152 @@ import {
   nombreDe,
   type Preferencia,
 } from "@/prototipo/datos";
-import { useCronometro, useIntervalo, useTitulo } from "@/prototipo/simulacion";
 
-type Fase = "esperando" | "llamado" | "en_silla" | "atendido";
+type Fase =
+  | "esperando"
+  | "llamado"
+  | "en_silla"
+  | "atendido"
+  | "cancelado"
+  | "no_llego"
+  | "abandono";
+type Rango = readonly [number, number];
+
+/** Todo lo que dibuja la página, venga del prototipo o de la base. */
+interface VistaTurno {
+  barberia: { nombre: string; slug: string };
+  numero: number;
+  codigo: string;
+  nombre: string;
+  fase: Fase;
+  /** Personas que pasan antes, con clave estable para animarlas (las más cercanas al final). */
+  delante: { id: string; inicial: string }[];
+  adelante: number;
+  /** `null` mientras espera con "el primero libre". */
+  barbero: string | null;
+  /** El número que tiene su barbero en la silla, si se sabe. */
+  atendiendo: number | null;
+  silla: number | null;
+  servicio: string;
+  precio: number;
+  anotado: string;
+  estimado: Rango | null;
+  /** Hora (ms) en que lo llamaron y en que se sentó; sin ella se cuenta desde que se abre. */
+  llamadoDesde?: number;
+  enSillaDesde?: number;
+  toleranciaMin: number;
+  esperaste: number | null;
+  estimamos: Rango | null;
+  /** Se puede cancelar desde este teléfono. */
+  cancelable: boolean;
+  /** Piezas del prototipo que todavía no hacen nada de verdad (avisos y "Ya voy"). */
+  simulado: boolean;
+}
+
+interface Acciones {
+  onCancelar: () => void;
+  errorCancelar: boolean;
+}
+
+export function Turno() {
+  const { codigo = "" } = useParams();
+  const [params] = useSearchParams();
+  // El turno del prototipo de diseño sigue simulado; los demás vienen de la base.
+  if (codigo === miTurno.codigo) {
+    const estado = params.get("estado");
+    return <TurnoPrototipo key={estado ?? "auto"} estado={estado} />;
+  }
+  return <TurnoReal codigo={codigo} />;
+}
+
+// ---------------------------------------------------------------------------------------------
+// Turno real
+// ---------------------------------------------------------------------------------------------
+
+function TurnoReal({ codigo }: { codigo: string }) {
+  const { estado, recargar } = useTurno(codigo);
+  const ahora = useReloj(30_000);
+  const [secreto] = useState(() => leerSecreto(codigo));
+  const [errorCancelar, setErrorCancelar] = useState(false);
+
+  useTitulo(
+    estado.tipo !== "listo"
+      ? "Turno"
+      : estado.turno.estado === "cancelado"
+        ? "Turno cancelado"
+        : `Turno #${estado.turno.numero}`,
+  );
+
+  const cancelar = useCallback(async () => {
+    if (!secreto) return;
+    setErrorCancelar(false);
+    if (await cancelarTurno(codigo, secreto)) void recargar();
+    else setErrorCancelar(true);
+  }, [codigo, secreto, recargar]);
+
+  if (estado.tipo === "cargando") return <Cargando />;
+  if (estado.tipo === "no_existe") return <NoEncontrado />;
+  if (estado.tipo === "error") {
+    return <SinConexion titulo="No pudimos cargar tu turno" alReintentar={() => void recargar()} />;
+  }
+
+  const vista = vistaReal(estado.turno, estado.fila, codigo, ahora, secreto !== null);
+  return (
+    <PantallaTurno vista={vista} onCancelar={() => void cancelar()} errorCancelar={errorCancelar} />
+  );
+}
+
+const minutosEntre = (desde: string, hasta: string) =>
+  Math.max(0, Math.round((Date.parse(hasta) - Date.parse(desde)) / 60_000));
+
+function vistaReal(
+  turno: TurnoPublico,
+  fila: FilaPublica | null,
+  codigo: string,
+  ahora: Date,
+  conSecreto: boolean,
+): VistaTurno {
+  // Quienes pasan antes, con la misma regla que `ver_turno`: su barbero o "el primero libre".
+  const antes = (fila?.fila ?? []).filter(
+    (t) =>
+      t.numero !== turno.numero &&
+      Date.parse(t.creado_en) <= Date.parse(turno.creado_en) &&
+      (turno.barbero_id === null || t.barbero_id === null || t.barbero_id === turno.barbero_id),
+  );
+  const estimado = fila ? simular(entradaEta(fila, ahora)).get(turno.numero) : undefined;
+  const suBarbero = fila?.barberos.find((b) => b.id === turno.barbero_id);
+
+  return {
+    barberia: turno.barberia,
+    numero: turno.numero,
+    codigo,
+    nombre: turno.nombre,
+    fase: turno.estado,
+    delante: antes.slice(-3).map((t) => ({
+      id: String(t.numero),
+      inicial: t.nombre?.charAt(0).toUpperCase() || "•",
+    })),
+    adelante: turno.adelante,
+    barbero: turno.barbero,
+    atendiendo: suBarbero?.atendiendo?.numero ?? null,
+    silla: turno.silla,
+    servicio: turno.servicio,
+    precio: turno.precio_ref,
+    anotado: hora(new Date(turno.creado_en)),
+    estimado: estimado?.minutos != null ? rangoDe(estimado.minutos) : null,
+    llamadoDesde: turno.llamado_en ? Date.parse(turno.llamado_en) : undefined,
+    enSillaDesde: turno.inicio_en ? Date.parse(turno.inicio_en) : undefined,
+    toleranciaMin: turno.barberia.tolerancia_min,
+    esperaste: turno.inicio_en ? minutosEntre(turno.creado_en, turno.inicio_en) : null,
+    estimamos: turno.estimado_min === null ? null : rangoDe(turno.estimado_min),
+    cancelable: conSecreto && (turno.estado === "esperando" || turno.estado === "llamado"),
+    simulado: false,
+  };
+}
+
+// ---------------------------------------------------------------------------------------------
+// Turno del prototipo
+// ---------------------------------------------------------------------------------------------
 
 const SECUENCIA: Array<{ fase: Fase; adelante: number }> = [
   { fase: "esperando", adelante: 2 },
@@ -33,14 +184,14 @@ const SECUENCIA: Array<{ fase: Fase; adelante: number }> = [
 /** `?estado=` abre la página directo en un estado; sin él, el turno avanza solo. */
 const ESTADOS: Record<string, number> = { fila: 0, casi: 2, llamado: 3, silla: 4, listo: 5 };
 
-const DURACION: Record<Fase, number> = {
+const DURACION: Partial<Record<Fase, number>> = {
   esperando: 6000,
   llamado: 8000,
   en_silla: 6000,
   atendido: 6000,
 };
 
-const ESTIMADOS: Array<[number, number]> = [
+const ESTIMADOS: Rango[] = [
   [35, 45],
   [20, 30],
   [5, 10],
@@ -51,24 +202,6 @@ const ADELANTE = [
   { id: "luis", inicial: "L" },
   { id: "daniel", inicial: "D" },
 ];
-
-const TEMAS = {
-  esperando: "bg-fondo text-tinta",
-  casi: "bg-poste-azul text-white",
-  llamado: "bg-poste-rojo text-white",
-  en_silla: "bg-noche text-hueso",
-  atendido: "bg-fondo text-tinta",
-  cancelado: "bg-fondo text-tinta",
-};
-
-const COLOR_BARRA: Record<keyof typeof TEMAS, string> = {
-  esperando: "#f3eee4",
-  casi: "#2c4d96",
-  llamado: "#b8312a",
-  en_silla: "#0a0f24",
-  atendido: "#f3eee4",
-  cancelado: "#f3eee4",
-};
 
 interface DatosTurno {
   nombre: string;
@@ -86,15 +219,7 @@ function leerDatos(estado: unknown): DatosTurno {
   };
 }
 
-export function Turno() {
-  const { codigo } = useParams();
-  const [params] = useSearchParams();
-  if (codigo !== miTurno.codigo) return <NoEncontrado />;
-  const estado = params.get("estado");
-  return <TurnoEnVivo key={estado ?? "auto"} estado={estado} />;
-}
-
-function TurnoEnVivo({ estado }: { estado: string | null }) {
+function TurnoPrototipo({ estado }: { estado: string | null }) {
   const { state } = useLocation();
   const datos = leerDatos(state);
   const [indice, setIndice] = useState(estado ? (ESTADOS[estado] ?? 0) : 0);
@@ -102,23 +227,74 @@ function TurnoEnVivo({ estado }: { estado: string | null }) {
   const auto = estado === null && !cancelado;
 
   const paso = SECUENCIA[indice] ?? { fase: "esperando" as Fase, adelante: 2 };
-  const fase = paso.fase;
-  const tema: keyof typeof TEMAS = cancelado
-    ? "cancelado"
-    : fase === "esperando" && paso.adelante === 0
-      ? "casi"
-      : fase;
-
   // Con "el primero libre", el barbero se conoce al llamarlo.
   const asignado = datos.barbero === "cualquiera" ? "kevin" : datos.barbero;
   const barbero = buscarBarbero(asignado);
-  const nombreBarbero = fase === "esperando" ? nombreDe(datos.barbero) : (barbero?.nombre ?? "");
+  const servicio = buscarServicio(datos.servicio);
 
   useTitulo(cancelado ? "Turno cancelado" : `Turno #${miTurno.numero}`);
   useIntervalo(
     () => setIndice((i) => Math.min(i + 1, SECUENCIA.length - 1)),
-    auto && indice < SECUENCIA.length - 1 ? DURACION[fase] : null,
+    auto && indice < SECUENCIA.length - 1 ? (DURACION[paso.fase] ?? null) : null,
   );
+
+  const vista: VistaTurno = {
+    barberia: { nombre: barberia.nombre, slug: barberia.slug },
+    numero: miTurno.numero,
+    codigo: miTurno.codigo,
+    nombre: datos.nombre,
+    fase: cancelado ? "cancelado" : paso.fase,
+    delante: ADELANTE.slice(ADELANTE.length - paso.adelante),
+    adelante: paso.adelante,
+    barbero: paso.fase === "esperando" ? nombreDe(datos.barbero) : (barbero?.nombre ?? ""),
+    atendiendo: 24,
+    silla: barbero?.silla ?? 1,
+    servicio: servicio?.nombre ?? "—",
+    precio: servicio?.precio ?? 0,
+    anotado: miTurno.anotado,
+    estimado: ESTIMADOS[2 - paso.adelante] ?? [5, 10],
+    toleranciaMin: 5,
+    esperaste: 41,
+    estimamos: [35, 45],
+    cancelable: true,
+    simulado: true,
+  };
+
+  return (
+    <PantallaTurno vista={vista} onCancelar={() => setCancelado(true)} errorCancelar={false} />
+  );
+}
+
+// ---------------------------------------------------------------------------------------------
+// Pantallas
+// ---------------------------------------------------------------------------------------------
+
+const TEMAS = {
+  esperando: "bg-fondo text-tinta",
+  casi: "bg-poste-azul text-white",
+  llamado: "bg-poste-rojo text-white",
+  en_silla: "bg-noche text-hueso",
+  final: "bg-fondo text-tinta",
+};
+
+const COLOR_BARRA: Record<keyof typeof TEMAS, string> = {
+  esperando: "#f3eee4",
+  casi: "#2c4d96",
+  llamado: "#b8312a",
+  en_silla: "#0a0f24",
+  final: "#f3eee4",
+};
+
+function PantallaTurno({ vista, onCancelar, errorCancelar }: { vista: VistaTurno } & Acciones) {
+  const { fase } = vista;
+  const tema: keyof typeof TEMAS =
+    fase === "esperando"
+      ? vista.adelante === 0
+        ? "casi"
+        : "esperando"
+      : fase === "llamado" || fase === "en_silla"
+        ? fase
+        : "final";
 
   // La barra del navegador del celular cambia de color con el estado.
   useEffect(() => {
@@ -130,33 +306,44 @@ function TurnoEnVivo({ estado }: { estado: string | null }) {
     };
   }, [tema]);
 
-  const cancelar = useCallback(() => setCancelado(true), []);
+  // Sonido y vibración cuando le toca (una vez por llamada).
+  const faseAnterior = useRef<Fase | null>(null);
+  useEffect(() => {
+    if (fase === "llamado" && faseAnterior.current !== "llamado") avisarQueToca();
+    faseAnterior.current = fase;
+  }, [fase]);
 
   return (
     <div className={cx("min-h-dvh overflow-x-clip transition-colors duration-700", TEMAS[tema])}>
       <div className="mx-auto max-w-lg px-4 pb-16">
         <header className="flex items-center justify-between gap-4 pt-5">
           <BotonMarca />
-          <span className="font-display text-lg font-extrabold uppercase">{barberia.nombre}</span>
+          <span className="min-w-0 truncate font-display text-lg font-extrabold uppercase">
+            {vista.barberia.nombre}
+          </span>
         </header>
 
         <AnimatePresence mode="wait">
-          {cancelado ? (
-            <Cancelado key="cancelado" />
-          ) : fase === "esperando" ? (
+          {fase === "esperando" ? (
             <Esperando
               key="esperando"
-              adelante={paso.adelante}
-              datos={datos}
-              nombreBarbero={nombreBarbero}
-              onCancelar={cancelar}
+              vista={vista}
+              onCancelar={onCancelar}
+              errorCancelar={errorCancelar}
             />
           ) : fase === "llamado" ? (
-            <Llamado key="llamado" barbero={nombreBarbero} silla={barbero?.silla ?? 1} />
+            <Llamado
+              key="llamado"
+              vista={vista}
+              onCancelar={onCancelar}
+              errorCancelar={errorCancelar}
+            />
           ) : fase === "en_silla" ? (
-            <EnSilla key="en_silla" barbero={nombreBarbero} />
+            <EnSilla key="en_silla" vista={vista} />
+          ) : fase === "atendido" ? (
+            <Atendido key="atendido" vista={vista} />
           ) : (
-            <Atendido key="atendido" />
+            <Terminado key={fase} vista={vista} />
           )}
         </AnimatePresence>
       </div>
@@ -171,21 +358,19 @@ const aparecer = {
   transition: { type: "spring" as const, stiffness: 200, damping: 24 },
 };
 
-function Esperando({
-  adelante,
-  datos,
-  nombreBarbero,
-  onCancelar,
-}: {
-  adelante: number;
-  datos: DatosTurno;
-  nombreBarbero: string;
-  onCancelar: () => void;
-}) {
+function Esperando({ vista, onCancelar, errorCancelar }: { vista: VistaTurno } & Acciones) {
   const [avisos, setAvisos] = useState(false);
-  const servicio = buscarServicio(datos.servicio);
-  const estimado = ESTIMADOS[2 - adelante] ?? [5, 10];
+  const { adelante, barbero, atendiendo } = vista;
   const casi = adelante === 0;
+  const progreso = casi ? 0.92 : Math.max(0.08, 0.9 / (adelante + 1));
+
+  const detalle = casi
+    ? barbero
+      ? `Cuando ${barbero} termine${atendiendo ? ` con el #${atendiendo}` : ""}, te llama.`
+      : "Te llama el primer barbero que quede libre."
+    : `${adelante} ${adelante === 1 ? "persona" : "personas"} antes que tú${
+        barbero && atendiendo ? ` · ${barbero} va por el #${atendiendo}` : ""
+      }`;
 
   return (
     <motion.main {...aparecer}>
@@ -198,7 +383,7 @@ function Esperando({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
           >
-            {casi ? "¡Ya casi, ve acercándote!" : `Hola, ${datos.nombre.replace(/\.$/, "")}. Vas`}
+            {casi ? "¡Ya casi, ve acercándote!" : `Hola, ${vista.nombre.replace(/\.$/, "")}. Vas`}
           </motion.p>
         </AnimatePresence>
         <div className="flex items-end gap-3">
@@ -206,42 +391,42 @@ function Esperando({
             <NumeroAnimado valor={adelante + 1} />
             <span className="absolute top-2 -right-7 text-6xl">º</span>
           </span>
-          <p className="mb-2 ml-6 font-display text-4xl leading-[0.9] font-extrabold uppercase">
+          <p className="mb-2 ml-6 min-w-0 font-display text-4xl leading-[0.9] font-extrabold break-words uppercase">
             {casi ? (
               <>
                 Eres el
                 <br />
                 siguiente
               </>
-            ) : (
+            ) : barbero ? (
               <>
                 en la fila
                 <br />
-                de {nombreBarbero}
+                de {barbero}
               </>
+            ) : (
+              "en la fila"
             )}
           </p>
         </div>
 
-        <FilaVisual adelante={adelante} />
+        <FilaVisual delante={vista.delante} restantes={adelante - vista.delante.length} />
       </section>
 
       <section className="mt-8 rounded-[1.75rem] bg-current/[0.06] p-5 ring-1 ring-current/10">
         <div className="flex items-baseline justify-between gap-3">
           <p className="text-sm opacity-75">Te toca en</p>
-          <p className="font-display text-4xl leading-none font-extrabold">≈ {rango(estimado)}</p>
+          <p className="font-display text-4xl leading-none font-extrabold">
+            {vista.estimado ? `≈ ${rango(vista.estimado)}` : "Por confirmar"}
+          </p>
         </div>
         <BarraPoste
-          valor={[0.25, 0.6, 0.92][2 - adelante] ?? 0.9}
+          valor={progreso}
           velocidad={casi ? 0.45 : 1.4}
           pista="bg-current/10"
           className="mt-4 h-4"
         />
-        <p className="mt-3 text-sm opacity-80">
-          {casi
-            ? `Cuando ${nombreBarbero} termine con el #24, te llama.`
-            : `${adelante} ${adelante === 1 ? "persona" : "personas"} antes que tú · ${nombreBarbero} va por el #24`}
-        </p>
+        <p className="mt-3 text-sm opacity-80">{detalle}</p>
       </section>
 
       <Boleto
@@ -250,25 +435,25 @@ function Esperando({
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="text-base font-medium text-tenue">Tu número</p>
-              <p className="font-display text-7xl leading-[0.9] font-black">#{miTurno.numero}</p>
+              <p className="font-display text-7xl leading-[0.9] font-black">#{vista.numero}</p>
             </div>
             <div className="text-right">
               <p className="text-sm text-tenue">Código</p>
-              <p className="font-mono text-lg font-bold tracking-widest">{miTurno.codigo}</p>
+              <p className="font-mono text-lg font-bold tracking-widest">{vista.codigo}</p>
             </div>
           </div>
         }
         abajo={
           <dl className="grid grid-cols-2 gap-4">
             {[
-              ["Barbero", nombreBarbero],
-              ["Servicio", servicio?.nombre ?? "—"],
-              ["Te anotaste", miTurno.anotado],
-              ["Precio", lempiras(servicio?.precio ?? 0)],
+              ["Barbero", barbero ?? "El primero libre"],
+              ["Servicio", vista.servicio],
+              ["Te anotaste", vista.anotado],
+              ["Precio", lempiras(vista.precio)],
             ].map(([titulo, valor]) => (
-              <div key={titulo}>
+              <div key={titulo} className="min-w-0">
                 <dt className="text-sm text-tenue">{titulo}</dt>
-                <dd className="mt-0.5 font-display text-xl leading-none font-extrabold uppercase">
+                <dd className="mt-0.5 font-display text-xl leading-none font-extrabold break-words uppercase">
                   {valor}
                 </dd>
               </div>
@@ -278,38 +463,72 @@ function Esperando({
       />
 
       <div className="mt-6 grid gap-3">
-        <button
-          type="button"
-          onClick={() => setAvisos(true)}
-          className={cx(
-            "flex min-h-14 items-center justify-center gap-2 rounded-full px-5 py-3 text-center font-semibold transition",
-            avisos
-              ? "bg-current/10 ring-1 ring-current/20"
-              : casi
-                ? "bg-white text-poste-azul"
-                : "bg-tinta text-fondo",
-          )}
-        >
-          <motion.span
-            animate={avisos ? { rotate: [0, -25, 20, -14, 8, 0] } : { rotate: 0 }}
-            transition={{ duration: 0.8 }}
+        {/* Los avisos por Web Push llegan en el Sprint 3; mientras, solo en el prototipo. */}
+        {vista.simulado && (
+          <button
+            type="button"
+            onClick={() => setAvisos(true)}
+            className={cx(
+              "flex min-h-14 items-center justify-center gap-2 rounded-full px-5 py-3 text-center font-semibold transition",
+              avisos
+                ? "bg-current/10 ring-1 ring-current/20"
+                : casi
+                  ? "bg-white text-poste-azul"
+                  : "bg-tinta text-fondo",
+            )}
           >
-            {avisos ? <Check className="size-5" /> : <BellRing className="size-5" />}
-          </motion.span>
-          {avisos ? "Te avisamos a los 15 min y cuando te toque" : "Avisarme cuando falten 15 min"}
-        </button>
-        <MantenerParaCancelar onCancelar={onCancelar} />
+            <motion.span
+              animate={avisos ? { rotate: [0, -25, 20, -14, 8, 0] } : { rotate: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              {avisos ? <Check className="size-5" /> : <BellRing className="size-5" />}
+            </motion.span>
+            {avisos
+              ? "Te avisamos a los 15 min y cuando te toque"
+              : "Avisarme cuando falten 15 min"}
+          </button>
+        )}
+        <Cancelar vista={vista} onCancelar={onCancelar} errorCancelar={errorCancelar} />
       </div>
       <p className="mt-6 text-center text-sm opacity-70">
-        Puedes cerrar esta página. Vuelve con el mismo enlace o el código{" "}
-        <strong className="font-mono">{miTurno.codigo}</strong>.
+        {vista.simulado
+          ? "Puedes cerrar esta página."
+          : "Deja esta página abierta para ver tu turno al día."}{" "}
+        Vuelve con el mismo enlace o el código <strong className="font-mono">{vista.codigo}</strong>
+        .
       </p>
     </motion.main>
   );
 }
 
-function FilaVisual({ adelante }: { adelante: number }) {
-  const delante = ADELANTE.slice(ADELANTE.length - adelante);
+function Cancelar({ vista, onCancelar, errorCancelar }: { vista: VistaTurno } & Acciones) {
+  if (!vista.cancelable) {
+    return (
+      <p className="text-center text-sm opacity-70">
+        Para cancelar, abre esta página en el teléfono con el que te anotaste.
+      </p>
+    );
+  }
+  return (
+    <>
+      <MantenerParaCancelar onCancelar={onCancelar} />
+      {errorCancelar && (
+        <p role="alert" className="text-center text-sm font-semibold">
+          No pudimos cancelar tu turno. Revisa tu conexión e inténtalo de nuevo.
+        </p>
+      )}
+    </>
+  );
+}
+
+function FilaVisual({
+  delante,
+  restantes,
+}: {
+  delante: VistaTurno["delante"];
+  /** Personas antes que no caben en la fila visual. */
+  restantes: number;
+}) {
   return (
     <div className="mt-8 flex items-center gap-2.5" aria-hidden="true">
       <div className="grid size-16 shrink-0 place-items-center rounded-2xl bg-current/10">
@@ -317,6 +536,15 @@ function FilaVisual({ adelante }: { adelante: number }) {
       </div>
       <div className="h-0.5 w-6 shrink-0 border-t-2 border-dotted border-current opacity-40" />
       <AnimatePresence mode="popLayout" initial={false}>
+        {restantes > 0 && (
+          <motion.div
+            key="mas"
+            layout
+            className="grid size-11 shrink-0 place-items-center rounded-full bg-current/10 text-sm font-bold"
+          >
+            +{restantes}
+          </motion.div>
+        )}
         {delante.map((p) => (
           <motion.div
             key={p.id}
@@ -346,12 +574,17 @@ function FilaVisual({ adelante }: { adelante: number }) {
 
 function MantenerParaCancelar({ onCancelar }: { onCancelar: () => void }) {
   const [presionando, setPresionando] = useState(false);
+  // La pantalla se redibuja cada segundo (el reloj de "Te toca"); eso no debe reiniciar la espera.
+  const accion = useRef(onCancelar);
+  useEffect(() => {
+    accion.current = onCancelar;
+  });
 
   useEffect(() => {
     if (!presionando) return;
-    const id = window.setTimeout(onCancelar, 1400);
+    const id = window.setTimeout(() => accion.current(), 1400);
     return () => window.clearTimeout(id);
-  }, [presionando, onCancelar]);
+  }, [presionando]);
 
   return (
     <button
@@ -380,8 +613,16 @@ function MantenerParaCancelar({ onCancelar }: { onCancelar: () => void }) {
   );
 }
 
-function Llamado({ barbero, silla }: { barbero: string; silla: number }) {
-  const segundos = useCronometro("llamado");
+/** Segundos desde `desde` (ms); sin ella, desde que se montó la pantalla. */
+function useSegundosDesde(desde: number | undefined) {
+  const [montado] = useState(() => Date.now());
+  const ahora = useReloj(1000);
+  return Math.floor((ahora.getTime() - (desde ?? montado)) / 1000);
+}
+
+function Llamado({ vista, onCancelar, errorCancelar }: { vista: VistaTurno } & Acciones) {
+  const segundos = useSegundosDesde(vista.llamadoDesde);
+  const restante = vista.toleranciaMin * 60 - segundos;
   return (
     <motion.main
       {...aparecer}
@@ -394,7 +635,7 @@ function Llamado({ barbero, silla }: { barbero: string; silla: number }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
       >
-        Tu turno #{miTurno.numero}
+        Tu turno #{vista.numero}
       </motion.p>
       <motion.h1
         className="font-display text-[clamp(7rem,36vw,13rem)] leading-[0.9] font-black uppercase"
@@ -413,27 +654,42 @@ function Llamado({ barbero, silla }: { barbero: string; silla: number }) {
         </motion.span>
       </motion.h1>
       <p className="mt-6 text-2xl">
-        {barbero} te espera en la <strong>silla {silla}</strong>
+        {vista.barbero} te espera
+        {vista.silla ? (
+          <>
+            {" "}
+            en la <strong>silla {vista.silla}</strong>
+          </>
+        ) : null}
       </p>
       <div className="mt-8 rounded-[1.75rem] bg-white/15 px-10 py-5">
-        <p className="text-sm">Tienes para llegar</p>
+        <p className="text-sm">
+          {restante > 0 ? "Tienes para llegar" : "Ve ya, te están esperando"}
+        </p>
         <p className="font-display text-7xl leading-none font-black tabular-nums">
-          {reloj(300 - segundos)}
+          {reloj(restante)}
         </p>
       </div>
-      <button
-        type="button"
-        className="mt-8 h-16 w-full rounded-full bg-white font-display text-2xl font-extrabold tracking-wide text-poste-rojo uppercase shadow-xl transition active:scale-[0.97]"
-      >
-        Ya voy en camino
-      </button>
+      {vista.simulado && (
+        <button
+          type="button"
+          className="mt-8 h-16 w-full rounded-full bg-white font-display text-2xl font-extrabold tracking-wide text-poste-rojo uppercase shadow-xl transition active:scale-[0.97]"
+        >
+          Ya voy en camino
+        </button>
+      )}
       <p className="mt-3 text-sm">Si no llegas a tiempo, pasa el siguiente de la fila.</p>
+      {!vista.simulado && (
+        <div className="mt-8 grid w-full gap-3">
+          <Cancelar vista={vista} onCancelar={onCancelar} errorCancelar={errorCancelar} />
+        </div>
+      )}
     </motion.main>
   );
 }
 
-function EnSilla({ barbero }: { barbero: string }) {
-  const segundos = useCronometro("silla");
+function EnSilla({ vista }: { vista: VistaTurno }) {
+  const segundos = useSegundosDesde(vista.enSillaDesde);
   return (
     <motion.main
       {...aparecer}
@@ -457,14 +713,18 @@ function EnSilla({ barbero }: { barbero: string }) {
         tu corte
       </h1>
       <p className="mt-5 text-hueso/80">
-        {barbero} empezó hace <span className="tabular-nums">{reloj(segundos)}</span>
+        {vista.barbero} empezó hace <span className="tabular-nums">{reloj(segundos)}</span>
       </p>
       <Poste className="mt-10 h-36 w-9 text-hueso" velocidad={1.1} ancho={7} />
     </motion.main>
   );
 }
 
-function Atendido() {
+function Atendido({ vista }: { vista: VistaTurno }) {
+  const datos = [
+    ["Esperaste", vista.esperaste === null ? null : `${vista.esperaste} min`],
+    ["Estimamos", vista.estimamos ? rango(vista.estimamos) : null],
+  ].filter((dato): dato is [string, string] => dato[1] !== null);
   return (
     <motion.main {...aparecer} className="relative pt-14 text-center">
       <Confeti disparo={2} />
@@ -474,22 +734,21 @@ function Atendido() {
       <h1 className="font-display text-[clamp(5rem,27vw,9rem)] leading-[0.9] font-black uppercase">
         fino!
       </h1>
-      <div className="mt-10 grid grid-cols-2 gap-3 text-left">
-        {[
-          ["Esperaste", "41 min"],
-          ["Estimamos", "35–45 min"],
-        ].map(([titulo, valor]) => (
-          <div key={titulo} className="rounded-[1.5rem] bg-superficie p-5 ring-1 ring-borde">
-            <p className="text-sm text-tenue">{titulo}</p>
-            <p className="mt-1 font-display text-4xl leading-none font-black">{valor}</p>
-          </div>
-        ))}
-      </div>
+      {datos.length > 0 && (
+        <div className="mt-10 grid grid-cols-2 gap-3 text-left">
+          {datos.map(([titulo, valor]) => (
+            <div key={titulo} className="rounded-[1.5rem] bg-superficie p-5 ring-1 ring-borde">
+              <p className="text-sm text-tenue">{titulo}</p>
+              <p className="mt-1 font-display text-4xl leading-none font-black">{valor}</p>
+            </div>
+          ))}
+        </div>
+      )}
       <p className="mt-8 text-lg text-tenue">
-        Gracias por venir a {barberia.nombre}. ¡Vuelve pronto!
+        Gracias por venir a {vista.barberia.nombre}. ¡Vuelve pronto!
       </p>
       <Link
-        to={`/b/${barberia.slug}`}
+        to={`/b/${vista.barberia.slug}`}
         className="mt-6 inline-flex h-14 items-center justify-center rounded-full px-8 font-display text-xl font-extrabold uppercase ring-2 ring-tinta transition hover:bg-tinta hover:text-fondo"
       >
         Ver la fila
@@ -498,20 +757,40 @@ function Atendido() {
   );
 }
 
-function Cancelado() {
+const FINALES: Record<
+  "cancelado" | "no_llego" | "abandono",
+  { arriba: string; titulo: [string, string]; texto: string }
+> = {
+  cancelado: {
+    arriba: "Listo,",
+    titulo: ["Turno", "cancelado"],
+    texto: "Liberaste tu lugar y los demás avanzaron un puesto. Gracias por avisar.",
+  },
+  no_llego: {
+    arriba: "Lo sentimos,",
+    titulo: ["Se pasó", "tu turno"],
+    texto: "Te llamamos y no llegaste a tiempo, así que pasó el siguiente de la fila.",
+  },
+  abandono: {
+    arriba: "Por hoy,",
+    titulo: ["Fila", "cerrada"],
+    texto: "La barbería cerró la fila del día antes de que te tocara.",
+  },
+};
+
+function Terminado({ vista }: { vista: VistaTurno }) {
+  const final = FINALES[vista.fase as keyof typeof FINALES] ?? FINALES.cancelado;
   return (
     <motion.main {...aparecer} className="pt-16">
-      <p className="text-2xl font-medium text-tenue">Listo,</p>
+      <p className="text-2xl font-medium text-tenue">{final.arriba}</p>
       <h1 className="font-display text-[clamp(3.5rem,19vw,6rem)] leading-[0.9] font-black uppercase">
-        Turno
+        {final.titulo[0]}
         <br />
-        <span className="text-rojo">cancelado</span>
+        <span className="text-rojo">{final.titulo[1]}</span>
       </h1>
-      <p className="mt-6 max-w-sm text-lg text-tenue">
-        Liberaste tu lugar y los demás avanzaron un puesto. Gracias por avisar.
-      </p>
+      <p className="mt-6 max-w-sm text-lg text-tenue">{final.texto}</p>
       <Link
-        to={`/b/${barberia.slug}/unirse`}
+        to={`/b/${vista.barberia.slug}/unirse`}
         className="mt-8 inline-flex h-14 items-center justify-center rounded-full bg-tinta px-8 font-display text-xl font-extrabold text-fondo uppercase"
       >
         Anotarme otra vez

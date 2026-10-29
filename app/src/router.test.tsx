@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { createMemoryRouter, RouterProvider } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { filaDeEjemplo } from "@/test/filaEjemplo";
+import { filaDeEjemplo, turnoDeEjemplo } from "@/test/filaEjemplo";
 import { rutas } from "./router";
 
 // En las pruebas no hay Supabase: `rpc` e `invoke` responden lo que cada prueba necesita.
@@ -24,7 +24,18 @@ vi.mock("@/components/Turnstile", async () => {
   };
 });
 
+/** Responde cada función de la base con lo que se le pase; las demás devuelven `null`. */
+function responder(respuestas: Record<string, unknown>) {
+  rpc.mockImplementation(async (funcion: string) => ({
+    data: respuestas[funcion] ?? null,
+    error: null,
+  }));
+}
+
+const CODIGO = "K7P2QM4XZA";
+
 beforeEach(() => {
+  localStorage.clear();
   rpc.mockReset();
   rpc.mockResolvedValue({ data: null, error: null });
   invoke.mockReset();
@@ -183,6 +194,85 @@ describe("rutas", () => {
     expect(await screen.findByRole("alert")).toHaveTextContent(
       "Ese número ya tiene un turno activo en esta barbería.",
     );
+  });
+
+  it("muestra un turno real en la fila con quién va antes", async () => {
+    localStorage.setItem(`nextcut:secreto:${CODIGO}`, "s".repeat(64));
+    responder({ ver_turno: turnoDeEjemplo(), fila_publica: filaDeEjemplo() });
+    abrir(`/t/${CODIGO}`);
+    expect(await screen.findByText("#5")).toBeInTheDocument();
+    expect(rpc).toHaveBeenCalledWith("ver_turno", { p_codigo: CODIGO });
+    expect(screen.getAllByText(CODIGO).length).toBeGreaterThan(0);
+    expect(screen.getByText("1 persona antes que tú")).toBeInTheDocument();
+    expect(screen.getByText("El primero libre")).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Mantén presionado para cancelar" }),
+    ).toBeInTheDocument();
+    // Los avisos por Web Push todavía no existen: el botón solo está en el prototipo.
+    expect(screen.queryByText("Avisarme cuando falten 15 min")).not.toBeInTheDocument();
+  });
+
+  it("cancela el turno con el secreto guardado en el teléfono", async () => {
+    localStorage.setItem(`nextcut:secreto:${CODIGO}`, "s".repeat(64));
+    responder({ ver_turno: turnoDeEjemplo(), fila_publica: filaDeEjemplo() });
+    abrir(`/t/${CODIGO}`);
+    const boton = await screen.findByRole("button", { name: "Mantén presionado para cancelar" });
+
+    responder({
+      cancelar_turno: true,
+      ver_turno: turnoDeEjemplo({ estado: "cancelado" }),
+      fila_publica: filaDeEjemplo(),
+    });
+    fireEvent.keyDown(boton, { key: " " });
+    expect(
+      await screen.findByRole("heading", { name: /Turno\s*cancelado/ }, { timeout: 3000 }),
+    ).toBeInTheDocument();
+    expect(rpc).toHaveBeenCalledWith("cancelar_turno", {
+      p_codigo: CODIGO,
+      p_secreto: "s".repeat(64),
+    });
+  });
+
+  it("sin el secreto no ofrece cancelar", async () => {
+    responder({ ver_turno: turnoDeEjemplo(), fila_publica: filaDeEjemplo() });
+    abrir(`/t/${CODIGO}`);
+    expect(
+      await screen.findByText(
+        "Para cancelar, abre esta página en el teléfono con el que te anotaste.",
+      ),
+    ).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /cancelar/ })).not.toBeInTheDocument();
+  });
+
+  it("avisa cuando le toca, con el barbero y la silla", async () => {
+    responder({
+      ver_turno: turnoDeEjemplo({
+        estado: "llamado",
+        barbero_id: "ana",
+        barbero: "Ana",
+        silla: 1,
+        llamado_en: new Date().toISOString(),
+      }),
+      fila_publica: filaDeEjemplo(),
+    });
+    abrir(`/t/${CODIGO}`);
+    expect(await screen.findByRole("heading", { name: /¡Te\s*toca!/ })).toBeInTheDocument();
+    expect(screen.getByText("silla 1")).toBeInTheDocument();
+  });
+
+  it("explica cuando se le pasó el turno", async () => {
+    responder({ ver_turno: turnoDeEjemplo({ estado: "no_llego" }) });
+    abrir(`/t/${CODIGO}`);
+    expect(await screen.findByRole("heading", { name: /Se pasó\s*tu turno/ })).toBeInTheDocument();
+    // Un turno cerrado ya no pide la fila.
+    expect(rpc).not.toHaveBeenCalledWith("fila_publica", expect.anything());
+  });
+
+  it("un código que no existe da no encontrado", async () => {
+    abrir("/t/ZZZZZZZZZZ");
+    expect(
+      await screen.findByRole("heading", { level: 1, name: "No encontramos esta página" }),
+    ).toBeInTheDocument();
   });
 
   it("muestra los cuatro botones del panel del barbero", async () => {

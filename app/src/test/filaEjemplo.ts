@@ -1,4 +1,5 @@
 import type { FilaPublica } from "@/lib/fila";
+import type { TurnoPublico } from "@/lib/turno";
 
 const hace = (minutos: number) => new Date(Date.now() - minutos * 60_000).toISOString();
 
@@ -43,5 +44,32 @@ export function filaDeEjemplo(cambios: Partial<FilaPublica["barberia"]> = {}): F
       },
       { numero: 5, nombre: null, barbero_id: null, servicio_id: "barba", creado_en: hace(2) },
     ],
+  };
+}
+
+/**
+ * Respuesta de `ver_turno` para el #5 de la fila de ejemplo: Óscar espera con "el primero libre"
+ * y tiene una persona antes (el #4 de Ana).
+ */
+export function turnoDeEjemplo(cambios: Partial<TurnoPublico> = {}): TurnoPublico {
+  return {
+    numero: 5,
+    nombre: "Óscar L.",
+    estado: "esperando",
+    barbero_id: null,
+    barbero: null,
+    silla: null,
+    servicio_id: "barba",
+    servicio: "Barba",
+    duracion_min: 15,
+    precio_ref: 100,
+    estimado_min: 50,
+    creado_en: hace(2),
+    llamado_en: null,
+    inicio_en: null,
+    fin_en: null,
+    adelante: 1,
+    barberia: { nombre: "El Faro", slug: "el-faro", tolerancia_min: 5 },
+    ...cambios,
   };
 }

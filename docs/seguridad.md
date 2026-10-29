@@ -1,6 +1,6 @@
 # Seguridad: auditoría del diseño
 
-**Proyecto:** [NextCut](../README.md) · **Fecha:** 25 de octubre de 2026 · **Fase:** Sprint 1 · base de datos (actualizado el 27/10/2026)
+**Proyecto:** [NextCut](../README.md) · **Fecha:** 25 de octubre de 2026 · **Fase:** Sprint 2 · cliente (actualizado el 28/10/2026)
 **Relacionado:** [Decisiones](decisiones.md) · [Investigación](investigacion.md) · [Plan de implementación](plan-implementacion.md) · [Bitácora](bitacora.md)
 
 El diseño se revisó contra los 10 fallos de seguridad más comunes en apps con APIs y agentes. Cada control tiene una **prueba** que debe pasar antes de lanzar. El estado se actualiza en cada fase.
@@ -49,7 +49,7 @@ Antes de la lista general, estos son los abusos más probables en este producto:
   - Revisión con el Security Advisor de Supabase antes de cada despliegue.
 - **Prueba (pgTAP):** `anon` no puede hacer `select` en `turnos`; un usuario de la barbería A no lee ni modifica filas de la barbería B.
 
-### 3. Input sin validar · 🟨 (base, Edge Function y formulario probados con Vitest; falta la prueba de Playwright)
+### 3. Input sin validar · 🟩 (base, Edge Function, formulario y prueba de punta a punta del 28/10/2026)
 
 - **Riesgo:** datos basura, inyección o XSS en la pantalla del local.
 - **Controles:**

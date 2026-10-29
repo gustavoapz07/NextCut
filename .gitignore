@@ -23,3 +23,8 @@ graphify-out/.graphify_labels.pending.json
 # Estado local de Claude Code (los hooks y el skill sí se versionan)
 .claude/settings.local.json
 .claude/.graphify-pending.json
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/

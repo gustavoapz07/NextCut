@@ -1,37 +1,44 @@
 # Graph Report - NextCut  (2026-10-28)
 
 ## Corpus Check
-- 62 files · ~57,693 words
+- 65 files · ~59,145 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 7 file(s) not represented in the graph (top: (none) 4, .example 1, .css 1)
 
 ## Summary
-- 635 nodes · 1740 edges · 22 communities (14 shown, 8 thin omitted)
+- 647 nodes · 1751 edges · 29 communities (23 shown, 6 thin omitted)
 - Extraction: 91% EXTRACTED · 9% INFERRED · 0% AMBIGUOUS · INFERRED: 158 edges (avg confidence: 0.87)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `a4636330`
+- Built from commit: `982d7114`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - Investigación
-- enVivo.ts
-- main.tsx
+- Seguridad
+- Arquitectura detallada
 - 20261027140203_base_de_datos.sql
-- Turnstile.tsx
+- eta.ts
+- ADR-008 · Desarrollo contra Supabase en la nube, sin Docker local
 - database.types.ts
 - ref_supabase_supabase_js
 - Fallo 2 · Endpoints expuestos
 - Variables de entorno
 - Unirse.tsx
 - concurrencia.mjs
-- FilaPublica.tsx
-- ref_vitest
+- Unirse.tsx
+- ADR-007 · Anotarse por Edge Function y tiempo real solo con señales
 - router.test.tsx
-- Turno.tsx
+- Stack v0.1 con versiones
+- fila.spec.ts
 - _shared/unirse.ts
+- index.ts
+- unirse.test.ts
+- Turno.tsx
+- manejarUnirse
+- lib/unirse.ts
 - imports
 
 ## God Nodes (most connected - your core abstractions)
@@ -49,12 +56,12 @@
 ## Surprising Connections (you probably didn't know these)
 - `Waitwhile` --semantically_similar_to--> `Fila virtual híbrida`  [INFERRED] [semantically similar]
   docs/investigacion.md → README.md
-- `Turnos fantasma` --semantically_similar_to--> `P1 Inasistencias (no-shows)`  [INFERRED] [semantically similar]
-  docs/seguridad.md → docs/investigacion.md
-- `Definición de abandono` --conceptually_related_to--> `Tasa de abandono`  [INFERRED]
-  docs/validacion-campo.md → README.md
-- `ADR-003 · Notificaciones sin API de WhatsApp` --references--> `Web Push (PWA)`  [INFERRED]
-  docs/decisiones.md → README.md
+- `Modelo de negocio (hipótesis)` --references--> `Competencia`  [INFERRED]
+  README.md → docs/investigacion.md
+- `Integración y despliegue (local, vista previa, producción)` --conceptually_related_to--> `Cloudflare Workers (hosting estático)`  [INFERRED]
+  docs/plan-implementacion.md → README.md
+- `graphify (grafo de conocimiento)` --conceptually_related_to--> `Desarrollo local`  [INFERRED]
+  docs/plan-implementacion.md → README.md
 - `Variables de entorno (.env.local)` --conceptually_related_to--> `Fallo 1 · API keys en el código`  [INFERRED]
   README.md → docs/seguridad.md
 
@@ -72,31 +79,39 @@
 - **Cuidado de claves y secretos (fallo 1) a lo largo de la bitácora** — docs_bitacora_clave_anon_heredada, docs_bitacora_nextcut_repositorio, docs_bitacora_arreglo_ci_gitleaks, docs_seguridad_f01_api_keys, readme_variables_entorno [INFERRED 0.85]
 - **Mecanismo de avisos al cliente (por evento y por reloj)** — docs_plan_implementacion_edge_function_avisos, docs_plan_implementacion_pg_cron, docs_plan_implementacion_modulo_eta, readme_web_push, docs_decisiones_suscribir_push [INFERRED 0.85]
 
-## Communities (22 total, 8 thin omitted)
+## Communities (29 total, 6 thin omitted)
 
 ### Community 0 - "Investigación"
-Cohesion: 0.05
-Nodes (85): Hallazgo: clave heredada anon activa, Bitácora de cambios, 2026-10-25 · Investigación inicial, 2026-10-26 · Plan de implementación y graphify automático, 2026-10-26 · El producto pasa a llamarse NextCut y se publica el repositorio, 2026-10-26 · Desarrollo sin Docker y prueba de riesgo 1, 2026-10-26 · Sprint 0: base del proyecto, Biome (lint y formato) (+77 more)
+Cohesion: 0.08
+Nodes (37): AgendaPro, Booksy, Cochrane 2013 · recordatorios por SMS, Competencia, Contexto Honduras 2026, DataReportal Digital 2026 Honduras, Investigación, Escala de calidad de evidencia (A–O) (+29 more)
 
-### Community 1 - "enVivo.ts"
-Cohesion: 0.17
-Nodes (13): Database, EstadoFila, EstadoTurno, ADR-0007, useFilaPublica(), useSenalFila(), useTurno(), supabase (+5 more)
+### Community 1 - "Seguridad"
+Cohesion: 0.20
+Nodes (23): Hallazgo: clave heredada anon activa, Bitácora de cambios, 2026-10-25 · Investigación inicial, 2026-10-26 · Plan de implementación y graphify automático, 2026-10-26 · El producto pasa a llamarse NextCut y se publica el repositorio, Registro de decisiones, Nombre provisional "Siguiente" (alternativa descartada), Repositorio público gustavoapz07/NextCut (+15 more)
+
+### Community 2 - "Arquitectura detallada"
+Cohesion: 0.14
+Nodes (21): Cambio de precios de WhatsApp (1/10/2026), Arquitectura detallada, Calendario de 8 semanas, Edge Function avisos, Módulo eta.ts compartido, pg_cron + pg_net, Playwright + axe, Prueba de riesgo 2 · Web Push (+13 more)
 
 ### Community 3 - "20261027140203_base_de_datos.sql"
 Cohesion: 0.07
 Nodes (46): barberias_senal, barberos_senal, barberos_user_idx, eventos_turno_barberia_idx, eventos_turno_inmutable, eventos_turno_turno_idx, miembros_barberia_idx, privado.es_dueno() (+38 more)
 
-### Community 5 - "Turnstile.tsx"
-Cohesion: 0.33
-Nodes (4): ApiTurnstile, cargarTurnstile(), Turnstile(), Window
+### Community 4 - "eta.ts"
+Cohesion: 0.14
+Nodes (18): BarberoEta, DURACION_POR_DEFECTO, DURACION_VALIDA, duracionDe(), EntradaEta, estimarNuevo(), minutosHastaLibre(), promedio() (+10 more)
+
+### Community 5 - "ADR-008 · Desarrollo contra Supabase en la nube, sin Docker local"
+Cohesion: 0.19
+Nodes (18): 2026-10-26 · Desarrollo sin Docker y prueba de riesgo 1, Biome (lint y formato), Docker local (alternativa descartada), ESLint + Prettier (alternativa descartada), Husky (alternativa descartada), Lefthook (revisiones antes de cada commit), Otra cuenta de Supabase (alternativa descartada), pnpm (alternativa descartada) (+10 more)
 
 ### Community 6 - "database.types.ts"
-Cohesion: 0.20
-Nodes (9): CompositeTypes, Constants, DatabaseWithoutInternals, DefaultSchema, Enums, Json, Tables, TablesInsert (+1 more)
+Cohesion: 0.17
+Nodes (11): CompositeTypes, Constants, Database, DatabaseWithoutInternals, DefaultSchema, Enums, Json, Tables (+3 more)
 
 ### Community 8 - "Fallo 2 · Endpoints expuestos"
-Cohesion: 0.06
-Nodes (70): Prueba de riesgo 1 superada (Broadcast público con clave publicable), Pruebas de riesgo del Sprint 0 (Broadcast público, Web Push, Turnstile con IP), Canal público fila:<barberia_id> (señal vacía), Edge Function unirse-a-fila, PHP + MySQL (alternativa descartada), Supabase Pro a USD 25 al mes (alternativa descartada), suscribir_push(codigo, secreto, suscripcion), Vercel (alternativa descartada) (+62 more)
+Cohesion: 0.12
+Nodes (30): Funciones de la base (security definer), Sprint 1 · Base de datos y seguridad, Adivinar códigos de turno, Amenazas propias de una fila virtual, Bitácora de eventos (eventos_turno), cancelar_turno(codigo, secreto), Clave de idempotencia al anotarse, Clave publicable y clave secreta de Supabase (+22 more)
 
 ### Community 9 - "Variables de entorno"
 Cohesion: 0.50
@@ -104,51 +119,79 @@ Nodes (3): @fontsource-variable/big-shoulders-display, ImportMeta, ImportMetaEnv
 
 ### Community 11 - "Unirse.tsx"
 Cohesion: 0.05
-Nodes (99): ErrorDeRuta(), BarraPoste(), Franjas(), FranjasProps, Poste(), Marca(), AbrirMenu, BotonMarca() (+91 more)
+Nodes (102): ErrorDeRuta(), BarraPoste(), Franjas(), FranjasProps, Poste(), Marca(), AbrirMenu, BotonMarca() (+94 more)
 
 ### Community 12 - "concurrencia.mjs"
 Cohesion: 0.19
 Nodes (12): anotar(), barberiaId, barberos, comoUsuario(), conectar(), preparar(), pruebaConBloqueo(), pruebaDobleEnvio() (+4 more)
 
-### Community 13 - "FilaPublica.tsx"
-Cohesion: 0.08
-Nodes (44): Miembro, FilaPrototipo(), FilaPublica(), FilaReal(), Tarjeta(), VistaFila(), VistaFilaProps, FormularioReal() (+36 more)
+### Community 13 - "Unirse.tsx"
+Cohesion: 0.05
+Nodes (72): Cargando(), NoEncontrado(), SinConexion(), ApiTurnstile, cargarTurnstile(), Turnstile(), Window, Miembro (+64 more)
 
-### Community 19 - "router.test.tsx"
-Cohesion: 0.33
-Nodes (5): TurnoPublico, { rpc, invoke }, filaDeEjemplo(), hace(), turnoDeEjemplo()
+### Community 14 - "ADR-007 · Anotarse por Edge Function y tiempo real solo con señales"
+Cohesion: 0.23
+Nodes (13): Prueba de riesgo 1 superada (Broadcast público con clave publicable), Pruebas de riesgo del Sprint 0 (Broadcast público, Web Push, Turnstile con IP), 2026-10-26 · Sprint 0: base del proyecto, Canal público fila:<barberia_id> (señal vacía), Edge Function unirse-a-fila, suscribir_push(codigo, secreto, suscripcion), gitleaks (secretos), Prueba de riesgo 1 · Broadcast público (+5 more)
+
+### Community 15 - "router.test.tsx"
+Cohesion: 0.08
+Nodes (4): raiz, rutas, { rpc, invoke }, ObservadorFalso
+
+### Community 19 - "Stack v0.1 con versiones"
+Cohesion: 0.20
+Nodes (13): PHP + MySQL (alternativa descartada), Supabase Pro a USD 25 al mes (alternativa descartada), Vercel (alternativa descartada), Costos en planes gratuitos, Resend (SMTP de Auth), Stack v0.1 con versiones, Borrado de teléfonos a los 90 días, gitleaks (+5 more)
+
+### Community 20 - "fila.spec.ts"
+Cohesion: 0.20
+Nodes (4): datosTurno(), encabezados, Fila, hex()
+
+### Community 21 - "_shared/unirse.ts"
+Cohesion: 0.20
+Nodes (9): encabezadosCors(), ERRORES_DE_LA_BASE, esquemaNombre, esquemaTelefono, esquemaTurnoCreado, esquemaUnirse, ESTADO_HTTP, RespuestaRpc (+1 more)
+
+### Community 22 - "index.ts"
+Cohesion: 0.22
+Nodes (6): hmacHex(), verificarTurnstile(), admin, clave, origenes, ADR-0007
+
+### Community 23 - "unirse.test.ts"
+Cohesion: 0.25
+Nodes (6): limpiarNombre(), obtenerIp(), enviar(), fila, peticion(), URL_TURNSTILE
 
 ### Community 24 - "Turno.tsx"
-Cohesion: 0.06
-Nodes (59): Confeti(), SinConexion(), Anillo(), TarjetaActual(), Acciones, ADELANTE, aparecer, Atendido() (+51 more)
+Cohesion: 0.09
+Nodes (31): Boleto(), Acciones, ADELANTE, aparecer, Atendido(), Cancelar(), COLOR_BARRA, DatosTurno (+23 more)
 
-### Community 33 - "_shared/unirse.ts"
-Cohesion: 0.06
-Nodes (37): Fuente, anotarse(), claveDe(), ErrorUnirse, esCodigo(), guardarSecreto(), leerSecreto(), MENSAJES (+29 more)
+### Community 25 - "manejarUnirse"
+Cohesion: 0.39
+Nodes (3): Dependencias, errorDeLaBase(), manejarUnirse()
+
+### Community 33 - "lib/unirse.ts"
+Cohesion: 0.21
+Nodes (11): anotarse(), claveDe(), ErrorUnirse, esCodigo(), guardarSecreto(), leerSecreto(), MENSAJES, ADR-0007 (+3 more)
 
 ### Community 36 - "imports"
 Cohesion: 0.50
 Nodes (3): imports, @supabase/supabase-js, zod
 
 ## Knowledge Gaps
-- **24 isolated node(s):** `ADR-0007`, `ADR-0007`, `ADR-0007`, `ADR-0007`, `Nombre provisional "Siguiente" (alternativa descartada)` (+19 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 168 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **24 isolated node(s):** `ADR-0007`, `ADR-0007`, `ADR-0007`, `ADR-0007`, `Docker local (alternativa descartada)` (+19 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 176 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **6 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `cx()` connect `Unirse.tsx` to `Turno.tsx`, `FilaPublica.tsx`?**
+- **Why does `cx()` connect `Unirse.tsx` to `Turno.tsx`, `Unirse.tsx`?**
   _High betweenness centrality (0.021) - this node is a cross-community bridge._
 - **What connects `ADR-0007`, `ADR-0007`, `ADR-0007` to the rest of the system?**
   _24 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Investigación` be split into smaller, more focused modules?**
-  _Cohesion score 0.0504950495049505 - nodes in this community are weakly interconnected._
-- **Why does `Seguridad` connect `Investigación` to `Fallo 2 · Endpoints expuestos`?**
+  _Cohesion score 0.07822410147991543 - nodes in this community are weakly interconnected._
+- **Why does `Seguridad` connect `Seguridad` to `Investigación`, `Arquitectura detallada`, `Fallo 2 · Endpoints expuestos`, `ADR-007 · Anotarse por Edge Function y tiempo real solo con señales`, `Stack v0.1 con versiones`?**
   _High betweenness centrality (0.016) - this node is a cross-community bridge._
+- **Should `Arquitectura detallada` be split into smaller, more focused modules?**
+  _Cohesion score 0.1383399209486166 - nodes in this community are weakly interconnected._
+- **Why does `entradaEta()` connect `Unirse.tsx` to `Turno.tsx`, `manejarUnirse`, `_shared/unirse.ts`?**
+  _High betweenness centrality (0.014) - this node is a cross-community bridge._
 - **Should `20261027140203_base_de_datos.sql` be split into smaller, more focused modules?**
   _Cohesion score 0.06885245901639345 - nodes in this community are weakly interconnected._
-- **Why does `entradaEta()` connect `FilaPublica.tsx` to `Turno.tsx`, `_shared/unirse.ts`, `Unirse.tsx`?**
-  _High betweenness centrality (0.014) - this node is a cross-community bridge._
-- **Should `Fallo 2 · Endpoints expuestos` be split into smaller, more focused modules?**
-  _Cohesion score 0.05789473684210526 - nodes in this community are weakly interconnected._

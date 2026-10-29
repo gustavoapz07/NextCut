@@ -260,6 +260,8 @@ No construye funciones del producto. Prepara el entorno y prueba lo que podría 
 
 **Salida:** Playwright: un cliente se anota en un celular simulado y ve su posición cambiar cuando otro turno avanza. Las pruebas del fallo 3 (nombres de 500 caracteres, `<script>`, emojis, teléfonos de otros países, servicio de otra barbería) pasan.
 
+**Resultado:** salida cumplida el 28/10/2026 con `npm run test:e2e` (`tests/e2e/fila.spec.ts`) contra `siguiente-pruebas`. Falta correrla en el CI: en la laptop no hay Docker para Supabase local ([ADR-008](decisiones.md#adr-008--desarrollo-contra-supabase-en-la-nube-sin-docker-local)).
+
 ### Sprint 3 · Barbero, TV y avisos (semana 5)
 
 - [ ] Login con correo y contraseña (Supabase Auth con SMTP de Resend).

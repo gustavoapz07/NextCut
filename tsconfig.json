@@ -22,5 +22,11 @@
       "@shared/*": ["./supabase/functions/_shared/*"]
     }
   },
-  "include": ["app/src", "supabase/functions/_shared", "vite.config.ts"]
+  "include": [
+    "app/src",
+    "supabase/functions/_shared",
+    "tests",
+    "vite.config.ts",
+    "playwright.config.ts"
+  ]
 }

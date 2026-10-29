@@ -145,3 +145,18 @@ Cada cambio del proyecto queda aquí, enlazado al documento que afecta. El grafo
 - **Pruebas:** 97 en total; 6 nuevas de la página real (en fila, cancelar con secreto, sin secreto, te toca, se pasó el turno y código inexistente). `npm run check` pasa.
 - **Verificado en el navegador:** el prototipo se ve igual en "en fila" y "te toca", y un código real consulta `ver_turno` en el proyecto de pruebas y muestra "no encontrado".
 - **Siguiente:** la prueba de Playwright que cierra el Sprint 2 (necesita una barbería de prueba en `siguiente-pruebas` o Supabase local en el CI) y las duraciones recientes en `fila_publica`.
+
+## 2026-10-28 · Prueba de punta a punta: sale el Sprint 2
+
+- **Qué:** la prueba de Playwright que pide la [salida del Sprint 2](plan-implementacion.md#sprint-2--cliente-fila-pública-y-turno-en-vivo-semana-4) pasa contra `siguiente-pruebas`.
+- **Barberías de prueba:** `scripts/e2e/barberias-prueba.sql` crea "Barbería Prueba" (`/b/barberia-prueba`, con Carlos, Jorge, corte y barba) y "Prueba Dos" (`prueba-dos`, solo para el caso de otra barbería). Se cargó en `siguiente-pruebas` con el MCP de Supabase; se puede volver a correr sin duplicar nada. Con ella ya se puede ver la fila real en el navegador.
+- **Prueba** (`tests/e2e/fila.spec.ts`, `npm run test:e2e`), en un Pixel 7 simulado:
+  1. Un turno de "<script>alert(1)</script>" se anota por la Edge Function y la fila pública lo muestra como texto, sin abrir ningún diálogo.
+  2. Un cliente con un emoji en el nombre se anota por el formulario, pasa Turnstile (clave de prueba) y llega a su turno.
+  3. Se cancela el turno de adelante y la página baja la posición sola, por la señal de tiempo real.
+  4. El cliente cancela el suyo manteniendo presionado.
+  5. La Edge Function rechaza un nombre de 500 caracteres, un teléfono de otro país y un servicio o un barbero de otra barbería (este último lo rechaza la base).
+- **Resultado:** 2 de 2 en 20 segundos, a la primera. En la base, los dos turnos quedaron cancelados, con 2 eventos cada uno, la IP solo como hash, los nombres tal cual y el estimado correcto (0 y 15 minutos).
+- **Herramientas:** `@playwright/test` 1.64.1, la versión del plan. En la laptop usa el Chrome instalado (sin descargar navegadores); en el CI usaría el Chromium de Playwright. Corre de a una, porque cada corrida saca 2 turnos y el límite es de 5 por IP cada 10 minutos.
+- **Seguridad:** el fallo 3 pasa a 🟩.
+- **Pendiente:** correr la prueba en el CI (con Supabase local o contra `siguiente-pruebas`), sumar axe para accesibilidad y las duraciones recientes en `fila_publica`.

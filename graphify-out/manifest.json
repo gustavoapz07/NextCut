@@ -1,14 +1,14 @@
 {
   "README.md": {
-    "mtime": 1793031023.019501,
-    "seen": 1793068108.8892093,
-    "ast_hash": "55ba7d5ab3fc038543733f892cdf8a23",
-    "semantic_hash": "55ba7d5ab3fc038543733f892cdf8a23"
+    "mtime": 1793233963.191236,
+    "seen": 1793233991.75352,
+    "ast_hash": "2c58dbd46bce6dc22a6386df91f57c18",
+    "semantic_hash": ""
   },
   "docs/bitacora.md": {
-    "mtime": 1793233212.4524095,
-    "seen": 1793233238.7834754,
-    "ast_hash": "6b46f84ce049c37fabcf28dd79e999ff",
+    "mtime": 1793233963.191236,
+    "seen": 1793233991.7535226,
+    "ast_hash": "d7422a7043329294baa28b92832de907",
     "semantic_hash": ""
   },
   "docs/decisiones.md": {
@@ -24,9 +24,9 @@
     "semantic_hash": "a03e6054d92f2b3847ff257819adb86d"
   },
   "docs/seguridad.md": {
-    "mtime": 1793232582.1149805,
-    "seen": 1793232606.4920306,
-    "ast_hash": "aabccefce7f8a80db505f565ef3321ee",
+    "mtime": 1793233963.187622,
+    "seen": 1793233991.7535317,
+    "ast_hash": "9571693d8f4354665db90d8f1f85ccc7",
     "semantic_hash": ""
   },
   "docs/validacion-campo.md": {
@@ -36,9 +36,9 @@
     "semantic_hash": "fce8b9c4ac2e58b20c5f98526ae1e804"
   },
   "docs/plan-implementacion.md": {
-    "mtime": 1793233212.4503012,
-    "seen": 1793233238.7834823,
-    "ast_hash": "fc6ec8163fa90c8724ace58063b5762e",
+    "mtime": 1793233963.1790893,
+    "seen": 1793233991.7535295,
+    "ast_hash": "d46b72744a7c31104140e1de28e5ee2a",
     "semantic_hash": ""
   },
   "app/src/components/ErrorDeRuta.tsx": {
@@ -369,6 +369,24 @@
     "mtime": 1793233167.832611,
     "seen": 1793233238.7834086,
     "ast_hash": "92657ebf394684eb939df74c9fa97602",
+    "semantic_hash": ""
+  },
+  "playwright.config.ts": {
+    "mtime": 1793233874.3196547,
+    "seen": 1793233991.7534733,
+    "ast_hash": "d4b5cb4071cbf1d3e4ca955d190c6a56",
+    "semantic_hash": ""
+  },
+  "scripts/e2e/barberias-prueba.sql": {
+    "mtime": 1793233728.9759586,
+    "seen": 1793233991.753479,
+    "ast_hash": "0074b8c26f710fbdab625beebb8da7b7",
+    "semantic_hash": ""
+  },
+  "tests/e2e/fila.spec.ts": {
+    "mtime": 1793233875.0515964,
+    "seen": 1793233991.753515,
+    "ast_hash": "cbbb80d58bdc40fc202371aace82c9cf",
     "semantic_hash": ""
   }
 }

@@ -1,14 +1,14 @@
 {
   "README.md": {
-    "mtime": 1793235520.873153,
-    "seen": 1793235530.9041605,
-    "ast_hash": "fc6fbb34b740f2285c9b1e132cd84de6",
+    "mtime": 1793237518.582628,
+    "seen": 1793237550.6747377,
+    "ast_hash": "44748aedf5cc5d65cbe314f40484f73a",
     "semantic_hash": ""
   },
   "docs/bitacora.md": {
-    "mtime": 1793235520.8742175,
-    "seen": 1793235530.9041631,
-    "ast_hash": "64276ebe589c3e2c70f9be28d11ccfdc",
+    "mtime": 1793237518.582628,
+    "seen": 1793237550.6747406,
+    "ast_hash": "889d2d54136f93496ceb4e8dfe637d81",
     "semantic_hash": ""
   },
   "docs/decisiones.md": {
@@ -36,9 +36,9 @@
     "semantic_hash": "fce8b9c4ac2e58b20c5f98526ae1e804"
   },
   "docs/plan-implementacion.md": {
-    "mtime": 1793235520.8705437,
-    "seen": 1793235530.90417,
-    "ast_hash": "effc47464ebefa21f59b835251671eb1",
+    "mtime": 1793237518.582628,
+    "seen": 1793237550.6747484,
+    "ast_hash": "3cf1720d0463816995e6fa1cc3a14c98",
     "semantic_hash": ""
   },
   "app/src/components/ErrorDeRuta.tsx": {
@@ -441,6 +441,18 @@
     "mtime": 1793235386.972238,
     "seen": 1793235530.904076,
     "ast_hash": "731eb79087414462ab56e35918df8557",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/20261029012938_tareas_programadas.sql": {
+    "mtime": 1793237394.7711222,
+    "seen": 1793237550.674711,
+    "ast_hash": "d1c5d4bcdc92073bc33605e9eb5449a9",
+    "semantic_hash": ""
+  },
+  "supabase/tests/database/04_tareas.test.sql": {
+    "mtime": 1793237394.8965726,
+    "seen": 1793237550.6747246,
+    "ast_hash": "875acda11b446befc633dceeca8e5d28",
     "semantic_hash": ""
   }
 }

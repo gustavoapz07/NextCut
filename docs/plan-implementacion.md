@@ -269,7 +269,7 @@ No construye funciones del producto. Prepara el entorno y prueba lo que podría 
 - [x] Botón "Avisar por WhatsApp": enlace `wa.me` con el mensaje ya escrito.
 - [x] Pantalla `/b/:slug/tv`: fila en letra grande, conexión permanente y pantalla siempre encendida (Wake Lock).
 - [ ] Web Push: suscripción desde la página del turno, service worker y Edge Function `avisos` (por evento y cada minuto con `pg_cron`).
-- [ ] `vencer_tolerancia()` cada minuto con `pg_cron`.
+- [x] `vencer_tolerancia()` cada minuto con `pg_cron` (migración `20261029012938_tareas_programadas`).
 
 **Salida:** Playwright: el barbero llama, empieza y termina un turno y el cliente lo ve en su página. Prueba manual de push en Android y iPhone. Un barbero no ve los turnos de otra barbería desde la interfaz.
 

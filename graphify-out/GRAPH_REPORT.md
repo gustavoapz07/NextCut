@@ -1,17 +1,17 @@
 # Graph Report - NextCut  (2026-10-28)
 
 ## Corpus Check
-- 74 files · ~66,183 words
+- 76 files · ~66,721 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 7 file(s) not represented in the graph (top: (none) 4, .example 1, .css 1)
 
 ## Summary
-- 727 nodes · 1989 edges · 34 communities (28 shown, 6 thin omitted)
+- 729 nodes · 1989 edges · 36 communities (28 shown, 8 thin omitted)
 - Extraction: 92% EXTRACTED · 8% INFERRED · 0% AMBIGUOUS · INFERRED: 160 edges (avg confidence: 0.87)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `40ed457a`
+- Built from commit: `c8e4f281`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -23,17 +23,17 @@
 - datos.ts
 - ADR-008 · Desarrollo contra Supabase en la nube, sin Docker local
 - database.types.ts
-- ref_supabase_supabase_js
+- sesion.ts
 - Fallo 2 · Endpoints expuestos
 - Variables de entorno
 - Unirse.tsx
 - concurrencia.mjs
 - Unirse.tsx
-- panel.test.tsx
+- FilaPublica.tsx
 - eta.ts
 - Stack v0.1 con versiones
 - e2e/utilidades.ts
-- FilaPublica.tsx
+- panel.test.tsx
 - PanelBarbero.tsx
 - Unirse.tsx
 - Turno.tsx
@@ -83,7 +83,7 @@
 - **Cuidado de claves y secretos (fallo 1) a lo largo de la bitácora** — docs_bitacora_clave_anon_heredada, docs_bitacora_nextcut_repositorio, docs_bitacora_arreglo_ci_gitleaks, docs_seguridad_f01_api_keys, readme_variables_entorno [INFERRED 0.85]
 - **Mecanismo de avisos al cliente (por evento y por reloj)** — docs_plan_implementacion_edge_function_avisos, docs_plan_implementacion_pg_cron, docs_plan_implementacion_modulo_eta, readme_web_push, docs_decisiones_suscribir_push [INFERRED 0.85]
 
-## Communities (34 total, 6 thin omitted)
+## Communities (36 total, 8 thin omitted)
 
 ### Community 0 - "Investigación"
 Cohesion: 0.10
@@ -113,7 +113,7 @@ Nodes (24): Pruebas de riesgo del Sprint 0 (Broadcast público, Web Push, Turnst
 Cohesion: 0.18
 Nodes (10): CompositeTypes, Constants, Database, DatabaseWithoutInternals, DefaultSchema, Enums, Json, Tables (+2 more)
 
-### Community 7 - "ref_supabase_supabase_js"
+### Community 7 - "sesion.ts"
 Cohesion: 0.22
 Nodes (6): EstadoSesion, MENSAJES_ENTRAR, ResultadoEntrar, supabase, resultado, supabase
 
@@ -137,9 +137,9 @@ Nodes (12): anotar(), barberiaId, barberos, comoUsuario(), conectar(), preparar(
 Cohesion: 0.17
 Nodes (15): Boleto(), Dato(), Formulario(), elegirYSeguir(), ir(), Imprimiendo(), Opcion(), PasoBarbero() (+7 more)
 
-### Community 14 - "panel.test.tsx"
-Cohesion: 0.20
-Nodes (5): BARBERIA, BARBERO, falso, SERVICIOS, TurnoPersonal
+### Community 14 - "FilaPublica.tsx"
+Cohesion: 0.23
+Nodes (15): BarraPoste(), FilaPrototipo(), FilaPublica(), Tarjeta(), VistaFila(), PantallaTv(), TableroPrototipo(), duracion() (+7 more)
 
 ### Community 15 - "eta.ts"
 Cohesion: 0.05
@@ -153,9 +153,9 @@ Nodes (10): PHP + MySQL (alternativa descartada), Supabase Pro a USD 25 al mes (
 Cohesion: 0.23
 Nodes (14): anotarPorApi(), BARBERO_CLAVE, BARBERO_CORREO, cancelarPorApi(), CLAVE, datosTurno(), encabezados, Fila (+6 more)
 
-### Community 21 - "FilaPublica.tsx"
-Cohesion: 0.23
-Nodes (15): BarraPoste(), FilaPrototipo(), FilaPublica(), Tarjeta(), VistaFila(), PantallaTv(), TableroPrototipo(), duracion() (+7 more)
+### Community 21 - "panel.test.tsx"
+Cohesion: 0.20
+Nodes (5): BARBERIA, BARBERO, falso, SERVICIOS, TurnoPersonal
 
 ### Community 22 - "PanelBarbero.tsx"
 Cohesion: 0.13
@@ -199,8 +199,8 @@ Nodes (3): imports, @supabase/supabase-js, zod
 
 ## Knowledge Gaps
 - **24 isolated node(s):** `ADR-0007`, `ADR-0007`, `ADR-0007`, `ADR-0007`, `Booksy` (+19 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 190 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **6 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 192 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_

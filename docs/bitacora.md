@@ -188,3 +188,14 @@ Cada cambio del proyecto queda aquí, enlazado al documento que afecta. El grafo
   - El límite de 5 turnos por IP cada 10 minutos frenó la creación de datos de prueba (`limite_ip`), como debe ser. Para seguir probando se creó un turno directo en la base con `unirse_a_fila`, sin hash de IP.
   - Los nombres con tilde que se mandaron con `curl` desde la terminal de Windows llegaron con otra codificación ("Jos� P."). Es un problema de esa terminal, no de la app: se corrigieron en la base, y los datos de prueba con tildes se crean por SQL o con Playwright.
 - **Pendiente:** las conexiones públicas de Realtime duran hasta 24 horas; supabase-js se reconecta y la TV recarga al reconectar, más la recarga de respaldo cada 60 s. Conviene revisarlo en el piloto con una TV encendida todo el día.
+
+## 2026-10-28 · Sprint 3: "no llegó" automático con pg_cron
+
+- **Qué:** quien fue llamado y no se sentó dentro de la tolerancia de su barbería queda como "no llegó" sin que el barbero toque nada ([plan](plan-implementacion.md#sprint-3--barbero-tv-y-avisos-semana-5)).
+- **Migración** `20261029012938_tareas_programadas` (aplicada en `siguiente-pruebas` con el MCP; el archivo lleva la misma versión, como pide [ADR-011](decisiones.md#adr-011--detalles-de-la-base-de-datos-del-sprint-1)):
+  - activa `pg_cron`;
+  - `vencer-tolerancia` corre `select public.vencer_tolerancia()` cada minuto. La función ya existía y estaba probada en `03_funciones`;
+  - `limpiar-historial-cron` borra a diario, a las 3:30 a. m. de Honduras, las corridas de más de una semana. Con una tarea por minuto, `cron.job_run_details` sumaría 1440 filas al día.
+- **Prueba en la nube:** se dejó un turno de "Barbería Prueba" como llamado hace 6 minutos (la tolerancia es de 5). La tarea de las 01:31 UTC lo pasó a `no_llego` y un segundo después la página del cliente cambió sola de "¡Te toca!" a "Se pasó tu turno". El turno quedó con sus 3 eventos en la bitácora, el panel de Carlos volvió a "Silla libre" y el historial de pg_cron muestra las corridas como `succeeded`.
+- **Pruebas:** `supabase/tests/database/04_tareas.test.sql` (6 pruebas pgTAP) revisa que `pg_cron` esté activo, que la tarea corra cada minuto, esté activa y llame solo a la función, y que la limpieza diaria exista una sola vez. Corre en el CI con Supabase local.
+- **Siguiente:** del Sprint 3 solo faltan los avisos por Web Push (necesitan la clave VAPID en los secretos de Supabase y probar en teléfonos reales). `cerrar_dia()` y `borrar_telefonos_viejos()` siguen para el Sprint 4, con el mismo mecanismo.

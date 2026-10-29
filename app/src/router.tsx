@@ -42,6 +42,11 @@ export const rutas: RouteObject[] = [
           import("./features/barbero/PanelBarbero").then((m) => ({ Component: m.PanelBarbero })),
       },
       {
+        path: "demo/panel",
+        lazy: () =>
+          import("./features/barbero/PanelBarbero").then((m) => ({ Component: m.PanelPrototipo })),
+      },
+      {
         path: "dueno",
         lazy: () =>
           import("./features/dueno/LayoutDueno").then((m) => ({ Component: m.LayoutDueno })),

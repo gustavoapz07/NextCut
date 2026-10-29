@@ -1,14 +1,14 @@
 {
   "README.md": {
-    "mtime": 1793233963.191236,
-    "seen": 1793233991.75352,
-    "ast_hash": "2c58dbd46bce6dc22a6386df91f57c18",
+    "mtime": 1793234866.0887885,
+    "seen": 1793234875.7349544,
+    "ast_hash": "f23f7517af649df1ea4fe0f60fe1eb37",
     "semantic_hash": ""
   },
   "docs/bitacora.md": {
-    "mtime": 1793233963.191236,
-    "seen": 1793233991.7535226,
-    "ast_hash": "d7422a7043329294baa28b92832de907",
+    "mtime": 1793234866.0907981,
+    "seen": 1793234875.7349567,
+    "ast_hash": "6f4e366b241de4d65e393c7b451dade0",
     "semantic_hash": ""
   },
   "docs/decisiones.md": {
@@ -36,9 +36,9 @@
     "semantic_hash": "fce8b9c4ac2e58b20c5f98526ae1e804"
   },
   "docs/plan-implementacion.md": {
-    "mtime": 1793233963.1790893,
-    "seen": 1793233991.7535295,
-    "ast_hash": "d46b72744a7c31104140e1de28e5ee2a",
+    "mtime": 1793234866.0867767,
+    "seen": 1793234875.7349634,
+    "ast_hash": "1c52de52eabe9127003aa91d81bba3be",
     "semantic_hash": ""
   },
   "app/src/components/ErrorDeRuta.tsx": {
@@ -66,15 +66,15 @@
     "semantic_hash": ""
   },
   "app/src/router.test.tsx": {
-    "mtime": 1793233102.2820795,
-    "seen": 1793233238.7834253,
-    "ast_hash": "8dd26d0dba0e74f8ef417fe0682f3839",
+    "mtime": 1793234514.250649,
+    "seen": 1793234875.7348876,
+    "ast_hash": "b924c11beae3eeff34b777ea6e6553f9",
     "semantic_hash": ""
   },
   "app/src/router.tsx": {
-    "mtime": 1793070294.5827093,
-    "seen": 1793105988.8135173,
-    "ast_hash": "14496d96371f3cb485c1b95f2475bacb",
+    "mtime": 1793234427.6036015,
+    "seen": 1793234875.7348895,
+    "ast_hash": "6ac6f81fa0b33615b7c1ac4736ae27e7",
     "semantic_hash": ""
   },
   "app/src/test/setup.ts": {
@@ -150,15 +150,15 @@
     "semantic_hash": ""
   },
   "app/src/features/acceso/Entrar.tsx": {
-    "mtime": 1793106862.366452,
-    "seen": 1793107347.934108,
-    "ast_hash": "654e3b3891928fd8b68405b44f23dcbf",
+    "mtime": 1793234298.92187,
+    "seen": 1793234875.734818,
+    "ast_hash": "3887ce124a5cf748498c459fcd830509",
     "semantic_hash": ""
   },
   "app/src/features/barbero/PanelBarbero.tsx": {
-    "mtime": 1793106651.66043,
-    "seen": 1793107347.9341102,
-    "ast_hash": "67c1ab9b07c4d5548c0326d975567256",
+    "mtime": 1793234430.8332903,
+    "seen": 1793234875.7348213,
+    "ast_hash": "1a5cee205ff9ea17782de5ccf376cfce",
     "semantic_hash": ""
   },
   "app/src/features/dueno/CodigoQr.tsx": {
@@ -228,9 +228,9 @@
     "semantic_hash": ""
   },
   "app/src/prototipo/pantallas.ts": {
-    "mtime": 1793106310.3952415,
-    "seen": 1793107347.9341462,
-    "ast_hash": "1a4a1224de2a7c4b7a15047d8d26f435",
+    "mtime": 1793234427.605616,
+    "seen": 1793234875.7348833,
+    "ast_hash": "3df77d275fa8d34ee2e449d691d367ab",
     "semantic_hash": ""
   },
   "app/src/prototipo/simulacion.ts": {
@@ -384,9 +384,45 @@
     "semantic_hash": ""
   },
   "tests/e2e/fila.spec.ts": {
-    "mtime": 1793233875.0515964,
-    "seen": 1793233991.753515,
-    "ast_hash": "cbbb80d58bdc40fc202371aace82c9cf",
+    "mtime": 1793234764.6748755,
+    "seen": 1793234875.7349477,
+    "ast_hash": "0136a4d68563b0df96d83591d4824efb",
+    "semantic_hash": ""
+  },
+  "app/src/features/barbero/panel.test.tsx": {
+    "mtime": 1793234479.4056766,
+    "seen": 1793234875.7348242,
+    "ast_hash": "2d0e980bf14e6a1580e6c052c8a12ce7",
+    "semantic_hash": ""
+  },
+  "app/src/lib/panel.ts": {
+    "mtime": 1793234728.289163,
+    "seen": 1793234875.7348635,
+    "ast_hash": "109a99366519cb45d99bd1bdd7492be0",
+    "semantic_hash": ""
+  },
+  "app/src/lib/sesion.ts": {
+    "mtime": 1793234281.2378545,
+    "seen": 1793234875.7348654,
+    "ast_hash": "21457d4f34966bc4dbc56f29de25ca98",
+    "semantic_hash": ""
+  },
+  "scripts/e2e/barbero-prueba.sql": {
+    "mtime": 1793234567.5232477,
+    "seen": 1793234875.7349107,
+    "ast_hash": "b1873f61b76edacf45a9ec6d8ec1d185",
+    "semantic_hash": ""
+  },
+  "tests/e2e/barbero.spec.ts": {
+    "mtime": 1793234767.51638,
+    "seen": 1793234875.734945,
+    "ast_hash": "b9ef7217cc9077bd1bbb26f0cba20413",
+    "semantic_hash": ""
+  },
+  "tests/e2e/utilidades.ts": {
+    "mtime": 1793234760.7759652,
+    "seen": 1793234875.7349494,
+    "ast_hash": "d2bc978528e4a98b6362e55f3c55e8a9",
     "semantic_hash": ""
   }
 }

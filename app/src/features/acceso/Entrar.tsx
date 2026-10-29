@@ -1,18 +1,41 @@
 import { Eye, EyeOff } from "lucide-react";
 import { motion } from "motion/react";
-import { useId, useState } from "react";
-import { useNavigate } from "react-router";
+import { type FormEvent, useId, useState } from "react";
+import { Navigate, useNavigate } from "react-router";
 import { Franjas } from "@/components/Franjas";
-import { BotonMarca } from "@/components/Marco";
+import { BotonMarca, Cargando } from "@/components/Marco";
 import { BotonPrincipal, claseCampo } from "@/components/Piezas";
-import { useTitulo } from "@/prototipo/simulacion";
+import { useTitulo } from "@/lib/ganchos";
+import { entrar, MENSAJES_ENTRAR, type ResultadoEntrar, useSesion } from "@/lib/sesion";
 
 export function Entrar() {
   useTitulo("Entrar");
+  const sesion = useSesion();
   const navigate = useNavigate();
+  const [correo, setCorreo] = useState("");
+  const [clave, setClave] = useState("");
   const [verClave, setVerClave] = useState(false);
+  const [enviando, setEnviando] = useState(false);
+  const [error, setError] = useState<Exclude<ResultadoEntrar, "ok"> | null>(null);
   const idCorreo = useId();
   const idClave = useId();
+
+  if (sesion.tipo === "cargando") return <Cargando />;
+  // Con la sesión abierta no hay nada que hacer aquí.
+  if (sesion.tipo === "dentro" && !enviando) return <Navigate to="/panel" replace />;
+
+  async function enviar(evento: FormEvent) {
+    evento.preventDefault();
+    setEnviando(true);
+    setError(null);
+    const resultado = await entrar(correo, clave);
+    if (resultado === "ok") {
+      navigate("/panel", { replace: true });
+      return;
+    }
+    setError(resultado);
+    setEnviando(false);
+  }
 
   return (
     <div className="grid min-h-dvh lg:grid-cols-[1.1fr_1fr]">
@@ -39,10 +62,7 @@ export function Entrar() {
 
       <main className="flex items-center justify-center px-4 py-12 sm:px-10">
         <motion.form
-          onSubmit={(e) => {
-            e.preventDefault();
-            navigate("/panel");
-          }}
+          onSubmit={(e) => void enviar(e)}
           className="w-full max-w-sm"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -61,8 +81,11 @@ export function Entrar() {
               <input
                 id={idCorreo}
                 type="email"
+                required
                 autoComplete="email"
                 placeholder="carlos@lanavaja.hn"
+                value={correo}
+                onChange={(e) => setCorreo(e.target.value)}
                 className={claseCampo}
               />
             </div>
@@ -74,7 +97,10 @@ export function Entrar() {
                 <input
                   id={idClave}
                   type={verClave ? "text" : "password"}
+                  required
                   autoComplete="current-password"
+                  value={clave}
+                  onChange={(e) => setClave(e.target.value)}
                   className={`${claseCampo} pr-14`}
                 />
                 <button
@@ -87,16 +113,23 @@ export function Entrar() {
                 </button>
               </div>
             </div>
-            <button
-              type="button"
-              className="justify-self-start text-sm font-semibold text-azul underline-offset-4 hover:underline"
-            >
-              ¿Olvidaste tu contraseña?
-            </button>
+            {/* Recuperar la contraseña por correo necesita el SMTP de Resend (pendiente). */}
+            <p className="text-sm text-tenue">
+              ¿Olvidaste tu contraseña? Pídele al dueño de la barbería que te la cambie.
+            </p>
           </div>
 
-          <BotonPrincipal type="submit" className="mt-8">
-            Entrar
+          {error && (
+            <p
+              role="alert"
+              className="mt-6 rounded-2xl bg-superficie px-4 py-3 text-sm font-medium text-rojo ring-1 ring-rojo/40"
+            >
+              {MENSAJES_ENTRAR[error]}
+            </p>
+          )}
+
+          <BotonPrincipal type="submit" className="mt-8" disabled={enviando}>
+            {enviando ? "Entrando…" : "Entrar"}
           </BotonPrincipal>
         </motion.form>
       </main>

@@ -160,3 +160,16 @@ Cada cambio del proyecto queda aquí, enlazado al documento que afecta. El grafo
 - **Herramientas:** `@playwright/test` 1.64.1, la versión del plan. En la laptop usa el Chrome instalado (sin descargar navegadores); en el CI usaría el Chromium de Playwright. Corre de a una, porque cada corrida saca 2 turnos y el límite es de 5 por IP cada 10 minutos.
 - **Seguridad:** el fallo 3 pasa a 🟩.
 - **Pendiente:** correr la prueba en el CI (con Supabase local o contra `siguiente-pruebas`), sumar axe para accesibilidad y las duraciones recientes en `fila_publica`.
+
+## 2026-10-28 · Sprint 3: login y panel del barbero conectados
+
+- **Qué:** las tres primeras tareas del [Sprint 3](plan-implementacion.md#sprint-3--barbero-tv-y-avisos-semana-5): entrar con correo y contraseña, el panel del barbero con sus cuatro botones y el aviso por WhatsApp.
+- **Sesión** (`app/src/lib/sesion.ts`): `signInWithPassword` de Supabase Auth, con mensajes para contraseña equivocada, demasiados intentos y sin conexión. `/entrar` lleva al panel si ya hay sesión, y `/panel` manda a `/entrar` si no la hay. "¿Olvidaste tu contraseña?" ahora explica que se la pidan al dueño: recuperarla por correo necesita el SMTP de Resend.
+- **Panel** (`app/src/lib/panel.ts`): lee con la sesión del barbero (RLS: solo su barbería) su silla, los servicios, los turnos activos y lo atendido hoy (según la zona horaria de la barbería). Se actualiza con la señal de la fila. Cada botón llama a su función de la base (`llamar_siguiente`, `empezar_turno`, `marcar_no_llego`, `terminar_turno`, `pausar_barbero`) y los rechazos se explican ("ya tienes a alguien en la silla", "ese turno ya cambió"…). Una cuenta sin silla ve un mensaje en vez de un panel vacío. Botón para salir.
+- **WhatsApp:** con un cliente llamado, el botón abre `wa.me` con el mensaje escrito ("Luis, ya te toca en Barbería Prueba. Te esperamos en la silla 1."). Si no dejó número, lo dice.
+- **Prototipo:** el panel simulado pasa a `/demo/panel`; el menú de pantallas apunta ahí.
+- **Cuenta de prueba:** `scripts/e2e/barbero-prueba.sql` crea por SQL una cuenta de barbero en `siguiente-pruebas` ligada a Carlos de "Barbería Prueba". El correo y la contraseña (generada al azar) viven solo en `.env.local` (`E2E_BARBERO_CORREO` y `E2E_BARBERO_CLAVE`), nunca en el repositorio. En producción las cuentas se crearán por invitación (Sprint 4).
+- **Probado en el navegador (localhost, celular de 375 px):** entrar con la cuenta de prueba, llamar al #3, ver el enlace de WhatsApp, empezar y terminar con tarjeta; en otra pestaña, la página del cliente pasó sola por "¡Te toca!", "Disfruta tu corte" y "¡Quedaste fino!". En la base: atendido, L 150, tarjeta y los 4 eventos de la bitácora.
+- **Ajuste:** "Registrado" convierte el monto a número antes de sumar, por si `numeric` llega como texto.
+- **Pruebas:** 105 de Vitest (7 nuevas del login y el panel, con un Supabase falso que simula sesión y tablas) y 3 de Playwright, con la nueva `tests/e2e/barbero.spec.ts`: dos celulares, el barbero llama, empieza y termina, y el cliente lo ve. Las funciones compartidas de las pruebas de punta a punta pasaron a `tests/e2e/utilidades.ts`.
+- **Pendiente del Sprint 3:** pantalla de TV, Web Push con la Edge Function `avisos`, `vencer_tolerancia()` con `pg_cron` y el SMTP de Resend.

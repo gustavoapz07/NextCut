@@ -264,14 +264,16 @@ No construye funciones del producto. Prepara el entorno y prueba lo que podría 
 
 ### Sprint 3 · Barbero, TV y avisos (semana 5)
 
-- [ ] Login con correo y contraseña (Supabase Auth con SMTP de Resend).
-- [ ] Panel del barbero: **Llamar siguiente · Empezar · Terminar · No llegó**, registro de servicio, monto y método de pago, y pausa.
-- [ ] Botón "Avisar por WhatsApp": enlace `wa.me` con el mensaje ya escrito.
+- [x] Login con correo y contraseña (Supabase Auth). Falta el SMTP de Resend, que hace falta para recuperar la contraseña y para las invitaciones del Sprint 4.
+- [x] Panel del barbero: **Llamar siguiente · Empezar · Terminar · No llegó**, registro de servicio, monto y método de pago, y pausa.
+- [x] Botón "Avisar por WhatsApp": enlace `wa.me` con el mensaje ya escrito.
 - [ ] Pantalla `/b/:slug/tv`: fila en letra grande, conexión permanente y pantalla siempre encendida (Wake Lock).
 - [ ] Web Push: suscripción desde la página del turno, service worker y Edge Function `avisos` (por evento y cada minuto con `pg_cron`).
 - [ ] `vencer_tolerancia()` cada minuto con `pg_cron`.
 
 **Salida:** Playwright: el barbero llama, empieza y termina un turno y el cliente lo ve en su página. Prueba manual de push en Android y iPhone. Un barbero no ve los turnos de otra barbería desde la interfaz.
+
+**Avance (28/10/2026):** la primera parte de la salida pasa: `tests/e2e/barbero.spec.ts` (el barbero llama, empieza y termina y el cliente lo ve). Faltan la TV, Web Push y la prueba manual de push.
 
 ### Sprint 4 · Dueño, antiabuso y lanzamiento (semana 6)
 

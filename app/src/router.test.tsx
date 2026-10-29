@@ -9,7 +9,17 @@ const { rpc, invoke } = vi.hoisted(() => ({ rpc: vi.fn(), invoke: vi.fn() }));
 vi.mock("@/lib/supabase", () => {
   const canal = { on: () => canal, subscribe: () => canal };
   return {
-    supabase: { rpc, functions: { invoke }, channel: () => canal, removeChannel: async () => "ok" },
+    supabase: {
+      rpc,
+      functions: { invoke },
+      channel: () => canal,
+      removeChannel: async () => "ok",
+      // Sin sesión: nadie del personal entró.
+      auth: {
+        getSession: async () => ({ data: { session: null } }),
+        onAuthStateChange: () => ({ data: { subscription: { unsubscribe: () => {} } } }),
+      },
+    },
   };
 });
 
@@ -276,7 +286,7 @@ describe("rutas", () => {
   });
 
   it("muestra los cuatro botones del panel del barbero", async () => {
-    abrir("/panel");
+    abrir("/demo/panel");
     for (const nombre of [/Llamar siguiente/, /Empezar/, /No llegó/, /Terminar/]) {
       expect(await screen.findByRole("button", { name: nombre })).toBeInTheDocument();
     }

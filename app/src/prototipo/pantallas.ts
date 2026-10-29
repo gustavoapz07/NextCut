@@ -70,7 +70,7 @@ export const pantallas: Array<{ grupo: string; descripcion: string; items: Panta
         icono: LogIn,
       },
       {
-        ruta: "/panel",
+        ruta: "/demo/panel",
         titulo: "Panel del barbero",
         texto: "Llamar, empezar, terminar o no llegó.",
         icono: Scissors,

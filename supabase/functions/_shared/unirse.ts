@@ -94,14 +94,13 @@ export function errorDeLaBase(mensaje: string): CodigoError {
 }
 
 /**
- * IP del cliente según el borde de Supabase. Prueba de riesgo 3: confirmar en el proyecto
- * desplegado cuál de estos encabezados trae la IP real y que el cliente no lo pueda falsear.
+ * IP del cliente según el borde de Supabase (prueba de riesgo 3, 28/10/2026): Cloudflare pone
+ * `cf-connecting-ip` y bloquea a quien lo manda por su cuenta, y `x-real-ip` llega con la IP
+ * real aunque el cliente mande otra. `x-forwarded-for` no se usa: su primer valor lo escribe
+ * el cliente. Sin estos encabezados (Supabase local) no hay IP y no se aplica el límite por IP.
  */
 export function obtenerIp(encabezados: Headers) {
-  const candidata =
-    encabezados.get("cf-connecting-ip") ??
-    encabezados.get("x-real-ip") ??
-    encabezados.get("x-forwarded-for")?.split(",")[0];
+  const candidata = encabezados.get("cf-connecting-ip") ?? encabezados.get("x-real-ip");
   const ip = candidata?.trim();
   return ip && ip.length <= 64 ? ip : null;
 }

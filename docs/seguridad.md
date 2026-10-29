@@ -100,7 +100,7 @@ Antes de la lista general, estos son los abusos más probables en este producto:
   - Clave de idempotencia al anotarse, para que un doble toque no cree dos turnos.
 - **Prueba:** dos barberos presionan "Llamar siguiente" a la vez y cada uno recibe un cliente distinto; un doble envío del formulario crea un solo turno.
 
-### 9. Rate limiting · 🟨 (límites por IP, teléfono y tamaño de la fila probados; Turnstile listo en código pero sin probar en la nube; falta la pausa automática)
+### 9. Rate limiting · 🟨 (límites por IP, teléfono y tamaño de la fila probados; Turnstile y la IP real probados en la nube; falta la pausa automática)
 
 - **Controles:**
   - Cloudflare Turnstile en el formulario, verificado en una Edge Function.

@@ -124,3 +124,12 @@ Cada cambio del proyecto queda aquí, enlazado al documento que afecta. El grafo
 - **Verificado en el navegador:** el formulario del prototipo llega al turno #33 como antes, y una barbería real que no existe consulta `fila_publica` y muestra "no encontrado".
 - **Hallazgo:** las herramientas de edición convertían en caracteres invisibles reales los escapes Unicode de una expresión regular (los que invierten el texto, U+202A a U+202E). Se reescribieron como texto ASCII y se revisó que ningún archivo de `app/` ni `supabase/` tenga caracteres invisibles.
 - **Pendiente:** cargar `TURNSTILE_SECRET` en `siguiente-pruebas` para cerrar la prueba de riesgo 3 (y ver qué encabezado trae la IP real); la página `/t/:codigo` con datos reales (hoy un código real cae en "no encontrado"); duraciones recientes en `fila_publica`; y la prueba de Playwright.
+
+## 2026-10-28 · Prueba de riesgo 3 superada: Turnstile y la IP real
+
+- **Qué:** con `TURNSTILE_SECRET` cargado en `siguiente-pruebas` (la clave de prueba de Cloudflare), se probó la Edge Function desplegada sin crear datos: con un token de prueba y una barbería inventada responde 404 `no_existe`, o sea que Turnstile ya la dejó pasar ([ADR-013](decisiones.md#adr-013--detalles-de-anotarse-en-la-fila)).
+- **IP real:** se hicieron llamadas marcadas en la URL, una normal y otra con `X-Forwarded-For` y `X-Real-IP` falsos (`203.0.113.7`). En los registros de la función, `cf-connecting-ip` y `x-real-ip` traen la IP real en las dos, nunca la falsa. Una llamada que intentó mandar `CF-Connecting-IP` la bloqueó Cloudflare antes de llegar (error 1000). `x-forwarded-for` no aparece en los registros, así que no se puede confirmar que sea confiable.
+- **Cambio:** `obtenerIp` ya no usa `x-forwarded-for`; toma `cf-connecting-ip` y, si falta, `x-real-ip`. Una prueba nueva confirma que un `x-forwarded-for` solo no cuenta como IP. 63 pruebas de las Edge Functions en verde.
+- **Despliegue:** versión 3 de `unirse-a-fila`. La versión 2 falló porque Supabase reusó la ruta absoluta del mapa de imports de la versión 1; se arregla pasando `import_map_path: deno.json` en cada despliegue.
+- **Sprint 0:** las pruebas de riesgo 1 y 3 están superadas; falta la 2 (Web Push).
+- **Pendiente para producción:** crear el widget de Turnstile en Cloudflare y cargar sus claves reales.

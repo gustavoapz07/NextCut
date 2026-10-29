@@ -62,7 +62,11 @@ function dependencias(cambios: Partial<Dependencias> = {}) {
 function peticion(cuerpo: unknown, metodo = "POST") {
   return new Request("https://ejemplo.supabase.co/functions/v1/unirse-a-fila", {
     method: metodo,
-    headers: { origin: ORIGEN, "content-type": "application/json", "x-forwarded-for": "190.5.1.2" },
+    headers: {
+      origin: ORIGEN,
+      "content-type": "application/json",
+      "cf-connecting-ip": "190.5.1.2",
+    },
     body: metodo === "POST" ? JSON.stringify(cuerpo) : null,
   });
 }
@@ -218,12 +222,16 @@ describe("limpiarNombre", () => {
 });
 
 describe("obtenerIp", () => {
-  it("prefiere la IP que pone Cloudflare y si no, la primera de x-forwarded-for", () => {
+  it("prefiere la IP que pone Cloudflare y si no, x-real-ip", () => {
     expect(obtenerIp(new Headers({ "cf-connecting-ip": "1.1.1.1", "x-real-ip": "2.2.2.2" }))).toBe(
       "1.1.1.1",
     );
-    expect(obtenerIp(new Headers({ "x-forwarded-for": " 3.3.3.3, 10.0.0.1" }))).toBe("3.3.3.3");
+    expect(obtenerIp(new Headers({ "x-real-ip": " 2.2.2.2 " }))).toBe("2.2.2.2");
     expect(obtenerIp(new Headers())).toBeNull();
+  });
+
+  it("no confía en x-forwarded-for, que puede escribir el cliente", () => {
+    expect(obtenerIp(new Headers({ "x-forwarded-for": "203.0.113.7" }))).toBeNull();
   });
 });
 

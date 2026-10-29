@@ -1,7 +1,7 @@
 # Graph Report - NextCut  (2026-10-28)
 
 ## Corpus Check
-- 61 files · ~54,825 words
+- 61 files · ~55,165 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 7 file(s) not represented in the graph (top: (none) 4, .example 1, .css 1)
 
@@ -11,7 +11,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `869228b3`
+- Built from commit: `13a40e70`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -68,10 +68,10 @@
   README.md → docs/seguridad.md
 - `Modelo de negocio (hipótesis)` --references--> `Competencia`  [INFERRED]
   README.md → docs/investigacion.md
-- `graphify (grafo de conocimiento)` --conceptually_related_to--> `Desarrollo local`  [INFERRED]
-  docs/plan-implementacion.md → README.md
 - `Definición de abandono` --conceptually_related_to--> `Tasa de abandono`  [INFERRED]
   docs/validacion-campo.md → README.md
+- `Tasa de abandono` --references--> `Validación de campo`  [INFERRED]
+  README.md → docs/validacion-campo.md
 
 ## Import Cycles
 - None detected.
@@ -210,7 +210,7 @@ Cohesion: 0.50
 Nodes (3): imports, @supabase/supabase-js, zod
 
 ## Knowledge Gaps
-- **24 isolated node(s):** `ADR-0007`, `ADR-0007`, `ADR-0007`, `ADR-0007`, `Nombre provisional "Siguiente" (alternativa descartada)` (+19 more)
+- **24 isolated node(s):** `ADR-0007`, `ADR-0007`, `ADR-0007`, `ADR-0007`, `Booksy` (+19 more)
   These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 159 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 

@@ -6,15 +6,15 @@
     "semantic_hash": "55ba7d5ab3fc038543733f892cdf8a23"
   },
   "docs/bitacora.md": {
-    "mtime": 1793230003.4847405,
-    "seen": 1793230012.9541576,
-    "ast_hash": "8dbc687e120b4e57bb7f1b89a5f1727c",
+    "mtime": 1793232582.11683,
+    "seen": 1793232606.4920192,
+    "ast_hash": "f724e500063b58a333ff3dbf23519d4b",
     "semantic_hash": ""
   },
   "docs/decisiones.md": {
-    "mtime": 1793230003.4836276,
-    "seen": 1793230012.9541595,
-    "ast_hash": "b57b5c2c0cd374e93df0a237cc61578b",
+    "mtime": 1793232582.1149805,
+    "seen": 1793232606.492023,
+    "ast_hash": "fc60f3ae4268e96f9e6a6accd3c8e5c2",
     "semantic_hash": ""
   },
   "docs/investigacion.md": {
@@ -24,9 +24,9 @@
     "semantic_hash": "a03e6054d92f2b3847ff257819adb86d"
   },
   "docs/seguridad.md": {
-    "mtime": 1793230003.4814994,
-    "seen": 1793230012.954166,
-    "ast_hash": "5de235caccb04b8a8f0cf70cccfa9846",
+    "mtime": 1793232582.1149805,
+    "seen": 1793232606.4920306,
+    "ast_hash": "aabccefce7f8a80db505f565ef3321ee",
     "semantic_hash": ""
   },
   "docs/validacion-campo.md": {
@@ -36,9 +36,9 @@
     "semantic_hash": "fce8b9c4ac2e58b20c5f98526ae1e804"
   },
   "docs/plan-implementacion.md": {
-    "mtime": 1793230003.480306,
-    "seen": 1793230012.954164,
-    "ast_hash": "69d786445d46ae556c769f70bbac9c62",
+    "mtime": 1793232582.1108067,
+    "seen": 1793232606.4920287,
+    "ast_hash": "0bda60dc42bfb2a4ae1f80549e53763a",
     "semantic_hash": ""
   },
   "app/src/components/ErrorDeRuta.tsx": {
@@ -342,15 +342,15 @@
     "semantic_hash": ""
   },
   "supabase/functions/_shared/unirse.test.ts": {
-    "mtime": 1793229835.8193588,
-    "seen": 1793230012.9541306,
-    "ast_hash": "4ddb83a3d945249b5c6b55677d899cea",
+    "mtime": 1793232395.8844478,
+    "seen": 1793232606.4919856,
+    "ast_hash": "1f2fbb6ed676f1036d491a0539c36921",
     "semantic_hash": ""
   },
   "supabase/functions/_shared/unirse.ts": {
-    "mtime": 1793229835.7811408,
-    "seen": 1793230012.9541328,
-    "ast_hash": "5346c93ec30bd0f6b3a484e75c6e9203",
+    "mtime": 1793232376.35456,
+    "seen": 1793232606.491989,
+    "ast_hash": "6120940e5192acd911719475106a6ac3",
     "semantic_hash": ""
   },
   "supabase/functions/unirse-a-fila/deno.json": {

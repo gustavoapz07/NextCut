@@ -231,7 +231,7 @@ No construye funciones del producto. Prepara el entorno y prueba lo que podría 
 - [ ] Crear el proyecto de producción y el Worker en Cloudflare con `workers.dev`, y desactivar las claves heredadas (`anon` y `service_role`) en ambos proyectos.
 - [x] **Prueba de riesgo 1 · Broadcast público:** superada el 26/10/2026. Una señal enviada con `realtime.send(..., private => false)` llega a un cliente anónimo con la clave publicable, y ese cliente es rechazado en un canal privado (`scripts/spikes/broadcast-publico.mjs`).
 - [ ] **Prueba de riesgo 2 · Web Push:** una Edge Function envía un aviso con VAPID que llega a Chrome en Android y a un iPhone con la página agregada a la pantalla de inicio.
-- [ ] **Prueba de riesgo 3 · Turnstile + IP:** la Edge Function verifica el token y obtiene la IP real del cliente. La función ya está desplegada en `siguiente-pruebas` (28/10/2026); falta cargar `TURNSTILE_SECRET` para probarla de punta a punta ([ADR-013](decisiones.md#adr-013--detalles-de-anotarse-en-la-fila)).
+- [x] **Prueba de riesgo 3 · Turnstile + IP:** superada el 28/10/2026. La Edge Function desplegada verifica el token con Cloudflare y recibe la IP real en `cf-connecting-ip` y `x-real-ip`, aunque el cliente mande otra; Cloudflare bloquea a quien intenta mandar `cf-connecting-ip` por su cuenta. `x-forwarded-for` se descartó porque el cliente puede escribirlo ([ADR-013](decisiones.md#adr-013--detalles-de-anotarse-en-la-fila)).
 
 **Salida:** CI en verde con un "hola mundo" desplegado, y las 3 pruebas de riesgo con resultado documentado en la bitácora. Si alguna falla, se registra un ADR con la alternativa antes del Sprint 1.
 

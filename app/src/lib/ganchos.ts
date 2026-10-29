@@ -26,3 +26,40 @@ export function useReloj(cada = 1000) {
   useIntervalo(() => setAhora(new Date()), cada);
   return ahora;
 }
+
+/**
+ * Mantiene la pantalla encendida (Wake Lock) mientras la página está visible. El navegador lo
+ * suelta al ocultarla, así que se vuelve a pedir al volver. Sin soporte, no hace nada.
+ */
+export function usePantallaEncendida() {
+  useEffect(() => {
+    if (!("wakeLock" in navigator)) return;
+    let vivo = true;
+    let bloqueo: WakeLockSentinel | null = null;
+
+    const pedir = async () => {
+      if (document.visibilityState !== "visible" || bloqueo) return;
+      try {
+        const nuevo = await navigator.wakeLock.request("screen");
+        if (!vivo) {
+          void nuevo.release();
+          return;
+        }
+        bloqueo = nuevo;
+        nuevo.addEventListener("release", () => {
+          bloqueo = null;
+        });
+      } catch {
+        // El navegador lo negó (batería baja o ahorro de energía): la pantalla se apaga sola.
+      }
+    };
+
+    void pedir();
+    document.addEventListener("visibilitychange", pedir);
+    return () => {
+      vivo = false;
+      document.removeEventListener("visibilitychange", pedir);
+      void bloqueo?.release();
+    };
+  }, []);
+}

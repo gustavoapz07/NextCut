@@ -285,6 +285,35 @@ describe("rutas", () => {
     ).toBeInTheDocument();
   });
 
+  it("muestra la TV del prototipo", async () => {
+    abrir("/b/la-navaja/tv");
+    expect(await screen.findByText("La Navaja")).toBeInTheDocument();
+    expect(screen.getByText("En fila")).toBeInTheDocument();
+  });
+
+  it("muestra la TV real con una columna por barbero y la fila", async () => {
+    rpc.mockResolvedValue({ data: filaDeEjemplo(), error: null });
+    abrir("/b/el-faro/tv");
+    expect(await screen.findByText("El Faro")).toBeInTheDocument();
+    expect(rpc).toHaveBeenCalledWith("fila_publica", { p_slug: "el-faro" });
+    // Ana atiende al #3 y le siguen el #4; Beto está en pausa.
+    expect(screen.getByRole("heading", { name: "Ana" })).toBeInTheDocument();
+    expect(screen.getByText("#3")).toBeInTheDocument();
+    expect(screen.getByText("#4 Óscar L.")).toBeInTheDocument();
+    expect(screen.getByText("En pausa")).toBeInTheDocument();
+    expect(screen.getByText("Cliente")).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Activar sonido de los anuncios" }),
+    ).toBeInTheDocument();
+  });
+
+  it("la TV de una barbería que no existe da no encontrado", async () => {
+    abrir("/b/no-existe/tv");
+    expect(
+      await screen.findByRole("heading", { level: 1, name: "No encontramos esta página" }),
+    ).toBeInTheDocument();
+  });
+
   it("muestra los cuatro botones del panel del barbero", async () => {
     abrir("/demo/panel");
     for (const nombre of [/Llamar siguiente/, /Empezar/, /No llegó/, /Terminar/]) {

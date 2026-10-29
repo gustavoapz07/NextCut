@@ -1,6 +1,7 @@
 // Lo que devuelve `ver_turno(codigo)`, cancelar el turno propio y el aviso de "te toca".
 
 import { z } from "zod";
+import { tocarTonos } from "./sonido";
 import { supabase } from "./supabase";
 
 export const ESTADOS_TURNO = [
@@ -50,8 +51,6 @@ export async function cancelarTurno(codigo: string, secreto: string) {
   return !error && data === true;
 }
 
-type ConAudioViejo = Window & { webkitAudioContext?: typeof AudioContext };
-
 /** Vibra y suena dos tonos cortos. Si el navegador no lo permite, no pasa nada. */
 export function avisarQueToca() {
   // Sin un toque previo en la página, el navegador bloquea las dos cosas y deja un error en la
@@ -62,24 +61,5 @@ export function avisarQueToca() {
   } catch {
     // Sin vibración.
   }
-  try {
-    const Contexto = window.AudioContext ?? (window as ConAudioViejo).webkitAudioContext;
-    if (!Contexto) return;
-    const audio = new Contexto();
-    for (const [indice, frecuencia] of [880, 1175].entries()) {
-      const inicio = audio.currentTime + indice * 0.35;
-      const tono = audio.createOscillator();
-      const volumen = audio.createGain();
-      tono.frequency.value = frecuencia;
-      volumen.gain.setValueAtTime(0.0001, inicio);
-      volumen.gain.exponentialRampToValueAtTime(0.3, inicio + 0.02);
-      volumen.gain.exponentialRampToValueAtTime(0.0001, inicio + 0.3);
-      tono.connect(volumen).connect(audio.destination);
-      tono.start(inicio);
-      tono.stop(inicio + 0.32);
-    }
-    window.setTimeout(() => void audio.close(), 1200);
-  } catch {
-    // Sin sonido (el navegador lo bloquea hasta que la persona toque la página).
-  }
+  tocarTonos();
 }

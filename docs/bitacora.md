@@ -173,3 +173,18 @@ Cada cambio del proyecto queda aquí, enlazado al documento que afecta. El grafo
 - **Ajuste:** "Registrado" convierte el monto a número antes de sumar, por si `numeric` llega como texto.
 - **Pruebas:** 105 de Vitest (7 nuevas del login y el panel, con un Supabase falso que simula sesión y tablas) y 3 de Playwright, con la nueva `tests/e2e/barbero.spec.ts`: dos celulares, el barbero llama, empieza y termina, y el cliente lo ve. Las funciones compartidas de las pruebas de punta a punta pasaron a `tests/e2e/utilidades.ts`.
 - **Pendiente del Sprint 3:** pantalla de TV, Web Push con la Edge Function `avisos`, `vencer_tolerancia()` con `pg_cron` y el SMTP de Resend.
+
+## 2026-10-28 · Sprint 3: la pantalla de TV con datos reales
+
+- **Qué:** `/b/:slug/tv` muestra la fila real de la barbería, anuncia cada llamado y mantiene la pantalla encendida ([plan](plan-implementacion.md#sprint-3--barbero-tv-y-avisos-semana-5)). `/b/la-navaja/tv` sigue con el prototipo.
+- **Columnas** (`app/src/lib/tv.ts`): una por barbero, tantas como tenga la barbería. Cada una muestra si está libre, llamando, atendiendo o en pausa, y el número en grande. "Sigue" sale de la misma simulación del estimado ([ADR-012](decisiones.md#adr-012--cómo-se-calcula-el-estimado-de-espera)), así un turno de "el primero libre" aparece una sola vez, con el barbero que probablemente lo atienda. Un barbero libre muestra "LIBRE" en grande en vez de un número (el "—" gigante se veía como una barra blanca).
+- **Anuncios:** cuando un barbero llama a alguien aparece a pantalla completa "Turno #9 · Luis P. · Pasa con Carlos · silla 1" durante 4,5 segundos. Si llegan varios a la vez, salen en orden. Al encender la TV no anuncia lo que ya estaba llamado. El nombre se recuerda de la fila, porque al llamarlo ya no está en ella.
+- **Sonido:** botón "Activar sonido de los anuncios" en la esquina; los navegadores no dejan sonar nada hasta que alguien toca la pantalla una vez. Los tonos pasaron a `lib/sonido.ts`, compartidos con el aviso de "te toca" del cliente.
+- **Pantalla encendida:** `usePantallaEncendida` pide Wake Lock y lo vuelve a pedir cuando la página vuelve a estar visible.
+- **QR y marquesina:** usan la dirección real de la página (en producción, el dominio) con `?origen=qr`.
+- **Probado en el navegador (1280×720):** la TV de "Barbería Prueba" con Carlos y Jorge, sus "sigue" y la fila. Desde el panel de Carlos se llamó al #9 y la TV mostró el anuncio unos 5 segundos (verificado en el DOM cada 100 ms; con el panel del navegador oculto, las capturas no siempre muestran el cuadro más reciente).
+- **Pruebas:** 117 en total. Nuevas: columnas y detección de llamados (`tv.test.ts`, incluida la secuencia llamado → libre → nuevo llamado), y la TV del prototipo, la real y la de una barbería inexistente en las rutas.
+- **Hallazgos:**
+  - El límite de 5 turnos por IP cada 10 minutos frenó la creación de datos de prueba (`limite_ip`), como debe ser. Para seguir probando se creó un turno directo en la base con `unirse_a_fila`, sin hash de IP.
+  - Los nombres con tilde que se mandaron con `curl` desde la terminal de Windows llegaron con otra codificación ("Jos� P."). Es un problema de esa terminal, no de la app: se corrigieron en la base, y los datos de prueba con tildes se crean por SQL o con Playwright.
+- **Pendiente:** las conexiones públicas de Realtime duran hasta 24 horas; supabase-js se reconecta y la TV recarga al reconectar, más la recarga de respaldo cada 60 s. Conviene revisarlo en el piloto con una TV encendida todo el día.

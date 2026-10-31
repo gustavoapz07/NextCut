@@ -301,3 +301,11 @@ Cada cambio del proyecto queda aquí, enlazado al documento que afecta. El grafo
   - `/diagnostico`: si falta el permiso, explica dónde activarlo (la app NextCut o el sitio en Chrome) y tiene un botón para pedirlo. Ya no muestra "Android 10": Chrome manda ese número en todos los teléfonos para no revelar la versión real.
 - **Pruebas:** 233 de Vitest (5 nuevas). Publicado y revisado en la app publicada: sin permiso, el diagnóstico muestra "Falta el permiso" con la guía y el botón; el recorrido de activar y recargar sigue igual. Sin errores de consola.
 - **Siguiente:** en el A55, activar las notificaciones de la app NextCut (Ajustes → Aplicaciones → NextCut → Notificaciones), revisar con `/diagnostico` y abrir el turno #13 para que se vuelva a suscribir. Después se vuelve a mandar su "ya casi" y se mira el registro del teléfono.
+
+## 2026-10-31 · El aviso llega a un Samsung A55: prueba de riesgo 2 en Android
+
+- **Qué:** con las notificaciones de la app NextCut activadas en los ajustes de Android, el autor abrió su turno #13 en el A55. La página vio que los avisos estaban activos pero el navegador ya no tenía suscripción, y se volvió a suscribir sola (13:45:33, suscripción nueva en `fcm.googleapis.com`). A las 13:46:00 el reloj de pg_cron mandó "ya casi", Google lo aceptó y **el aviso apareció en el teléfono**.
+- **Antes, la prueba que lo confirmó:** al volver a mandar el "ya casi" a la suscripción vieja (13:44), Google respondió **410**: Chrome la había borrado cuando el permiso pasó a la app de la pantalla de inicio. La función registró "suscripción vencida" con el código y la quitó de la base, como debe.
+- **Para el piloto:** si un cliente de Android agrega la página a la pantalla de inicio, esa app tiene su propio permiso de notificaciones. La página del turno ahora lo explica y se resuscribe sola cuando vuelve el permiso; `/diagnostico` sirve para revisarlo con el teléfono del cliente.
+- **Prueba de riesgo 2:** pasa en Chrome de escritorio y en Android. Falta el iPhone (Safari, con la página agregada a la pantalla de inicio, iOS 16.4 o superior). Con eso se cierra también la salida del Sprint 3.
+- **Nota:** el turno #13 del autor sigue en la fila de Carlos. Sirve para probar el "¡Te toca!" llamándolo desde el panel, o se puede cancelar.

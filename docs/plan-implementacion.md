@@ -232,7 +232,7 @@ No construye funciones del producto. Prepara el entorno y prueba lo que podría 
 - [x] CI mínimo: Biome, `tsc`, Vitest, gitleaks y build.
 - [ ] Crear el proyecto de producción y el Worker en Cloudflare con `workers.dev`, y desactivar las claves heredadas (`anon` y `service_role`) en ambos proyectos. Avance del 31/10/2026: el Worker `nextcut` está publicado en https://nextcut.gustavoapz07.workers.dev contra el proyecto de pruebas (`npm run deploy:pruebas`); falta el proyecto de producción de Supabase.
 - [x] **Prueba de riesgo 1 · Broadcast público:** superada el 26/10/2026. Una señal enviada con `realtime.send(..., private => false)` llega a un cliente anónimo con la clave publicable, y ese cliente es rechazado en un canal privado (`scripts/spikes/broadcast-publico.mjs`).
-- [ ] **Prueba de riesgo 2 · Web Push:** una Edge Function envía un aviso con VAPID que llega a Chrome en Android y a un iPhone con la página agregada a la pantalla de inicio. Avance del 31/10/2026: los avisos llegan a Chrome de escritorio de punta a punta, en local (`tests/e2e/avisos.spec.ts`) y desde la app publicada en `nextcut.gustavoapz07.workers.dev`; falta probarlo en Android y iPhone.
+- [ ] **Prueba de riesgo 2 · Web Push:** una Edge Function envía un aviso con VAPID que llega a Chrome en Android y a un iPhone con la página agregada a la pantalla de inicio. Avance del 31/10/2026: los avisos llegan a Chrome de escritorio de punta a punta, en local (`tests/e2e/avisos.spec.ts`) y desde la app publicada en `nextcut.gustavoapz07.workers.dev`; y en Android llegó a un Samsung Galaxy A55 con Chrome (31/10/2026, 13:46). Falta el iPhone.
 - [x] **Prueba de riesgo 3 · Turnstile + IP:** superada el 28/10/2026. La Edge Function desplegada verifica el token con Cloudflare y recibe la IP real en `cf-connecting-ip` y `x-real-ip`, aunque el cliente mande otra; Cloudflare bloquea a quien intenta mandar `cf-connecting-ip` por su cuenta. `x-forwarded-for` se descartó porque el cliente puede escribirlo ([ADR-013](decisiones.md#adr-013--detalles-de-anotarse-en-la-fila)).
 
 **Salida:** CI en verde con un "hola mundo" desplegado, y las 3 pruebas de riesgo con resultado documentado en la bitácora. Si alguna falla, se registra un ADR con la alternativa antes del Sprint 1.
@@ -275,7 +275,7 @@ No construye funciones del producto. Prepara el entorno y prueba lo que podría 
 
 **Salida:** Playwright: el barbero llama, empieza y termina un turno y el cliente lo ve en su página. Prueba manual de push en Android y iPhone. Un barbero no ve los turnos de otra barbería desde la interfaz.
 
-**Avance (31/10/2026):** las seis tareas están hechas. De la salida pasa la primera parte: `tests/e2e/barbero.spec.ts` (el barbero llama, empieza y termina y el cliente lo ve). Falta la prueba manual de push en Android y iPhone, que necesita las claves cargadas y la app en HTTPS.
+**Avance (31/10/2026):** las seis tareas están hechas. De la salida pasa la primera parte: `tests/e2e/barbero.spec.ts` (el barbero llama, empieza y termina y el cliente lo ve). La prueba manual de push pasó en Android (Samsung A55, Chrome) con la app publicada; falta el iPhone.
 
 ### Sprint 4 · Dueño, antiabuso y lanzamiento (semana 6)
 

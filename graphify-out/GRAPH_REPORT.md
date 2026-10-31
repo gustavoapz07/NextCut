@@ -11,7 +11,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `5f4a6f55`
+- Built from commit: `a02edf76`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -23,15 +23,17 @@
 - turno.ts
 - ADR-008 · Desarrollo contra Supabase en la nube, sin Docker local
 - datos.ts
-- FilaAhora
+- LayoutDueno.tsx
 - Fallo 2 · Endpoints expuestos
 - Variables de entorno
 - Resumen.tsx
+- eta.ts
 - Unirse.tsx
 - PantallaTv.tsx
-- eta.ts
+- sesion.ts
 - Stack v0.1 con versiones
 - e2e/utilidades.ts
+- FilaAhora
 - database.types.ts
 - Turno.tsx
 - webpush.ts
@@ -42,12 +44,10 @@
 - _shared/unirse.ts
 - _shared/avisos.ts
 - imports
-- fila.ts
-- sesion.ts
+- tv.ts
 - 20261031132532_avisos_web_push.sql
 - public.barberias
 - dueno.ts
-- LayoutDueno.tsx
 - dueno.test.tsx
 - Diagnostico.tsx
 - fila.ts
@@ -125,6 +125,10 @@ Nodes (24): Pruebas de riesgo del Sprint 0 (Broadcast público, Web Push, Turnst
 Cohesion: 0.10
 Nodes (32): claseCampo, VistaPanel, DIAS, Miembro, Pestana, PESTANAS, VistaResumen, VistaFilaProps (+24 more)
 
+### Community 7 - "LayoutDueno.tsx"
+Cohesion: 0.20
+Nodes (18): BotonMarca(), Cargando(), BotonPrincipal(), destinoAlEntrar(), Entrar(), enviar(), Contexto, ContextoDueno (+10 more)
+
 ### Community 8 - "Fallo 2 · Endpoints expuestos"
 Cohesion: 0.13
 Nodes (20): Funciones de la base (security definer), Riesgos técnicos, Sprint 1 · Base de datos y seguridad, Amenazas propias de una fila virtual, Bitácora de eventos (eventos_turno), Clave de idempotencia al anotarse, Clave publicable y clave secreta de Supabase, Fallo 7 · Permisos excesivos (+12 more)
@@ -137,6 +141,10 @@ Nodes (3): @fontsource-variable/big-shoulders-display, ImportMeta, ImportMetaEnv
 Cohesion: 0.14
 Nodes (21): Digito(), DIGITOS, NumeroAnimado(), Props, Avatar(), BotonAccion(), HojaTerminar(), Panel() (+13 more)
 
+### Community 12 - "eta.ts"
+Cohesion: 0.15
+Nodes (16): BarberoEta, DURACION_POR_DEFECTO, DURACION_VALIDA, duracionDe(), minutosHastaLibre(), promedio(), RECIENTES_MAXIMO, RECIENTES_MINIMO (+8 more)
+
 ### Community 13 - "Unirse.tsx"
 Cohesion: 0.13
 Nodes (32): Boleto(), SinConexion(), FilaPrototipo(), FilaPublica(), FilaReal(), Tarjeta(), VistaFila(), Dato() (+24 more)
@@ -145,9 +153,9 @@ Nodes (32): Boleto(), SinConexion(), FilaPrototipo(), FilaPublica(), FilaReal(),
 Cohesion: 0.23
 Nodes (17): ResumenPrototipo(), leerDatos(), TurnoPrototipo(), Anuncio(), BANDA, ColumnaBarbero(), ESTADO, PantallaTv() (+9 more)
 
-### Community 15 - "eta.ts"
-Cohesion: 0.15
-Nodes (16): BarberoEta, DURACION_POR_DEFECTO, DURACION_VALIDA, duracionDe(), minutosHastaLibre(), promedio(), RECIENTES_MAXIMO, RECIENTES_MINIMO (+8 more)
+### Community 15 - "sesion.ts"
+Cohesion: 0.38
+Nodes (4): EstadoSesion, MENSAJES_ENTRAR, ResultadoEntrar, supabase
 
 ### Community 19 - "Stack v0.1 con versiones"
 Cohesion: 0.27
@@ -193,13 +201,9 @@ Nodes (20): Aviso, crearAviso(), decidirAviso(), DependenciasAvisos, esquemaCuer
 Cohesion: 0.50
 Nodes (3): imports, @supabase/supabase-js, zod
 
-### Community 37 - "fila.ts"
+### Community 37 - "tv.ts"
 Cohesion: 0.18
 Nodes (18): FormularioReal(), VistaTv, tonoDe(), TurnoPublico, ANUNCIO_MS, columnasTv(), ColumnaTv, detectarLlamados() (+10 more)
-
-### Community 38 - "sesion.ts"
-Cohesion: 0.38
-Nodes (4): EstadoSesion, MENSAJES_ENTRAR, ResultadoEntrar, supabase
 
 ### Community 39 - "20261031132532_avisos_web_push.sql"
 Cohesion: 0.12
@@ -212,10 +216,6 @@ Nodes (17): barberias_senal, barberos_senal, barberos_user_idx, privado.puede_at
 ### Community 41 - "dueno.ts"
 Cohesion: 0.13
 Nodes (19): Resumen(), ResumenReal(), BarberiaDueno, BarberoDueno, cargarResumen(), DatosResumen, ejecutar(), ErrorDueno (+11 more)
-
-### Community 42 - "LayoutDueno.tsx"
-Cohesion: 0.20
-Nodes (18): BotonMarca(), Cargando(), BotonPrincipal(), destinoAlEntrar(), Entrar(), enviar(), Contexto, ContextoDueno (+10 more)
 
 ### Community 43 - "dueno.test.tsx"
 Cohesion: 0.05
@@ -257,17 +257,17 @@ Nodes (6): EstadoFila, EstadoTurno, ADR-0007, useSenalFila(), useTurno(), esquem
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `cx()` connect `cx` to `datos.ts`, `FilaAhora`, `LayoutDueno.tsx`, `Resumen.tsx`, `Diagnostico.tsx`, `Unirse.tsx`, `PantallaTv.tsx`, `Turno.tsx`, `webpush.ts`, `PanelBarbero.tsx`?**
+- **Why does `cx()` connect `cx` to `datos.ts`, `LayoutDueno.tsx`, `Resumen.tsx`, `Diagnostico.tsx`, `Unirse.tsx`, `PantallaTv.tsx`, `FilaAhora`, `Turno.tsx`, `webpush.ts`, `PanelBarbero.tsx`?**
   _High betweenness centrality (0.020) - this node is a cross-community bridge._
 - **What connects `RFC-8291`, `ADR-0007`, `ADR-0007` to the rest of the system?**
   _30 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Investigación` be split into smaller, more focused modules?**
   _Cohesion score 0.09615384615384616 - nodes in this community are weakly interconnected._
-- **Why does `entradaEta()` connect `fila.ts` to `_shared/unirse.ts`, `_shared/avisos.ts`, `fila.ts`, `Unirse.tsx`, `Turno.tsx`?**
+- **Why does `entradaEta()` connect `tv.ts` to `_shared/unirse.ts`, `_shared/avisos.ts`, `fila.ts`, `Unirse.tsx`, `Turno.tsx`?**
   _High betweenness centrality (0.017) - this node is a cross-community bridge._
 - **Should `Arquitectura detallada` be split into smaller, more focused modules?**
   _Cohesion score 0.13043478260869565 - nodes in this community are weakly interconnected._
-- **Why does `useTitulo()` connect `PantallaTv.tsx` to `cx`, `datos.ts`, `dueno.ts`, `LayoutDueno.tsx`, `Resumen.tsx`, `Diagnostico.tsx`, `Unirse.tsx`, `Turno.tsx`, `PanelBarbero.tsx`?**
+- **Why does `useTitulo()` connect `PantallaTv.tsx` to `cx`, `datos.ts`, `LayoutDueno.tsx`, `dueno.ts`, `Resumen.tsx`, `Diagnostico.tsx`, `Unirse.tsx`, `Turno.tsx`, `PanelBarbero.tsx`?**
   _High betweenness centrality (0.015) - this node is a cross-community bridge._
 - **Should `20261027140203_base_de_datos.sql` be split into smaller, more focused modules?**
   _Cohesion score 0.10227272727272728 - nodes in this community are weakly interconnected._

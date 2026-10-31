@@ -10,7 +10,7 @@ import { NoEncontrado } from "@/components/NoEncontrado";
 import { NumeroAnimado } from "@/components/NumeroAnimado";
 import { Boleto, Confeti } from "@/components/Piezas";
 import { SinConexion } from "@/components/SinConexion";
-import { type EstadoAvisos, useAvisos } from "@/lib/avisos";
+import { desdePantallaDeInicio, type EstadoAvisos, useAvisos } from "@/lib/avisos";
 import { useTurno } from "@/lib/enVivo";
 import { entradaEta } from "@/lib/fila";
 import { hora, lempiras, rango, reloj } from "@/lib/formato";
@@ -590,6 +590,13 @@ function BotonAvisos({ avisos, casi }: { avisos: ControlAvisos; casi: boolean })
           No pudimos activar los avisos. Revisa tu conexión e inténtalo de nuevo.
         </p>
       )}
+      {estado === "sin_respuesta" && (
+        <p role="alert" className="text-center text-sm font-semibold">
+          {desdePantallaDeInicio()
+            ? "No apareció la pregunta para permitir los avisos. Como agregaste NextCut a tu pantalla de inicio, tiene su propio permiso: en los ajustes del teléfono, busca la app NextCut, activa sus notificaciones y vuelve a tocar el botón."
+            : "No apareció la pregunta para permitir los avisos, o la cerraste. Vuelve a tocar el botón y elige Permitir; si no aparece, activa las notificaciones de tu navegador en los ajustes del teléfono."}
+        </p>
+      )}
       {activos && (
         <div className="text-center text-sm">
           <button
@@ -601,8 +608,9 @@ function BotonAvisos({ avisos, casi }: { avisos: ControlAvisos; casi: boolean })
           </button>
           {avisos.prueba && (
             <p role="status" className="opacity-80">
-              Te mandamos uno de prueba. Si no apareció, activa las notificaciones de tu navegador
-              en los ajustes del teléfono.
+              Te mandamos uno de prueba. Si no apareció, activa en los ajustes del teléfono las
+              notificaciones de tu navegador, o las de la app NextCut si la agregaste a la pantalla
+              de inicio.
             </p>
           )}
         </div>

@@ -28,8 +28,10 @@ export const REGISTRO = { cache: "nextcut-diagnostico", ruta: "/diagnostico/avis
 
 /** "Chrome 141 · Android 15", "Samsung Internet 28 · Android 15", "Safari · iOS 18"… */
 export function describirNavegador(agente: string) {
+  // Chrome dice "Android 10; K" en todos los teléfonos para no revelar la versión real.
+  const android = /Android 10; K\)/.test(agente) ? "Android" : agente.match(/Android \d+/)?.[0];
   const sistema =
-    agente.match(/Android \d+/)?.[0] ??
+    android ??
     (/iPhone|iPad/.test(agente)
       ? `iOS ${agente.match(/OS (\d+)_/)?.[1] ?? ""}`.trim()
       : /Windows/.test(agente)
@@ -115,5 +117,15 @@ export async function avisoDePrueba(): Promise<ResultadoPrueba> {
     return vistas.length > 0 ? "a_la_vista" : "sin_rastro";
   } catch (error) {
     return { error: error instanceof Error ? `${error.name}: ${error.message}` : "desconocido" };
+  }
+}
+
+/** Pide el permiso de notificaciones desde el diagnóstico y dice qué contestó el navegador. */
+export async function pedirPermiso(): Promise<NotificationPermission | "sin_soporte"> {
+  if (!("Notification" in window)) return "sin_soporte";
+  try {
+    return await Notification.requestPermission();
+  } catch {
+    return Notification.permission;
   }
 }

@@ -4,7 +4,7 @@
 // manda: "ya casi" cuando faltan unos 15 minutos y "te toca" cuando el barbero llama.
 
 import { desdeBase64url } from "@shared/webpush";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { supabase } from "./supabase";
 
 export type DisponibilidadAvisos =
@@ -24,6 +24,12 @@ export type EstadoAvisos =
   | "activos"
   | "bloqueados"
   | "instalar"
+  /**
+   * Se pidió el permiso y no hubo respuesta: la persona cerró la pregunta o el teléfono no la
+   * mostró (pasa con la página agregada a la pantalla de inicio de Android, que tiene su propio
+   * permiso). Se puede volver a intentar, pero hay que decir qué revisar.
+   */
+  | "sin_respuesta"
   | "error";
 
 /** Se lee cada vez, no al cargar el módulo, para que las pruebas puedan cambiarla. */
@@ -37,7 +43,7 @@ function esIos() {
   );
 }
 
-function desdePantallaDeInicio() {
+export function desdePantallaDeInicio() {
   const standalone = (navigator as Navigator & { standalone?: boolean }).standalone;
   return standalone === true || window.matchMedia?.("(display-mode: standalone)").matches === true;
 }
@@ -58,8 +64,13 @@ const marca = (codigo: string) => `nextcut:avisos:${codigo}`;
 
 /** Este teléfono ya activó los avisos de este turno (y el permiso sigue dado). */
 export function avisosActivos(codigo: string) {
+  return activadosAntes(codigo) && Notification.permission === "granted";
+}
+
+/** Este teléfono los activó alguna vez, aunque después haya perdido el permiso. */
+function activadosAntes(codigo: string) {
   try {
-    return localStorage.getItem(marca(codigo)) === "1" && Notification.permission === "granted";
+    return localStorage.getItem(marca(codigo)) === "1";
   } catch {
     return false;
   }
@@ -179,13 +190,16 @@ function estadoInicial(codigo: string, secreto: string | null): EstadoAvisos {
   const disponibilidad = disponibilidadAvisos();
   if (disponibilidad === "no_disponible") return "oculto";
   if (disponibilidad !== "disponible") return disponibilidad;
-  return avisosActivos(codigo) ? "activos" : "apagados";
+  if (avisosActivos(codigo)) return "activos";
+  // Los había activado y el permiso se perdió (en Android, al agregar la página a la pantalla de
+  // inicio): se dice desde ya qué revisar, en vez de un botón que parece no hacer nada.
+  return activadosAntes(codigo) ? "sin_respuesta" : "apagados";
 }
 
 const DESPUES_DE: Record<ResultadoAvisos, EstadoAvisos> = {
   activados: "activos",
   bloqueados: "bloqueados",
-  sin_permiso: "apagados",
+  sin_permiso: "sin_respuesta",
   error: "error",
 };
 
@@ -205,5 +219,23 @@ export function useAvisos(codigo: string, secreto: string | null) {
     // El navegador perdió la suscripción: vuelve a aparecer "Avisarme".
     else setEstado("apagados");
   }, [codigo]);
+
+  // Al abrir con los avisos activos se revisa que la suscripción siga ahí: el navegador la borra
+  // si el permiso se perdió un rato (en Android, al agregar la página a la pantalla de inicio). Con
+  // el permiso dado, volver a suscribirse no pregunta nada.
+  const revisada = useRef(false);
+  useEffect(() => {
+    if (revisada.current || estado !== "activos") return;
+    revisada.current = true;
+    void (async () => {
+      try {
+        const registro = await navigator.serviceWorker.getRegistration("/");
+        if (!(await registro?.pushManager.getSubscription())) await activar();
+      } catch {
+        // Sin poder revisarla, se queda como está; "Probar el aviso" lo detecta.
+      }
+    })();
+  }, [estado, activar]);
+
   return { estado, activar, probar, prueba };
 }

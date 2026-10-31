@@ -198,17 +198,45 @@ describe("activarAvisos", () => {
 });
 
 describe("useAvisos", () => {
+  it("si no hubo respuesta al permiso, lo dice en vez de volver al mismo botón", async () => {
+    navegadorConPush({ respuesta: "default" });
+    const { result } = renderHook(() => useAvisos(CODIGO, SECRETO));
+    await act(() => result.current.activar());
+    expect(result.current.estado).toBe("sin_respuesta");
+  });
+
+  it("si los había activado y el permiso se perdió, lo dice desde que abre", () => {
+    // En Android pasa al agregar la página a la pantalla de inicio: la app tiene su propio permiso.
+    navegadorConPush({ permiso: "default" });
+    localStorage.setItem(`nextcut:avisos:${CODIGO}`, "1");
+    const { result } = renderHook(() => useAvisos(CODIGO, SECRETO));
+    expect(result.current.estado).toBe("sin_respuesta");
+  });
+
   it("sin el secreto del turno (otro teléfono) no muestra nada", () => {
     navegadorConPush();
     const { result } = renderHook(() => useAvisos(CODIGO, null));
     expect(result.current.estado).toBe("oculto");
   });
 
-  it("recuerda que este teléfono ya los activó", () => {
-    navegadorConPush({ permiso: "granted" });
+  it("recuerda que este teléfono ya los activó", async () => {
+    const { pushManager } = navegadorConPush({ permiso: "granted", actual: suscripcionFalsa() });
     localStorage.setItem(`nextcut:avisos:${CODIGO}`, "1");
     const { result } = renderHook(() => useAvisos(CODIGO, SECRETO));
     expect(result.current.estado).toBe("activos");
+    // Revisa la suscripción y, como sigue ahí, no hace nada más.
+    await vi.waitFor(() => expect(pushManager.getSubscription).toHaveBeenCalled());
+    expect(pushManager.subscribe).not.toHaveBeenCalled();
+    expect(rpc).not.toHaveBeenCalled();
+  });
+
+  it("si el navegador perdió la suscripción, se vuelve a suscribir solo al abrir", async () => {
+    const { pushManager } = navegadorConPush({ permiso: "granted", actual: null });
+    localStorage.setItem(`nextcut:avisos:${CODIGO}`, "1");
+    const { result } = renderHook(() => useAvisos(CODIGO, SECRETO));
+    await vi.waitFor(() => expect(rpc).toHaveBeenCalledWith("suscribir_push", expect.anything()));
+    expect(pushManager.subscribe).toHaveBeenCalled();
+    await vi.waitFor(() => expect(result.current.estado).toBe("activos"));
   });
 
   it("al activarlos pasa por activando y queda activo", async () => {

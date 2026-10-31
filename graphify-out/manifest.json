@@ -6,9 +6,9 @@
     "semantic_hash": ""
   },
   "docs/bitacora.md": {
-    "mtime": 1793474905.8378634,
-    "seen": 1793474916.3396678,
-    "ast_hash": "e87977f803dfb2ceb8269bcd2d40a1d4",
+    "mtime": 1793475405.9615595,
+    "seen": 1793475421.5792062,
+    "ast_hash": "129ed5bc9a413cd1570c1bc6a1d6d16f",
     "semantic_hash": ""
   },
   "docs/decisiones.md": {
@@ -192,9 +192,9 @@
     "semantic_hash": ""
   },
   "app/src/features/fila/Turno.tsx": {
-    "mtime": 1793473659.7437532,
-    "seen": 1793473767.9745078,
-    "ast_hash": "85b6c11bcdfa1b3ba33c8a4e3de077a4",
+    "mtime": 1793475140.0999527,
+    "seen": 1793475421.5788972,
+    "ast_hash": "b3c942b8e559a262c44f4a272b5cab32",
     "semantic_hash": ""
   },
   "app/src/features/fila/Unirse.tsx": {
@@ -456,15 +456,15 @@
     "semantic_hash": ""
   },
   "app/src/lib/avisos.test.ts": {
-    "mtime": 1793473657.1288238,
-    "seen": 1793473767.9745188,
-    "ast_hash": "62b424db5426626c6cc842d713f48113",
+    "mtime": 1793475318.466815,
+    "seen": 1793475421.5789135,
+    "ast_hash": "f0d70f0a129dd121afd2dd06c64546b4",
     "semantic_hash": ""
   },
   "app/src/lib/avisos.ts": {
-    "mtime": 1793473612.6793725,
-    "seen": 1793473767.9745216,
-    "ast_hash": "28374eea042d0bfe5686c2fe5a007c3f",
+    "mtime": 1793475297.9684982,
+    "seen": 1793475421.5789173,
+    "ast_hash": "e0faeb2b66792235973562e4ef7f6875",
     "semantic_hash": ""
   },
   "scripts/claves-vapid.mjs": {
@@ -558,21 +558,21 @@
     "semantic_hash": ""
   },
   "app/src/features/diagnostico/Diagnostico.tsx": {
-    "mtime": 1793474609.4870827,
-    "seen": 1793474916.3392797,
-    "ast_hash": "00d86bf4754ab02c3dd4112a24244568",
+    "mtime": 1793475188.0475147,
+    "seen": 1793475421.5788631,
+    "ast_hash": "4b115545f32bf71a145570b6dd1daa4a",
     "semantic_hash": ""
   },
   "app/src/lib/diagnostico.test.ts": {
-    "mtime": 1793474686.0089626,
-    "seen": 1793474916.3393624,
-    "ast_hash": "7d65f3a1b3d4385cc226385eb605aaa2",
+    "mtime": 1793475208.8453896,
+    "seen": 1793475421.5789256,
+    "ast_hash": "b01b77cd35a5f1e67d97b8e69a397fd0",
     "semantic_hash": ""
   },
   "app/src/lib/diagnostico.ts": {
-    "mtime": 1793474685.9769933,
-    "seen": 1793474916.3393667,
-    "ast_hash": "d68b391ff555bc769780d0058f9ad790",
+    "mtime": 1793475169.3358095,
+    "seen": 1793475421.5789294,
+    "ast_hash": "70a97dbb0ac296117cf45556e75301d3",
     "semantic_hash": ""
   },
   "app/src/lib/version.ts": {

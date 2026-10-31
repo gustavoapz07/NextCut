@@ -5,6 +5,7 @@ import {
   avisoDePrueba,
   type Diagnostico as DatosDiagnostico,
   diagnosticar,
+  pedirPermiso,
   type ResultadoPrueba,
 } from "@/lib/diagnostico";
 import { useTitulo } from "@/lib/ganchos";
@@ -70,6 +71,19 @@ export function Diagnostico() {
     await actualizar();
   }
 
+  const [respuesta, setRespuesta] = useState<string | null>(null);
+  async function pedir() {
+    const permiso = await pedirPermiso();
+    setRespuesta(
+      permiso === "granted"
+        ? "Permitido. Ahora prueba el aviso, y en tu turno vuelve a tocar «Avisarme»."
+        : permiso === "denied"
+          ? "El teléfono dijo que no. Actívalo en los ajustes, como dice arriba."
+          : "No apareció ninguna pregunta, o la cerraste. Actívalo en los ajustes, como dice arriba.",
+    );
+    await actualizar();
+  }
+
   return (
     <main className="mx-auto min-h-dvh max-w-lg bg-fondo px-4 pt-5 pb-16 text-tinta">
       <BotonMarca />
@@ -101,6 +115,31 @@ export function Diagnostico() {
             </Fila>
             <Fila titulo="Desde la pantalla de inicio">{datos.instalada ? "Sí" : "No"}</Fila>
           </dl>
+
+          {datos.permiso !== "granted" && datos.permiso !== "sin_soporte" && (
+            <section className="mt-6 rounded-[1.75rem] bg-poste-azul p-5 text-white">
+              <h2 className="font-display text-3xl leading-none font-black uppercase">
+                Falta el permiso
+              </h2>
+              <p className="mt-2 text-sm">
+                {datos.instalada
+                  ? "Abriste NextCut desde la pantalla de inicio. En Android eso la vuelve una app aparte, con su propio permiso: en Ajustes → Aplicaciones → NextCut → Notificaciones, actívalas."
+                  : "Permite las notificaciones de este sitio: en Chrome, ⋮ → Configuración → Configuración de sitios → Notificaciones. Revisa también que Chrome tenga las notificaciones activadas en los ajustes del teléfono."}
+              </p>
+              <button
+                type="button"
+                onClick={() => void pedir()}
+                className="mt-4 h-12 w-full rounded-full bg-white font-semibold text-poste-azul"
+              >
+                Pedir permiso
+              </button>
+              {respuesta && (
+                <p role="status" className="mt-3 text-sm">
+                  {respuesta}
+                </p>
+              )}
+            </section>
+          )}
 
           <section className="mt-6 rounded-[1.75rem] bg-superficie p-5 ring-1 ring-borde">
             <h2 className="font-display text-3xl leading-none font-black uppercase">

@@ -1,17 +1,24 @@
 import { Eye, EyeOff } from "lucide-react";
 import { motion } from "motion/react";
 import { type FormEvent, useId, useState } from "react";
-import { Navigate, useNavigate } from "react-router";
+import { Navigate, useNavigate, useSearchParams } from "react-router";
 import { Franjas } from "@/components/Franjas";
 import { BotonMarca, Cargando } from "@/components/Marco";
 import { BotonPrincipal, claseCampo } from "@/components/Piezas";
 import { useTitulo } from "@/lib/ganchos";
 import { entrar, MENSAJES_ENTRAR, type ResultadoEntrar, useSesion } from "@/lib/sesion";
 
+/** A dónde ir después de entrar: solo los paneles del personal, nunca otra página u otro sitio. */
+export function destinoAlEntrar(siguiente: string | null) {
+  return siguiente && /^\/(panel|dueno)(\/[a-z]+)?$/.test(siguiente) ? siguiente : "/panel";
+}
+
 export function Entrar() {
   useTitulo("Entrar");
   const sesion = useSesion();
   const navigate = useNavigate();
+  const [params] = useSearchParams();
+  const destino = destinoAlEntrar(params.get("siguiente"));
   const [correo, setCorreo] = useState("");
   const [clave, setClave] = useState("");
   const [verClave, setVerClave] = useState(false);
@@ -22,7 +29,7 @@ export function Entrar() {
 
   if (sesion.tipo === "cargando") return <Cargando />;
   // Con la sesión abierta no hay nada que hacer aquí.
-  if (sesion.tipo === "dentro" && !enviando) return <Navigate to="/panel" replace />;
+  if (sesion.tipo === "dentro" && !enviando) return <Navigate to={destino} replace />;
 
   async function enviar(evento: FormEvent) {
     evento.preventDefault();
@@ -30,7 +37,7 @@ export function Entrar() {
     setError(null);
     const resultado = await entrar(correo, clave);
     if (resultado === "ok") {
-      navigate("/panel", { replace: true });
+      navigate(destino, { replace: true });
       return;
     }
     setError(resultado);

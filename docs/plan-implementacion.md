@@ -280,8 +280,8 @@ No construye funciones del producto. Prepara el entorno y prueba lo que podría 
 ### Sprint 4 · Dueño, antiabuso y lanzamiento (semana 6)
 
 - [ ] Configuración: barberos (con invitación por correo), servicios con duración, horario, tamaño máximo de la fila y tolerancia.
-- [ ] QR imprimible y botón para pausar la fila remota; renombrar u ocultar un turno.
-- [ ] Reporte del día: atendidos por barbero, ingresos registrados, espera promedio, error del estimado, abandonos y horas pico.
+- [x] QR imprimible y botón para pausar la fila remota; renombrar u ocultar un turno (`/dueno` y `/dueno/qr`, 31/10/2026).
+- [x] Reporte del día: atendidos por barbero, ingresos registrados, espera promedio, error del estimado, abandonos y horas pico (`/dueno`, con `reporte_dia`, 31/10/2026).
 - [ ] Antiabuso: un turno activo por teléfono, 5 turnos por IP cada 10 minutos, pausa automática ante picos y alerta al dueño.
 - [ ] `cerrar_dia()` y `borrar_telefonos_viejos()` con `pg_cron`.
 - [ ] Sentry sin datos personales, endpoint `salud` y monitor de UptimeRobot.

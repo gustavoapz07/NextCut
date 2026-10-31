@@ -3,9 +3,10 @@ import { motion } from "motion/react";
 import { QRCodeSVG } from "qrcode.react";
 import { useState } from "react";
 import { Marca } from "@/components/Marca";
+import { useTitulo } from "@/lib/ganchos";
 import { cx, vars } from "@/lib/utilidades";
-import { barberia, DOMINIO } from "@/prototipo/datos";
-import { useTitulo } from "@/prototipo/simulacion";
+import { DOMINIO } from "@/prototipo/datos";
+import { useContextoDueno } from "./contexto";
 
 const ESTILOS = {
   clasico: {
@@ -40,15 +41,20 @@ export function CodigoQr() {
   useTitulo("Código QR");
   const [estilo, setEstilo] = useState<Estilo>("clasico");
   const [copiado, setCopiado] = useState(false);
-  const enlaceQr = `https://${DOMINIO}/b/${barberia.slug}?origen=qr`;
-  const enlaceBio = `https://${DOMINIO}/b/${barberia.slug}?origen=ig`;
+  const { modo, barberia } = useContextoDueno();
+  // En el prototipo, el dominio de ejemplo; en la barbería real, la dirección donde corre la app.
+  const sitio = modo === "prototipo" ? `https://${DOMINIO}` : window.location.origin;
+  const enlaceQr = `${sitio}/b/${barberia.slug}?origen=qr`;
+  // El de la bio no lleva ?origen=qr: quien lo abre desde Instagram no está en el local.
+  const enlaceBio = `${sitio}/b/${barberia.slug}`;
   const tema = ESTILOS[estilo];
 
   async function copiar() {
     try {
       await navigator.clipboard.writeText(enlaceBio);
     } catch {
-      // En el prototipo basta con mostrar el estado de copiado.
+      // Sin permiso para el portapapeles: el enlace sigue a la vista para copiarlo a mano.
+      return;
     }
     setCopiado(true);
     window.setTimeout(() => setCopiado(false), 2000);
@@ -153,7 +159,9 @@ export function CodigoQr() {
             </h2>
             <p className="mt-1 text-sm text-tenue">Ponlo en la bio o en tu estado.</p>
             <div className="mt-4 flex items-center gap-2 rounded-2xl bg-fondo p-2 pl-4 ring-1 ring-borde">
-              <p className="min-w-0 flex-1 font-mono text-sm break-all">{barberia.enlace}</p>
+              <p className="min-w-0 flex-1 font-mono text-sm break-all">
+                {enlaceBio.replace(/^https?:\/\//, "")}
+              </p>
               <button
                 type="button"
                 onClick={copiar}

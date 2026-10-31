@@ -4,8 +4,21 @@ import { Cargando, MarcoPrototipo } from "./components/Marco";
 import { NoEncontrado } from "./components/NoEncontrado";
 import { Inicio } from "./features/inicio/Inicio";
 
-// Prototipo de diseño: las pantallas usan datos de ejemplo (app/src/prototipo/), todavía sin Supabase.
 // Cada pantalla se carga por separado para que el cliente no descargue el panel ni el reporte.
+// Las del prototipo de diseño (datos de ejemplo de app/src/prototipo/) viven en /demo y en los
+// ejemplos fijos (/b/la-navaja y /t/K7P2Q); las demás leen de Supabase.
+
+// El resumen y el QR del dueño son los mismos en el panel real y en el prototipo: cada pantalla
+// sabe cuál es por el contexto que pone LayoutDueno.
+const resumenDueno: RouteObject = {
+  index: true,
+  lazy: () => import("./features/dueno/Resumen").then((m) => ({ Component: m.Resumen })),
+};
+const qrDueno: RouteObject = {
+  path: "qr",
+  lazy: () => import("./features/dueno/CodigoQr").then((m) => ({ Component: m.CodigoQr })),
+};
+
 export const rutas: RouteObject[] = [
   {
     path: "/",
@@ -47,14 +60,20 @@ export const rutas: RouteObject[] = [
           import("./features/barbero/PanelBarbero").then((m) => ({ Component: m.PanelPrototipo })),
       },
       {
+        // Panel real del dueño: pide sesión. La configuración llega en el siguiente paso.
         path: "dueno",
         lazy: () =>
           import("./features/dueno/LayoutDueno").then((m) => ({ Component: m.LayoutDueno })),
+        children: [resumenDueno, qrDueno],
+      },
+      {
+        path: "demo/dueno",
+        lazy: () =>
+          import("./features/dueno/LayoutDueno").then((m) => ({
+            Component: m.LayoutDuenoPrototipo,
+          })),
         children: [
-          {
-            index: true,
-            lazy: () => import("./features/dueno/Resumen").then((m) => ({ Component: m.Resumen })),
-          },
+          resumenDueno,
           {
             path: "configuracion",
             lazy: () =>
@@ -62,11 +81,7 @@ export const rutas: RouteObject[] = [
                 Component: m.Configuracion,
               })),
           },
-          {
-            path: "qr",
-            lazy: () =>
-              import("./features/dueno/CodigoQr").then((m) => ({ Component: m.CodigoQr })),
-          },
+          qrDueno,
         ],
       },
       { path: "*", element: <NoEncontrado /> },

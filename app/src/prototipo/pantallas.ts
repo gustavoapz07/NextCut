@@ -82,19 +82,19 @@ export const pantallas: Array<{ grupo: string; descripcion: string; items: Panta
     descripcion: "El control del negocio",
     items: [
       {
-        ruta: "/dueno",
+        ruta: "/demo/dueno",
         titulo: "Resumen del día",
         texto: "Atendidos, ingresos, esperas y horas pico.",
         icono: LayoutDashboard,
       },
       {
-        ruta: "/dueno/configuracion",
+        ruta: "/demo/dueno/configuracion",
         titulo: "Configuración",
         texto: "Barberos, servicios, horario y reglas de la fila.",
         icono: Settings,
       },
       {
-        ruta: "/dueno/qr",
+        ruta: "/demo/dueno/qr",
         titulo: "Código QR",
         texto: "El cartel para la puerta, listo para imprimir.",
         icono: QrCode,

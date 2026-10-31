@@ -1,14 +1,14 @@
 {
   "README.md": {
-    "mtime": 1793469235.3512743,
-    "seen": 1793469271.0494199,
-    "ast_hash": "dbcecbc34a961a8c290225941478f8f5",
+    "mtime": 1793470940.4284358,
+    "seen": 1793470976.3484285,
+    "ast_hash": "9ef7220a83d30545761403dba5ac1163",
     "semantic_hash": ""
   },
   "docs/bitacora.md": {
-    "mtime": 1793469234.1104949,
-    "seen": 1793469271.0494218,
-    "ast_hash": "69d58ac9001c397ac2afea29685184f9",
+    "mtime": 1793470940.8955414,
+    "seen": 1793470976.3484306,
+    "ast_hash": "848c358625dce3019882f70c89ecb116",
     "semantic_hash": ""
   },
   "docs/decisiones.md": {
@@ -36,9 +36,9 @@
     "semantic_hash": "fce8b9c4ac2e58b20c5f98526ae1e804"
   },
   "docs/plan-implementacion.md": {
-    "mtime": 1793469234.2155025,
-    "seen": 1793469271.049428,
-    "ast_hash": "e4d5b377f9bd3ff8e0dc434dba789cd6",
+    "mtime": 1793470939.9059522,
+    "seen": 1793470976.348437,
+    "ast_hash": "352c50f2632a8d2f2b9c27d2bc3720ca",
     "semantic_hash": ""
   },
   "app/src/components/ErrorDeRuta.tsx": {
@@ -66,15 +66,15 @@
     "semantic_hash": ""
   },
   "app/src/router.test.tsx": {
-    "mtime": 1793454019.1113026,
-    "seen": 1793454476.3987436,
-    "ast_hash": "8ae6a4aa90e131a17ae1bc1491bed2ed",
+    "mtime": 1793470696.7424183,
+    "seen": 1793470976.3483386,
+    "ast_hash": "f87bee5343a343c25861c2e3ab91728e",
     "semantic_hash": ""
   },
   "app/src/router.tsx": {
-    "mtime": 1793234427.6036015,
-    "seen": 1793234875.7348895,
-    "ast_hash": "6ac6f81fa0b33615b7c1ac4736ae27e7",
+    "mtime": 1793470646.353922,
+    "seen": 1793470976.3483407,
+    "ast_hash": "8e64fab38385db9198483ee401687b0a",
     "semantic_hash": ""
   },
   "app/src/test/setup.ts": {
@@ -150,9 +150,9 @@
     "semantic_hash": ""
   },
   "app/src/features/acceso/Entrar.tsx": {
-    "mtime": 1793234298.92187,
-    "seen": 1793234875.734818,
-    "ast_hash": "3887ce124a5cf748498c459fcd830509",
+    "mtime": 1793470669.2982323,
+    "seen": 1793470976.348244,
+    "ast_hash": "1618079c1793a183362c15b8b30634ac",
     "semantic_hash": ""
   },
   "app/src/features/barbero/PanelBarbero.tsx": {
@@ -162,9 +162,9 @@
     "semantic_hash": ""
   },
   "app/src/features/dueno/CodigoQr.tsx": {
-    "mtime": 1793106651.6099098,
-    "seen": 1793107347.934112,
-    "ast_hash": "ecc81a7d6b2173798f0657edd0ae1b48",
+    "mtime": 1793470673.7545078,
+    "seen": 1793470976.348252,
+    "ast_hash": "f12115c578438869faa01c512df07d3b",
     "semantic_hash": ""
   },
   "app/src/features/dueno/Configuracion.tsx": {
@@ -174,15 +174,15 @@
     "semantic_hash": ""
   },
   "app/src/features/dueno/LayoutDueno.tsx": {
-    "mtime": 1793106639.1687796,
-    "seen": 1793107347.9341161,
-    "ast_hash": "74f6d0d0f8ec30848ec1becd45e1176d",
+    "mtime": 1793470673.752495,
+    "seen": 1793470976.3482568,
+    "ast_hash": "6240d6c25c2ffdcb8f93627db6399dc8",
     "semantic_hash": ""
   },
   "app/src/features/dueno/Resumen.tsx": {
-    "mtime": 1793106651.6234324,
-    "seen": 1793107347.9341187,
-    "ast_hash": "a2b6a33e760ef7707406109515b76708",
+    "mtime": 1793470673.8293104,
+    "seen": 1793470976.3482587,
+    "ast_hash": "c0c2bb7f1efb1ff615f7acc9df6b338a",
     "semantic_hash": ""
   },
   "app/src/features/fila/FilaPublica.tsx": {
@@ -228,9 +228,9 @@
     "semantic_hash": ""
   },
   "app/src/prototipo/pantallas.ts": {
-    "mtime": 1793234427.605616,
-    "seen": 1793234875.7348833,
-    "ast_hash": "3df77d275fa8d34ee2e449d691d367ab",
+    "mtime": 1793470653.6455102,
+    "seen": 1793470976.3483343,
+    "ast_hash": "2efe1a8fe5a32b992923f47afcf7091c",
     "semantic_hash": ""
   },
   "app/src/prototipo/simulacion.ts": {
@@ -531,6 +531,30 @@
     "mtime": 1793469041.688351,
     "seen": 1793469271.049409,
     "ast_hash": "15655551939ce17ef0f749f93ba30d53",
+    "semantic_hash": ""
+  },
+  "app/src/features/dueno/contexto.ts": {
+    "mtime": 1793470433.646844,
+    "seen": 1793470976.3482614,
+    "ast_hash": "60c60b34fa8b378722b0a5232a9e1c53",
+    "semantic_hash": ""
+  },
+  "app/src/features/dueno/dueno.test.tsx": {
+    "mtime": 1793470740.457063,
+    "seen": 1793470976.3482637,
+    "ast_hash": "fc526610883c7e827de6a0cf47c75822",
+    "semantic_hash": ""
+  },
+  "app/src/lib/dueno.ts": {
+    "mtime": 1793470433.0160978,
+    "seen": 1793470976.3482845,
+    "ast_hash": "9e2d9e3a8744b69e338ddd6df4a395c9",
+    "semantic_hash": ""
+  },
+  "scripts/e2e/dueno-prueba.sql": {
+    "mtime": 1793470795.5214403,
+    "seen": 1793470976.3483605,
+    "ast_hash": "76ffbe9294bdd2c4486aa95fb492a047",
     "semantic_hash": ""
   }
 }

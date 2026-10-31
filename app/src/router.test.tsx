@@ -80,9 +80,9 @@ describe("rutas", () => {
     ["/b/la-navaja", "La Navaja"],
     ["/b/la-navaja/unirse", "¿Cómo te llamas?"],
     ["/entrar", "Entrar"],
-    ["/dueno", /de/],
-    ["/dueno/configuracion", "Configuración"],
-    ["/dueno/qr", "Código QR"],
+    ["/demo/dueno", /de/],
+    ["/demo/dueno/configuracion", "Configuración"],
+    ["/demo/dueno/qr", "Código QR"],
   ])("abre %s", async (ruta, titulo) => {
     abrir(ruta);
     expect(await screen.findByRole("heading", { level: 1, name: titulo })).toBeInTheDocument();

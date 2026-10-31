@@ -219,3 +219,16 @@ Cada cambio del proyecto queda aquí, enlazado al documento que afecta. El grafo
   1. Crear en Vault `avisos_url` y `avisos_clave` (SQL en el editor de Supabase).
   2. `npx supabase login` y `node scripts/claves-vapid.mjs` (carga `VAPID_PUBLIC_KEY` y `VAPID_PRIVATE_KEY` en Supabase y la pública en `.env.local`).
   3. Probar en Chrome de escritorio y, con la app en HTTPS (Worker de Cloudflare), en Android y iPhone: eso cierra la prueba de riesgo 2 y la salida del Sprint 3.
+
+## 2026-10-31 · Los avisos llegan a Chrome: prueba de riesgo 2 en escritorio
+
+- **Qué:** con las claves cargadas, los avisos llegaron de punta a punta a Chrome de escritorio. Es la mitad de escritorio de la [prueba de riesgo 2](plan-implementacion.md#sprint-0--entorno-y-pruebas-de-riesgo-semanas-12-en-paralelo-a-la-validación); faltan Android y iPhone.
+- **Configuración** (hecha por el autor en `siguiente-pruebas`): `avisos_url` y `avisos_clave` en Vault, `VAPID_PUBLIC_KEY` y `VAPID_PRIVATE_KEY` en los secretos de las Edge Functions con `scripts/claves-vapid.mjs`, y la clave pública en `.env.local`. Se comprobó que la clave pública de `.env.local` es la misma de Supabase comparando huellas SHA-256, sin mostrarla.
+- **Prueba nueva** (`tests/e2e/avisos.spec.ts`, solo en la laptop porque el Chromium del CI no tiene servicio de push): un cliente se anota con Carlos, activa los avisos y recibe "Ya casi te toca" en el siguiente minuto (pg_cron), y "¡Te toca!" cuando Carlos lo llama desde el panel (trigger), unos 7 segundos después. Pasa por la base, pg_net, la función `avisos`, el servicio de push de Google y el service worker. Al final cancela el turno.
+- **Hallazgos:**
+  - Los contextos normales de Playwright son tipo incógnito, y Chrome no deja usar Web Push en incógnito ("Registration failed - permission denied"). La prueba usa un perfil persistente y quita `--disable-background-networking` para que Chrome escuche a Google.
+  - Con el permiso de notificaciones que concede Playwright (temporal, de la sesión), Google respondió 410 en 2 de 4 corridas: Chrome daba de baja la suscripción al repasar los permisos. Con el permiso guardado en el perfil, como cuando una persona acepta el cuadro, pasaron las 2 corridas siguientes y los 4 avisos fueron aceptados. A un cliente real no debería pasarle, porque su permiso queda guardado; se confirma con la prueba en teléfonos.
+  - Para encontrarlo, la función ahora registra las suscripciones vencidas con el servicio y el código de Google (nunca el endpoint). Versión 3 de `avisos` desplegada.
+  - Antes, un envío desde la laptop con el mismo código y claves de prueba de un solo uso fue aceptado (201) y Chrome mostró la notificación: el cifrado y la firma están bien.
+- **Pruebas:** 193 de Vitest (la de suscripción vencida revisa el registro nuevo). La base quedó limpia: 0 suscripciones y 0 turnos activos en "Barbería Prueba".
+- **Siguiente:** publicar la app en HTTPS (Worker de Cloudflare) para probar en Android y iPhone, y con eso cerrar la prueba de riesgo 2 y la salida del Sprint 3. Después, el Sprint 4.

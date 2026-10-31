@@ -232,7 +232,7 @@ No construye funciones del producto. Prepara el entorno y prueba lo que podría 
 - [x] CI mínimo: Biome, `tsc`, Vitest, gitleaks y build.
 - [ ] Crear el proyecto de producción y el Worker en Cloudflare con `workers.dev`, y desactivar las claves heredadas (`anon` y `service_role`) en ambos proyectos.
 - [x] **Prueba de riesgo 1 · Broadcast público:** superada el 26/10/2026. Una señal enviada con `realtime.send(..., private => false)` llega a un cliente anónimo con la clave publicable, y ese cliente es rechazado en un canal privado (`scripts/spikes/broadcast-publico.mjs`).
-- [ ] **Prueba de riesgo 2 · Web Push:** una Edge Function envía un aviso con VAPID que llega a Chrome en Android y a un iPhone con la página agregada a la pantalla de inicio. Avance del 31/10/2026: el cifrado reproduce el ejemplo de la RFC 8291 y la función `avisos` está desplegada; falta probarlo en teléfonos reales.
+- [ ] **Prueba de riesgo 2 · Web Push:** una Edge Function envía un aviso con VAPID que llega a Chrome en Android y a un iPhone con la página agregada a la pantalla de inicio. Avance del 31/10/2026: los avisos llegan a Chrome de escritorio de punta a punta (`tests/e2e/avisos.spec.ts`); falta probarlo en Android y iPhone, con la app en HTTPS.
 - [x] **Prueba de riesgo 3 · Turnstile + IP:** superada el 28/10/2026. La Edge Function desplegada verifica el token con Cloudflare y recibe la IP real en `cf-connecting-ip` y `x-real-ip`, aunque el cliente mande otra; Cloudflare bloquea a quien intenta mandar `cf-connecting-ip` por su cuenta. `x-forwarded-for` se descartó porque el cliente puede escribirlo ([ADR-013](decisiones.md#adr-013--detalles-de-anotarse-en-la-fila)).
 
 **Salida:** CI en verde con un "hola mundo" desplegado, y las 3 pruebas de riesgo con resultado documentado en la bitácora. Si alguna falla, se registra un ADR con la alternativa antes del Sprint 1.
@@ -270,7 +270,7 @@ No construye funciones del producto. Prepara el entorno y prueba lo que podría 
 - [x] Panel del barbero: **Llamar siguiente · Empezar · Terminar · No llegó**, registro de servicio, monto y método de pago, y pausa.
 - [x] Botón "Avisar por WhatsApp": enlace `wa.me` con el mensaje ya escrito.
 - [x] Pantalla `/b/:slug/tv`: fila en letra grande, conexión permanente y pantalla siempre encendida (Wake Lock).
-- [x] Web Push: suscripción desde la página del turno, service worker y Edge Function `avisos` (por evento con `pg_net` y cada minuto con `pg_cron`), máximo 2 avisos por turno ([ADR-014](decisiones.md#adr-014--avisos-por-web-push-sin-librerías-ni-caché)). Falta cargar las claves (Vault y VAPID) y probarlo en teléfonos.
+- [x] Web Push: suscripción desde la página del turno, service worker y Edge Function `avisos` (por evento con `pg_net` y cada minuto con `pg_cron`), máximo 2 avisos por turno ([ADR-014](decisiones.md#adr-014--avisos-por-web-push-sin-librerías-ni-caché)). Claves cargadas en `siguiente-pruebas` y probado en Chrome de escritorio; falta probarlo en teléfonos.
 - [x] `vencer_tolerancia()` cada minuto con `pg_cron` (migración `20261029012938_tareas_programadas`).
 
 **Salida:** Playwright: el barbero llama, empieza y termina un turno y el cliente lo ve en su página. Prueba manual de push en Android y iPhone. Un barbero no ve los turnos de otra barbería desde la interfaz.

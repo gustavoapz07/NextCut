@@ -203,6 +203,7 @@ export async function manejarAvisos(
         resumen.enviados++;
       } else if (resultado.tipo === "vencida") {
         resumen.vencidos++;
+        deps.registrar("suscripción vencida", { servicio, tipo, estado: resultado.estado });
         await deps.borrarSuscripcion(pendiente.turno_id);
       } else {
         resumen.fallidos++;

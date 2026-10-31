@@ -209,6 +209,12 @@ describe("manejarAvisos", () => {
     expect(cuerpo).toMatchObject({ enviados: 0, vencidos: 1 });
     expect(deps.borrarSuscripcion).toHaveBeenCalledWith("c0000000-0000-4000-8000-000000000004");
     expect(deps.liberar).not.toHaveBeenCalled();
+    // Queda registrado con el código del servicio, sin el endpoint.
+    expect(deps.registrar).toHaveBeenCalledWith("suscripción vencida", {
+      servicio: "fcm.googleapis.com",
+      tipo: "llamado",
+      estado: 410,
+    });
   });
 
   it("tras una falla pasajera libera la reserva para el siguiente minuto", async () => {

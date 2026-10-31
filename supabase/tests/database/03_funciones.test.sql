@@ -194,7 +194,7 @@ select is(
   public.suscribir_push(
     (select t.codigo_publico from public.turnos t where t.nombre = 'Óscar López'), repeat('a', 32),
     jsonb_build_object(
-      'endpoint', 'https://push.example.com/abc',
+      'endpoint', 'https://fcm.googleapis.com/fcm/send/abc',
       'keys', jsonb_build_object('p256dh', repeat('p', 40), 'auth', repeat('q', 16))
     )
   ),

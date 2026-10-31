@@ -1,0 +1,20 @@
+{
+  "name": "NextCut",
+  "short_name": "NextCut",
+  "description": "Fila virtual para barberías: mira cuánto falta y recibe un aviso cuando te toca.",
+  "lang": "es",
+  "dir": "ltr",
+  "display": "standalone",
+  "background_color": "#0a0f24",
+  "theme_color": "#0a0f24",
+  "icons": [
+    { "src": "/icono-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icono-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    {
+      "src": "/icono-mascara-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

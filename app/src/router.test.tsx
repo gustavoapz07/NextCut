@@ -218,8 +218,71 @@ describe("rutas", () => {
     expect(
       screen.getByRole("button", { name: "Mantén presionado para cancelar" }),
     ).toBeInTheDocument();
-    // Los avisos por Web Push todavía no existen: el botón solo está en el prototipo.
+    // jsdom no tiene Web Push: sin él, el botón de avisos no aparece.
     expect(screen.queryByText("Avisarme cuando falten 15 min")).not.toBeInTheDocument();
+  });
+
+  it("con Web Push ofrece los avisos y los activa con el secreto del turno", async () => {
+    const suscripcion = {
+      options: { applicationServerKey: null },
+      unsubscribe: async () => true,
+      toJSON: () => ({
+        endpoint: "https://fcm.googleapis.com/fcm/send/abc",
+        keys: { p256dh: "B".repeat(87), auth: "q".repeat(22) },
+      }),
+    };
+    vi.stubEnv(
+      "VITE_VAPID_PUBLIC_KEY",
+      "BP4z9KsN6nGRTbVYI_c7VJSPQTBtkgcy27mlmlMoZIIgDll6e3vCYLocInmYWAmS6TlzAC8wEqKK6PBru3jl7A8",
+    );
+    vi.stubGlobal("PushManager", () => {});
+    vi.stubGlobal("isSecureContext", true);
+    vi.stubGlobal("Notification", {
+      permission: "default",
+      requestPermission: async () => "granted",
+    });
+    Object.defineProperty(navigator, "serviceWorker", {
+      configurable: true,
+      value: {
+        register: async () => ({}),
+        ready: Promise.resolve({
+          pushManager: { getSubscription: async () => null, subscribe: async () => suscripcion },
+        }),
+      },
+    });
+    try {
+      localStorage.setItem(`nextcut:secreto:${CODIGO}`, "s".repeat(64));
+      responder({
+        ver_turno: turnoDeEjemplo(),
+        fila_publica: filaDeEjemplo(),
+        suscribir_push: true,
+      });
+      abrir(`/t/${CODIGO}`);
+      expect(
+        await screen.findByText("Deja esta página abierta para ver tu turno al día.", {
+          exact: false,
+        }),
+      ).toBeInTheDocument();
+
+      fireEvent.click(await screen.findByRole("button", { name: "Avisarme cuando falten 15 min" }));
+
+      expect(
+        await screen.findByRole("button", { name: "Te avisamos a los 15 min y cuando te toque" }),
+      ).toBeDisabled();
+      expect(rpc).toHaveBeenCalledWith("suscribir_push", {
+        p_codigo: CODIGO,
+        p_secreto: "s".repeat(64),
+        p_suscripcion: {
+          endpoint: "https://fcm.googleapis.com/fcm/send/abc",
+          keys: { p256dh: "B".repeat(87), auth: "q".repeat(22) },
+        },
+      });
+      expect(screen.getByText("Puedes cerrar esta página.", { exact: false })).toBeInTheDocument();
+    } finally {
+      vi.unstubAllEnvs();
+      vi.unstubAllGlobals();
+      Reflect.deleteProperty(navigator, "serviceWorker");
+    }
   });
 
   it("cancela el turno con el secreto guardado en el teléfono", async () => {

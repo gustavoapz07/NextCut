@@ -2,8 +2,8 @@
 
 > Que ningún cliente se vaya por no saber cuánto le falta.
 
-**Estado:** Sprints 1 y 2 terminados (base de datos, fila pública, anotarse y turno en vivo) · Sprint 3 casi listo (login, panel, TV y "no llegó" automático; faltan los avisos por Web Push) · Sprint 0 casi listo (falta la prueba de Web Push) · validación de campo en pausa
-**Última actualización:** 26 de octubre de 2026
+**Estado:** Sprints 1 y 2 terminados (base de datos, fila pública, anotarse y turno en vivo) · Sprint 3 construido (login, panel, TV, "no llegó" automático y avisos por Web Push; falta cargar las claves de los avisos y probarlos en teléfonos) · Sprint 0 casi listo (falta la prueba de Web Push en teléfonos) · validación de campo en pausa
+**Última actualización:** 31 de octubre de 2026
 
 NextCut es un SaaS para barberías que atienden por orden de llegada. Convierte la fila física en una fila virtual: el cliente escanea un QR o abre un enlace, ve cuántas personas hay y cuánto falta, se anota desde donde esté y recibe un aviso cuando le toca. El barbero pasa los turnos desde el celular. El dueño ve, por primera vez, cuántos clientes atendió cada barbero, cuánto esperaron y cuántos se fueron sin cortarse.
 

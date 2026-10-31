@@ -10,6 +10,7 @@ import { NoEncontrado } from "@/components/NoEncontrado";
 import { NumeroAnimado } from "@/components/NumeroAnimado";
 import { Boleto, Confeti } from "@/components/Piezas";
 import { SinConexion } from "@/components/SinConexion";
+import { type EstadoAvisos, useAvisos } from "@/lib/avisos";
 import { useTurno } from "@/lib/enVivo";
 import { entradaEta } from "@/lib/fila";
 import { hora, lempiras, rango, reloj } from "@/lib/formato";
@@ -63,13 +64,20 @@ interface VistaTurno {
   estimamos: Rango | null;
   /** Se puede cancelar desde este teléfono. */
   cancelable: boolean;
-  /** Piezas del prototipo que todavía no hacen nada de verdad (avisos y "Ya voy"). */
+  /** Piezas del prototipo que todavía no hacen nada de verdad ("Ya voy en camino"). */
   simulado: boolean;
+}
+
+/** Avisos por Web Push: en qué está el botón y qué hace al tocarlo. */
+interface ControlAvisos {
+  estado: EstadoAvisos;
+  activar: () => void;
 }
 
 interface Acciones {
   onCancelar: () => void;
   errorCancelar: boolean;
+  avisos: ControlAvisos;
 }
 
 export function Turno() {
@@ -92,6 +100,7 @@ function TurnoReal({ codigo }: { codigo: string }) {
   const ahora = useReloj(30_000);
   const [secreto] = useState(() => leerSecreto(codigo));
   const [errorCancelar, setErrorCancelar] = useState(false);
+  const { estado: estadoAvisos, activar } = useAvisos(codigo, secreto);
 
   useTitulo(
     estado.tipo !== "listo"
@@ -116,7 +125,12 @@ function TurnoReal({ codigo }: { codigo: string }) {
 
   const vista = vistaReal(estado.turno, estado.fila, codigo, ahora, secreto !== null);
   return (
-    <PantallaTurno vista={vista} onCancelar={() => void cancelar()} errorCancelar={errorCancelar} />
+    <PantallaTurno
+      vista={vista}
+      onCancelar={() => void cancelar()}
+      errorCancelar={errorCancelar}
+      avisos={{ estado: estadoAvisos, activar: () => void activar() }}
+    />
   );
 }
 
@@ -224,6 +238,8 @@ function TurnoPrototipo({ estado }: { estado: string | null }) {
   const datos = leerDatos(state);
   const [indice, setIndice] = useState(estado ? (ESTADOS[estado] ?? 0) : 0);
   const [cancelado, setCancelado] = useState(estado === "cancelado");
+  // En el prototipo los avisos se simulan: se encienden al tocar el botón.
+  const [avisos, setAvisos] = useState<EstadoAvisos>("apagados");
   const auto = estado === null && !cancelado;
 
   const paso = SECUENCIA[indice] ?? { fase: "esperando" as Fase, adelante: 2 };
@@ -261,7 +277,12 @@ function TurnoPrototipo({ estado }: { estado: string | null }) {
   };
 
   return (
-    <PantallaTurno vista={vista} onCancelar={() => setCancelado(true)} errorCancelar={false} />
+    <PantallaTurno
+      vista={vista}
+      onCancelar={() => setCancelado(true)}
+      errorCancelar={false}
+      avisos={{ estado: avisos, activar: () => setAvisos("activos") }}
+    />
   );
 }
 
@@ -285,7 +306,12 @@ const COLOR_BARRA: Record<keyof typeof TEMAS, string> = {
   final: "#f3eee4",
 };
 
-function PantallaTurno({ vista, onCancelar, errorCancelar }: { vista: VistaTurno } & Acciones) {
+function PantallaTurno({
+  vista,
+  onCancelar,
+  errorCancelar,
+  avisos,
+}: { vista: VistaTurno } & Acciones) {
   const { fase } = vista;
   const tema: keyof typeof TEMAS =
     fase === "esperando"
@@ -330,6 +356,7 @@ function PantallaTurno({ vista, onCancelar, errorCancelar }: { vista: VistaTurno
               vista={vista}
               onCancelar={onCancelar}
               errorCancelar={errorCancelar}
+              avisos={avisos}
             />
           ) : fase === "llamado" ? (
             <Llamado
@@ -337,6 +364,7 @@ function PantallaTurno({ vista, onCancelar, errorCancelar }: { vista: VistaTurno
               vista={vista}
               onCancelar={onCancelar}
               errorCancelar={errorCancelar}
+              avisos={avisos}
             />
           ) : fase === "en_silla" ? (
             <EnSilla key="en_silla" vista={vista} />
@@ -358,8 +386,7 @@ const aparecer = {
   transition: { type: "spring" as const, stiffness: 200, damping: 24 },
 };
 
-function Esperando({ vista, onCancelar, errorCancelar }: { vista: VistaTurno } & Acciones) {
-  const [avisos, setAvisos] = useState(false);
+function Esperando({ vista, onCancelar, errorCancelar, avisos }: { vista: VistaTurno } & Acciones) {
   const { adelante, barbero, atendiendo } = vista;
   const casi = adelante === 0;
   const progreso = casi ? 0.92 : Math.max(0.08, 0.9 / (adelante + 1));
@@ -463,35 +490,11 @@ function Esperando({ vista, onCancelar, errorCancelar }: { vista: VistaTurno } &
       />
 
       <div className="mt-6 grid gap-3">
-        {/* Los avisos por Web Push llegan en el Sprint 3; mientras, solo en el prototipo. */}
-        {vista.simulado && (
-          <button
-            type="button"
-            onClick={() => setAvisos(true)}
-            className={cx(
-              "flex min-h-14 items-center justify-center gap-2 rounded-full px-5 py-3 text-center font-semibold transition",
-              avisos
-                ? "bg-current/10 ring-1 ring-current/20"
-                : casi
-                  ? "bg-white text-poste-azul"
-                  : "bg-tinta text-fondo",
-            )}
-          >
-            <motion.span
-              animate={avisos ? { rotate: [0, -25, 20, -14, 8, 0] } : { rotate: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              {avisos ? <Check className="size-5" /> : <BellRing className="size-5" />}
-            </motion.span>
-            {avisos
-              ? "Te avisamos a los 15 min y cuando te toque"
-              : "Avisarme cuando falten 15 min"}
-          </button>
-        )}
+        <BotonAvisos avisos={avisos} casi={casi} />
         <Cancelar vista={vista} onCancelar={onCancelar} errorCancelar={errorCancelar} />
       </div>
       <p className="mt-6 text-center text-sm opacity-70">
-        {vista.simulado
+        {vista.simulado || avisos.estado === "activos"
           ? "Puedes cerrar esta página."
           : "Deja esta página abierta para ver tu turno al día."}{" "}
         Vuelve con el mismo enlace o el código <strong className="font-mono">{vista.codigo}</strong>
@@ -501,7 +504,71 @@ function Esperando({ vista, onCancelar, errorCancelar }: { vista: VistaTurno } &
   );
 }
 
-function Cancelar({ vista, onCancelar, errorCancelar }: { vista: VistaTurno } & Acciones) {
+/** "Avisarme cuando falten 15 min": pide permiso, se suscribe y explica si no se puede. */
+function BotonAvisos({ avisos, casi }: { avisos: ControlAvisos; casi: boolean }) {
+  const { estado } = avisos;
+  if (estado === "oculto") return null;
+  if (estado === "bloqueados") {
+    return (
+      <p className="text-center text-sm opacity-80">
+        Bloqueaste los avisos de esta página. Si los quieres, actívalos en los ajustes del
+        navegador.
+      </p>
+    );
+  }
+  if (estado === "instalar") {
+    return (
+      <p className="rounded-[1.25rem] bg-current/[0.06] px-4 py-3 text-center text-sm ring-1 ring-current/10">
+        <BellRing className="mr-1 inline size-4 align-[-2px]" aria-hidden="true" />
+        En iPhone los avisos llegan si agregas esta página a tu pantalla de inicio: toca{" "}
+        <strong>Compartir</strong> y luego <strong>Agregar a pantalla de inicio</strong>.
+      </p>
+    );
+  }
+
+  const activos = estado === "activos";
+  return (
+    <>
+      <button
+        type="button"
+        onClick={avisos.activar}
+        disabled={activos || estado === "activando"}
+        className={cx(
+          "flex min-h-14 items-center justify-center gap-2 rounded-full px-5 py-3 text-center font-semibold transition",
+          activos
+            ? "bg-current/10 ring-1 ring-current/20"
+            : casi
+              ? "bg-white text-poste-azul"
+              : "bg-tinta text-fondo",
+          estado === "activando" && "opacity-70",
+        )}
+      >
+        <motion.span
+          animate={activos ? { rotate: [0, -25, 20, -14, 8, 0] } : { rotate: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          {activos ? <Check className="size-5" /> : <BellRing className="size-5" />}
+        </motion.span>
+        {activos
+          ? "Te avisamos a los 15 min y cuando te toque"
+          : estado === "activando"
+            ? "Activando los avisos…"
+            : "Avisarme cuando falten 15 min"}
+      </button>
+      {estado === "error" && (
+        <p role="alert" className="text-center text-sm font-semibold">
+          No pudimos activar los avisos. Revisa tu conexión e inténtalo de nuevo.
+        </p>
+      )}
+    </>
+  );
+}
+
+function Cancelar({
+  vista,
+  onCancelar,
+  errorCancelar,
+}: { vista: VistaTurno } & Omit<Acciones, "avisos">) {
   if (!vista.cancelable) {
     return (
       <p className="text-center text-sm opacity-70">

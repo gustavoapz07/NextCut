@@ -420,3 +420,7 @@ enabled = true
 # La clave publicable no es un JWT: la función se protege con Turnstile y valida todo por dentro.
 [functions.unirse-a-fila]
 verify_jwt = false
+
+# Solo la llama la base, con la clave de Vault en x-avisos-clave (no hay sesión que verificar).
+[functions.avisos]
+verify_jwt = false

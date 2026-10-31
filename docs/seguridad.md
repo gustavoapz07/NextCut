@@ -21,6 +21,7 @@ Antes de la lista general, estos son los abusos más probables en este producto:
 | **Nombre ofensivo o con código en la TV** | Un nombre con groserías o con `<script>` | Pena pública o XSS persistente en la pantalla del local | El texto se muestra siempre como texto, límite de largo y botón del dueño para ocultar o renombrar (#3) |
 | **Montos alterados** | Un barbero registra menos de lo cobrado | Pérdida para el dueño (el problema P3) | Bitácora inmutable de eventos; el barbero no puede editar un turno cerrado (#7, #10) |
 | **Una barbería ve datos de otra** | Error en un filtro | Fuga de datos entre clientes del SaaS | RLS en la base, no filtros en el frontend (#2, #7) |
+| **Usar los avisos para atacar otra dirección (SSRF)** | Registrar como "suscripción" una URL interna o de un tercero | La función de avisos le manda solicitudes a esa dirección | Solo endpoints de Google, Mozilla, Apple y Microsoft, en la base y en la función ([ADR-014](decisiones.md#adr-014--avisos-por-web-push-sin-librerías-ni-caché)); probado con pgTAP y Vitest |
 
 ---
 
@@ -76,11 +77,11 @@ Antes de la lista general, estos son los abusos más probables en este producto:
   - Honduras no tiene todavía una ley de protección de datos personales vigente (estaba pendiente en agosto de 2026), pero se aplican sus principios de todos modos: finalidad, mínimo necesario y derecho a borrar.
 - **Prueba:** revisar la respuesta de `fila_publica` y de `ver_turno`; ninguna debe contener teléfonos.
 
-### 6. Sin límite de tokens · ⬜ (equivalente sin IA: 🟦)
+### 6. Sin límite de tokens · ⬜ (equivalente sin IA: 🟨 — máximo de 2 avisos por turno probado el 31/10/2026; faltan las cuotas por barbería)
 
 - **Estado:** sin IA no hay tokens. El riesgo equivalente es el **costo variable sin techo**.
-- **Controles:** cuotas por barbería (turnos por día según el plan y tamaño máximo de la fila), máximo de 2 avisos push por turno y, en el complemento de WhatsApp, presupuesto mensual con alerta al 80 % y corte al 100 %. Con IA: `max_tokens` por solicitud y presupuesto mensual por barbería.
-- **Prueba:** crear turnos hasta superar la cuota; el sistema debe rechazar con un mensaje claro.
+- **Controles:** cuotas por barbería (turnos por día según el plan y tamaño máximo de la fila), máximo de 2 avisos push por turno (cada uno se reserva una sola vez en la base, [ADR-014](decisiones.md#adr-014--avisos-por-web-push-sin-librerías-ni-caché)), la base solo llama a la función de avisos cuando hay algo pendiente y, en el complemento de WhatsApp, presupuesto mensual con alerta al 80 % y corte al 100 %. Con IA: `max_tokens` por solicitud y presupuesto mensual por barbería.
+- **Prueba:** crear turnos hasta superar la cuota; el sistema debe rechazar con un mensaje claro. Los avisos: `supabase/tests/database/05_avisos.test.sql` (un turno recibe "ya casi" y "te toca" una sola vez cada uno, aunque cambie de navegador).
 
 ### 7. Permisos excesivos · 🟩
 
@@ -89,7 +90,7 @@ Antes de la lista general, estos son los abusos más probables en este producto:
   - Un turno cerrado no se edita; las correcciones se hacen como un evento nuevo que el dueño ve.
   - La clave secreta solo existe en Edge Functions.
   - Funciones `security definer` con `search_path` fijo y `revoke all ... from public`; solo se concede `execute` al rol que la necesita.
-- **Prueba (pgTAP):** un barbero no puede cerrar el turno de otro ni editar un turno `atendido`; el público no puede ejecutar `unirse_a_fila` directo ni escribir en ninguna tabla.
+- **Prueba (pgTAP):** un barbero no puede cerrar el turno de otro ni editar un turno `atendido`; el público no puede ejecutar `unirse_a_fila` directo ni escribir en ninguna tabla; ni el público ni el personal tocan las funciones de los avisos, que solo ejecuta la clave secreta.
 
 ### 8. Manejo de errores · 🟩 (concurrencia e idempotencia probadas en el CI el 27/10/2026; los mensajes genéricos del formulario se revisan en el Sprint 2)
 

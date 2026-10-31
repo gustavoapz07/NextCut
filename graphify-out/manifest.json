@@ -1,20 +1,20 @@
 {
   "README.md": {
-    "mtime": 1793237518.582628,
-    "seen": 1793237550.6747377,
-    "ast_hash": "44748aedf5cc5d65cbe314f40484f73a",
+    "mtime": 1793454431.7532752,
+    "seen": 1793454476.398834,
+    "ast_hash": "817396cba3b3c5ccc8b0f9e2eff10381",
     "semantic_hash": ""
   },
   "docs/bitacora.md": {
-    "mtime": 1793237518.582628,
-    "seen": 1793237550.6747406,
-    "ast_hash": "889d2d54136f93496ceb4e8dfe637d81",
+    "mtime": 1793454464.4000797,
+    "seen": 1793454476.398836,
+    "ast_hash": "042a493935ff590534917f9c6dea4b49",
     "semantic_hash": ""
   },
   "docs/decisiones.md": {
-    "mtime": 1793232582.1149805,
-    "seen": 1793232606.492023,
-    "ast_hash": "fc60f3ae4268e96f9e6a6accd3c8e5c2",
+    "mtime": 1793454398.0328927,
+    "seen": 1793454476.3988383,
+    "ast_hash": "a11a3e18dca1d0f01731e6959c3532c1",
     "semantic_hash": ""
   },
   "docs/investigacion.md": {
@@ -24,9 +24,9 @@
     "semantic_hash": "a03e6054d92f2b3847ff257819adb86d"
   },
   "docs/seguridad.md": {
-    "mtime": 1793233963.187622,
-    "seen": 1793233991.7535317,
-    "ast_hash": "9571693d8f4354665db90d8f1f85ccc7",
+    "mtime": 1793454431.1847818,
+    "seen": 1793454476.3988445,
+    "ast_hash": "463f2efd3689eaeb97a7d1c19b6c4188",
     "semantic_hash": ""
   },
   "docs/validacion-campo.md": {
@@ -36,9 +36,9 @@
     "semantic_hash": "fce8b9c4ac2e58b20c5f98526ae1e804"
   },
   "docs/plan-implementacion.md": {
-    "mtime": 1793237518.582628,
-    "seen": 1793237550.6747484,
-    "ast_hash": "3cf1720d0463816995e6fa1cc3a14c98",
+    "mtime": 1793454429.4998,
+    "seen": 1793454476.3988426,
+    "ast_hash": "ca74440d472398f8ea6a91a15de9bf19",
     "semantic_hash": ""
   },
   "app/src/components/ErrorDeRuta.tsx": {
@@ -66,9 +66,9 @@
     "semantic_hash": ""
   },
   "app/src/router.test.tsx": {
-    "mtime": 1793235170.1267056,
-    "seen": 1793235530.9040923,
-    "ast_hash": "1febc97adec3d0f66f43042ed1f03692",
+    "mtime": 1793454019.1113026,
+    "seen": 1793454476.3987436,
+    "ast_hash": "8ae6a4aa90e131a17ae1bc1491bed2ed",
     "semantic_hash": ""
   },
   "app/src/router.tsx": {
@@ -96,9 +96,9 @@
     "semantic_hash": "78a38ea596a0edeb7389f95c1078250d"
   },
   "app/src/lib/database.types.ts": {
-    "mtime": 1793111363.3794916,
-    "seen": 1793111467.685857,
-    "ast_hash": "3322bab8bc8c48cc1d861b69d91e0694",
+    "mtime": 1793454323.4920385,
+    "seen": 1793454476.398699,
+    "ast_hash": "c231cc5cc3dca72798e280db77ff965d",
     "semantic_hash": ""
   },
   "app/src/lib/supabase.ts": {
@@ -192,9 +192,9 @@
     "semantic_hash": ""
   },
   "app/src/features/fila/Turno.tsx": {
-    "mtime": 1793233042.4876006,
-    "seen": 1793233238.7833803,
-    "ast_hash": "6ebabfb2b187213da23dc02f3963c36d",
+    "mtime": 1793454019.1113026,
+    "seen": 1793454476.3986835,
+    "ast_hash": "5f1940f526393a8c91c7f27d9e73af97",
     "semantic_hash": ""
   },
   "app/src/features/fila/Unirse.tsx": {
@@ -270,9 +270,9 @@
     "semantic_hash": ""
   },
   "supabase/tests/database/03_funciones.test.sql": {
-    "mtime": 1793109520.356022,
-    "seen": 1793111467.6859012,
-    "ast_hash": "23282daf91f27e9350c28e1ba327e17e",
+    "mtime": 1793454019.1133118,
+    "seen": 1793454476.3988178,
+    "ast_hash": "57cae3935e76a538f99706897b2dc98c",
     "semantic_hash": ""
   },
   "app/src/lib/enVivo.ts": {
@@ -453,6 +453,78 @@
     "mtime": 1793237394.8965726,
     "seen": 1793237550.6747246,
     "ast_hash": "875acda11b446befc633dceeca8e5d28",
+    "semantic_hash": ""
+  },
+  "app/src/lib/avisos.test.ts": {
+    "mtime": 1793454019.3072157,
+    "seen": 1793454476.3986938,
+    "ast_hash": "84aac2764770ef7e7f288840ac16d49f",
+    "semantic_hash": ""
+  },
+  "app/src/lib/avisos.ts": {
+    "mtime": 1793454019.308726,
+    "seen": 1793454476.3986962,
+    "ast_hash": "c765032ea163b99e4440d980d9d6ea67",
+    "semantic_hash": ""
+  },
+  "scripts/claves-vapid.mjs": {
+    "mtime": 1793454093.4702065,
+    "seen": 1793454476.3987577,
+    "ast_hash": "806c9870170738470970c1e84a94436e",
+    "semantic_hash": ""
+  },
+  "scripts/iconos.mjs": {
+    "mtime": 1793454019.308726,
+    "seen": 1793454476.3987668,
+    "ast_hash": "210dab59a65057f0fc06480a53d2bf33",
+    "semantic_hash": ""
+  },
+  "supabase/functions/_shared/avisos.test.ts": {
+    "mtime": 1793454019.3107388,
+    "seen": 1793454476.3987718,
+    "ast_hash": "4be16df14b8ff78851135cab53fcf4f3",
+    "semantic_hash": ""
+  },
+  "supabase/functions/_shared/avisos.ts": {
+    "mtime": 1793454019.3127484,
+    "seen": 1793454476.3987734,
+    "ast_hash": "98f3fbbe8a860a464c2d334e6259b50a",
+    "semantic_hash": ""
+  },
+  "supabase/functions/_shared/webpush.test.ts": {
+    "mtime": 1793454019.3127484,
+    "seen": 1793454476.3987875,
+    "ast_hash": "a37affb2ff095f35514640907ac5bdc3",
+    "semantic_hash": ""
+  },
+  "supabase/functions/_shared/webpush.ts": {
+    "mtime": 1793454019.3127484,
+    "seen": 1793454476.3987896,
+    "ast_hash": "e3d7d9a0f6fd58ddd9ee8092aef826ae",
+    "semantic_hash": ""
+  },
+  "supabase/functions/avisos/deno.json": {
+    "mtime": 1793454019.314757,
+    "seen": 1793454476.3987918,
+    "ast_hash": "ade40ccf61304df2683e04c96dbeaa38",
+    "semantic_hash": ""
+  },
+  "supabase/functions/avisos/index.ts": {
+    "mtime": 1793454019.314757,
+    "seen": 1793454476.3987935,
+    "ast_hash": "2319dc15c63f0e780d7c569ff1e36fc8",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/20261031132532_avisos_web_push.sql": {
+    "mtime": 1793454019.3167655,
+    "seen": 1793454476.3988092,
+    "ast_hash": "2b23ff3315f05c386d007320d705a83e",
+    "semantic_hash": ""
+  },
+  "supabase/tests/database/05_avisos.test.sql": {
+    "mtime": 1793454019.3167655,
+    "seen": 1793454476.3988223,
+    "ast_hash": "6c73dd640c6c8d4bfa8abc3f2b861ca8",
     "semantic_hash": ""
   }
 }

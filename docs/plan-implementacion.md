@@ -43,7 +43,7 @@ Versiones vigentes al 26/10/2026 (consultadas en npm). Las exactas quedan fijada
 | Rutas | React Router (modo SPA) | 8.5 | El router más documentado; carga perezosa por ruta |
 | Datos del servidor | TanStack Query | 5 | Caché, reintentos y recarga cuando llega la señal de tiempo real |
 | Formularios y validación | react-hook-form + zod | 7 · 4.6 | El mismo esquema zod valida en el cliente y documenta lo que la base vuelve a validar |
-| PWA y Web Push | vite-plugin-pwa (Workbox) | 2.0 · 7 | Modo `injectManifest`: service worker propio para los eventos `push` y `notificationclick` |
+| PWA y Web Push | Service worker propio y cifrado con WebCrypto | — | `app/public/sw.js` sin caché y `_shared/webpush.ts` sin dependencias ([ADR-014](decisiones.md#adr-014--avisos-por-web-push-sin-librerías-ni-caché); reemplaza a vite-plugin-pwa) |
 | Cliente de Supabase | @supabase/supabase-js | 2.118 | Auth, RPC y Realtime |
 | Base de datos | Supabase Postgres + RLS | — | Aislamiento entre barberías en la base, no en la interfaz |
 | Lógica del servidor | Supabase Edge Functions (Deno) | — | Turnstile, Web Push e invitaciones con la clave secreta fuera del navegador |
@@ -211,6 +211,8 @@ Todas son `security definer` con `search_path` fijo, `revoke all ... from public
 | `pausar_barbero(en_pausa)` | El propio barbero | Recalcula los estimados |
 | `pausar_fila_remota`, `renombrar_turno`, `reporte_dia(fecha)` | Dueño | Control del local y reporte |
 | `vencer_tolerancia()`, `cerrar_dia()`, `borrar_telefonos_viejos()` | pg_cron | "No llegó" automático, abandonos al cierre y borrado a los 90 días |
+| `avisos_pendientes(clave)`, `reservar_aviso`, `liberar_aviso`, `borrar_suscripcion` | Solo clave secreta | Los usa la Edge Function `avisos`; `avisos_pendientes` valida la clave de Vault ([ADR-014](decisiones.md#adr-014--avisos-por-web-push-sin-librerías-ni-caché)) |
+| `privado.revisar_avisos()` y trigger `turnos_avisos` | pg_cron y la base | Llaman a la función `avisos` con pg_net solo si hay un aviso pendiente |
 
 Las tablas de configuración (`barberias`, `barberos`, `servicios`) se editan directo con políticas RLS que solo dejan pasar al dueño de esa barbería.
 
@@ -230,7 +232,7 @@ No construye funciones del producto. Prepara el entorno y prueba lo que podría 
 - [x] CI mínimo: Biome, `tsc`, Vitest, gitleaks y build.
 - [ ] Crear el proyecto de producción y el Worker en Cloudflare con `workers.dev`, y desactivar las claves heredadas (`anon` y `service_role`) en ambos proyectos.
 - [x] **Prueba de riesgo 1 · Broadcast público:** superada el 26/10/2026. Una señal enviada con `realtime.send(..., private => false)` llega a un cliente anónimo con la clave publicable, y ese cliente es rechazado en un canal privado (`scripts/spikes/broadcast-publico.mjs`).
-- [ ] **Prueba de riesgo 2 · Web Push:** una Edge Function envía un aviso con VAPID que llega a Chrome en Android y a un iPhone con la página agregada a la pantalla de inicio.
+- [ ] **Prueba de riesgo 2 · Web Push:** una Edge Function envía un aviso con VAPID que llega a Chrome en Android y a un iPhone con la página agregada a la pantalla de inicio. Avance del 31/10/2026: el cifrado reproduce el ejemplo de la RFC 8291 y la función `avisos` está desplegada; falta probarlo en teléfonos reales.
 - [x] **Prueba de riesgo 3 · Turnstile + IP:** superada el 28/10/2026. La Edge Function desplegada verifica el token con Cloudflare y recibe la IP real en `cf-connecting-ip` y `x-real-ip`, aunque el cliente mande otra; Cloudflare bloquea a quien intenta mandar `cf-connecting-ip` por su cuenta. `x-forwarded-for` se descartó porque el cliente puede escribirlo ([ADR-013](decisiones.md#adr-013--detalles-de-anotarse-en-la-fila)).
 
 **Salida:** CI en verde con un "hola mundo" desplegado, y las 3 pruebas de riesgo con resultado documentado en la bitácora. Si alguna falla, se registra un ADR con la alternativa antes del Sprint 1.
@@ -268,12 +270,12 @@ No construye funciones del producto. Prepara el entorno y prueba lo que podría 
 - [x] Panel del barbero: **Llamar siguiente · Empezar · Terminar · No llegó**, registro de servicio, monto y método de pago, y pausa.
 - [x] Botón "Avisar por WhatsApp": enlace `wa.me` con el mensaje ya escrito.
 - [x] Pantalla `/b/:slug/tv`: fila en letra grande, conexión permanente y pantalla siempre encendida (Wake Lock).
-- [ ] Web Push: suscripción desde la página del turno, service worker y Edge Function `avisos` (por evento y cada minuto con `pg_cron`).
+- [x] Web Push: suscripción desde la página del turno, service worker y Edge Function `avisos` (por evento con `pg_net` y cada minuto con `pg_cron`), máximo 2 avisos por turno ([ADR-014](decisiones.md#adr-014--avisos-por-web-push-sin-librerías-ni-caché)). Falta cargar las claves (Vault y VAPID) y probarlo en teléfonos.
 - [x] `vencer_tolerancia()` cada minuto con `pg_cron` (migración `20261029012938_tareas_programadas`).
 
 **Salida:** Playwright: el barbero llama, empieza y termina un turno y el cliente lo ve en su página. Prueba manual de push en Android y iPhone. Un barbero no ve los turnos de otra barbería desde la interfaz.
 
-**Avance (28/10/2026):** la primera parte de la salida pasa: `tests/e2e/barbero.spec.ts` (el barbero llama, empieza y termina y el cliente lo ve). La TV ya está conectada; faltan Web Push y la prueba manual de push.
+**Avance (31/10/2026):** las seis tareas están hechas. De la salida pasa la primera parte: `tests/e2e/barbero.spec.ts` (el barbero llama, empieza y termina y el cliente lo ve). Falta la prueba manual de push en Android y iPhone, que necesita las claves cargadas y la app en HTTPS.
 
 ### Sprint 4 · Dueño, antiabuso y lanzamiento (semana 6)
 

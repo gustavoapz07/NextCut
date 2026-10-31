@@ -200,6 +200,8 @@ export type Database = {
       suscripciones_push: {
         Row: {
           auth: string
+          aviso_casi_en: string | null
+          aviso_llamado_en: string | null
           creado_en: string
           endpoint: string
           p256dh: string
@@ -207,6 +209,8 @@ export type Database = {
         }
         Insert: {
           auth: string
+          aviso_casi_en?: string | null
+          aviso_llamado_en?: string | null
           creado_en?: string
           endpoint: string
           p256dh: string
@@ -214,6 +218,8 @@ export type Database = {
         }
         Update: {
           auth?: string
+          aviso_casi_en?: string | null
+          aviso_llamado_en?: string | null
           creado_en?: string
           endpoint?: string
           p256dh?: string
@@ -331,6 +337,11 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      avisos_pendientes: {
+        Args: { p_barberia?: string; p_clave: string }
+        Returns: Json
+      }
+      borrar_suscripcion: { Args: { p_turno: string }; Returns: boolean }
       borrar_telefonos_viejos: { Args: { p_dias?: number }; Returns: number }
       cancelar_turno: {
         Args: { p_codigo: string; p_secreto: string }
@@ -339,6 +350,10 @@ export type Database = {
       cerrar_dia: { Args: never; Returns: number }
       empezar_turno: { Args: { p_turno_id: string }; Returns: Json }
       fila_publica: { Args: { p_slug: string }; Returns: Json }
+      liberar_aviso: {
+        Args: { p_tipo: string; p_turno: string }
+        Returns: boolean
+      }
       llamar_siguiente: { Args: { p_barbero_id: string }; Returns: Json }
       marcar_no_llego: { Args: { p_turno_id: string }; Returns: Json }
       ocultar_turno: {
@@ -360,6 +375,10 @@ export type Database = {
       reporte_dia: {
         Args: { p_barberia_id: string; p_fecha?: string }
         Returns: Json
+      }
+      reservar_aviso: {
+        Args: { p_tipo: string; p_turno: string }
+        Returns: boolean
       }
       suscribir_push: {
         Args: { p_codigo: string; p_secreto: string; p_suscripcion: Json }

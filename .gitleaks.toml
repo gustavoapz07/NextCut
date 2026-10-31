@@ -1,0 +1,22 @@
+# Configuración de gitleaks (fallo 1 de docs/seguridad.md). Usa todas las reglas de siempre y
+# solo deja pasar valores públicos que no son secretos de nadie.
+title = "NextCut"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Valores públicos de ejemplo usados en las pruebas"
+regexes = [
+  # RFC 8291, apéndice A: el ejemplo completo de un aviso Web Push (claves, sal y secreto de
+  # autenticación). Las pruebas de supabase/functions/_shared/webpush.test.ts lo reproducen
+  # byte por byte, y otras pruebas reusan esas claves como suscripción de ejemplo.
+  '''BTBZMqHH6r4Tts7J_aSIgg''',
+  '''BCVxsr7N_eNgVRqvHtD0zTZsEc6''',
+  '''BP4z9KsN6nGRTbVYI_c7VJSPQTBtkgcy27''',
+  '''yfWPiYE-n46HLnH0KqZOF1fJJU3MYrct3AELtAQ-oRw''',
+  '''q1dXpw3UpT5VOmu_cf_v6ih07Aems3njxI-JWgLcM94''',
+  '''DGv6ra1nlYgDCS1FRnbzlw''',
+  # Nombres de variables de entorno en comentarios, no sus valores.
+  '''^VAPID_(PUBLIC|PRIVATE)_KEY$''',
+]

@@ -256,6 +256,7 @@ npm run check           # lint, tipos, pruebas y build (lo mismo que corre CI)
 npx supabase login      # una sola vez: abre el navegador
 npx supabase link --project-ref bquvluxsqfacleumlnmi
 npx supabase db push    # aplica las migraciones al proyecto de pruebas
+npm run deploy:pruebas  # publica en https://nextcut.gustavoapz07.workers.dev, contra el proyecto de pruebas
 ```
 
 Las pruebas de RLS con pgTAP (un barbero de A no ve la fila de B) corren en CI, que levanta Supabase en su propio runner.

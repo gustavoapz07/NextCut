@@ -2,6 +2,7 @@
 .env
 .env.*
 !.env.example
+!.env.pruebas
 
 # Dependencias, builds y estado local de las herramientas
 node_modules/

@@ -230,7 +230,7 @@ No construye funciones del producto. Prepara el entorno y prueba lo que podría 
 - [x] Crear el proyecto Vite (React + TypeScript 7 + Tailwind 4) con Biome, Vitest y Lefthook.
 - [x] `supabase init`, crear el proyecto `siguiente-pruebas` en la nube y generar tipos desde él ([ADR-008](decisiones.md#adr-008--desarrollo-contra-supabase-en-la-nube-sin-docker-local)).
 - [x] CI mínimo: Biome, `tsc`, Vitest, gitleaks y build.
-- [ ] Crear el proyecto de producción y el Worker en Cloudflare con `workers.dev`, y desactivar las claves heredadas (`anon` y `service_role`) en ambos proyectos.
+- [ ] Crear el proyecto de producción y el Worker en Cloudflare con `workers.dev`, y desactivar las claves heredadas (`anon` y `service_role`) en ambos proyectos. Avance del 31/10/2026: el Worker `nextcut` está publicado en https://nextcut.gustavoapz07.workers.dev contra el proyecto de pruebas (`npm run deploy:pruebas`); falta el proyecto de producción de Supabase.
 - [x] **Prueba de riesgo 1 · Broadcast público:** superada el 26/10/2026. Una señal enviada con `realtime.send(..., private => false)` llega a un cliente anónimo con la clave publicable, y ese cliente es rechazado en un canal privado (`scripts/spikes/broadcast-publico.mjs`).
 - [ ] **Prueba de riesgo 2 · Web Push:** una Edge Function envía un aviso con VAPID que llega a Chrome en Android y a un iPhone con la página agregada a la pantalla de inicio. Avance del 31/10/2026: los avisos llegan a Chrome de escritorio de punta a punta (`tests/e2e/avisos.spec.ts`); falta probarlo en Android y iPhone, con la app en HTTPS.
 - [x] **Prueba de riesgo 3 · Turnstile + IP:** superada el 28/10/2026. La Edge Function desplegada verifica el token con Cloudflare y recibe la IP real en `cf-connecting-ip` y `x-real-ip`, aunque el cliente mande otra; Cloudflare bloquea a quien intenta mandar `cf-connecting-ip` por su cuenta. `x-forwarded-for` se descartó porque el cliente puede escribirlo ([ADR-013](decisiones.md#adr-013--detalles-de-anotarse-en-la-fila)).
@@ -375,7 +375,7 @@ Fuentes: [Supabase Pricing](https://supabase.com/pricing), [Cloudflare: migrar d
 ## 15. Decisiones pendientes
 
 - [ ] **Resultado de la validación de campo:** confirma o cambia el alcance de los sprints 2 a 4.
-- [ ] **Dominio:** `workers.dev` gratis o dominio propio, antes de imprimir el QR del piloto.
+- [ ] **Dominio:** `workers.dev` gratis o dominio propio, antes de imprimir el QR del piloto. Por ahora la versión de prueba vive en `nextcut.gustavoapz07.workers.dev`.
 - [ ] **Espacio para producción:** la cuenta de Supabase ya usa sus 2 proyectos gratuitos (`siguiente-pruebas` y `cms-opalo`). Antes del piloto hay que pausar otro proyecto o pagar Pro.
 - [ ] **Plazo de borrado de teléfonos:** 90 días propuestos, a confirmar con los dueños ([fallo 5](seguridad.md#5-datos-sensibles--)).
 - [x] **Repositorio público o privado:** público, en [gustavoapz07/NextCut](https://github.com/gustavoapz07/NextCut), con los commits firmados con el correo privado de GitHub.

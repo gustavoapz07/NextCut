@@ -51,6 +51,8 @@ interface VistaTurno {
   barbero: string | null;
   /** El número que tiene su barbero en la silla, si se sabe. */
   atendiendo: number | null;
+  /** Qué está haciendo su barbero; `null` si no se sabe (todavía no llegó la fila). */
+  estadoBarbero: "atendiendo" | "libre" | "pausa" | null;
   silla: number | null;
   servicio: string;
   precio: number;
@@ -167,6 +169,13 @@ function vistaReal(
     adelante: turno.adelante,
     barbero: turno.barbero,
     atendiendo: suBarbero?.atendiendo?.numero ?? null,
+    estadoBarbero: !suBarbero
+      ? null
+      : suBarbero.en_pausa
+        ? "pausa"
+        : suBarbero.atendiendo
+          ? "atendiendo"
+          : "libre",
     silla: turno.silla,
     servicio: turno.servicio,
     precio: turno.precio_ref,
@@ -264,6 +273,7 @@ function TurnoPrototipo({ estado }: { estado: string | null }) {
     adelante: paso.adelante,
     barbero: paso.fase === "esperando" ? nombreDe(datos.barbero) : (barbero?.nombre ?? ""),
     atendiendo: 24,
+    estadoBarbero: "atendiendo",
     silla: barbero?.silla ?? 1,
     servicio: servicio?.nombre ?? "—",
     precio: servicio?.precio ?? 0,
@@ -392,9 +402,13 @@ function Esperando({ vista, onCancelar, errorCancelar, avisos }: { vista: VistaT
   const progreso = casi ? 0.92 : Math.max(0.08, 0.9 / (adelante + 1));
 
   const detalle = casi
-    ? barbero
-      ? `Cuando ${barbero} termine${atendiendo ? ` con el #${atendiendo}` : ""}, te llama.`
-      : "Te llama el primer barbero que quede libre."
+    ? !barbero
+      ? "Te llama el primer barbero que quede libre."
+      : vista.estadoBarbero === "libre"
+        ? `${barbero} está libre: te llama en cualquier momento.`
+        : vista.estadoBarbero === "pausa"
+          ? `${barbero} está en pausa: te llama cuando vuelva.`
+          : `Cuando ${barbero} termine${atendiendo ? ` con el #${atendiendo}` : ""}, te llama.`
     : `${adelante} ${adelante === 1 ? "persona" : "personas"} antes que tú${
         barbero && atendiendo ? ` · ${barbero} va por el #${atendiendo}` : ""
       }`;

@@ -6,9 +6,9 @@
     "semantic_hash": ""
   },
   "docs/bitacora.md": {
-    "mtime": 1793471848.2400267,
-    "seen": 1793471874.6201408,
-    "ast_hash": "3eee89f4e847939f5dc12dea61c18acb",
+    "mtime": 1793473102.2984304,
+    "seen": 1793473112.2516348,
+    "ast_hash": "69d23d1958666c7500c348c6ca8c2815",
     "semantic_hash": ""
   },
   "docs/decisiones.md": {
@@ -36,9 +36,9 @@
     "semantic_hash": "fce8b9c4ac2e58b20c5f98526ae1e804"
   },
   "docs/plan-implementacion.md": {
-    "mtime": 1793471832.4729328,
-    "seen": 1793471874.6201477,
-    "ast_hash": "8404d47b491d2becc874e6e4c7434994",
+    "mtime": 1793472155.6729991,
+    "seen": 1793473112.251641,
+    "ast_hash": "62de5a67ae38cd35016cbdd080bf9514",
     "semantic_hash": ""
   },
   "app/src/components/ErrorDeRuta.tsx": {
@@ -66,9 +66,9 @@
     "semantic_hash": ""
   },
   "app/src/router.test.tsx": {
-    "mtime": 1793470696.7424183,
-    "seen": 1793470976.3483386,
-    "ast_hash": "f87bee5343a343c25861c2e3ab91728e",
+    "mtime": 1793472975.072539,
+    "seen": 1793473112.251538,
+    "ast_hash": "7440cd353fa413a9cb1ccb4008b61079",
     "semantic_hash": ""
   },
   "app/src/router.tsx": {
@@ -192,9 +192,9 @@
     "semantic_hash": ""
   },
   "app/src/features/fila/Turno.tsx": {
-    "mtime": 1793454019.1113026,
-    "seen": 1793454476.3986835,
-    "ast_hash": "5f1940f526393a8c91c7f27d9e73af97",
+    "mtime": 1793472929.2011147,
+    "seen": 1793473112.251482,
+    "ast_hash": "72420f4b0b090b3459adeb3c1b5dcf48",
     "semantic_hash": ""
   },
   "app/src/features/fila/Unirse.tsx": {
@@ -456,15 +456,15 @@
     "semantic_hash": ""
   },
   "app/src/lib/avisos.test.ts": {
-    "mtime": 1793454019.3072157,
-    "seen": 1793454476.3986938,
-    "ast_hash": "84aac2764770ef7e7f288840ac16d49f",
+    "mtime": 1793472970.5894527,
+    "seen": 1793473112.2514915,
+    "ast_hash": "e0c7c37f7324aeeb0df481f0e5c67723",
     "semantic_hash": ""
   },
   "app/src/lib/avisos.ts": {
-    "mtime": 1793454019.308726,
-    "seen": 1793454476.3986962,
-    "ast_hash": "c765032ea163b99e4440d980d9d6ea67",
+    "mtime": 1793472908.3453753,
+    "seen": 1793473112.251494,
+    "ast_hash": "68e540b3f69dd7046dd0de9a05462475",
     "semantic_hash": ""
   },
   "scripts/claves-vapid.mjs": {

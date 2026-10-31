@@ -91,6 +91,26 @@ async function suscribirNavegador(push: PushManager) {
   return push.subscribe({ userVisibleOnly: true, applicationServerKey: clave });
 }
 
+/**
+ * Un aviso de prueba al activarlos, que no pasa por el servidor: si no aparece, el teléfono bloquea
+ * las notificaciones del navegador (ajustes de Android, de iOS o del propio navegador) y la persona
+ * se entera ahora, no cuando ya le toca. Lleva la etiqueta del turno: "ya casi" lo reemplaza.
+ */
+async function confirmarEnElTelefono(registro: ServiceWorkerRegistration, codigo: string) {
+  try {
+    await registro.showNotification("Avisos activados", {
+      body: "Así te avisamos cuando falten unos 15 minutos y cuando te toque.",
+      tag: `turno-${codigo}`,
+      icon: "/icono-192.png",
+      badge: "/insignia-96.png",
+      lang: "es",
+      data: { url: `/t/${codigo}` },
+    });
+  } catch {
+    // Los avisos quedan activos igual; si no se ven, el problema está en los ajustes del teléfono.
+  }
+}
+
 export async function activarAvisos(codigo: string, secreto: string): Promise<ResultadoAvisos> {
   try {
     const permiso = await Notification.requestPermission();
@@ -111,6 +131,7 @@ export async function activarAvisos(codigo: string, secreto: string): Promise<Re
     });
     if (error || data !== true) return "error";
     recordarActivos(codigo);
+    await confirmarEnElTelefono(registro, codigo);
     return "activados";
   } catch {
     return "error";

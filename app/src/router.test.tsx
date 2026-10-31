@@ -285,6 +285,26 @@ describe("rutas", () => {
     }
   });
 
+  it.each([
+    ["atendiendo", "ana", "Ana", null, "Cuando Ana termine con el #3, te llama."],
+    ["libre", "ana", "Ana", "libre", "Ana está libre: te llama en cualquier momento."],
+    ["en pausa", "beto", "Beto", null, "Beto está en pausa: te llama cuando vuelva."],
+  ] as const)(
+    "cuando es el siguiente y su barbero está %s, lo dice",
+    async (_caso, id, nombre, libre, texto) => {
+      const fila = filaDeEjemplo();
+      if (libre) {
+        fila.barberos = fila.barberos.map((b) => (b.id === id ? { ...b, atendiendo: null } : b));
+      }
+      responder({
+        ver_turno: turnoDeEjemplo({ numero: 4, adelante: 0, barbero_id: id, barbero: nombre }),
+        fila_publica: fila,
+      });
+      abrir(`/t/${CODIGO}`);
+      expect(await screen.findByText(texto)).toBeInTheDocument();
+    },
+  );
+
   it("cancela el turno con el secreto guardado en el teléfono", async () => {
     localStorage.setItem(`nextcut:secreto:${CODIGO}`, "s".repeat(64));
     responder({ ver_turno: turnoDeEjemplo(), fila_publica: filaDeEjemplo() });

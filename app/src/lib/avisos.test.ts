@@ -37,9 +37,10 @@ function navegadorConPush({
     getSubscription: vi.fn(async () => actual),
     subscribe: vi.fn(async () => nueva),
   };
+  const showNotification = vi.fn(async () => {});
   const serviceWorker = {
     register: vi.fn(async () => ({})),
-    ready: Promise.resolve({ pushManager }),
+    ready: Promise.resolve({ pushManager, showNotification }),
   };
   const notificacion = {
     permission: permiso,
@@ -53,7 +54,7 @@ function navegadorConPush({
   vi.stubGlobal("isSecureContext", true);
   Object.defineProperty(navigator, "serviceWorker", { configurable: true, value: serviceWorker });
   Object.defineProperty(navigator, "userAgent", { configurable: true, get: () => agente });
-  return { pushManager, serviceWorker, notificacion, nueva };
+  return { pushManager, serviceWorker, notificacion, nueva, showNotification };
 }
 
 /** Safari en iPhone sin la página en la pantalla de inicio: no hay PushManager ni Notification. */
@@ -122,6 +123,28 @@ describe("activarAvisos", () => {
       },
     });
     expect(avisosActivos(CODIGO)).toBe(true);
+  });
+
+  it("al activarlos muestra un aviso de prueba en el teléfono, con la etiqueta del turno", async () => {
+    const { showNotification } = navegadorConPush();
+    expect(await activarAvisos(CODIGO, SECRETO)).toBe("activados");
+    expect(showNotification).toHaveBeenCalledWith(
+      "Avisos activados",
+      expect.objectContaining({ tag: `turno-${CODIGO}`, data: { url: `/t/${CODIGO}` } }),
+    );
+  });
+
+  it("si el teléfono no deja mostrar el aviso de prueba, los avisos quedan activos igual", async () => {
+    const { showNotification } = navegadorConPush();
+    showNotification.mockRejectedValue(new TypeError("No notification permission"));
+    expect(await activarAvisos(CODIGO, SECRETO)).toBe("activados");
+  });
+
+  it("si la base no la acepta, no muestra el aviso de prueba", async () => {
+    const { showNotification } = navegadorConPush();
+    rpc.mockResolvedValue({ data: false, error: null });
+    expect(await activarAvisos(CODIGO, SECRETO)).toBe("error");
+    expect(showNotification).not.toHaveBeenCalled();
   });
 
   it("si dice que no, quedan bloqueados y no se registra nada", async () => {

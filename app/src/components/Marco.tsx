@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 import { Link, NavLink, Outlet, ScrollRestoration, useLocation, useNavigation } from "react-router";
 import { cx } from "@/lib/utilidades";
+import { useVersionNueva } from "@/lib/version";
 import { pantallas } from "@/prototipo/pantallas";
 import { Franjas, Poste } from "./Franjas";
 import { Marca } from "./Marca";
@@ -14,6 +15,7 @@ const AbrirMenu = createContext<() => void>(() => {});
 
 export function MarcoPrototipo() {
   const navegacion = useNavigation();
+  useVersionNueva(useLocation().pathname);
   const [abierto, setAbierto] = useState(false);
   const abrir = useCallback(() => setAbierto(true), []);
   const cerrar = useCallback(() => setAbierto(false), []);

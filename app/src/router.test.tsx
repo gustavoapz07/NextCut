@@ -80,6 +80,7 @@ describe("rutas", () => {
     ["/b/la-navaja", "La Navaja"],
     ["/b/la-navaja/unirse", "¿Cómo te llamas?"],
     ["/entrar", "Entrar"],
+    ["/diagnostico", "Diagnóstico de avisos"],
     ["/demo/dueno", /de/],
     ["/demo/dueno/configuracion", "Configuración"],
     ["/demo/dueno/qr", "Código QR"],

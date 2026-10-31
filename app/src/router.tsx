@@ -33,6 +33,12 @@ export const rutas: RouteObject[] = [
           import("./features/fila/FilaPublica").then((m) => ({ Component: m.FilaPublica })),
       },
       {
+        // Para revisar los avisos en un teléfono; no está enlazada desde ninguna pantalla.
+        path: "diagnostico",
+        lazy: () =>
+          import("./features/diagnostico/Diagnostico").then((m) => ({ Component: m.Diagnostico })),
+      },
+      {
         path: "b/:slug/unirse",
         lazy: () => import("./features/fila/Unirse").then((m) => ({ Component: m.Unirse })),
       },

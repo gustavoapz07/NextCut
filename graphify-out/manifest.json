@@ -6,9 +6,9 @@
     "semantic_hash": ""
   },
   "docs/bitacora.md": {
-    "mtime": 1793473757.8972719,
-    "seen": 1793473767.9746668,
-    "ast_hash": "286db81c85e815f56a10b02927905424",
+    "mtime": 1793474905.8378634,
+    "seen": 1793474916.3396678,
+    "ast_hash": "e87977f803dfb2ceb8269bcd2d40a1d4",
     "semantic_hash": ""
   },
   "docs/decisiones.md": {
@@ -66,15 +66,15 @@
     "semantic_hash": ""
   },
   "app/src/router.test.tsx": {
-    "mtime": 1793472975.072539,
-    "seen": 1793473112.251538,
-    "ast_hash": "7440cd353fa413a9cb1ccb4008b61079",
+    "mtime": 1793474682.2387524,
+    "seen": 1793474916.3394463,
+    "ast_hash": "6d8f1ceb58e04ea3c8969f6f15e1d394",
     "semantic_hash": ""
   },
   "app/src/router.tsx": {
-    "mtime": 1793470646.353922,
-    "seen": 1793470976.3483407,
-    "ast_hash": "8e64fab38385db9198483ee401687b0a",
+    "mtime": 1793474610.1030014,
+    "seen": 1793474916.3394508,
+    "ast_hash": "0b3f06e0dc6bcfc0b22bfa83e05430f6",
     "semantic_hash": ""
   },
   "app/src/test/setup.ts": {
@@ -132,9 +132,9 @@
     "semantic_hash": ""
   },
   "app/src/components/Marco.tsx": {
-    "mtime": 1793106301.3374398,
-    "seen": 1793107347.934097,
-    "ast_hash": "a3eb176bc9b02edafb17b1456d274d7e",
+    "mtime": 1793474658.884261,
+    "seen": 1793474916.3392227,
+    "ast_hash": "67d36d4348f3aa887e9a33db9eac7751",
     "semantic_hash": ""
   },
   "app/src/components/NumeroAnimado.tsx": {
@@ -555,6 +555,30 @@
     "mtime": 1793470795.5214403,
     "seen": 1793470976.3483605,
     "ast_hash": "76ffbe9294bdd2c4486aa95fb492a047",
+    "semantic_hash": ""
+  },
+  "app/src/features/diagnostico/Diagnostico.tsx": {
+    "mtime": 1793474609.4870827,
+    "seen": 1793474916.3392797,
+    "ast_hash": "00d86bf4754ab02c3dd4112a24244568",
+    "semantic_hash": ""
+  },
+  "app/src/lib/diagnostico.test.ts": {
+    "mtime": 1793474686.0089626,
+    "seen": 1793474916.3393624,
+    "ast_hash": "7d65f3a1b3d4385cc226385eb605aaa2",
+    "semantic_hash": ""
+  },
+  "app/src/lib/diagnostico.ts": {
+    "mtime": 1793474685.9769933,
+    "seen": 1793474916.3393667,
+    "ast_hash": "d68b391ff555bc769780d0058f9ad790",
+    "semantic_hash": ""
+  },
+  "app/src/lib/version.ts": {
+    "mtime": 1793474657.5320573,
+    "seen": 1793474916.3394234,
+    "ast_hash": "655667a5e2331db56e16702b45d88e09",
     "semantic_hash": ""
   }
 }

@@ -1,7 +1,13 @@
 import { desdeBase64url } from "@shared/webpush";
 import { act, renderHook } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { activarAvisos, avisosActivos, disponibilidadAvisos, useAvisos } from "./avisos";
+import {
+  activarAvisos,
+  avisosActivos,
+  disponibilidadAvisos,
+  probarAviso,
+  useAvisos,
+} from "./avisos";
 
 const { rpc } = vi.hoisted(() => ({ rpc: vi.fn() }));
 vi.mock("./supabase", () => ({ supabase: { rpc } }));
@@ -38,9 +44,11 @@ function navegadorConPush({
     subscribe: vi.fn(async () => nueva),
   };
   const showNotification = vi.fn(async () => {});
+  const registro = { pushManager, showNotification };
   const serviceWorker = {
     register: vi.fn(async () => ({})),
-    ready: Promise.resolve({ pushManager, showNotification }),
+    ready: Promise.resolve(registro),
+    getRegistration: vi.fn(async (): Promise<typeof registro | undefined> => registro),
   };
   const notificacion = {
     permission: permiso,
@@ -215,5 +223,45 @@ describe("useAvisos", () => {
     safariSinInstalar();
     const { result } = renderHook(() => useAvisos(CODIGO, SECRETO));
     expect(result.current.estado).toBe("instalar");
+  });
+});
+
+describe("probarAviso", () => {
+  it("con los avisos activos muestra uno de prueba en el teléfono", async () => {
+    const { showNotification } = navegadorConPush({
+      permiso: "granted",
+      actual: suscripcionFalsa(),
+    });
+    expect(await probarAviso(CODIGO)).toBe(true);
+    expect(showNotification).toHaveBeenCalledWith(
+      "Así te llega el aviso",
+      expect.objectContaining({ tag: `turno-${CODIGO}` }),
+    );
+  });
+
+  it("si el navegador perdió la suscripción, pide volver a activarlos", async () => {
+    const { showNotification } = navegadorConPush({ permiso: "granted", actual: null });
+    expect(await probarAviso(CODIGO)).toBe(false);
+    expect(showNotification).not.toHaveBeenCalled();
+  });
+
+  it("sin service worker también", async () => {
+    const { serviceWorker } = navegadorConPush({ permiso: "granted" });
+    serviceWorker.getRegistration.mockResolvedValue(undefined);
+    expect(await probarAviso(CODIGO)).toBe(false);
+  });
+
+  it("desde la página: con la prueba enviada explica qué revisar; sin suscripción vuelve a Avisarme", async () => {
+    navegadorConPush({ permiso: "granted", actual: suscripcionFalsa() });
+    localStorage.setItem(`nextcut:avisos:${CODIGO}`, "1");
+    const { result } = renderHook(() => useAvisos(CODIGO, SECRETO));
+    expect(result.current.estado).toBe("activos");
+    await act(() => result.current.probar());
+    expect(result.current.prueba).toBe(true);
+
+    navegadorConPush({ permiso: "granted", actual: null });
+    await act(() => result.current.probar());
+    expect(result.current.prueba).toBe(false);
+    expect(result.current.estado).toBe("apagados");
   });
 });

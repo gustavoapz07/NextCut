@@ -74,6 +74,10 @@ interface VistaTurno {
 interface ControlAvisos {
   estado: EstadoAvisos;
   activar: () => void;
+  /** Muestra un aviso de prueba en el teléfono, sin pasar por el servidor. */
+  probar: () => void;
+  /** Ya se mandó el de prueba: la página dice qué revisar si no apareció. */
+  prueba: boolean;
 }
 
 interface Acciones {
@@ -102,7 +106,7 @@ function TurnoReal({ codigo }: { codigo: string }) {
   const ahora = useReloj(30_000);
   const [secreto] = useState(() => leerSecreto(codigo));
   const [errorCancelar, setErrorCancelar] = useState(false);
-  const { estado: estadoAvisos, activar } = useAvisos(codigo, secreto);
+  const { estado: estadoAvisos, activar, probar, prueba } = useAvisos(codigo, secreto);
 
   useTitulo(
     estado.tipo !== "listo"
@@ -131,7 +135,12 @@ function TurnoReal({ codigo }: { codigo: string }) {
       vista={vista}
       onCancelar={() => void cancelar()}
       errorCancelar={errorCancelar}
-      avisos={{ estado: estadoAvisos, activar: () => void activar() }}
+      avisos={{
+        estado: estadoAvisos,
+        activar: () => void activar(),
+        probar: () => void probar(),
+        prueba,
+      }}
     />
   );
 }
@@ -249,6 +258,7 @@ function TurnoPrototipo({ estado }: { estado: string | null }) {
   const [cancelado, setCancelado] = useState(estado === "cancelado");
   // En el prototipo los avisos se simulan: se encienden al tocar el botón.
   const [avisos, setAvisos] = useState<EstadoAvisos>("apagados");
+  const [prueba, setPrueba] = useState(false);
   const auto = estado === null && !cancelado;
 
   const paso = SECUENCIA[indice] ?? { fase: "esperando" as Fase, adelante: 2 };
@@ -291,7 +301,13 @@ function TurnoPrototipo({ estado }: { estado: string | null }) {
       vista={vista}
       onCancelar={() => setCancelado(true)}
       errorCancelar={false}
-      avisos={{ estado: avisos, activar: () => setAvisos("activos") }}
+      avisos={{
+        estado: avisos,
+        activar: () => setAvisos("activos"),
+        // En el prototipo no hay service worker: solo se muestra la explicación.
+        probar: () => setPrueba(true),
+        prueba,
+      }}
     />
   );
 }
@@ -573,6 +589,23 @@ function BotonAvisos({ avisos, casi }: { avisos: ControlAvisos; casi: boolean })
         <p role="alert" className="text-center text-sm font-semibold">
           No pudimos activar los avisos. Revisa tu conexión e inténtalo de nuevo.
         </p>
+      )}
+      {activos && (
+        <div className="text-center text-sm">
+          <button
+            type="button"
+            onClick={avisos.probar}
+            className="min-h-11 px-3 font-semibold underline underline-offset-4"
+          >
+            Probar el aviso
+          </button>
+          {avisos.prueba && (
+            <p role="status" className="opacity-80">
+              Te mandamos uno de prueba. Si no apareció, activa las notificaciones de tu navegador
+              en los ajustes del teléfono.
+            </p>
+          )}
+        </div>
       )}
     </>
   );

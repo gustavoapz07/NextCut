@@ -92,22 +92,57 @@ async function suscribirNavegador(push: PushManager) {
 }
 
 /**
- * Un aviso de prueba al activarlos, que no pasa por el servidor: si no aparece, el teléfono bloquea
- * las notificaciones del navegador (ajustes de Android, de iOS o del propio navegador) y la persona
- * se entera ahora, no cuando ya le toca. Lleva la etiqueta del turno: "ya casi" lo reemplaza.
+ * Una notificación que no pasa por el servidor: si no aparece, el teléfono bloquea las del
+ * navegador (ajustes de Android, de iOS o del propio navegador). Lleva la etiqueta del turno, así
+ * "ya casi" la reemplaza.
  */
+function avisoLocal(
+  registro: ServiceWorkerRegistration,
+  codigo: string,
+  titulo: string,
+  cuerpo: string,
+) {
+  return registro.showNotification(titulo, {
+    body: cuerpo,
+    tag: `turno-${codigo}`,
+    icon: "/icono-192.png",
+    badge: "/insignia-96.png",
+    lang: "es",
+    data: { url: `/t/${codigo}` },
+  });
+}
+
+/** Al activarlos, para que la persona se entere ahora si no le llegan, no cuando ya le toca. */
 async function confirmarEnElTelefono(registro: ServiceWorkerRegistration, codigo: string) {
   try {
-    await registro.showNotification("Avisos activados", {
-      body: "Así te avisamos cuando falten unos 15 minutos y cuando te toque.",
-      tag: `turno-${codigo}`,
-      icon: "/icono-192.png",
-      badge: "/insignia-96.png",
-      lang: "es",
-      data: { url: `/t/${codigo}` },
-    });
+    await avisoLocal(
+      registro,
+      codigo,
+      "Avisos activados",
+      "Así te avisamos cuando falten unos 15 minutos y cuando te toque.",
+    );
   } catch {
     // Los avisos quedan activos igual; si no se ven, el problema está en los ajustes del teléfono.
+  }
+}
+
+/**
+ * "Probar el aviso", con los avisos ya activos. Devuelve `false` si este navegador perdió el
+ * service worker o la suscripción: entonces hay que volver a activarlos.
+ */
+export async function probarAviso(codigo: string) {
+  try {
+    const registro = await navigator.serviceWorker.getRegistration("/");
+    if (!registro || !(await registro.pushManager.getSubscription())) return false;
+    await avisoLocal(
+      registro,
+      codigo,
+      "Así te llega el aviso",
+      "Si ves esto, los avisos de tu turno funcionan en este teléfono.",
+    );
+    return true;
+  } catch {
+    return false;
   }
 }
 
@@ -156,10 +191,19 @@ const DESPUES_DE: Record<ResultadoAvisos, EstadoAvisos> = {
 
 export function useAvisos(codigo: string, secreto: string | null) {
   const [estado, setEstado] = useState<EstadoAvisos>(() => estadoInicial(codigo, secreto));
+  /** Se mandó un aviso de prueba: la página explica qué revisar si no apareció. */
+  const [prueba, setPrueba] = useState(false);
   const activar = useCallback(async () => {
     if (!secreto) return;
     setEstado("activando");
+    setPrueba(false);
     setEstado(DESPUES_DE[await activarAvisos(codigo, secreto)]);
   }, [codigo, secreto]);
-  return { estado, activar };
+  const probar = useCallback(async () => {
+    setPrueba(false);
+    if (await probarAviso(codigo)) setPrueba(true);
+    // El navegador perdió la suscripción: vuelve a aparecer "Avisarme".
+    else setEstado("apagados");
+  }, [codigo]);
+  return { estado, activar, probar, prueba };
 }

@@ -6,9 +6,9 @@
     "semantic_hash": ""
   },
   "docs/bitacora.md": {
-    "mtime": 1793473102.2984304,
-    "seen": 1793473112.2516348,
-    "ast_hash": "69d23d1958666c7500c348c6ca8c2815",
+    "mtime": 1793473757.8972719,
+    "seen": 1793473767.9746668,
+    "ast_hash": "286db81c85e815f56a10b02927905424",
     "semantic_hash": ""
   },
   "docs/decisiones.md": {
@@ -192,9 +192,9 @@
     "semantic_hash": ""
   },
   "app/src/features/fila/Turno.tsx": {
-    "mtime": 1793472929.2011147,
-    "seen": 1793473112.251482,
-    "ast_hash": "72420f4b0b090b3459adeb3c1b5dcf48",
+    "mtime": 1793473659.7437532,
+    "seen": 1793473767.9745078,
+    "ast_hash": "85b6c11bcdfa1b3ba33c8a4e3de077a4",
     "semantic_hash": ""
   },
   "app/src/features/fila/Unirse.tsx": {
@@ -456,15 +456,15 @@
     "semantic_hash": ""
   },
   "app/src/lib/avisos.test.ts": {
-    "mtime": 1793472970.5894527,
-    "seen": 1793473112.2514915,
-    "ast_hash": "e0c7c37f7324aeeb0df481f0e5c67723",
+    "mtime": 1793473657.1288238,
+    "seen": 1793473767.9745188,
+    "ast_hash": "62b424db5426626c6cc842d713f48113",
     "semantic_hash": ""
   },
   "app/src/lib/avisos.ts": {
-    "mtime": 1793472908.3453753,
-    "seen": 1793473112.251494,
-    "ast_hash": "68e540b3f69dd7046dd0de9a05462475",
+    "mtime": 1793473612.6793725,
+    "seen": 1793473767.9745216,
+    "ast_hash": "28374eea042d0bfe5686c2fe5a007c3f",
     "semantic_hash": ""
   },
   "scripts/claves-vapid.mjs": {

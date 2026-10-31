@@ -11,13 +11,20 @@ const falso = vi.hoisted(() => ({
   rpc: vi.fn(),
   sesion: null as { user: { id: string } } | null,
   tablas: {} as Record<string, unknown>,
+  /** Cada insert o update que hace la pantalla: [tabla, operación, valores]. */
+  escrituras: [] as Array<[string, string, unknown]>,
 }));
 
 vi.mock("@/lib/supabase", () => {
   const canal = { on: () => canal, subscribe: () => canal };
 
   function consulta(tabla: string) {
-    const respuesta = () => ({ data: falso.tablas[tabla] ?? null, error: null });
+    let escritura = false;
+    // Una escritura con .select("id") devuelve la fila que cambió.
+    const respuesta = () =>
+      escritura
+        ? { data: [{ id: "fila-cambiada" }], error: null }
+        : { data: falso.tablas[tabla] ?? null, error: null };
     const cadena: object = new Proxy(
       {},
       {
@@ -27,6 +34,13 @@ vi.mock("@/lib/supabase", () => {
           }
           if (propiedad === "single" || propiedad === "maybeSingle") {
             return async () => respuesta();
+          }
+          if (propiedad === "insert" || propiedad === "update") {
+            return (valores: unknown) => {
+              escritura = true;
+              falso.escrituras.push([tabla, propiedad, valores]);
+              return cadena;
+            };
           }
           return () => cadena;
         },
@@ -135,6 +149,7 @@ function abrir(ruta: string) {
 beforeEach(() => {
   falso.sesion = null;
   falso.tablas = {};
+  falso.escrituras = [];
   falso.rpc.mockReset();
   falso.rpc.mockResolvedValue({ data: null, error: null });
 });
@@ -143,6 +158,16 @@ describe("panel del dueño", () => {
   it("sin sesión manda a entrar", async () => {
     abrir("/dueno");
     expect(await screen.findByRole("heading", { level: 1, name: "Entrar" })).toBeInTheDocument();
+  });
+
+  it("después de entrar vuelve a la sección que se pidió", async () => {
+    const router = createMemoryRouter(rutas, { initialEntries: ["/dueno/configuracion"] });
+    render(<RouterProvider router={router} />);
+    expect(await screen.findByRole("heading", { level: 1, name: "Entrar" })).toBeInTheDocument();
+    expect(new URLSearchParams(router.state.location.search).get("siguiente")).toBe(
+      "/dueno/configuracion",
+    );
+    expect(destinoAlEntrar("/dueno/configuracion")).toBe("/dueno/configuracion");
   });
 
   it("una cuenta que no es dueña no ve nada de la barbería", async () => {
@@ -260,17 +285,128 @@ describe("panel del dueño", () => {
     ).toBeInTheDocument();
   });
 
-  it("el QR lleva a la fila real con ?origen=qr, y la configuración todavía no aparece", async () => {
+  it("el QR lleva a la fila real, y las tres secciones están en el menú", async () => {
     comoDueno();
     abrir("/dueno/qr");
     expect(await screen.findByRole("heading", { level: 1, name: "Código QR" })).toBeInTheDocument();
     const enlace = `${window.location.host}/b/barberia-prueba`;
     expect(screen.getByText(enlace)).toBeInTheDocument();
     expect(screen.getByTitle("Código QR de la fila de Barbería Prueba")).toBeInTheDocument();
-    const secciones = screen.getAllByRole("navigation", { name: "Secciones del dueño" });
-    for (const nav of secciones) {
-      expect(within(nav).queryByText(/Configuración|Ajustes/)).not.toBeInTheDocument();
-    }
+    const [lateral] = screen.getAllByRole("navigation", { name: "Secciones del dueño" });
+    expect(within(lateral as HTMLElement).getByText("Configuración")).toHaveAttribute(
+      "href" in (lateral as HTMLElement) ? "href" : "class",
+    );
+  });
+});
+
+describe("configuración del dueño", () => {
+  /** La barbería con dos barberos (uno con cuenta) y un servicio activo y otro que ya no se ofrece. */
+  function conConfiguracion() {
+    comoDueno();
+    falso.tablas.barberias = { ...BARBERIA, max_fila: 20, tolerancia_min: 5 };
+    falso.tablas.barberos = [
+      { id: "b-carlos", nombre: "Carlos", apodo: null, silla: 1, activo: true, user_id: "u-1" },
+      { id: "b-jorge", nombre: "Jorge", apodo: "El Profe", silla: 2, activo: true, user_id: null },
+    ];
+    falso.tablas.servicios = [
+      { id: "s-corte", nombre: "Corte clásico", duracion_min: 30, precio_ref: 150, activo: true },
+      { id: "s-barba", nombre: "Barba", duracion_min: 15, precio_ref: 100, activo: false },
+    ];
+  }
+
+  const pestana = async (nombre: string) =>
+    fireEvent.click(await screen.findByRole("tab", { name: nombre }));
+
+  it("muestra los datos reales de la barbería, su equipo y sus servicios", async () => {
+    conConfiguracion();
+    abrir("/dueno/configuracion");
+    expect(await screen.findByLabelText("Nombre")).toHaveValue("Barbería Prueba");
+    expect(
+      screen.getByText("El enlace no cambia, para que los QR impresos sigan funcionando."),
+    ).toBeInTheDocument();
+
+    await pestana("Barberos");
+    const nombres = await screen.findAllByLabelText("Nombre del barbero");
+    expect(nombres.map((n) => (n as HTMLInputElement).value)).toEqual(["Carlos", "Jorge"]);
+    expect(screen.getByText("Entra al panel con su cuenta.")).toBeInTheDocument();
+    expect(screen.getByText("Todavía no tiene cuenta para el panel.")).toBeInTheDocument();
+
+    await pestana("Servicios");
+    expect(await screen.findByDisplayValue("Corte clásico")).toBeInTheDocument();
+    expect(screen.getByText("Ya no se ofrecen")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Volver a ofrecer/ })).toBeInTheDocument();
+  });
+
+  it("cambia la duración de un servicio y guarda solo eso", async () => {
+    conConfiguracion();
+    abrir("/dueno/configuracion");
+    await pestana("Servicios");
+    fireEvent.click(await screen.findByRole("button", { name: "Más minutos para Corte clásico" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Guardar" }));
+    expect(await screen.findByText("Cambios guardados")).toBeInTheDocument();
+    expect(falso.escrituras).toEqual([["servicios", "update", { duracion_min: 35 }]]);
+  });
+
+  it("agrega un barbero con la siguiente silla libre", async () => {
+    conConfiguracion();
+    abrir("/dueno/configuracion");
+    await pestana("Barberos");
+    fireEvent.click(await screen.findByRole("button", { name: /Agregar barbero/ }));
+    const nombres = screen.getAllByLabelText("Nombre del barbero");
+    fireEvent.change(nombres.at(-1) as HTMLElement, { target: { value: "Kevin" } });
+    fireEvent.click(screen.getByRole("button", { name: "Guardar" }));
+    expect(await screen.findByText("Cambios guardados")).toBeInTheDocument();
+    expect(falso.escrituras).toEqual([
+      [
+        "barberos",
+        "insert",
+        { nombre: "Kevin", apodo: null, silla: 3, activo: true, barberia_id: BARBERIA.id },
+      ],
+    ]);
+  });
+
+  it("quitar un servicio guardado lo deja inactivo, no lo borra", async () => {
+    conConfiguracion();
+    falso.tablas.servicios = [
+      { id: "s-corte", nombre: "Corte clásico", duracion_min: 30, precio_ref: 150, activo: true },
+      { id: "s-barba", nombre: "Barba", duracion_min: 15, precio_ref: 100, activo: true },
+    ];
+    abrir("/dueno/configuracion");
+    await pestana("Servicios");
+    fireEvent.click(await screen.findByRole("button", { name: "Quitar Barba" }));
+    fireEvent.click(screen.getByRole("button", { name: "Guardar" }));
+    expect(await screen.findByText("Cambios guardados")).toBeInTheDocument();
+    expect(falso.escrituras).toEqual([["servicios", "update", { activo: false }]]);
+  });
+
+  it("no guarda un servicio sin nombre y explica qué arreglar", async () => {
+    conConfiguracion();
+    abrir("/dueno/configuracion");
+    await pestana("Servicios");
+    fireEvent.click(await screen.findByRole("button", { name: /Agregar servicio/ }));
+    fireEvent.click(screen.getByRole("button", { name: "Guardar" }));
+    expect(await screen.findByText(/el nombre lleva entre 2 y 40 letras/)).toBeInTheDocument();
+    expect(falso.escrituras).toEqual([]);
+  });
+
+  it("descartar vuelve a lo guardado", async () => {
+    conConfiguracion();
+    abrir("/dueno/configuracion");
+    fireEvent.change(await screen.findByLabelText("Nombre"), { target: { value: "Otra" } });
+    fireEvent.click(await screen.findByRole("button", { name: "Descartar" }));
+    expect(screen.getByLabelText("Nombre")).toHaveValue("Barbería Prueba");
+    // La barra se va con una animación.
+    await vi.waitFor(() =>
+      expect(screen.queryByText("Tienes cambios sin guardar")).not.toBeInTheDocument(),
+    );
+  });
+
+  it("las protecciones están siempre activas: no hay interruptores para apagarlas", async () => {
+    conConfiguracion();
+    abrir("/dueno/configuracion");
+    await pestana("Reglas de la fila");
+    expect(await screen.findByText("Un turno activo por teléfono")).toBeInTheDocument();
+    expect(screen.queryByRole("switch")).not.toBeInTheDocument();
   });
 });
 

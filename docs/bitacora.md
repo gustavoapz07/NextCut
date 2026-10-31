@@ -309,3 +309,17 @@ Cada cambio del proyecto queda aquí, enlazado al documento que afecta. El grafo
 - **Para el piloto:** si un cliente de Android agrega la página a la pantalla de inicio, esa app tiene su propio permiso de notificaciones. La página del turno ahora lo explica y se resuscribe sola cuando vuelve el permiso; `/diagnostico` sirve para revisarlo con el teléfono del cliente.
 - **Prueba de riesgo 2:** pasa en Chrome de escritorio y en Android. Falta el iPhone (Safari, con la página agregada a la pantalla de inicio, iOS 16.4 o superior). Con eso se cierra también la salida del Sprint 3.
 - **Nota:** el turno #13 del autor sigue en la fila de Carlos. Sirve para probar el "¡Te toca!" llamándolo desde el panel, o se puede cancelar.
+
+## 2026-10-31 · Sprint 4: la configuración del dueño con datos reales
+
+- **Qué:** `/dueno/configuracion` edita la barbería real ([plan](plan-implementacion.md#sprint-4--dueño-antiabuso-y-lanzamiento-semana-6)). El prototipo sigue en `/demo/dueno/configuracion`, con las mismas pestañas y la misma barra de "Tienes cambios sin guardar".
+- **Secciones:**
+  - **Barbería:** nombre y zona. El enlace de la fila se muestra pero no se cambia, para que los QR impresos sigan funcionando.
+  - **Barberos:** nombre, apodo y silla; agregar; quitar (queda en "Ya no atienden", porque los turnos pasados lo nombran) y volver a agregar. Dice quién tiene cuenta para el panel. La invitación por correo queda para cuando esté el SMTP de Resend.
+  - **Servicios:** nombre, duración (de 5 en 5, de 5 a 240 minutos) y precio; agregar; quitar (queda en "Ya no se ofrecen") y volver a ofrecer.
+  - **Reglas de la fila:** tamaño máximo y tolerancia. Las protecciones (un turno activo por teléfono, 5 turnos por conexión cada 10 minutos, nada de teléfonos en pantallas públicas) se muestran como siempre activas: en el prototipo eran interruptores, pero apagarlas debilitaría controles de seguridad.
+- **Cómo guarda** (`app/src/lib/configuracion.ts`): se edita un borrador; al guardar se valida con las mismas reglas que los CHECK de la base y se explica el primer problema ("dos barberos activos tienen la misma silla", "deja al menos un servicio activo"…). Después se manda solo lo que cambió, con el texto limpio. RLS deja escribir solo al dueño; cada escritura pide de vuelta la fila, porque con RLS una actualización ajena no da error, solo no cambia nada. Tras guardar se recarga, así un error a la mitad muestra lo que sí quedó.
+- **Login:** el panel del dueño manda a `/entrar?siguiente=` con la sección pedida. Antes siempre volvía al resumen.
+- **Pruebas:** 252 de Vitest (21 nuevas: validación, cambios entre lo guardado y el borrador, la pantalla con datos reales, guardar solo lo que cambió, agregar un barbero en la siguiente silla libre, quitar sin borrar, no guardar con errores, descartar, protecciones fijas y la vuelta después de entrar).
+- **Revisado en Chrome contra la app publicada,** con la cuenta de prueba: entrar vuelve a `/dueno/configuracion`; Barba de 15 a 20 minutos y de vuelta; agregar a un barbero y quitarlo; la tolerancia de 5 a 6 y de vuelta. Sin scroll lateral a 375 px ni errores de consola. La base quedó como estaba; el barbero de prueba, sin turnos, se borró a mano.
+- **Falta de la configuración:** el horario (no existe en la base; para que cierre la fila remota sola hay que tocar `unirse_a_fila` y la fila pública) y la invitación por correo.

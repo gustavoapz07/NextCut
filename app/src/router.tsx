@@ -8,11 +8,16 @@ import { Inicio } from "./features/inicio/Inicio";
 // Las del prototipo de diseño (datos de ejemplo de app/src/prototipo/) viven en /demo y en los
 // ejemplos fijos (/b/la-navaja y /t/K7P2Q); las demás leen de Supabase.
 
-// El resumen y el QR del dueño son los mismos en el panel real y en el prototipo: cada pantalla
-// sabe cuál es por el contexto que pone LayoutDueno.
+// El resumen, la configuración y el QR del dueño son los mismos en el panel real y en el
+// prototipo: cada pantalla sabe cuál es por el contexto que pone LayoutDueno.
 const resumenDueno: RouteObject = {
   index: true,
   lazy: () => import("./features/dueno/Resumen").then((m) => ({ Component: m.Resumen })),
+};
+const configuracionDueno: RouteObject = {
+  path: "configuracion",
+  lazy: () =>
+    import("./features/dueno/Configuracion").then((m) => ({ Component: m.Configuracion })),
 };
 const qrDueno: RouteObject = {
   path: "qr",
@@ -66,11 +71,11 @@ export const rutas: RouteObject[] = [
           import("./features/barbero/PanelBarbero").then((m) => ({ Component: m.PanelPrototipo })),
       },
       {
-        // Panel real del dueño: pide sesión. La configuración llega en el siguiente paso.
+        // Panel real del dueño: pide sesión.
         path: "dueno",
         lazy: () =>
           import("./features/dueno/LayoutDueno").then((m) => ({ Component: m.LayoutDueno })),
-        children: [resumenDueno, qrDueno],
+        children: [resumenDueno, configuracionDueno, qrDueno],
       },
       {
         path: "demo/dueno",
@@ -78,17 +83,7 @@ export const rutas: RouteObject[] = [
           import("./features/dueno/LayoutDueno").then((m) => ({
             Component: m.LayoutDuenoPrototipo,
           })),
-        children: [
-          resumenDueno,
-          {
-            path: "configuracion",
-            lazy: () =>
-              import("./features/dueno/Configuracion").then((m) => ({
-                Component: m.Configuracion,
-              })),
-          },
-          qrDueno,
-        ],
+        children: [resumenDueno, configuracionDueno, qrDueno],
       },
       { path: "*", element: <NoEncontrado /> },
     ],

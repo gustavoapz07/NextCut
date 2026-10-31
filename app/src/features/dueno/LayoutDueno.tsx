@@ -1,7 +1,7 @@
 import { ArrowUpRight, LayoutDashboard, LogOut, QrCode, Settings } from "lucide-react";
 import { motion } from "motion/react";
 import { useCallback, useEffect, useState } from "react";
-import { Link, Navigate, NavLink, Outlet } from "react-router";
+import { Link, Navigate, NavLink, Outlet, useLocation } from "react-router";
 import { Poste } from "@/components/Franjas";
 import { BotonMarca, Cargando } from "@/components/Marco";
 import { SinConexion } from "@/components/SinConexion";
@@ -20,8 +20,12 @@ const resorte = { type: "spring" as const, stiffness: 380, damping: 32 };
 
 export function LayoutDueno() {
   const sesion = useSesion();
+  const { pathname } = useLocation();
   if (sesion.tipo === "cargando") return <Cargando />;
-  if (sesion.tipo === "fuera") return <Navigate to="/entrar?siguiente=/dueno" replace />;
+  // Después de entrar vuelve a la misma sección (resumen, configuración o QR).
+  if (sesion.tipo === "fuera") {
+    return <Navigate to={`/entrar?siguiente=${encodeURIComponent(pathname)}`} replace />;
+  }
   return <LayoutReal userId={sesion.sesion.user.id} />;
 }
 
@@ -121,19 +125,9 @@ export function LayoutDuenoPrototipo() {
 
 function MarcoDueno({ contexto, onSalir }: { contexto: ContextoDueno; onSalir?: () => void }) {
   const { base, barberia } = contexto;
-  // La configuración real llega en el siguiente paso del Sprint 4; por ahora solo en el prototipo.
   const secciones = [
     { ruta: base, titulo: "Resumen", corto: "Resumen", icono: LayoutDashboard },
-    ...(contexto.modo === "prototipo"
-      ? [
-          {
-            ruta: `${base}/configuracion`,
-            titulo: "Configuración",
-            corto: "Ajustes",
-            icono: Settings,
-          },
-        ]
-      : []),
+    { ruta: `${base}/configuracion`, titulo: "Configuración", corto: "Ajustes", icono: Settings },
     { ruta: `${base}/qr`, titulo: "Código QR", corto: "QR", icono: QrCode },
   ];
 
@@ -234,7 +228,7 @@ function MarcoDueno({ contexto, onSalir }: { contexto: ContextoDueno; onSalir?: 
           aria-label="Secciones del dueño"
           className={cx(
             "fixed inset-x-3 bottom-3 z-30 mx-auto grid max-w-md gap-1 rounded-full bg-noche p-1.5 text-hueso shadow-2xl ring-1 ring-white/10 lg:hidden print:hidden",
-            secciones.length === 3 ? "grid-cols-3" : "grid-cols-2",
+            "grid-cols-3",
           )}
         >
           {secciones.map((s) => (

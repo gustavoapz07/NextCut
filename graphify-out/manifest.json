@@ -1,14 +1,14 @@
 {
   "README.md": {
-    "mtime": 1793581379.8817635,
-    "seen": 1793581415.7548478,
-    "ast_hash": "c7c495f51bd4c323d02b721f75bc032d",
+    "mtime": 1793599417.6960673,
+    "seen": 1793599445.6441884,
+    "ast_hash": "f3e9f9b0fc6f7158d53fc0145eaa88d7",
     "semantic_hash": ""
   },
   "docs/bitacora.md": {
-    "mtime": 1793581378.969442,
-    "seen": 1793581415.7548501,
-    "ast_hash": "ad7a9016ebe94e22fb33e7fce52fb93d",
+    "mtime": 1793599417.7867928,
+    "seen": 1793599445.644191,
+    "ast_hash": "281b7e539c8aafd0bad5ee75b195143e",
     "semantic_hash": ""
   },
   "docs/decisiones.md": {
@@ -24,9 +24,9 @@
     "semantic_hash": "a03e6054d92f2b3847ff257819adb86d"
   },
   "docs/seguridad.md": {
-    "mtime": 1793454431.1847818,
-    "seen": 1793454476.3988445,
-    "ast_hash": "463f2efd3689eaeb97a7d1c19b6c4188",
+    "mtime": 1793599417.6937702,
+    "seen": 1793599445.6441994,
+    "ast_hash": "f5faeb28592cab481b468307b46d7ae2",
     "semantic_hash": ""
   },
   "docs/validacion-campo.md": {
@@ -36,9 +36,9 @@
     "semantic_hash": "fce8b9c4ac2e58b20c5f98526ae1e804"
   },
   "docs/plan-implementacion.md": {
-    "mtime": 1793581379.059222,
-    "seen": 1793581415.754857,
-    "ast_hash": "6d633f95e85d2d167a88bed0126f8431",
+    "mtime": 1793599417.6947968,
+    "seen": 1793599445.6441977,
+    "ast_hash": "19a8ff96d2b0c26f09d229ea5fd9282b",
     "semantic_hash": ""
   },
   "app/src/components/ErrorDeRuta.tsx": {
@@ -615,6 +615,18 @@
     "mtime": 1793477284.571388,
     "seen": 1793581415.7548347,
     "ast_hash": "2c349ec1c8204f400d022a81e434740a",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/20261102060131_cierre_y_borrado.sql": {
+    "mtime": 1793599186.227939,
+    "seen": 1793599445.6441548,
+    "ast_hash": "c3a241faaffa210453cffa8bd20d163f",
+    "semantic_hash": ""
+  },
+  "supabase/tests/database/07_cierre_y_borrado.test.sql": {
+    "mtime": 1793599259.5554612,
+    "seen": 1793599445.6441746,
+    "ast_hash": "d6118fcafa8294d5c1fc9bee5a4b23a6",
     "semantic_hash": ""
   }
 }

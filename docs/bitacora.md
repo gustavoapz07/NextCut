@@ -338,3 +338,21 @@ Cada cambio del proyecto queda aquí, enlazado al documento que afecta. El grafo
   - Con el domingo de 18:00 a 23:00, mostró "Abierto hasta 11:00 p. m.".
   - El horario se puso y se quitó directo en la base. La pantalla del dueño se probó con Vitest, no entrando con la cuenta de prueba a la app publicada.
 - **Falta de la configuración:** la invitación por correo (necesita el SMTP de Resend).
+
+## 2026-11-02 · El día se cierra solo y los teléfonos se borran a los 90 días
+
+- **Qué:** se programaron con `pg_cron` las dos funciones que existían desde la migración base (migración `20261102060131_cierre_y_borrado.sql`). No se cambió ninguna función.
+- **`cerrar-dia`** corre cada hora, al minuto 1. `cerrar_dia()` solo toca los turnos de un día anterior al de cada barbería en su zona horaria, así que el día se cierra poco después de la medianoche de cualquier zona (en Honduras, a las 00:01):
+  - Quien seguía esperando cuenta como abandono y entra en el reporte de ese día.
+  - Quien fue llamado y no se sentó queda como "no llegó".
+  - Quien quedó en la silla no se toca, porque el cobro lo registra el barbero.
+  - La suscripción a avisos de los turnos cerrados se borra.
+- **`borrar-telefonos-viejos`** corre cada día a las 3:40 a. m. de Honduras (9:40 UTC). Borra el teléfono de los turnos cerrados de hace más de 90 días. El resto del turno se queda para el reporte. El fallo 5 de [seguridad](seguridad.md) pasa a 🟩; falta confirmar el plazo con los dueños.
+- **Pruebas:** 30 de pgTAP nuevas (`07_cierre_y_borrado`), que pasan en la nube. Comprueban:
+  - las dos tareas: horario, comando, que estén activas y que no estén repetidas;
+  - la zona horaria: la misma fecha se cierra en Kiritimati (UTC+14) y sigue abierta en Pago Pago (UTC−11);
+  - que no se toca a quien está en la silla ni a quien espera hoy, que el abandono queda en la bitácora del turno y que correrlo dos veces no cambia nada;
+  - el plazo de 90 días, que un turno abierto conserva el teléfono y que no se acepta un plazo de cero días;
+  - que ni el público ni el personal pueden ejecutar las funciones.
+- **En la nube:** la única fila vieja era un turno de prueba del 31/10 en la Barbería Prueba. La primera corrida (1:01 a. m. del 02/11) lo cierra como abandono.
+- **Anotado:** el hash de la IP de cada turno no se borra. La base no deja editar un turno cerrado salvo para quitarle el teléfono, así que borrarlo necesita cambiar esa regla. Queda para la revisión de antiabuso.

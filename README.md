@@ -2,7 +2,7 @@
 
 > Que ningún cliente se vaya por no saber cuánto le falta.
 
-**Estado:** Sprints 1 y 2 terminados (base de datos, fila pública, anotarse y turno en vivo) · Sprint 3 construido (login, panel, TV, "no llegó" automático y avisos por Web Push; los avisos llegan a Chrome de escritorio y a Android; falta probarlos en iPhone) · Sprint 4 empezado (panel del dueño: resumen del día, configuración, QR, pausa de la fila remota y renombrar u ocultar turnos; el horario cierra la fila en línea sola; faltan las invitaciones por correo) · Sprint 0 casi listo (falta la prueba de Web Push en iPhone) · validación de campo en pausa
+**Estado:** Sprints 1 y 2 terminados (base de datos, fila pública, anotarse y turno en vivo) · Sprint 3 construido (login, panel, TV, "no llegó" automático y avisos por Web Push; los avisos llegan a Chrome de escritorio y a Android; falta probarlos en iPhone) · Sprint 4 empezado (panel del dueño: resumen del día, configuración, QR, pausa de la fila remota y renombrar u ocultar turnos; el horario cierra la fila en línea sola; el día se cierra solo y los teléfonos se borran a los 90 días; faltan las invitaciones por correo) · Sprint 0 casi listo (falta la prueba de Web Push en iPhone) · validación de campo en pausa
 **Última actualización:** 31 de octubre de 2026
 
 NextCut es un SaaS para barberías que atienden por orden de llegada. Convierte la fila física en una fila virtual: el cliente escanea un QR o abre un enlace, ve cuántas personas hay y cuánto falta, se anota desde donde esté y recibe un aviso cuando le toca. El barbero pasa los turnos desde el celular. El dueño ve, por primera vez, cuántos clientes atendió cada barbero, cuánto esperaron y cuántos se fueron sin cortarse.
@@ -211,7 +211,7 @@ El diseño se auditó contra los 10 fallos más comunes en apps con APIs y agent
 | 2 | Endpoints expuestos | RLS activo en todas las tablas. El público solo llama a 3 funciones RPC y a una vista sin teléfonos ni nombres completos; para anotarse pasa por una Edge Function con Turnstile |
 | 3 | Input sin validar | Validación con zod en el cliente y otra vez en la base: largos, teléfono `+504` con 8 dígitos y servicio de la misma barbería |
 | 4 | Prompt débil | No hay IA en el MVP. Reglas definidas para cuando la haya |
-| 5 | Datos sensibles | Solo nombre y teléfono opcional. La pantalla pública muestra "Carlos M.", nunca el teléfono. Teléfonos borrados a los 90 días (propuesta) |
+| 5 | Datos sensibles | Solo nombre y teléfono opcional. La pantalla pública muestra "Carlos M.", nunca el teléfono. Teléfonos borrados a los 90 días con `pg_cron` (plazo propuesto) |
 | 6 | Sin límite de tokens | Equivalente sin IA: cuotas por barbería (turnos por día, tamaño de fila y avisos por turno) |
 | 7 | Permisos excesivos | El barbero solo modifica sus turnos. La pantalla de TV es de solo lectura. La clave de servicio solo existe en Edge Functions |
 | 8 | Manejo de errores | Mensajes genéricos para el usuario y detalle en los logs. "Llamar siguiente" es una transacción con bloqueo para que dos barberos no llamen al mismo cliente |

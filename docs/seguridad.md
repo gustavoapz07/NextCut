@@ -65,17 +65,17 @@ Antes de la lista general, estos son los abusos más probables en este producto:
 - **Estado:** el MVP no usa IA.
 - **Regla para cuando la haya** (por ejemplo, un asistente que responda "¿cuánta gente hay?"): prompt de sistema con un rol cerrado; el modelo solo recibe datos de **una** barbería; herramientas de solo lectura y en lista blanca; respuestas validadas contra un esquema; batería de pruebas de inyección de prompt antes de activarlo.
 
-### 5. Datos sensibles · 🟨 (pantallas públicas probadas; falta programar el borrado a los 90 días)
+### 5. Datos sensibles · 🟩 (pantallas públicas probadas; borrado a los 90 días programado y probado el 02/11/2026; falta confirmar el plazo con los dueños)
 
 - **Riesgo:** exponer teléfonos o hábitos de los clientes.
 - **Controles:**
   - Se pide lo mínimo: nombre y, opcional, teléfono.
   - La vista pública y la TV muestran "Carlos M." y el número de turno.
   - El teléfono solo lo ve el personal de esa barbería.
-  - Se borran los teléfonos 90 días después de la última visita (propuesta a confirmar con los dueños).
+  - El teléfono de cada turno cerrado se borra 90 días después de esa visita: `borrar_telefonos_viejos()` corre cada día a las 3:40 a. m. con `pg_cron` (plazo propuesto, a confirmar con los dueños). Un turno abierto conserva el teléfono hasta que se cierre.
   - Solo HTTPS. Aviso de privacidad corto en el formulario.
   - Honduras no tiene todavía una ley de protección de datos personales vigente (estaba pendiente en agosto de 2026), pero se aplican sus principios de todos modos: finalidad, mínimo necesario y derecho a borrar.
-- **Prueba:** revisar la respuesta de `fila_publica` y de `ver_turno`; ninguna debe contener teléfonos.
+- **Prueba:** revisar la respuesta de `fila_publica` y de `ver_turno`; ninguna debe contener teléfonos. El borrado se prueba en `07_cierre_y_borrado` (pgTAP).
 
 ### 6. Sin límite de tokens · ⬜ (equivalente sin IA: 🟨 — máximo de 2 avisos por turno probado el 31/10/2026; faltan las cuotas por barbería)
 

@@ -1,6 +1,10 @@
 import { HORARIO_INICIAL, type Horario } from "@shared/horario";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { cambiosEntre, type DatosConfig, validar } from "./configuracion";
+
+// Solo se prueban funciones puras. Sin esto, la CI (que no tiene .env.local) falla al crear el
+// cliente de Supabase.
+vi.mock("./supabase", () => ({ supabase: {} }));
 
 /** El elemento i de la lista; la prueba falla si no existe. */
 function en<T>(lista: T[], i: number): T {

@@ -1,3 +1,4 @@
+import { HORARIO_INICIAL } from "@shared/horario";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { createMemoryRouter, RouterProvider } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
@@ -148,6 +149,26 @@ describe("rutas", () => {
     rpc.mockResolvedValue({ data: filaDeEjemplo({ fila_remota_activa: false }), error: null });
     abrir("/b/el-faro?origen=qr");
     expect(await screen.findByRole("link", { name: /Anotarme en la fila/ })).toBeInTheDocument();
+  });
+
+  it("fuera de horario cierra la fila en línea y dice cuándo abre", async () => {
+    const cerrada = filaDeEjemplo({ horario: HORARIO_INICIAL, abierta: false });
+    rpc.mockResolvedValue({ data: cerrada, error: null });
+    abrir("/b/el-faro");
+    expect(await screen.findByText("Cerrado ahora")).toBeInTheDocument();
+    // El día depende de la hora en que corre la prueba; la hora de abrir no.
+    expect(
+      screen.getByText(/^Abre .+ a las 9:00 a\. m\. Si ya estás en el local/),
+    ).toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: /Anotarme en la fila/ })).not.toBeInTheDocument();
+  });
+
+  it("fuera de horario, con el QR de la puerta sí deja anotarse", async () => {
+    const cerrada = filaDeEjemplo({ horario: HORARIO_INICIAL, abierta: false });
+    rpc.mockResolvedValue({ data: cerrada, error: null });
+    abrir("/b/el-faro?origen=qr");
+    expect(await screen.findByRole("link", { name: /Anotarme en la fila/ })).toBeInTheDocument();
+    expect(screen.queryByText("Cerrado ahora")).not.toBeInTheDocument();
   });
 
   it("anota a un cliente de una barbería real y lo lleva a su turno", async () => {

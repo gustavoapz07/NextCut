@@ -3,6 +3,7 @@
 
 import { z } from "zod";
 import type { EntradaEta } from "./eta.ts";
+import { esquemaHorario } from "./horario.ts";
 
 const esquemaBarbero = z.object({
   id: z.string(),
@@ -29,6 +30,11 @@ export const esquemaFilaPublica = z.object({
     fila_remota_activa: z.boolean(),
     max_fila: z.number(),
     tolerancia_min: z.number(),
+    // Opcionales: la base los manda desde la migración del horario.
+    zona_horaria: z.string().optional(),
+    horario: esquemaHorario.nullable().optional(),
+    /** Abierta ahora según su horario (sin horario, siempre). */
+    abierta: z.boolean().optional(),
   }),
   barberos: z.array(esquemaBarbero),
   servicios: z.array(

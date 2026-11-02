@@ -1,4 +1,5 @@
 import { rangoDe } from "@shared/eta";
+import { cierreDeHoy, textoApertura } from "@shared/horario";
 import {
   ArrowRight,
   Clock,
@@ -50,16 +51,24 @@ function FilaReal({ slug }: { slug: string }) {
   const { datos } = estado;
   const { porBarbero, primeroLibre, masRapido } = resumirFila(datos, ahora);
   const nombres = new Map(datos.barberos.map((b) => [b.id, b.nombre]));
-  const cerrada = !(local || datos.barberia.fila_remota_activa)
-    ? "pausada"
-    : datos.fila.length >= datos.barberia.max_fila
-      ? "llena"
-      : null;
+  const zonaHoraria = datos.barberia.zona_horaria ?? "America/Tegucigalpa";
+  const horario = datos.barberia.horario ?? null;
+  // Fuera de horario la fila en línea se cierra sola (la base lo decide); el QR de la puerta no.
+  const fueraDeHorario = !local && datos.barberia.abierta === false;
+  const cerrada = fueraDeHorario
+    ? "horario"
+    : !(local || datos.barberia.fila_remota_activa)
+      ? "pausada"
+      : datos.fila.length >= datos.barberia.max_fila
+        ? "llena"
+        : null;
 
   return (
     <VistaFila
       nombre={datos.barberia.nombre}
       zona={datos.barberia.zona}
+      cierra={cierreDeHoy(horario, ahora, zonaHoraria) ?? undefined}
+      apertura={fueraDeHorario && horario ? textoApertura(horario, ahora, zonaHoraria) : undefined}
       enFila={datos.fila.length}
       masRapido={
         masRapido && { nombre: masRapido.barbero.nombre, rango: rangoDe(masRapido.minutos) }
@@ -179,7 +188,9 @@ interface VistaFilaProps {
   }[];
   fila: { numero: number; nombre: string; barbero: string }[];
   /** Por qué no se puede anotar desde el celular, si es el caso. */
-  cerrada: "pausada" | "llena" | null;
+  cerrada: "horario" | "pausada" | "llena" | null;
+  /** Fuera de horario: "Abre mañana a las 9:00 a. m." */
+  apertura?: string;
   /** Llegó por el QR de la puerta. */
   local: boolean;
 }
@@ -195,6 +206,7 @@ function VistaFila({
   barberos,
   fila,
   cerrada,
+  apertura,
   local,
 }: VistaFilaProps) {
   const abierta = cerrada === null;
@@ -407,15 +419,23 @@ function VistaFila({
             </>
           ) : (
             <p className="flex items-start gap-3 rounded-[1.5rem] bg-superficie p-4 ring-1 ring-borde">
-              <PauseCircle className="mt-0.5 size-5 shrink-0 text-rojo" />
+              {cerrada === "horario" ? (
+                <Clock className="mt-0.5 size-5 shrink-0 text-rojo" aria-hidden="true" />
+              ) : (
+                <PauseCircle className="mt-0.5 size-5 shrink-0 text-rojo" aria-hidden="true" />
+              )}
               <span>
                 <strong className="block">
-                  {cerrada === "llena"
-                    ? "La fila está llena por ahora"
-                    : "La fila en línea está pausada"}
+                  {cerrada === "horario"
+                    ? "Cerrado ahora"
+                    : cerrada === "llena"
+                      ? "La fila está llena por ahora"
+                      : "La fila en línea está pausada"}
                 </strong>
                 <span className="text-sm text-tenue">
-                  Puedes anotarte en el local. Esta página se actualiza sola.
+                  {cerrada === "horario"
+                    ? `${apertura ? `${apertura} ` : ""}Si ya estás en el local, anótate con el QR de la puerta.`
+                    : "Puedes anotarte en el local. Esta página se actualiza sola."}
                 </span>
               </span>
             </p>

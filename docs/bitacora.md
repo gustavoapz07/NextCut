@@ -323,3 +323,18 @@ Cada cambio del proyecto queda aquí, enlazado al documento que afecta. El grafo
 - **Pruebas:** 252 de Vitest (21 nuevas: validación, cambios entre lo guardado y el borrador, la pantalla con datos reales, guardar solo lo que cambió, agregar un barbero en la siguiente silla libre, quitar sin borrar, no guardar con errores, descartar, protecciones fijas y la vuelta después de entrar).
 - **Revisado en Chrome contra la app publicada,** con la cuenta de prueba: entrar vuelve a `/dueno/configuracion`; Barba de 15 a 20 minutos y de vuelta; agregar a un barbero y quitarlo; la tolerancia de 5 a 6 y de vuelta. Sin scroll lateral a 375 px ni errores de consola. La base quedó como estaba; el barbero de prueba, sin turnos, se borró a mano.
 - **Falta de la configuración:** el horario (no existe en la base; para que cierre la fila remota sola hay que tocar `unirse_a_fila` y la fila pública) y la invitación por correo.
+
+## 2026-11-01 · El horario cierra la fila en línea sola
+
+- **Qué:** cada barbería puede tener un horario por día de la semana: a qué hora abre y cierra, o si ese día no abre. Fuera de horario, la fila en línea se cierra sola. El QR de la puerta (`?origen=qr`) sigue dejando anotarse. Sin horario todo sigue como antes: la fila en línea queda abierta hasta que el dueño la pausa.
+- **Base** (migración `20261031200657_horario.sql`): columna `barberias.horario` (jsonb) con un CHECK (`privado.horario_valido`: días del 1 al 7, horas en formato HH:MM y la hora de cerrar después de la de abrir). `privado.abierta_en` decide usando la zona horaria de la barbería. `fila_publica` ahora manda `horario`, `zona_horaria` y `abierta`. `unirse_a_fila` rechaza los turnos remotos fuera de horario con `fuera_de_horario`, y la Edge Function `unirse-a-fila` (versión 6) lo devuelve como 409.
+- **Página pública:** fuera de horario dice "Cerrado ahora", cuándo vuelve a abrir ("Abre mañana a las 9:00 a. m.", hoy o el día que toque) y que quien ya está en el local se anote con el QR. Abierta, muestra "Abierto hasta 7:00 p. m.". El texto sale de `supabase/functions/_shared/horario.ts`; si se puede anotar o no, lo decide la base.
+- **Configuración:** en la pestaña Barbería hay una tarjeta "Horario". Un interruptor la activa, empezando de lunes a sábado de 9:00 a 19:00. Cada día se abre o se cierra y se le cambian las horas. Un día que cierra antes de abrir se marca en rojo y no se guarda.
+- **Pruebas:** 286 de Vitest (34 nuevas) y 24 de pgTAP (`06_horario`), que pasan en la nube. Las pruebas encontraron un punto de más en "9:00 a. m.." y se corrigió.
+- **Revisado en la app publicada** con la Barbería Prueba, un domingo a las 19:00:
+  - Con el horario de lunes a sábado, la página dijo "Cerrado ahora · Abre mañana a las 9:00 a. m." y no mostró el botón para anotarse.
+  - Con `?origen=qr`, el botón siguió.
+  - La Edge Function respondió 409 `fuera_de_horario` a un turno remoto.
+  - Con el domingo de 18:00 a 23:00, mostró "Abierto hasta 11:00 p. m.".
+  - El horario se puso y se quitó directo en la base. La pantalla del dueño se probó con Vitest, no entrando con la cuenta de prueba a la app publicada.
+- **Falta de la configuración:** la invitación por correo (necesita el SMTP de Resend).

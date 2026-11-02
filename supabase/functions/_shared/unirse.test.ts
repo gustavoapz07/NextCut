@@ -159,6 +159,7 @@ describe("manejarUnirse", () => {
     ["servicio_invalido", 400, "datos_invalidos"],
     ["fila_llena", 409, "fila_llena"],
     ["fila_remota_pausada", 409, "fila_remota_pausada"],
+    ["fuera_de_horario", 409, "fuera_de_horario"],
     ["telefono_con_turno", 409, "telefono_con_turno"],
     ["limite_ip", 429, "limite_ip"],
     ['relation "turnos" does not exist', 500, "error"],

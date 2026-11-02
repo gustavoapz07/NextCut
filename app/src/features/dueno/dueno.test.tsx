@@ -401,6 +401,53 @@ describe("configuración del dueño", () => {
     );
   });
 
+  it("activa el horario, cierra el sábado y lo guarda", async () => {
+    conConfiguracion();
+    abrir("/dueno/configuracion");
+    fireEvent.click(
+      await screen.findByRole("switch", { name: "Cerrar la fila en línea fuera de horario" }),
+    );
+    fireEvent.click(screen.getByRole("switch", { name: "Abre el sábado" }));
+    fireEvent.change(screen.getByLabelText("Cierra el viernes a las"), {
+      target: { value: "20:30" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Guardar" }));
+    expect(await screen.findByText("Cambios guardados")).toBeInTheDocument();
+    const lunesAJueves = { abre: "09:00", cierra: "19:00" };
+    expect(falso.escrituras).toEqual([
+      [
+        "barberias",
+        "update",
+        {
+          horario: {
+            "1": lunesAJueves,
+            "2": lunesAJueves,
+            "3": lunesAJueves,
+            "4": lunesAJueves,
+            "5": { abre: "09:00", cierra: "20:30" },
+            "6": null,
+            "7": null,
+          },
+        },
+      ],
+    ]);
+  });
+
+  it("no guarda un día que cierra antes de abrir", async () => {
+    conConfiguracion();
+    abrir("/dueno/configuracion");
+    fireEvent.click(
+      await screen.findByRole("switch", { name: "Cerrar la fila en línea fuera de horario" }),
+    );
+    fireEvent.change(screen.getByLabelText("Cierra el lunes a las"), {
+      target: { value: "08:00" },
+    });
+    expect(screen.getByText("La hora de cerrar va después de la de abrir.")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Guardar" }));
+    expect(await screen.findByText(/cierra después de abrir/)).toBeInTheDocument();
+    expect(falso.escrituras).toEqual([]);
+  });
+
   it("las protecciones están siempre activas: no hay interruptores para apagarlas", async () => {
     conConfiguracion();
     abrir("/dueno/configuracion");

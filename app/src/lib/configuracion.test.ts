@@ -1,3 +1,4 @@
+import { HORARIO_INICIAL, type Horario } from "@shared/horario";
 import { describe, expect, it } from "vitest";
 import { cambiosEntre, type DatosConfig, validar } from "./configuracion";
 
@@ -17,6 +18,7 @@ function datos(): DatosConfig {
       zona: "Centro",
       max_fila: 20,
       tolerancia_min: 5,
+      horario: null,
     },
     barberos: [
       { clave: "c", id: "c", nombre: "Carlos", apodo: "", silla: 1, activo: true, conCuenta: true },
@@ -140,5 +142,61 @@ describe("validar", () => {
     const d = datos();
     d.barberos[1] = { ...en(d.barberos, 1), silla: 1, activo: false };
     expect(validar(d)).toBeNull();
+  });
+});
+
+describe("horario", () => {
+  it("acepta el horario inicial", () => {
+    const d = datos();
+    d.barberia.horario = HORARIO_INICIAL;
+    expect(validar(d)).toBeNull();
+  });
+
+  it.each([
+    [
+      "sin ningún día abierto",
+      Object.fromEntries(Object.keys(HORARIO_INICIAL).map((dia) => [dia, null])),
+      /abre al menos un día/,
+    ],
+    [
+      "un día que cierra antes de abrir",
+      { ...HORARIO_INICIAL, "2": { abre: "19:00", cierra: "09:00" } },
+      /cierra después de abrir/,
+    ],
+    [
+      "una hora borrada",
+      { ...HORARIO_INICIAL, "3": { abre: "", cierra: "19:00" } },
+      /cierra después de abrir/,
+    ],
+  ])("rechaza %s", (_caso, horario, mensaje) => {
+    const d = datos();
+    d.barberia.horario = horario as Horario;
+    expect(validar(d)).toMatch(mensaje);
+  });
+
+  it("activarlo, cambiarlo o quitarlo es un cambio de la barbería", () => {
+    const conHorario = datos();
+    conHorario.barberia.horario = HORARIO_INICIAL;
+    expect(cambiosEntre(datos(), conHorario)).toEqual([
+      { tipo: "barberia", cambios: { horario: HORARIO_INICIAL } },
+    ]);
+
+    const otroSabado = datos();
+    otroSabado.barberia.horario = { ...HORARIO_INICIAL, "6": { abre: "08:00", cierra: "19:00" } };
+    expect(cambiosEntre(conHorario, otroSabado)).toEqual([
+      { tipo: "barberia", cambios: { horario: otroSabado.barberia.horario } },
+    ]);
+
+    expect(cambiosEntre(conHorario, datos())).toEqual([
+      { tipo: "barberia", cambios: { horario: null } },
+    ]);
+  });
+
+  it("el mismo horario en otro objeto no cuenta como cambio", () => {
+    const antes = datos();
+    antes.barberia.horario = HORARIO_INICIAL;
+    const despues = datos();
+    despues.barberia.horario = structuredClone(HORARIO_INICIAL);
+    expect(cambiosEntre(antes, despues)).toEqual([]);
   });
 });

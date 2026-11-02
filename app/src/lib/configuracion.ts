@@ -6,6 +6,7 @@
 // Nada se borra: un barbero o un servicio que se quita queda inactivo, porque los turnos pasados
 // lo siguen nombrando (y la base no deja borrar lo que un turno usa).
 
+import { esquemaHorario, type Horario } from "@shared/horario";
 import { z } from "zod";
 import { supabase } from "./supabase";
 
@@ -16,6 +17,8 @@ export interface BarberiaConfig {
   zona: string;
   max_fila: number;
   tolerancia_min: number;
+  /** `null`: sin horario, la fila en línea no se cierra sola. */
+  horario: Horario | null;
 }
 
 export interface BarberoConfig {
@@ -73,6 +76,14 @@ const esquemaServicio = z.object({
 
 /** El primer problema del borrador, explicado para el dueño; `null` si se puede guardar. */
 export function validar(borrador: DatosConfig): string | null {
+  const { horario } = borrador.barberia;
+  if (horario) {
+    const dias = Object.values(horario).filter((f) => f !== null);
+    if (dias.length === 0) return "Con horario, la barbería abre al menos un día.";
+    if (!esquemaHorario.safeParse(horario).success) {
+      return "Revisa el horario: cada día abierto cierra después de abrir.";
+    }
+  }
   if (!esquemaBarberia.safeParse(borrador.barberia).success) {
     return "Revisa los datos de la barbería: el nombre lleva entre 2 y 60 letras y la zona hasta 80.";
   }
@@ -123,7 +134,12 @@ function diferencias<T extends object, K extends keyof T>(antes: T, despues: T, 
   for (const campo of campos) {
     const valor = despues[campo];
     const normalizado = (typeof valor === "string" ? limpio(valor) : valor) as T[K];
-    if (normalizado !== antes[campo]) cambios[campo] = normalizado;
+    // Los objetos (el horario) se comparan por contenido.
+    const igual =
+      typeof normalizado === "object" && normalizado !== null
+        ? JSON.stringify(normalizado) === JSON.stringify(antes[campo])
+        : normalizado === antes[campo];
+    if (!igual) cambios[campo] = normalizado;
   }
   return cambios;
 }
@@ -139,6 +155,7 @@ export function cambiosEntre(original: DatosConfig, borrador: DatosConfig): Oper
     "zona",
     "max_fila",
     "tolerancia_min",
+    "horario",
   ]);
   if (hayCambios(barberia)) operaciones.push({ tipo: "barberia", cambios: barberia });
 
@@ -204,7 +221,7 @@ export async function cargarConfiguracion(barberiaId: string): Promise<Resultado
   const [barberia, barberos, servicios] = await Promise.all([
     supabase
       .from("barberias")
-      .select("id, nombre, slug, zona, max_fila, tolerancia_min")
+      .select("id, nombre, slug, zona, max_fila, tolerancia_min, horario")
       .eq("id", barberiaId)
       .single(),
     supabase
@@ -224,7 +241,15 @@ export async function cargarConfiguracion(barberiaId: string): Promise<Resultado
   return {
     tipo: "listo",
     datos: {
-      barberia: { ...barberia.data, zona: barberia.data.zona ?? "" },
+      barberia: {
+        ...barberia.data,
+        zona: barberia.data.zona ?? "",
+        // La base solo guarda horarios válidos (CHECK); si algo no se entiende, sin horario.
+        horario: esquemaHorario
+          .nullable()
+          .catch(null)
+          .parse(barberia.data.horario ?? null),
+      },
       barberos: barberos.data.map((b) => ({
         clave: b.id,
         id: b.id,

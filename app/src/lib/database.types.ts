@@ -18,6 +18,7 @@ export type Database = {
         Row: {
           creado_en: string
           fila_remota_activa: boolean
+          horario: Json | null
           id: string
           max_fila: number
           nombre: string
@@ -29,6 +30,7 @@ export type Database = {
         Insert: {
           creado_en?: string
           fila_remota_activa?: boolean
+          horario?: Json | null
           id?: string
           max_fila?: number
           nombre: string
@@ -40,6 +42,7 @@ export type Database = {
         Update: {
           creado_en?: string
           fila_remota_activa?: boolean
+          horario?: Json | null
           id?: string
           max_fila?: number
           nombre?: string

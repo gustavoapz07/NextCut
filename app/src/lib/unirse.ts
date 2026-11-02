@@ -16,6 +16,7 @@ export const MENSAJES: Record<ErrorUnirse, string> = {
   no_existe: "Esta barbería ya no recibe turnos por aquí.",
   fila_llena: "La fila se llenó. Inténtalo en un rato o anótate en el local.",
   fila_remota_pausada: "La barbería pausó la fila en línea. Puedes anotarte en el local.",
+  fuera_de_horario: "La barbería está cerrada ahora. Puedes anotarte en línea cuando abra.",
   telefono_con_turno: "Ese número ya tiene un turno activo en esta barbería.",
   limite_ip: "Se pidieron muchos turnos desde esta conexión. Espera unos minutos.",
   error: "Algo salió mal de nuestro lado. Inténtalo de nuevo.",

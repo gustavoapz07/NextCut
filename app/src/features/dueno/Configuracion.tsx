@@ -1,3 +1,10 @@
+import {
+  DIAS as DIAS_SEMANA,
+  type Dia,
+  type Franja,
+  HORARIO_INICIAL,
+  type Horario,
+} from "@shared/horario";
 import { Mail, Minus, Plus, RotateCcw, ShieldCheck, Trash2, UserPlus } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { type ReactNode, useCallback, useEffect, useId, useState } from "react";
@@ -31,6 +38,9 @@ const PESTANAS = [
 type Pestana = (typeof PESTANAS)[number]["id"];
 
 const DIAS = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+
+/** El horario de un día que se vuelve a abrir. */
+const FRANJA_NUEVA: Franja = { abre: "09:00", cierra: "19:00" };
 
 export function Configuracion() {
   const { modo, barberia } = useContextoDueno();
@@ -209,6 +219,106 @@ function DatosReales({ datos, cambiar }: { datos: DatosConfig; cambiar: Cambiar 
   const { barberia: b } = datos;
   const campo = (cambio: Partial<DatosConfig["barberia"]>) =>
     cambiar((d) => ({ ...d, barberia: { ...d.barberia, ...cambio } }));
+  return (
+    <div className="grid grid-cols-1 gap-4">
+      <DatosBasicos barberia={b} campo={campo} />
+      <HorarioReal horario={b.horario} onCambio={(horario) => campo({ horario })} />
+    </div>
+  );
+}
+
+function HorarioReal({
+  horario,
+  onCambio,
+}: {
+  horario: Horario | null;
+  onCambio: (horario: Horario | null) => void;
+}) {
+  const cambiarDia = (dia: Dia, franja: Franja | null) => {
+    if (horario) onCambio({ ...horario, [dia]: franja });
+  };
+  return (
+    <Tarjeta
+      titulo="Horario"
+      texto="Fuera de este horario la fila en línea se cierra sola. En el local se siguen anotando con el QR de la puerta."
+    >
+      <div className="flex items-center gap-4 rounded-2xl bg-fondo px-4 py-4 ring-1 ring-borde">
+        <span className="min-w-0 flex-1">
+          <span className="block font-semibold">Cerrar la fila en línea fuera de horario</span>
+          <span className="block text-sm text-tenue">
+            {horario
+              ? "La fila pública dice cuándo vuelves a abrir."
+              : "Sin horario, la fila en línea queda abierta hasta que la pauses."}
+          </span>
+        </span>
+        <Interruptor
+          etiqueta="Cerrar la fila en línea fuera de horario"
+          activo={horario !== null}
+          onCambiar={() => onCambio(horario ? null : HORARIO_INICIAL)}
+        />
+      </div>
+      {horario && (
+        <ul className="mt-3 grid gap-2">
+          {DIAS_SEMANA.map(({ id, nombre }) => {
+            const franja = horario[id];
+            const dia = nombre.toLowerCase();
+            const revisar = franja !== null && !(franja.abre && franja.abre < franja.cierra);
+            return (
+              <li
+                key={id}
+                className={cx(
+                  "flex flex-wrap items-center gap-3 rounded-2xl bg-fondo px-4 py-3 ring-1",
+                  revisar ? "ring-2 ring-rojo" : "ring-borde",
+                )}
+              >
+                <Interruptor
+                  etiqueta={`Abre el ${dia}`}
+                  activo={franja !== null}
+                  onCambiar={() => cambiarDia(id, franja ? null : FRANJA_NUEVA)}
+                />
+                <span className="w-24 font-semibold">{nombre}</span>
+                {franja ? (
+                  <span className="flex w-full items-center gap-2 text-sm sm:ml-auto sm:w-auto">
+                    <input
+                      type="time"
+                      aria-label={`Abre el ${dia} a las`}
+                      value={franja.abre}
+                      onChange={(e) => cambiarDia(id, { ...franja, abre: e.target.value })}
+                      className="w-0 min-w-0 flex-1 rounded-lg bg-superficie px-2 py-1.5 ring-1 ring-borde sm:w-auto sm:flex-none"
+                    />
+                    <span className="text-tenue">a</span>
+                    <input
+                      type="time"
+                      aria-label={`Cierra el ${dia} a las`}
+                      value={franja.cierra}
+                      onChange={(e) => cambiarDia(id, { ...franja, cierra: e.target.value })}
+                      className="w-0 min-w-0 flex-1 rounded-lg bg-superficie px-2 py-1.5 ring-1 ring-borde sm:w-auto sm:flex-none"
+                    />
+                  </span>
+                ) : (
+                  <span className="ml-auto text-sm text-tenue">Cerrado</span>
+                )}
+                {revisar && (
+                  <p className="w-full text-sm font-semibold text-rojo">
+                    La hora de cerrar va después de la de abrir.
+                  </p>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </Tarjeta>
+  );
+}
+
+function DatosBasicos({
+  barberia: b,
+  campo,
+}: {
+  barberia: DatosConfig["barberia"];
+  campo: (cambio: Partial<DatosConfig["barberia"]>) => void;
+}) {
   return (
     <Tarjeta titulo="Datos" texto="Así aparece tu barbería en la fila pública y en la TV.">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">

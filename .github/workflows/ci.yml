@@ -91,6 +91,9 @@ jobs:
       - name: Concurrencia (fallo 8)
         run: npm run test:concurrencia
 
+      - name: Carga y abuso (fallo 9)
+        run: npm run test:carga
+
       - name: Apagar Supabase
         if: always()
         run: supabase stop --no-backup

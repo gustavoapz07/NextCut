@@ -1,14 +1,14 @@
 {
   "README.md": {
-    "mtime": 1793624677.0885174,
-    "seen": 1793624721.6073751,
-    "ast_hash": "38e7ce255344f3f0644db4b830b471ec",
+    "mtime": 1793625570.6072896,
+    "seen": 1793625580.9201531,
+    "ast_hash": "cb9a333847b0566483f9f16e54a7c579",
     "semantic_hash": ""
   },
   "docs/bitacora.md": {
-    "mtime": 1793624702.6309776,
-    "seen": 1793624721.6073773,
-    "ast_hash": "997892e80bb195f6b5491f4d9ab50233",
+    "mtime": 1793625570.7129025,
+    "seen": 1793625580.9201577,
+    "ast_hash": "e1002abd8e83306da99ba49fb4dca8dc",
     "semantic_hash": ""
   },
   "docs/decisiones.md": {
@@ -24,9 +24,9 @@
     "semantic_hash": "a03e6054d92f2b3847ff257819adb86d"
   },
   "docs/seguridad.md": {
-    "mtime": 1793624677.0885174,
-    "seen": 1793624721.6073864,
-    "ast_hash": "26684adcb49b209f09aa150934474e90",
+    "mtime": 1793625570.6072896,
+    "seen": 1793625580.9201748,
+    "ast_hash": "87961ca5dc4a5d6223b55fff721aa2e6",
     "semantic_hash": ""
   },
   "docs/validacion-campo.md": {
@@ -36,9 +36,9 @@
     "semantic_hash": "fce8b9c4ac2e58b20c5f98526ae1e804"
   },
   "docs/plan-implementacion.md": {
-    "mtime": 1793624677.0885174,
-    "seen": 1793624721.6073842,
-    "ast_hash": "fe54a88726d9e4added8e6b4b043ad84",
+    "mtime": 1793625570.6062858,
+    "seen": 1793625580.9201715,
+    "ast_hash": "ba6e339fd054fedcc306db634e724c55",
     "semantic_hash": ""
   },
   "app/src/components/ErrorDeRuta.tsx": {
@@ -636,9 +636,21 @@
     "semantic_hash": ""
   },
   "supabase/tests/database/08_pausa_automatica.test.sql": {
-    "mtime": 1793624169.6986306,
-    "seen": 1793624372.1867645,
-    "ast_hash": "296b918cbdaf0daac9c36aff90039322",
+    "mtime": 1793625195.301438,
+    "seen": 1793625218.830063,
+    "ast_hash": "eb9884cf8962c4d56f802ad3739b403a",
+    "semantic_hash": ""
+  },
+  "scripts/carga-api.mjs": {
+    "mtime": 1793625508.9129765,
+    "seen": 1793625580.9200003,
+    "ast_hash": "625d80829794ecbcbb23a3f6657d7d7b",
+    "semantic_hash": ""
+  },
+  "scripts/carga.mjs": {
+    "mtime": 1793625475.6987245,
+    "seen": 1793625580.9200034,
+    "ast_hash": "454e583b4ef71666246971e75cb00c7e",
     "semantic_hash": ""
   }
 }

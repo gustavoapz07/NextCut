@@ -285,7 +285,7 @@ No construye funciones del producto. Prepara el entorno y prueba lo que podría 
 - [x] Antiabuso: un turno activo por teléfono, 5 turnos por IP cada 10 minutos, pausa automática ante picos y alerta al dueño. La pausa y la alerta quedaron el 02/11/2026: 10 turnos en línea en 5 minutos pausan la fila en línea y el resumen del dueño lo avisa ([ADR-015](decisiones.md#adr-015--pausa-automática-de-la-fila-en-línea-ante-picos)). Falta avisarle por push o por correo.
 - [x] `cerrar_dia()` y `borrar_telefonos_viejos()` con `pg_cron`: el cierre cada hora y el borrado cada día a las 3:40 a. m. (migración `20261102060131_cierre_y_borrado`, 02/11/2026).
 - [ ] Sentry sin datos personales, endpoint `salud` y monitor de UptimeRobot.
-- [ ] Prueba de carga: 50 intentos en un minuto; pasan como máximo los permitidos y salta la alerta.
+- [x] Prueba de carga: 50 intentos en un minuto; pasan como máximo los permitidos y salta la alerta. Desde 50 IPs a la vez entran 10 y salta la pausa con su alerta; desde una sola, entran 5 (`scripts/carga.mjs`, en la CI). Contra la Edge Function publicada, desde una IP y con encabezados de IP falsos, entraron 5 de 50 (`scripts/carga-api.mjs`, 02/11/2026).
 - [ ] Revisión del Security Advisor de Supabase y búsqueda de `sb_secret` en el build de producción.
 - [ ] Despliegue a producción y carga de la barbería piloto.
 
@@ -309,7 +309,7 @@ No construye funciones del producto. Prepara el entorno y prueba lo que podría 
 | Concurrencia | Script con dos conexiones | "Llamar siguiente" simultáneo, doble envío del formulario | Cada PR |
 | Punta a punta | Playwright + axe | Cliente, barbero, TV y dueño en viewport de celular; accesibilidad | Cada PR |
 | Secretos | gitleaks | Claves en el código o el historial | Pre-commit y cada PR |
-| Carga y abuso | Script de 50 turnos por minuto | Límites, pausa automática y alerta | Antes del piloto |
+| Carga y abuso | `scripts/carga.mjs` y `scripts/carga-api.mjs` | Límites, pausa automática y alerta | La de la base en cada PR; la de la Edge Function a mano, antes del piloto |
 | Manual | Celulares reales | Push en Android e iPhone, sonido, vibración y QR impreso | Antes del piloto |
 
 ## 11. Integración y despliegue
@@ -321,7 +321,7 @@ No construye funciones del producto. Prepara el entorno y prueba lo que podría 
 | Vista previa | URL por PR (`wrangler versions upload`) | Proyecto de Supabase de pruebas | Revisar cambios en el celular sin tocar datos reales |
 | Producción | `wrangler deploy` al fusionar en `main` | Proyecto de Supabase | Piloto |
 
-- **CI (cada PR):** Biome → `tsc` → Vitest → Supabase local + pgTAP → script de concurrencia → Playwright → gitleaks → build.
+- **CI (cada PR):** Biome → `tsc` → Vitest → Supabase local + pgTAP → scripts de concurrencia y de carga → Playwright → gitleaks → build.
 - **Migraciones:** durante el MVP se aplican a producción a mano con `supabase db push`, después de que CI pase. Automatizarlo queda para la v0.2.
 - **Secretos:** `TURNSTILE_SECRET`, `VAPID_PRIVATE_KEY` y la configuración de Resend viven en los secretos de Supabase. En GitHub solo van `CLOUDFLARE_API_TOKEN` y `SUPABASE_ACCESS_TOKEN`.
 - **Variables públicas** (`.env.local`, con `.env.example` en el repo): `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`, `VITE_TURNSTILE_SITE_KEY`, `VITE_VAPID_PUBLIC_KEY` y `VITE_SENTRY_DSN`.

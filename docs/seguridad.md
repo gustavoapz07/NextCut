@@ -101,7 +101,7 @@ Antes de la lista general, estos son los abusos más probables en este producto:
   - Clave de idempotencia al anotarse, para que un doble toque no cree dos turnos.
 - **Prueba:** dos barberos presionan "Llamar siguiente" a la vez y cada uno recibe un cliente distinto; un doble envío del formulario crea un solo turno.
 
-### 9. Rate limiting · 🟨 (límites por IP, teléfono y tamaño de la fila y pausa automática probados; Turnstile y la IP real probados en la nube; falta la prueba de carga de 50 turnos)
+### 9. Rate limiting · 🟩 (límites por IP, teléfono y tamaño de la fila, pausa automática y prueba de carga probados; Turnstile y la IP real probados en la nube)
 
 - **Controles:**
   - Cloudflare Turnstile en el formulario, verificado en una Edge Function.
@@ -110,6 +110,8 @@ Antes de la lista general, estos son los abusos más probables en este producto:
   - Tamaño máximo de la fila configurable.
   - **Pausa automática** de la fila en línea si entran 10 turnos en línea en 5 minutos (el dueño elige de 3 a 50), con aviso en su resumen. Los turnos del QR de la puerta no cuentan ([ADR-015](decisiones.md#adr-015--pausa-automática-de-la-fila-en-línea-ante-picos)). Se prueba en `08_pausa_automatica` (pgTAP).
 - **Prueba:** un script que intenta 50 turnos en un minuto; deben pasar como máximo los permitidos y debe saltar la alerta.
+  - `scripts/carga.mjs` (en la CI, contra la base): 50 intentos a la vez desde 50 IPs distintas dejan entrar 10, pausan la fila en línea y dejan una sola alerta; desde una IP entran 5.
+  - `scripts/carga-api.mjs` (a mano, contra la Edge Function publicada): el 02/11/2026, 50 intentos en 10 segundos desde una IP, cada uno con `x-forwarded-for` y `x-real-ip` falsos. Entraron 5 y 45 recibieron `limite_ip`; los 5 quedaron con el mismo hash de IP.
 
 ### 10. Monitoreo, logs y alertas · 🟨 (bitácora y alerta de pico probadas; faltan Sentry y el endpoint de salud)
 
@@ -127,6 +129,6 @@ Antes de la lista general, estos son los abusos más probables en este producto:
 
 - [x] Escribir las pruebas pgTAP de RLS (#2 y #7): `supabase/tests/database/`, 101 pruebas en verde el 27/10/2026.
 - [ ] Configurar `gitleaks` en pre-commit y CI (#1).
-- [ ] Prueba de carga del formulario con límites activos (#9).
+- [x] Prueba de carga del formulario con límites activos (#9): 02/11/2026, en la CI y contra la Edge Function publicada.
 - [ ] Confirmar con los dueños el plazo de borrado de teléfonos (#5).
 - [ ] Revisar los términos de uso comercial de Cloudflare Workers ([ADR-005](decisiones.md#adr-005--hosting-en-cloudflare-workers-en-lugar-de-pages)) y del plan gratuito de Supabase.

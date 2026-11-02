@@ -22,6 +22,7 @@
     "deploy": "npm run build && wrangler deploy",
     "deploy:pruebas": "vite build --mode pruebas && wrangler deploy",
     "test:concurrencia": "node scripts/concurrencia.mjs",
+    "test:carga": "node scripts/carga.mjs",
     "test:e2e": "playwright test"
   },
   "dependencies": {

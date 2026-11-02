@@ -377,3 +377,16 @@ Cada cambio del proyecto queda aquí, enlazado al documento que afecta. El grafo
 - **Hallazgo en la CI:** Vitest fallaba en GitHub desde `cd26a47` (31/10), aunque pasaba en local. `configuracion.test.ts` importaba el cliente de Supabase, que se detiene sin `.env.local`, y la CI no lo tiene. Se arregló simulando el cliente (commit `916225a`). Las pruebas de la base sí pasaban en la CI, incluidas las del cierre del día.
 - **Cierre del día en la nube:** la primera corrida (1:01 a. m. del 02/11) cerró el turno de prueba que esperaba desde el 31/10, y desde entonces corre cada hora sin errores. El borrado de las 3:40 a. m. también corrió.
 - **Falta:** avisarle al dueño por push o por correo, y la prueba de carga de 50 turnos en un minuto.
+
+## 2026-11-02 · Prueba de carga: 50 intentos en un minuto
+
+- **Qué:** la prueba de carga del Sprint 4 en dos partes. Desde una sola computadora todos los intentos salen de la misma IP, y el límite por IP frena antes de que la pausa automática pueda saltar. Por eso el caso de muchas IPs se prueba en la base.
+- **`scripts/carga.mjs`** (`npm run test:carga`, nuevo paso de la CI después del de concurrencia): manda 50 intentos a `unirse_a_fila` al mismo tiempo, repartidos en 20 conexiones.
+  - Desde 50 IPs distintas entran exactamente 10, los otros 40 reciben `fila_remota_pausada`, la fila en línea queda pausada y la alerta queda una sola vez en la bitácora. En el local se siguen anotando.
+  - Desde una sola IP entran exactamente 5, los otros 45 reciben `limite_ip` y la pausa no salta.
+  - Antes de subirlo se simularon los dos casos en orden en la nube, dentro de una transacción que se deshizo, con el mismo resultado. La versión con conexiones simultáneas corre en la CI.
+- **`scripts/carga-api.mjs`** (a mano, contra la Edge Function publicada y la Barbería Prueba): manda 50 intentos en tandas de 5, cada uno con `x-forwarded-for` y `x-real-ip` falsos.
+  - Resultado del 02/11/2026: tardaron 9,9 segundos, entraron 5, los otros 45 recibieron 429 `limite_ip` y la fila en línea siguió abierta.
+  - Los 5 quedaron con el mismo hash de IP, así que las IP falsas no sirvieron. El script canceló los 5 al final.
+- **CI:** con el arreglo de la prueba de la pausa automática (`2ca90d9`) los tres trabajos de la CI quedaron en verde por primera vez desde el 31/10.
+- **Seguridad:** el fallo 9 pasa a 🟩 y la prueba de carga sale de los pendientes antes del piloto.

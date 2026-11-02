@@ -101,23 +101,23 @@ Antes de la lista general, estos son los abusos más probables en este producto:
   - Clave de idempotencia al anotarse, para que un doble toque no cree dos turnos.
 - **Prueba:** dos barberos presionan "Llamar siguiente" a la vez y cada uno recibe un cliente distinto; un doble envío del formulario crea un solo turno.
 
-### 9. Rate limiting · 🟨 (límites por IP, teléfono y tamaño de la fila probados; Turnstile y la IP real probados en la nube; falta la pausa automática)
+### 9. Rate limiting · 🟨 (límites por IP, teléfono y tamaño de la fila y pausa automática probados; Turnstile y la IP real probados en la nube; falta la prueba de carga de 50 turnos)
 
 - **Controles:**
   - Cloudflare Turnstile en el formulario, verificado en una Edge Function.
   - Un turno activo por teléfono por barbería.
   - Máximo de 5 turnos por IP cada 10 minutos (contador en Postgres).
   - Tamaño máximo de la fila configurable.
-  - **Pausa automática** de la fila remota si entran más turnos de lo normal en 5 minutos, con aviso al dueño.
+  - **Pausa automática** de la fila en línea si entran 10 turnos en línea en 5 minutos (el dueño elige de 3 a 50), con aviso en su resumen. Los turnos del QR de la puerta no cuentan ([ADR-015](decisiones.md#adr-015--pausa-automática-de-la-fila-en-línea-ante-picos)). Se prueba en `08_pausa_automatica` (pgTAP).
 - **Prueba:** un script que intenta 50 turnos en un minuto; deben pasar como máximo los permitidos y debe saltar la alerta.
 
-### 10. Monitoreo, logs y alertas · 🟨 (bitácora probada; faltan Sentry, salud y alertas)
+### 10. Monitoreo, logs y alertas · 🟨 (bitácora y alerta de pico probadas; faltan Sentry y el endpoint de salud)
 
 - **Controles:**
   - Tabla `eventos_turno` como bitácora de solo inserción (quién, qué y cuándo).
   - Sentry para errores del frontend.
   - Monitor de disponibilidad gratuito sobre un endpoint de salud.
-  - Alertas al dueño: pico anómalo de turnos y fila remota pausada.
+  - Alertas al dueño: pico anómalo de turnos y fila remota pausada. Por ahora en el resumen del panel; todavía no por push ni por correo.
   - Revisión semanal de los logs y de los avisos del Security Advisor de Supabase.
 - **Prueba:** provocar un pico y un error; deben aparecer en los logs y llegar la alerta.
 

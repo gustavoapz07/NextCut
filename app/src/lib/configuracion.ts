@@ -17,6 +17,8 @@ export interface BarberiaConfig {
   zona: string;
   max_fila: number;
   tolerancia_min: number;
+  /** Turnos en línea en 5 minutos que pausan sola la fila en línea. */
+  pico_turnos: number;
   /** `null`: sin horario, la fila en línea no se cierra sola. */
   horario: Horario | null;
 }
@@ -62,6 +64,7 @@ const esquemaBarberia = z.object({
   zona: z.string().transform(limpio).pipe(z.string().max(80)),
   max_fila: z.number().int().min(1).max(100),
   tolerancia_min: z.number().int().min(1).max(30),
+  pico_turnos: z.number().int().min(3).max(100),
 });
 const esquemaBarbero = z.object({
   nombre,
@@ -155,6 +158,7 @@ export function cambiosEntre(original: DatosConfig, borrador: DatosConfig): Oper
     "zona",
     "max_fila",
     "tolerancia_min",
+    "pico_turnos",
     "horario",
   ]);
   if (hayCambios(barberia)) operaciones.push({ tipo: "barberia", cambios: barberia });
@@ -221,7 +225,7 @@ export async function cargarConfiguracion(barberiaId: string): Promise<Resultado
   const [barberia, barberos, servicios] = await Promise.all([
     supabase
       .from("barberias")
-      .select("id, nombre, slug, zona, max_fila, tolerancia_min, horario")
+      .select("id, nombre, slug, zona, max_fila, tolerancia_min, pico_turnos, horario")
       .eq("id", barberiaId)
       .single(),
     supabase

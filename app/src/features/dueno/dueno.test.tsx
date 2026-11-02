@@ -71,6 +71,8 @@ const BARBERIA = {
   zona: "Col. Centro, El Progreso",
   zona_horaria: "America/Tegucigalpa",
   fila_remota_activa: true,
+  pausa_automatica_en: null as string | null,
+  pico_turnos: 10,
 };
 const CARLOS = { id: "b-carlos", nombre: "Carlos", silla: 1, en_pausa: false };
 const JORGE = { id: "b-jorge", nombre: "Jorge", silla: 2, en_pausa: false };
@@ -231,6 +233,39 @@ describe("panel del dueño", () => {
     });
   });
 
+  it("avisa si la fila en línea se pausó sola y la vuelve a abrir", async () => {
+    comoDueno();
+    // 15:03 UTC son las 9:03 a. m. en Honduras.
+    falso.tablas.barberias = {
+      ...BARBERIA,
+      fila_remota_activa: false,
+      pausa_automatica_en: "2026-11-02T15:03:00Z",
+    };
+    abrir("/dueno");
+    const alerta = await screen.findByRole("alert");
+    expect(
+      within(alerta).getByRole("heading", {
+        name: "La fila en línea se pausó sola a las 9:03 a. m.",
+      }),
+    ).toBeInTheDocument();
+    expect(alerta).toHaveTextContent("Entraron 10 turnos en línea en menos de 5 minutos.");
+
+    fireEvent.click(within(alerta).getByRole("button", { name: "Abrir la fila en línea" }));
+    expect(await screen.findByText("La fila remota está abierta otra vez")).toBeInTheDocument();
+    expect(falso.rpc).toHaveBeenCalledWith("pausar_fila_remota", {
+      p_barberia_id: BARBERIA.id,
+      p_pausada: false,
+    });
+  });
+
+  it("si la pausó el dueño, no hay aviso de pico", async () => {
+    comoDueno();
+    falso.tablas.barberias = { ...BARBERIA, fila_remota_activa: false };
+    abrir("/dueno");
+    expect(await screen.findByRole("switch", { name: /Fila remota pausada/ })).toBeInTheDocument();
+    expect(screen.queryByText(/se pausó sola/)).not.toBeInTheDocument();
+  });
+
   it("oculta un turno de las pantallas públicas", async () => {
     comoDueno();
     abrir("/dueno");
@@ -303,7 +338,7 @@ describe("configuración del dueño", () => {
   /** La barbería con dos barberos (uno con cuenta) y un servicio activo y otro que ya no se ofrece. */
   function conConfiguracion() {
     comoDueno();
-    falso.tablas.barberias = { ...BARBERIA, max_fila: 20, tolerancia_min: 5 };
+    falso.tablas.barberias = { ...BARBERIA, max_fila: 20, tolerancia_min: 5, pico_turnos: 10 };
     falso.tablas.barberos = [
       { id: "b-carlos", nombre: "Carlos", apodo: null, silla: 1, activo: true, user_id: "u-1" },
       { id: "b-jorge", nombre: "Jorge", apodo: "El Profe", silla: 2, activo: true, user_id: null },
@@ -446,6 +481,18 @@ describe("configuración del dueño", () => {
     fireEvent.click(screen.getByRole("button", { name: "Guardar" }));
     expect(await screen.findByText(/cierra después de abrir/)).toBeInTheDocument();
     expect(falso.escrituras).toEqual([]);
+  });
+
+  it("cambia el límite de la pausa automática y guarda solo eso", async () => {
+    conConfiguracion();
+    abrir("/dueno/configuracion");
+    await pestana("Reglas de la fila");
+    fireEvent.change(await screen.findByLabelText("Pausa automática ante picos"), {
+      target: { value: "15" },
+    });
+    fireEvent.click(await screen.findByRole("button", { name: "Guardar" }));
+    expect(await screen.findByText("Cambios guardados")).toBeInTheDocument();
+    expect(falso.escrituras).toEqual([["barberias", "update", { pico_turnos: 15 }]]);
   });
 
   it("las protecciones están siempre activas: no hay interruptores para apagarlas", async () => {

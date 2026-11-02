@@ -282,7 +282,7 @@ No construye funciones del producto. Prepara el entorno y prueba lo que podría 
 - [ ] Configuración: barberos (con invitación por correo), servicios con duración, horario, tamaño máximo de la fila y tolerancia. Avance del 31/10/2026: en `/dueno/configuracion` ya se editan los datos de la barbería, los barberos (sin cuenta), los servicios, el tamaño máximo y la tolerancia; falta la invitación por correo (necesita el SMTP de Resend). El horario quedó el 01/11/2026: fuera de horario la fila en línea se cierra sola.
 - [x] QR imprimible y botón para pausar la fila remota; renombrar u ocultar un turno (`/dueno` y `/dueno/qr`, 31/10/2026).
 - [x] Reporte del día: atendidos por barbero, ingresos registrados, espera promedio, error del estimado, abandonos y horas pico (`/dueno`, con `reporte_dia`, 31/10/2026).
-- [ ] Antiabuso: un turno activo por teléfono, 5 turnos por IP cada 10 minutos, pausa automática ante picos y alerta al dueño.
+- [x] Antiabuso: un turno activo por teléfono, 5 turnos por IP cada 10 minutos, pausa automática ante picos y alerta al dueño. La pausa y la alerta quedaron el 02/11/2026: 10 turnos en línea en 5 minutos pausan la fila en línea y el resumen del dueño lo avisa ([ADR-015](decisiones.md#adr-015--pausa-automática-de-la-fila-en-línea-ante-picos)). Falta avisarle por push o por correo.
 - [x] `cerrar_dia()` y `borrar_telefonos_viejos()` con `pg_cron`: el cierre cada hora y el borrado cada día a las 3:40 a. m. (migración `20261102060131_cierre_y_borrado`, 02/11/2026).
 - [ ] Sentry sin datos personales, endpoint `salud` y monitor de UptimeRobot.
 - [ ] Prueba de carga: 50 intentos en un minuto; pasan como máximo los permitidos y salta la alerta.

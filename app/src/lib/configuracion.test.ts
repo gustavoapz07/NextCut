@@ -22,6 +22,7 @@ function datos(): DatosConfig {
       zona: "Centro",
       max_fila: 20,
       tolerancia_min: 5,
+      pico_turnos: 10,
       horario: null,
     },
     barberos: [
@@ -202,5 +203,21 @@ describe("horario", () => {
     const despues = datos();
     despues.barberia.horario = structuredClone(HORARIO_INICIAL);
     expect(cambiosEntre(antes, despues)).toEqual([]);
+  });
+});
+
+describe("pausa automática ante picos", () => {
+  it.each([2, 101, 4.5])("no acepta un límite de %s turnos", (pico_turnos) => {
+    const borrador = datos();
+    borrador.barberia.pico_turnos = pico_turnos;
+    expect(validar(borrador)).not.toBeNull();
+  });
+
+  it("un límite nuevo se guarda con los datos de la barbería", () => {
+    const borrador = datos();
+    borrador.barberia.pico_turnos = 15;
+    expect(cambiosEntre(datos(), borrador)).toEqual([
+      { tipo: "barberia", cambios: { pico_turnos: 15 } },
+    ]);
   });
 });

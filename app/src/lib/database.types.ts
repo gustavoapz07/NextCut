@@ -18,10 +18,13 @@ export type Database = {
         Row: {
           creado_en: string
           fila_remota_activa: boolean
+          fila_remota_reanudada_en: string | null
           horario: Json | null
           id: string
           max_fila: number
           nombre: string
+          pausa_automatica_en: string | null
+          pico_turnos: number
           slug: string
           tolerancia_min: number
           zona: string | null
@@ -30,10 +33,13 @@ export type Database = {
         Insert: {
           creado_en?: string
           fila_remota_activa?: boolean
+          fila_remota_reanudada_en?: string | null
           horario?: Json | null
           id?: string
           max_fila?: number
           nombre: string
+          pausa_automatica_en?: string | null
+          pico_turnos?: number
           slug: string
           tolerancia_min?: number
           zona?: string | null
@@ -42,10 +48,13 @@ export type Database = {
         Update: {
           creado_en?: string
           fila_remota_activa?: boolean
+          fila_remota_reanudada_en?: string | null
           horario?: Json | null
           id?: string
           max_fila?: number
           nombre?: string
+          pausa_automatica_en?: string | null
+          pico_turnos?: number
           slug?: string
           tolerancia_min?: number
           zona?: string | null

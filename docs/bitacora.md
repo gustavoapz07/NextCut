@@ -356,3 +356,24 @@ Cada cambio del proyecto queda aquí, enlazado al documento que afecta. El grafo
   - que ni el público ni el personal pueden ejecutar las funciones.
 - **En la nube:** la única fila vieja era un turno de prueba del 31/10 en la Barbería Prueba. La primera corrida (1:01 a. m. del 02/11) lo cierra como abandono.
 - **Anotado:** el hash de la IP de cada turno no se borra. La base no deja editar un turno cerrado salvo para quitarle el teléfono, así que borrarlo necesita cambiar esa regla. Queda para la revisión de antiabuso.
+
+## 2026-11-02 · La fila en línea se pausa sola ante un pico
+
+- **Qué:** si entran 10 turnos en línea en 5 minutos, la fila en línea se pausa sola y el resumen del dueño lo avisa. Los turnos del QR de la puerta no cuentan y siguen entrando. Las reglas están en [ADR-015](decisiones.md#adr-015--pausa-automática-de-la-fila-en-línea-ante-picos).
+- **Base** (migración `20261102125411_pausa_automatica.sql`):
+  - columnas nuevas en `barberias`: `pico_turnos` (10 por omisión, de 3 a 100), `pausa_automatica_en` y `fila_remota_reanudada_en`;
+  - el trigger `turnos_pausar_ante_pico` cuenta los turnos en línea de los últimos 5 minutos después de cada uno. Al llegar al límite pausa la fila en línea y deja el evento `pausa_automatica` en la bitácora del turno;
+  - `pausar_fila_remota` borra la marca de pausa automática y, al abrir, reinicia el conteo.
+- **Panel del dueño:** en el resumen aparece un recuadro con la hora de la pausa ("La fila en línea se pausó sola a las 9:03 a. m."), qué pasó y un botón para abrirla. En Configuración → Reglas de la fila hay un deslizador para el límite (de 3 a 50 turnos).
+- **Pruebas:**
+  - 24 de pgTAP nuevas (`08_pausa_automatica`), que pasan en la nube;
+  - 7 de Vitest nuevas (293 en total).
+  - `03_funciones` sube el límite de su barbería a 100: anota más de 10 turnos en línea seguidos para probar el límite por IP y la fila llena, y la pausa los habría tapado.
+- **Probado en vivo** por la Edge Function real, con la Barbería Prueba y el límite en 3:
+  - entraron 3 turnos en línea y el 4.º recibió 409 `fila_remota_pausada`;
+  - el del local entró igual y la página publicada mostró "La fila en línea está pausada";
+  - la bitácora guardó la pausa en el 3.er turno.
+  - Después se cancelaron los 4 turnos de prueba y la barbería volvió a 10 con la fila abierta. El evento de la pausa sigue en la bitácora, porque no se borra.
+- **Hallazgo en la CI:** Vitest fallaba en GitHub desde `cd26a47` (31/10), aunque pasaba en local. `configuracion.test.ts` importaba el cliente de Supabase, que se detiene sin `.env.local`, y la CI no lo tiene. Se arregló simulando el cliente (commit `916225a`). Las pruebas de la base sí pasaban en la CI, incluidas las del cierre del día.
+- **Cierre del día en la nube:** la primera corrida (1:01 a. m. del 02/11) cerró el turno de prueba que esperaba desde el 31/10, y desde entonces corre cada hora sin errores. El borrado de las 3:40 a. m. también corrió.
+- **Falta:** avisarle al dueño por push o por correo, y la prueba de carga de 50 turnos en un minuto.

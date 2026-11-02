@@ -11,7 +11,14 @@ type Tablas = Database["public"]["Tables"];
 
 export type BarberiaDueno = Pick<
   Tablas["barberias"]["Row"],
-  "id" | "nombre" | "slug" | "zona" | "zona_horaria" | "fila_remota_activa"
+  | "id"
+  | "nombre"
+  | "slug"
+  | "zona"
+  | "zona_horaria"
+  | "fila_remota_activa"
+  | "pausa_automatica_en"
+  | "pico_turnos"
 >;
 export type BarberoDueno = Pick<Tablas["barberos"]["Row"], "id" | "nombre" | "silla" | "en_pausa">;
 export type TurnoDueno = Pick<
@@ -19,7 +26,8 @@ export type TurnoDueno = Pick<
   "id" | "numero" | "nombre" | "barbero_id" | "origen" | "estado" | "oculto" | "creado_en"
 >;
 
-const COLUMNAS_BARBERIA = "id, nombre, slug, zona, zona_horaria, fila_remota_activa";
+const COLUMNAS_BARBERIA =
+  "id, nombre, slug, zona, zona_horaria, fila_remota_activa, pausa_automatica_en, pico_turnos";
 
 export type ResultadoBarberia =
   | { tipo: "listo"; barberia: BarberiaDueno }

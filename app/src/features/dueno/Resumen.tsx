@@ -1,3 +1,4 @@
+import { horaLegible, momentoEn } from "@shared/horario";
 import {
   Check,
   Clock,
@@ -7,6 +8,7 @@ import {
   Pencil,
   QrCode,
   Scissors,
+  ShieldAlert,
   Smartphone,
   Target,
   Users,
@@ -72,6 +74,8 @@ interface VistaResumen {
   remota: boolean;
   /** El cambio de la fila remota va en camino. */
   cambiandoRemota: boolean;
+  /** La fila en línea se pausó sola por un pico: a qué hora y con cuántos turnos. */
+  pausaAutomatica: { hora: string; turnos: number } | null;
   indicadores: Indicador[];
   porBarbero: Array<{
     clave: string;
@@ -118,6 +122,15 @@ function vistaReal(datos: DatosResumen, ahora: Date): Omit<VistaResumen, "cambia
   return {
     slug: barberia.slug,
     remota: barberia.fila_remota_activa,
+    pausaAutomatica:
+      !barberia.fila_remota_activa && barberia.pausa_automatica_en
+        ? {
+            hora: horaLegible(
+              momentoEn(new Date(barberia.pausa_automatica_en), barberia.zona_horaria).hora,
+            ),
+            turnos: barberia.pico_turnos,
+          }
+        : null,
     indicadores: [
       {
         titulo: "Atendidos",
@@ -263,6 +276,7 @@ function ResumenPrototipo() {
     slug: barberiaPrototipo.slug,
     remota,
     cambiandoRemota: false,
+    pausaAutomatica: null,
     indicadores: [
       {
         titulo: "Atendidos",
@@ -399,6 +413,14 @@ function PantallaResumen({ vista, acciones }: { vista: VistaResumen; acciones: A
         </button>
       </header>
 
+      {vista.pausaAutomatica && (
+        <AlertaPico
+          alerta={vista.pausaAutomatica}
+          cambiando={vista.cambiandoRemota}
+          alAbrir={acciones.alternarRemota}
+        />
+      )}
+
       <section
         aria-label="Indicadores del día"
         className="mt-8 grid grid-cols-2 gap-3 lg:grid-cols-3"
@@ -487,6 +509,44 @@ function PantallaResumen({ vista, acciones }: { vista: VistaResumen; acciones: A
         ocultar={acciones.ocultar}
       />
     </div>
+  );
+}
+
+/** Aviso al dueño: la fila en línea se pausó sola porque entraron demasiados turnos de golpe. */
+function AlertaPico({
+  alerta,
+  cambiando,
+  alAbrir,
+}: {
+  alerta: NonNullable<VistaResumen["pausaAutomatica"]>;
+  cambiando: boolean;
+  alAbrir: () => void;
+}) {
+  return (
+    <section
+      role="alert"
+      className="mt-6 flex flex-col gap-4 rounded-[1.75rem] bg-tinta p-5 text-fondo sm:flex-row sm:items-center"
+    >
+      <ShieldAlert className="size-9 shrink-0 text-poste-rojo" aria-hidden="true" />
+      <div className="min-w-0 flex-1">
+        <h2 className="font-display text-2xl leading-none font-extrabold uppercase">
+          La fila en línea se pausó sola a las {alerta.hora}
+        </h2>
+        <p className="mt-2 text-sm opacity-80">
+          Entraron {alerta.turnos} turnos en línea en menos de 5 minutos. Revisa la fila de abajo:
+          si son clientes de verdad, ábrela otra vez. En el local se siguen anotando con el QR de la
+          puerta.
+        </p>
+      </div>
+      <button
+        type="button"
+        disabled={cambiando}
+        onClick={alAbrir}
+        className="shrink-0 rounded-full bg-fondo px-5 py-3 font-semibold text-tinta disabled:opacity-60"
+      >
+        Abrir la fila en línea
+      </button>
+    </section>
   );
 }
 

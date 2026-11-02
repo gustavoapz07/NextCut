@@ -9,9 +9,11 @@ insert into auth.users (id, email) values
   ('d0000000-0000-4000-8000-0000000000a2', 'ana@funciones.test'),
   ('d0000000-0000-4000-8000-0000000000a3', 'beto@funciones.test');
 
-insert into public.barberias (id, nombre, slug, max_fila) values
-  ('d1000000-0000-4000-8000-00000000000a', 'Funciones A', 'funciones-a', 50),
-  ('d1000000-0000-4000-8000-00000000000b', 'Funciones B', 'funciones-b', 50);
+-- Aquí se anotan muchos turnos en línea seguidos: la pausa automática ante picos se prueba en
+-- 08_pausa_automatica y no debe estorbar.
+insert into public.barberias (id, nombre, slug, max_fila, pico_turnos) values
+  ('d1000000-0000-4000-8000-00000000000a', 'Funciones A', 'funciones-a', 50, 100),
+  ('d1000000-0000-4000-8000-00000000000b', 'Funciones B', 'funciones-b', 50, 100);
 
 insert into public.miembros (user_id, barberia_id, rol) values
   ('d0000000-0000-4000-8000-0000000000a1', 'd1000000-0000-4000-8000-00000000000a', 'dueno'),

@@ -681,7 +681,16 @@ function ReglasReales({ datos, cambiar }: { datos: DatosConfig; cambiar: Cambiar
         </div>
       </Tarjeta>
       <Tarjeta titulo="Protección" texto="Siempre activas: cuidan la fila de abusos.">
-        <ul className="grid gap-2">
+        <Deslizador
+          etiqueta="Pausa automática ante picos"
+          texto="Si entran tantos turnos en línea en 5 minutos, la fila en línea se pausa sola y te avisamos en el resumen."
+          valor={datos.barberia.pico_turnos}
+          min={3}
+          max={50}
+          unidad="turnos"
+          onCambio={(pico_turnos) => campo({ pico_turnos })}
+        />
+        <ul className="mt-3 grid gap-2">
           {PROTECCIONES.map((p) => (
             <li
               key={p.titulo}

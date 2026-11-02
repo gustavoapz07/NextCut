@@ -28,7 +28,7 @@ returns jsonb language sql as $$
 $$;
 create function pg_temp.barberia(p_id uuid) returns public.barberias language sql as $$
   select * from public.barberias where id = p_id
-$;
+$$;
 
 -- ── El límite ──────────────────────────────────────────────────────────────────────────────
 select is(

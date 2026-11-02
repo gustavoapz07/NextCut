@@ -5,8 +5,11 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router/dom";
+import { iniciarErrores } from "./lib/errores";
 import { rutas } from "./router";
 import "./index.css";
+
+iniciarErrores();
 
 const raiz = document.getElementById("root");
 if (!raiz) throw new Error("No existe el elemento #root en index.html");

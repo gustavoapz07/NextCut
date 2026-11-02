@@ -1,20 +1,20 @@
 {
   "README.md": {
-    "mtime": 1793625570.6072896,
-    "seen": 1793625580.9201531,
-    "ast_hash": "cb9a333847b0566483f9f16e54a7c579",
+    "mtime": 1793627628.6326811,
+    "seen": 1793627639.191516,
+    "ast_hash": "0e6957e70b52b6ae71b621631ca7ff93",
     "semantic_hash": ""
   },
   "docs/bitacora.md": {
-    "mtime": 1793625570.7129025,
-    "seen": 1793625580.9201577,
-    "ast_hash": "e1002abd8e83306da99ba49fb4dca8dc",
+    "mtime": 1793627628.6326811,
+    "seen": 1793627639.1915183,
+    "ast_hash": "0285d384e2e38cbf7a70c32a257fff23",
     "semantic_hash": ""
   },
   "docs/decisiones.md": {
-    "mtime": 1793624701.4171846,
-    "seen": 1793624721.6073794,
-    "ast_hash": "95b5e623db6d183fa61b7c7c2c723126",
+    "mtime": 1793627628.6187706,
+    "seen": 1793627639.1915205,
+    "ast_hash": "39dc375cfe00e4c49968d588ec24b13f",
     "semantic_hash": ""
   },
   "docs/investigacion.md": {
@@ -24,9 +24,9 @@
     "semantic_hash": "a03e6054d92f2b3847ff257819adb86d"
   },
   "docs/seguridad.md": {
-    "mtime": 1793625570.6072896,
-    "seen": 1793625580.9201748,
-    "ast_hash": "87961ca5dc4a5d6223b55fff721aa2e6",
+    "mtime": 1793627628.6208951,
+    "seen": 1793627639.1915276,
+    "ast_hash": "f8be0eb727650347c640f363b7d29011",
     "semantic_hash": ""
   },
   "docs/validacion-campo.md": {
@@ -36,15 +36,15 @@
     "semantic_hash": "fce8b9c4ac2e58b20c5f98526ae1e804"
   },
   "docs/plan-implementacion.md": {
-    "mtime": 1793625570.6062858,
-    "seen": 1793625580.9201715,
-    "ast_hash": "ba6e339fd054fedcc306db634e724c55",
+    "mtime": 1793627628.6208951,
+    "seen": 1793627639.1915252,
+    "ast_hash": "3be38cb3ab9778432a4eb8cbc74bdbc8",
     "semantic_hash": ""
   },
   "app/src/components/ErrorDeRuta.tsx": {
-    "mtime": 1793105646.8680816,
-    "seen": 1793105988.8134463,
-    "ast_hash": "b88161836d07423cfdd65e7d231189f7",
+    "mtime": 1793627448.354064,
+    "seen": 1793627639.1912458,
+    "ast_hash": "cfbaf8fd427947f69d2b27beb99c2954",
     "semantic_hash": ""
   },
   "app/src/components/NoEncontrado.tsx": {
@@ -60,9 +60,9 @@
     "semantic_hash": ""
   },
   "app/src/main.tsx": {
-    "mtime": 1793105680.8893442,
-    "seen": 1793105988.813507,
-    "ast_hash": "084e95dd27c2d49f08b06a0b0befd472",
+    "mtime": 1793627448.354064,
+    "seen": 1793627639.1913798,
+    "ast_hash": "b687084dee9bc969ddec1df7c6dfbd4b",
     "semantic_hash": ""
   },
   "app/src/router.test.tsx": {
@@ -651,6 +651,60 @@
     "mtime": 1793625475.6987245,
     "seen": 1793625580.9200034,
     "ast_hash": "454e583b4ef71666246971e75cb00c7e",
+    "semantic_hash": ""
+  },
+  "app/src/lib/errores.test.ts": {
+    "mtime": 1793627396.861689,
+    "seen": 1793627639.19134,
+    "ast_hash": "bf64fd547630c32bb374b5fc8841ac80",
+    "semantic_hash": ""
+  },
+  "app/src/lib/errores.ts": {
+    "mtime": 1793627466.7144904,
+    "seen": 1793627639.1913426,
+    "ast_hash": "a9bbb21177f0afc9acfd1113f295b81d",
+    "semantic_hash": ""
+  },
+  "app/src/lib/sentry.ts": {
+    "mtime": 1793627466.5725417,
+    "seen": 1793627639.1913567,
+    "ast_hash": "278a71247d3a8da71ce9ec1fefc817e8",
+    "semantic_hash": ""
+  },
+  "supabase/functions/_shared/salud.test.ts": {
+    "mtime": 1793627173.8100674,
+    "seen": 1793627639.1914394,
+    "ast_hash": "d75ab3f1af086b4f9be0d69b357da56e",
+    "semantic_hash": ""
+  },
+  "supabase/functions/_shared/salud.ts": {
+    "mtime": 1793627146.0394628,
+    "seen": 1793627639.191441,
+    "ast_hash": "1f18fbb7b9c8f525134a15bbf6b276b3",
+    "semantic_hash": ""
+  },
+  "supabase/functions/salud/deno.json": {
+    "mtime": 1793627148.6596594,
+    "seen": 1793627639.1914566,
+    "ast_hash": "ade40ccf61304df2683e04c96dbeaa38",
+    "semantic_hash": ""
+  },
+  "supabase/functions/salud/index.ts": {
+    "mtime": 1793627148.7622726,
+    "seen": 1793627639.1914587,
+    "ast_hash": "2c505fe69618bb6a6de14d37054d5fdc",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/20261102134455_salud.sql": {
+    "mtime": 1793627094.594144,
+    "seen": 1793627639.1914809,
+    "ast_hash": "8229056c29b3c84c0aa73118bdf945be",
+    "semantic_hash": ""
+  },
+  "supabase/tests/database/09_salud.test.sql": {
+    "mtime": 1793627112.6795392,
+    "seen": 1793627639.1915028,
+    "ast_hash": "27ed699cf04291b1838b8dd60ed16a6b",
     "semantic_hash": ""
   }
 }

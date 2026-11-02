@@ -51,7 +51,7 @@ Versiones vigentes al 26/10/2026 (consultadas en npm). Las exactas quedan fijada
 | Hosting | Cloudflare Workers (recursos estáticos) | Wrangler 4 | Cloudflare recomienda Workers para proyectos nuevos ([ADR-005](decisiones.md#adr-005--hosting-en-cloudflare-workers-en-lugar-de-pages)) |
 | Antibots | Cloudflare Turnstile | — | Gratis y sin rompecabezas para el cliente |
 | Correo de Auth | Resend (SMTP) | — | El SMTP incluido en Supabase solo manda unos pocos correos por hora; Resend da 3,000 al mes gratis |
-| Errores | Sentry (React) | 11 | Errores del frontend sin datos personales |
+| Errores | Sentry (React) | 11.8 | Errores del frontend sin datos personales; se descarga solo si hay DSN ([ADR-016](decisiones.md#adr-016--sentry-bajo-demanda-y-endpoint-de-salud-con-el-reloj-de-pg_cron)) |
 | Fechas y horas | API `Intl` del navegador | — | Zona `America/Tegucigalpa` sin librerías extra |
 | QR | qrcode.react | 4.2 | QR imprimible desde el panel del dueño |
 
@@ -284,7 +284,7 @@ No construye funciones del producto. Prepara el entorno y prueba lo que podría 
 - [x] Reporte del día: atendidos por barbero, ingresos registrados, espera promedio, error del estimado, abandonos y horas pico (`/dueno`, con `reporte_dia`, 31/10/2026).
 - [x] Antiabuso: un turno activo por teléfono, 5 turnos por IP cada 10 minutos, pausa automática ante picos y alerta al dueño. La pausa y la alerta quedaron el 02/11/2026: 10 turnos en línea en 5 minutos pausan la fila en línea y el resumen del dueño lo avisa ([ADR-015](decisiones.md#adr-015--pausa-automática-de-la-fila-en-línea-ante-picos)). Falta avisarle por push o por correo.
 - [x] `cerrar_dia()` y `borrar_telefonos_viejos()` con `pg_cron`: el cierre cada hora y el borrado cada día a las 3:40 a. m. (migración `20261102060131_cierre_y_borrado`, 02/11/2026).
-- [ ] Sentry sin datos personales, endpoint `salud` y monitor de UptimeRobot.
+- [ ] Sentry sin datos personales, endpoint `salud` y monitor de UptimeRobot. Avance del 02/11/2026: la Edge Function `salud` está publicada y Sentry está listo sin datos personales, bajo demanda ([ADR-016](decisiones.md#adr-016--sentry-bajo-demanda-y-endpoint-de-salud-con-el-reloj-de-pg_cron)). Falta crear el proyecto de Sentry (su DSN va en `.env.pruebas`) y el monitor de UptimeRobot.
 - [x] Prueba de carga: 50 intentos en un minuto; pasan como máximo los permitidos y salta la alerta. Desde 50 IPs a la vez entran 10 y salta la pausa con su alerta; desde una sola, entran 5 (`scripts/carga.mjs`, en la CI). Contra la Edge Function publicada, desde una IP y con encabezados de IP falsos, entraron 5 de 50 (`scripts/carga-api.mjs`, 02/11/2026).
 - [ ] Revisión del Security Advisor de Supabase y búsqueda de `sb_secret` en el build de producción.
 - [ ] Despliegue a producción y carga de la barbería piloto.

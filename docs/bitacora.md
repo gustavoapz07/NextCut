@@ -390,3 +390,21 @@ Cada cambio del proyecto queda aquí, enlazado al documento que afecta. El grafo
   - Los 5 quedaron con el mismo hash de IP, así que las IP falsas no sirvieron. El script canceló los 5 al final.
 - **CI:** con el arreglo de la prueba de la pausa automática (`2ca90d9`) los tres trabajos de la CI quedaron en verde por primera vez desde el 31/10.
 - **Seguridad:** el fallo 9 pasa a 🟩 y la prueba de carga sale de los pendientes antes del piloto.
+
+## 2026-11-02 · Endpoint de salud y Sentry sin datos personales
+
+- **Qué:** la Edge Function `salud` para UptimeRobot, y Sentry para los errores del frontend, listo para encenderse con un DSN. Las reglas están en [ADR-016](decisiones.md#adr-016--sentry-bajo-demanda-y-endpoint-de-salud-con-el-reloj-de-pg_cron).
+- **Salud:**
+  - migración `20261102134455_salud.sql`: `estado_salud()`, que solo puede llamar la clave secreta, dice si la base responde y si `vencer_tolerancia` corrió bien en los últimos 3 minutos;
+  - Edge Function `salud` (versión 1, sin JWT), con la lógica en `supabase/functions/_shared/salud.ts`. Responde 200 o 503, acepta GET y HEAD, espera 5 segundos como máximo y no da detalles del error;
+  - probada en la nube: GET dio 200 con `{"estado":"ok","base":"ok","tareas":"ok"}` en 1,4 segundos, HEAD dio 200 sin cuerpo y POST dio 405.
+- **Sentry** (`@sentry/react` 11.8.0, la versión más nueva con más de dos semanas):
+  - `app/src/lib/errores.ts` no carga nada sin `VITE_SENTRY_DSN`. Con DSN baja el SDK cuando la página termina de cargar o con el primer error de una ruta, y `ErrorDeRuta` reporta los errores de las rutas;
+  - cada evento sale sin usuario, IP, cookies, encabezados ni parámetros de URL. Los códigos de turno pasan a `/t/:codigo`, los teléfonos y correos se reemplazan, y se descartan las migas de clics y de consola;
+  - **hallazgo:** con `import("@sentry/react")` el archivo de Sentry pesaba 148 KB comprimido, porque traía el SDK entero (grabación de sesiones, trazas). `app/src/lib/sentry.ts` solo exporta `init` y `captureException`, y bajó a 30 KB. La carga inicial creció medio KB;
+  - en la versión publicada (`6d1465e4`), sin DSN, la página no hizo ninguna petición a Sentry ni mostró errores en la consola.
+- **Pruebas:** 24 de Vitest nuevas (317 en total): 8 de `salud` y 16 de la limpieza de errores. También 5 de pgTAP (`09_salud`), que pasan en la nube.
+- **Dependencias:** `npm audit` no encuentra vulnerabilidades en las de producción. Las 3 que reporta son de `wrangler` (herramienta de despliegue) y ya estaban.
+- **Falta (lo hace Gus):**
+  - crear el proyecto de React en Sentry, poner su DSN en `.env.pruebas` y activar "Prevent Storing of IP Addresses";
+  - crear el monitor de UptimeRobot con la URL de `salud`, cada 5 minutos.

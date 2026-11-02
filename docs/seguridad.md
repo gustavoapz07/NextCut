@@ -70,6 +70,7 @@ Antes de la lista general, estos son los abusos más probables en este producto:
 - **Riesgo:** exponer teléfonos o hábitos de los clientes.
 - **Controles:**
   - Se pide lo mínimo: nombre y, opcional, teléfono.
+  - Los errores que van a Sentry salen sin IP, usuario, cookies, encabezados, códigos de turno, teléfonos ni correos, y sin las migas de clics y de consola (`app/src/lib/errores.ts`).
   - La vista pública y la TV muestran "Carlos M." y el número de turno.
   - El teléfono solo lo ve el personal de esa barbería.
   - El teléfono de cada turno cerrado se borra 90 días después de esa visita: `borrar_telefonos_viejos()` corre cada día a las 3:40 a. m. con `pg_cron` (plazo propuesto, a confirmar con los dueños). Un turno abierto conserva el teléfono hasta que se cierre.
@@ -113,12 +114,12 @@ Antes de la lista general, estos son los abusos más probables en este producto:
   - `scripts/carga.mjs` (en la CI, contra la base): 50 intentos a la vez desde 50 IPs distintas dejan entrar 10, pausan la fila en línea y dejan una sola alerta; desde una IP entran 5.
   - `scripts/carga-api.mjs` (a mano, contra la Edge Function publicada): el 02/11/2026, 50 intentos en 10 segundos desde una IP, cada uno con `x-forwarded-for` y `x-real-ip` falsos. Entraron 5 y 45 recibieron `limite_ip`; los 5 quedaron con el mismo hash de IP.
 
-### 10. Monitoreo, logs y alertas · 🟨 (bitácora y alerta de pico probadas; faltan Sentry y el endpoint de salud)
+### 10. Monitoreo, logs y alertas · 🟨 (bitácora, alerta de pico y endpoint de salud probados; Sentry listo sin datos personales; faltan la cuenta de Sentry y el monitor de UptimeRobot)
 
 - **Controles:**
   - Tabla `eventos_turno` como bitácora de solo inserción (quién, qué y cuándo).
-  - Sentry para errores del frontend.
-  - Monitor de disponibilidad gratuito sobre un endpoint de salud.
+  - Sentry para errores del frontend, bajo demanda y sin datos personales ([ADR-016](decisiones.md#adr-016--sentry-bajo-demanda-y-endpoint-de-salud-con-el-reloj-de-pg_cron)).
+  - Monitor de disponibilidad gratuito sobre la Edge Function `salud`. Responde 503 si la base no contesta o si el reloj de pg_cron lleva más de 3 minutos sin correr (`09_salud`, pgTAP).
   - Alertas al dueño: pico anómalo de turnos y fila remota pausada. Por ahora en el resumen del panel; todavía no por push ni por correo.
   - Revisión semanal de los logs y de los avisos del Security Advisor de Supabase.
 - **Prueba:** provocar un pico y un error; deben aparecer en los logs y llegar la alerta.

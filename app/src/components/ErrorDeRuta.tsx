@@ -1,8 +1,13 @@
-import { Link } from "react-router";
+import { useEffect } from "react";
+import { Link, useRouteError } from "react-router";
+import { reportarError } from "@/lib/errores";
 import { Franjas } from "./Franjas";
 
-// Mensaje genérico para el usuario; el detalle del error irá a Sentry (fallo 8 de docs/seguridad.md).
+// Mensaje genérico para el usuario; el detalle del error va a Sentry, limpio de datos personales
+// (fallos 5 y 8 de docs/seguridad.md).
 export function ErrorDeRuta() {
+  const error = useRouteError();
+  useEffect(() => reportarError(error), [error]);
   return (
     <main
       role="alert"

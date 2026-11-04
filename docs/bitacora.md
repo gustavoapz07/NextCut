@@ -408,3 +408,21 @@ Cada cambio del proyecto queda aquí, enlazado al documento que afecta. El grafo
 - **Falta (lo hace Gus):**
   - crear el proyecto de React en Sentry, poner su DSN en `.env.pruebas` y activar "Prevent Storing of IP Addresses";
   - crear el monitor de UptimeRobot con la URL de `salud`, cada 5 minutos.
+
+## 2026-11-04 · Security Advisor y revisión del build
+
+- **Qué:** la penúltima tarea del Sprint 4: revisar el Security Advisor de Supabase y buscar claves secretas en el build de producción. El fallo 1 de [seguridad](seguridad.md) pasa a 🟩.
+- **Security Advisor** (`siguiente-pruebas`), sin hallazgos nuevos en la base:
+  - las 4 funciones que ejecuta el público (`fila_publica`, `ver_turno`, `cancelar_turno`, `suscribir_push`) y las 9 del personal son las de [ADR-011](decisiones.md#adr-011--detalles-de-la-base-de-datos-del-sprint-1), punto 8. Las 9 del personal revisan el permiso por dentro;
+  - `suscripciones_push` sin políticas, también aceptado ahí;
+  - revisado a mano: las 9 funciones internas de `public` (`unirse_a_fila`, `cerrar_dia`, `estado_salud`…) solo las ejecuta la clave secreta, todas tienen `search_path` vacío, las 7 tablas tienen RLS y el público no lee ninguna. De `privado`, el personal solo ejecuta `es_miembro` y `es_dueno`, que usan las políticas;
+  - **aviso nuevo de Auth:** la protección contra contraseñas filtradas (HaveIBeenPwned) está apagada. Solo existe en el plan Pro, así que queda para cuando se pague Pro;
+  - rendimiento: dos índices sin uso (`miembros_barberia_idx`, `turnos_servicio_idx`). Se quedan: sirven a las llaves foráneas y el proyecto de pruebas casi no tiene tráfico.
+- **Hallazgo en la CI:** el paso "El build no contiene claves secretas" pasaba sin revisar nada útil.
+  - La CI compila sin `VITE_SUPABASE_URL`, `supabase.ts` lanza el error al cargar y Vite quita `supabase-js` entero (unos 200 KB). El build revisado no era el que se publica.
+  - Con las variables reales, el mismo `grep "sb_secret_"` habría fallado: `supabase-js` trae ese texto para reconocer el prefijo de las claves.
+- **`scripts/revisar-build.mjs`** (`npm run revisar:build`) reemplaza el `grep`. Busca claves `sb_secret_` completas, JWT con rol `service_role`, llaves privadas PEM, archivos `.map` y el valor de cada variable sin prefijo `VITE_` de los `.env` (por ejemplo la clave del barbero de prueba). Nunca imprime lo que encuentra.
+  - Corre en la CI, ahora con un build que lleva valores de ejemplo para que incluya `supabase-js`, y dentro de `npm run check`, `npm run deploy` y `npm run deploy:pruebas`: si encuentra algo, no se publica.
+  - Probado con los builds `production` y `pruebas` reales (39 archivos, sin hallazgos) y con uno al que se le plantaron una clave y un `.map` (3 fallas).
+- **Pruebas:** 8 de Vitest nuevas (325 en total).
+- **Falta (lo decide Gus):** en `supabase/config.toml` las contraseñas piden 6 caracteres como mínimo y sin requisitos, y el registro público de cuentas está encendido; falta mirar si la nube tiene lo mismo (Authentication → Sign In / Providers). Una cuenta nueva no ve nada sin membresía, pero conviene subir el mínimo y apagar el registro cuando lleguen las invitaciones por correo.

@@ -27,7 +27,7 @@ Antes de la lista general, estos son los abusos más probables en este producto:
 
 ## Los 10 fallos
 
-### 1. API keys en el código · 🟦
+### 1. API keys en el código · 🟩 (gitleaks y revisión del build en la CI, 04/11/2026)
 
 - **Riesgo:** subir al repositorio la clave secreta de Supabase o de Turnstile da control total de la base.
 - **Controles:**
@@ -36,18 +36,18 @@ Antes de la lista general, estos son los abusos más probables en este producto:
   - `.env*` en `.gitignore`, con un `.env.example` sin valores.
   - `gitleaks` en pre-commit y en CI; escaneo de secretos de GitHub activado.
   - Si una clave se filtra, se rota de inmediato y se registra en la bitácora.
-- **Prueba:** `gitleaks detect` pasa en CI. Buscar en el build de producción que no aparezca `service_role` ni `sb_secret`.
+- **Prueba:** `gitleaks detect` pasa en CI. `scripts/revisar-build.mjs` (`npm run revisar:build`) revisa `dist/` en la CI y antes de cada `npm run deploy`: claves `sb_secret_…`, JWT con rol `service_role`, llaves privadas PEM, archivos `.map` y el valor de cada variable sin prefijo `VITE_` de los `.env`. Busca la clave, no el prefijo, porque `supabase-js` trae el texto `sb_secret_` para reconocer las claves.
 
 ### 2. Endpoints expuestos en la web pública · 🟩
 
 - **Riesgo:** con la API de Supabase, cualquier tabla sin RLS queda abierta a internet.
 - **Controles:**
   - RLS activo en **todas** las tablas, con denegación por defecto.
-  - El público (rol `anon`) no toca tablas. Solo puede ejecutar `ver_turno(codigo)`, `cancelar_turno(codigo, secreto)` y `suscribir_push(codigo, secreto, suscripcion)`, además de leer la vista `fila_publica`, que no tiene teléfonos ni nombres completos.
+  - El público (rol `anon`) no toca tablas. Solo puede ejecutar `fila_publica(slug)`, que no devuelve teléfonos ni nombres completos ([ADR-011](decisiones.md#adr-011--detalles-de-la-base-de-datos-del-sprint-1)), `ver_turno(codigo)`, `cancelar_turno(codigo, secreto)` y `suscribir_push(codigo, secreto, suscripcion)`.
   - Para anotarse, el formulario llama a la Edge Function `unirse-a-fila`, que verifica Turnstile y el límite por IP y solo entonces ejecuta `unirse_a_fila` con la clave secreta. Así nadie se salta Turnstile llamando a la API ([ADR-007](decisiones.md#adr-007--anotarse-pasa-por-una-edge-function-y-el-tiempo-real-solo-manda-señales)).
   - El tiempo real solo publica una señal vacía ("la fila cambió") en un canal público; los datos se vuelven a pedir con los permisos de cada pantalla.
   - `codigo_publico` aleatorio de al menos 10 caracteres; el número que se ve en la TV es aparte y no sirve para nada.
-  - Revisión con el Security Advisor de Supabase antes de cada despliegue.
+  - Revisión con el Security Advisor de Supabase antes de cada despliegue. La del 04/11/2026 solo marcó lo aceptado en [ADR-011](decisiones.md#adr-011--detalles-de-la-base-de-datos-del-sprint-1) (las 4 funciones públicas, las 9 del personal y `suscripciones_push` sin políticas) y la protección contra contraseñas filtradas, que solo existe en el plan Pro.
 - **Prueba (pgTAP):** `anon` no puede hacer `select` en `turnos`; un usuario de la barbería A no lee ni modifica filas de la barbería B.
 
 ### 3. Input sin validar · 🟩 (base, Edge Function, formulario y prueba de punta a punta del 28/10/2026)

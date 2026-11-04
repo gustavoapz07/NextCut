@@ -47,15 +47,16 @@ jobs:
       - name: Pruebas unitarias (Vitest)
         run: npm run test
 
+      # Valores de ejemplo, no secretos: sin ellos Vite quita supabase-js del build y la revisión
+      # de abajo miraría un build distinto al que se publica.
       - name: Build
         run: npm run build
+        env:
+          VITE_SUPABASE_URL: https://ejemplo.supabase.co
+          VITE_SUPABASE_PUBLISHABLE_KEY: sb_publishable_ci
 
       - name: El build no contiene claves secretas (fallo 1)
-        run: |
-          if grep -rEl "sb_secret_|service_role" dist/; then
-            echo "::error::El build contiene una clave secreta o una referencia a service_role."
-            exit 1
-          fi
+        run: npm run revisar:build
 
   base:
     name: Base de datos (pgTAP y concurrencia)

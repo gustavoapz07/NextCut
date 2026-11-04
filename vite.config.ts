@@ -22,7 +22,11 @@ export default defineConfig({
   },
   test: {
     dir: raiz("."),
-    include: ["app/src/**/*.test.{ts,tsx}", "supabase/functions/_shared/**/*.test.ts"],
+    include: [
+      "app/src/**/*.test.{ts,tsx}",
+      "supabase/functions/_shared/**/*.test.ts",
+      "scripts/**/*.test.mjs",
+    ],
     environment: "jsdom",
     setupFiles: [raiz("./app/src/test/setup.ts")],
   },

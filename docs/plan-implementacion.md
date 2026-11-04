@@ -286,7 +286,7 @@ No construye funciones del producto. Prepara el entorno y prueba lo que podría 
 - [x] `cerrar_dia()` y `borrar_telefonos_viejos()` con `pg_cron`: el cierre cada hora y el borrado cada día a las 3:40 a. m. (migración `20261102060131_cierre_y_borrado`, 02/11/2026).
 - [ ] Sentry sin datos personales, endpoint `salud` y monitor de UptimeRobot. Avance del 02/11/2026: la Edge Function `salud` está publicada y Sentry está listo sin datos personales, bajo demanda ([ADR-016](decisiones.md#adr-016--sentry-bajo-demanda-y-endpoint-de-salud-con-el-reloj-de-pg_cron)). Falta crear el proyecto de Sentry (su DSN va en `.env.pruebas`) y el monitor de UptimeRobot.
 - [x] Prueba de carga: 50 intentos en un minuto; pasan como máximo los permitidos y salta la alerta. Desde 50 IPs a la vez entran 10 y salta la pausa con su alerta; desde una sola, entran 5 (`scripts/carga.mjs`, en la CI). Contra la Edge Function publicada, desde una IP y con encabezados de IP falsos, entraron 5 de 50 (`scripts/carga-api.mjs`, 02/11/2026).
-- [ ] Revisión del Security Advisor de Supabase y búsqueda de `sb_secret` en el build de producción.
+- [x] Revisión del Security Advisor de Supabase y búsqueda de `sb_secret` en el build de producción (04/11/2026). El Advisor solo marca lo aceptado en [ADR-011](decisiones.md#adr-011--detalles-de-la-base-de-datos-del-sprint-1) y la protección contra contraseñas filtradas (solo en Pro). El build se revisa con `scripts/revisar-build.mjs` en la CI y antes de cada despliegue.
 - [ ] Despliegue a producción y carga de la barbería piloto.
 
 **Salida:** los 10 fallos de [seguridad](seguridad.md) en 🟩 o ⬜, la lista de pendientes antes del piloto completa y la barbería piloto configurada con su QR impreso.

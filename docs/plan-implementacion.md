@@ -287,7 +287,7 @@ No construye funciones del producto. Prepara el entorno y prueba lo que podría 
 - [ ] Sentry sin datos personales, endpoint `salud` y monitor de UptimeRobot. Avance del 02/11/2026: la Edge Function `salud` está publicada y Sentry está listo sin datos personales, bajo demanda ([ADR-016](decisiones.md#adr-016--sentry-bajo-demanda-y-endpoint-de-salud-con-el-reloj-de-pg_cron)). Falta crear el proyecto de Sentry (su DSN va en `.env.pruebas`) y el monitor de UptimeRobot.
 - [x] Prueba de carga: 50 intentos en un minuto; pasan como máximo los permitidos y salta la alerta. Desde 50 IPs a la vez entran 10 y salta la pausa con su alerta; desde una sola, entran 5 (`scripts/carga.mjs`, en la CI). Contra la Edge Function publicada, desde una IP y con encabezados de IP falsos, entraron 5 de 50 (`scripts/carga-api.mjs`, 02/11/2026).
 - [x] Revisión del Security Advisor de Supabase y búsqueda de `sb_secret` en el build de producción (04/11/2026). El Advisor solo marca lo aceptado en [ADR-011](decisiones.md#adr-011--detalles-de-la-base-de-datos-del-sprint-1) y la protección contra contraseñas filtradas (solo en Pro). El build se revisa con `scripts/revisar-build.mjs` en la CI y antes de cada despliegue.
-- [ ] Despliegue a producción y carga de la barbería piloto.
+- [ ] Despliegue a producción y carga de la barbería piloto. Avance del 04/11/2026: listo todo lo que no necesita cuentas. Hay guía paso a paso ([produccion.md](produccion.md)), Worker aparte (`nextcut-produccion`), `npm run deploy:produccion` con revisión de variables, script de alta de la barbería y aviso de privacidad en `/privacidad`. El 05/11/2026 se creó `nextcut-produccion` con su base, funciones y Vault ([estado](produccion.md#estado-al-05112026)). Publicada el 05/11/2026 en `nextcut-produccion.gustavoapz07.workers.dev`, con Turnstile, secretos y Auth configurados. Falta dar de alta la barbería piloto.
 
 **Salida:** los 10 fallos de [seguridad](seguridad.md) en 🟩 o ⬜, la lista de pendientes antes del piloto completa y la barbería piloto configurada con su QR impreso.
 
@@ -375,8 +375,8 @@ Fuentes: [Supabase Pricing](https://supabase.com/pricing), [Cloudflare: migrar d
 ## 15. Decisiones pendientes
 
 - [ ] **Resultado de la validación de campo:** confirma o cambia el alcance de los sprints 2 a 4.
-- [ ] **Dominio:** `workers.dev` gratis o dominio propio, antes de imprimir el QR del piloto. Por ahora la versión de prueba vive en `nextcut.gustavoapz07.workers.dev`.
-- [ ] **Espacio para producción:** la cuenta de Supabase ya usa sus 2 proyectos gratuitos (`siguiente-pruebas` y `cms-opalo`). Antes del piloto hay que pausar otro proyecto o pagar Pro.
+- [x] **Dominio:** el autor eligió `workers.dev` (05/11/2026): producción vive en `nextcut-produccion.gustavoapz07.workers.dev`, sin costo. Si más adelante se compra un dominio propio, hay que reimprimir el QR de cada barbería.
+- [x] **Espacio para producción:** se pausó `cms-opalo` (05/11/2026) y se creó `nextcut-produccion` (`ctexofluhhsnsxenblgp`) en el plan gratuito.
 - [ ] **Plazo de borrado de teléfonos:** 90 días propuestos, a confirmar con los dueños ([fallo 5](seguridad.md#5-datos-sensibles--)).
 - [x] **Repositorio público o privado:** público, en [gustavoapz07/NextCut](https://github.com/gustavoapz07/NextCut), con los commits firmados con el correo privado de GitHub.
 - [ ] **Disponibilidad del nombre NextCut:** revisar dominio y marca antes de imprimir material ([ADR-009](decisiones.md#adr-009--nombre-del-producto-nextcut)).

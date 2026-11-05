@@ -19,7 +19,7 @@
     "test:watch": "vitest",
     "check": "npm run lint && npm run typecheck && npm run test && npm run build && npm run revisar:build",
     "supabase": "supabase",
-    "deploy": "npm run build && npm run revisar:build && wrangler deploy",
+    "deploy:produccion": "node scripts/revisar-produccion.mjs && vite build && npm run revisar:build && wrangler deploy --env produccion",
     "deploy:pruebas": "vite build --mode pruebas && npm run revisar:build && wrangler deploy",
     "revisar:build": "node scripts/revisar-build.mjs",
     "test:concurrencia": "node scripts/concurrencia.mjs",

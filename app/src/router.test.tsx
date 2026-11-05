@@ -70,6 +70,22 @@ describe("rutas", () => {
     expect(screen.getByRole("link", { name: "Ir al inicio" })).toHaveAttribute("href", "/");
   });
 
+  it("muestra el aviso de privacidad con el plazo de borrado del teléfono", async () => {
+    abrir("/privacidad");
+    expect(
+      await screen.findByRole("heading", { level: 1, name: "Aviso de privacidad" }),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/Se borra solo a los 90 días/)).toBeInTheDocument();
+  });
+
+  it("enlaza el aviso de privacidad desde el inicio", () => {
+    abrir("/");
+    expect(screen.getByRole("link", { name: "Aviso de privacidad" })).toHaveAttribute(
+      "href",
+      "/privacidad",
+    );
+  });
+
   it("no muestra la fila de una barbería que no existe", async () => {
     abrir("/b/no-existe");
     expect(

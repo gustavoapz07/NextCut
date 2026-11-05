@@ -424,3 +424,7 @@ verify_jwt = false
 # Solo la llama la base, con la clave de Vault en x-avisos-clave (no hay sesión que verificar).
 [functions.avisos]
 verify_jwt = false
+
+# La consulta UptimeRobot sin sesión; solo dice si la base y pg_cron responden (ADR-016).
+[functions.salud]
+verify_jwt = false

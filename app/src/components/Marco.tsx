@@ -13,6 +13,10 @@ import { Marca } from "./Marca";
 
 const AbrirMenu = createContext<() => void>(() => {});
 
+// En producción el logo lleva al inicio: los clientes de una barbería no tienen por qué ver el menú
+// con las pantallas de demostración. En desarrollo y en la versión de pruebas se queda.
+const conMenu = import.meta.env.MODE !== "production";
+
 export function MarcoPrototipo() {
   const navegacion = useNavigation();
   useVersionNueva(useLocation().pathname);
@@ -35,7 +39,7 @@ export function MarcoPrototipo() {
         )}
       </AnimatePresence>
       <Outlet />
-      <MenuPantallas abierto={abierto} onCerrar={cerrar} />
+      {conMenu && <MenuPantallas abierto={abierto} onCerrar={cerrar} />}
       <ScrollRestoration />
     </AbrirMenu.Provider>
   );
@@ -44,6 +48,13 @@ export function MarcoPrototipo() {
 /** El logo de los encabezados: al tocarlo abre el menú con todas las pantallas. */
 export function BotonMarca({ className }: { className?: string }) {
   const abrir = useContext(AbrirMenu);
+  if (!conMenu) {
+    return (
+      <Link to="/" aria-label="NextCut: ir al inicio" className="rounded-lg">
+        <Marca className={className} />
+      </Link>
+    );
+  }
   return (
     <button
       type="button"

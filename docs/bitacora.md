@@ -426,3 +426,52 @@ Cada cambio del proyecto queda aquí, enlazado al documento que afecta. El grafo
   - Probado con los builds `production` y `pruebas` reales (39 archivos, sin hallazgos) y con uno al que se le plantaron una clave y un `.map` (3 fallas).
 - **Pruebas:** 8 de Vitest nuevas (325 en total).
 - **Falta (lo decide Gus):** en `supabase/config.toml` las contraseñas piden 6 caracteres como mínimo y sin requisitos, y el registro público de cuentas está encendido; falta mirar si la nube tiene lo mismo (Authentication → Sign In / Providers). Una cuenta nueva no ve nada sin membresía, pero conviene subir el mínimo y apagar el registro cuando lleguen las invitaciones por correo.
+
+## 2026-11-04 · Producción lista para montarse y aviso de privacidad
+
+- **Qué:** todo lo de producción que no necesita cuentas nuevas, para instalar la barbería piloto en cuanto existan el proyecto de Supabase y el dominio. La guía completa está en [produccion.md](produccion.md).
+- **Aviso de privacidad** (`/privacidad`, `app/src/features/legal/Privacidad.tsx`):
+  - dice qué se guarda (nombre, teléfono opcional, el turno, el hash de la IP y la suscripción de avisos), para qué y cuánto dura, qué no se hace y qué servicios participan;
+  - el enlace está bajo el campo del teléfono, donde la persona da el dato, y abre en otra pestaña para no perder el formulario. También está en el pie del inicio;
+  - el contacto para pedir que se borren los datos sale de `VITE_CONTACTO_PRIVACIDAD`; sin él, la página remite a la barbería.
+- **Producción aparte de pruebas:**
+  - `wrangler.jsonc` tiene el entorno `produccion` (Worker `nextcut-produccion`). Antes, `npm run deploy` publicaba sobre el mismo Worker que pruebas. Ese comando se cambia por `npm run deploy:produccion`;
+  - **hallazgo:** Vite también carga `.env.local` (pruebas) al armar producción. Si a `.env.production.local` le faltaba una variable, el sitio de producción quedaba conectado a la base de pruebas sin aviso. `scripts/revisar-produccion.mjs` frena la publicación en ese caso, y también si falta una variable o si la clave de Turnstile es de prueba. Hoy, sin `.env.production.local`, frena con 4 problemas, como debe;
+  - plantilla `.env.production.example` con las variables y de dónde sale cada una;
+  - `supabase/config.toml` declara `salud` sin JWT, como ya estaba publicada en pruebas, para que un `functions deploy` a producción la deje igual.
+- **Menú de demos fuera de producción:** al tocar el logo se abría el menú con todas las pantallas de demostración. En producción el logo lleva al inicio y Vite quita el menú del build. Comprobado en los dos builds. En desarrollo y en pruebas se queda.
+- **Alta de la barbería piloto:** `scripts/produccion/alta-barberia.sql` crea barbería, dueño, barberos y servicios en una transacción, a partir de una cuenta creada en Supabase Auth. Probado en `siguiente-pruebas` dentro de una transacción deshecha: quedaron 3 servicios, 2 barberos y el dueño, `fila_publica` respondió y no quedó nada guardado.
+- **Pruebas:** 8 de Vitest nuevas (333 en total): 6 de la revisión de variables y 2 de las rutas del aviso. Revisado en el navegador a 375 px: sin scroll lateral ni errores en la consola.
+- **Falta (Gus):** decidir el espacio en Supabase y el dominio, y después seguir los pasos 1, 3, 5 y 6 de [produccion.md](produccion.md). Lo demás lo puede hacer el asistente.
+
+## 2026-11-05 · Proyecto de producción en Supabase
+
+- **Qué:** con `cms-opalo` pausado por el autor, se creó `nextcut-produccion` (`ctexofluhhsnsxenblgp`, us-east-1, plan gratuito, USD 0). Pasos 1, 2 y 4 de [produccion.md](produccion.md).
+- **Base:** `npx supabase db push --linked` aplicó las 8 migraciones con sus mismas versiones.
+  - **Hallazgo:** la CLI 2.122 ya no pide la contraseña de la base: con la sesión de `supabase login` entra con un rol temporal. Las migraciones de producción van con la CLI y no con el MCP, como se hizo en pruebas ([ADR-011](decisiones.md#adr-011--detalles-de-la-base-de-datos-del-sprint-1), punto 9), así las versiones coinciden sin tocarlas a mano.
+  - Al terminar, la CLI quedó enlazada otra vez a `siguiente-pruebas`.
+- **Funciones:** `unirse-a-fila`, `avisos` y `salud` publicadas con `functions deploy --use-api`.
+- **Vault:** `avisos_url` y `avisos_clave` creados con SQL; la clave se generó dentro de la base.
+- **Revisado:**
+  - las 5 tareas de `pg_cron` existen;
+  - las 7 tablas tienen RLS; el público ejecuta 4 funciones y el personal 13, igual que en pruebas;
+  - el Security Advisor marca solo lo aceptado en ADR-011;
+  - `salud` respondió 200 con `"tareas":"ok"`;
+  - `unirse-a-fila` responde `{"error":"error"}`, porque todavía no tiene `TURNSTILE_SECRET` (falla cerrada, [ADR-013](decisiones.md#adr-013--detalles-de-anotarse-en-la-fila), punto 4);
+  - `avisos` rechaza a quien no trae la clave (401).
+- **`.env.production.local`** (no se sube) tiene la URL y la clave publicable. `scripts/revisar-produccion.mjs` ya solo frena por Turnstile y VAPID.
+- **Falta (Gus):** elegir el dominio, desactivar las claves heredadas (`anon` sigue activa), crear el widget de Turnstile, cargar los secretos (paso 3) y configurar Auth (paso 5).
+- **Dominio (decisión del autor):** producción se queda en `nextcut-produccion.gustavoapz07.workers.dev`, sin dominio propio. Los pasos de Turnstile, `ORIGENES_PERMITIDOS` y Auth usan esa dirección.
+- **Configuración en los paneles** (con Claude in Chrome, en la sesión del autor):
+  - Supabase Auth: Site URL de producción, redirección `https://nextcut-produccion.gustavoapz07.workers.dev/**`, registro de cuentas apagado y contraseña mínima de 10 caracteres con letras y números. Cada cambio se comprobó recargando la página;
+  - las claves heredadas ya venían desactivadas en el proyecto nuevo: la API rechaza la `anon` con 401 y acepta la publicable;
+  - Cloudflare: widget de Turnstile "NextCut produccion", modo Managed, sin pre-autorización. Su clave del sitio quedó en `.env.production.local`; la secreta no pasó por el asistente.
+- **`scripts/produccion/secretos.mjs`:** pide la Secret Key de Turnstile sin mostrarla, genera `IP_SALT` y las claves VAPID, guarda los 5 secretos con la CLI y escribe la pública VAPID en `.env.production.local`. Ensayado con `--sin-guardar`: la clave no aparece en pantalla y rechaza una vacía o igual a la del sitio.
+- **Publicada:** con los secretos cargados por el autor (`TURNSTILE_SECRET`, `ORIGENES_PERMITIDOS`, `IP_SALT` y las claves VAPID), `npm run deploy:produccion` pasó las dos revisiones y publicó `nextcut-produccion` (versión `8f84aaea`) en https://nextcut-produccion.gustavoapz07.workers.dev. Revisado desde afuera:
+  - el inicio, `/privacidad` y las rutas de la SPA responden 200;
+  - el build apunta al proyecto de producción y no tiene rastros del de pruebas;
+  - `unirse-a-fila` acepta el origen de producción y rechaza otros (CORS), y Turnstile rechaza un token falso con 403. La clave secreta es la real: la de prueba lo habría dejado pasar;
+  - en el navegador, el logo lleva al inicio sin el menú de demos y la consola no muestra errores.
+- **Cuentas:** existe una cuenta confirmada, creada por el autor, todavía sin barbería.
+- **Siguiente:** los datos de la barbería piloto para correr `scripts/produccion/alta-barberia.sql`.
+

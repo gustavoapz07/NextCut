@@ -57,6 +57,11 @@ export const rutas: RouteObject[] = [
         lazy: () => import("./features/fila/Turno").then((m) => ({ Component: m.Turno })),
       },
       {
+        path: "privacidad",
+        lazy: () =>
+          import("./features/legal/Privacidad").then((m) => ({ Component: m.Privacidad })),
+      },
+      {
         path: "entrar",
         lazy: () => import("./features/acceso/Entrar").then((m) => ({ Component: m.Entrar })),
       },

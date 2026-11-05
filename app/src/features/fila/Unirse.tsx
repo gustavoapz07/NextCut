@@ -474,9 +474,22 @@ function PasoNombre({
           />
         </div>
         <p id={idAyuda} className={cx("mt-2 text-sm", telefonoValido ? "text-tenue" : "text-rojo")}>
-          {telefonoValido
-            ? "Solo para avisarte cuando te toque. Lo borramos a los 90 días."
-            : "Revisa el número: son 8 dígitos."}
+          {telefonoValido ? (
+            <>
+              Solo para avisarte cuando te toque. Lo borramos a los 90 días.{" "}
+              {/* En otra pestaña, para no perder lo que ya escribió en el formulario. */}
+              <a
+                href="/privacidad"
+                target="_blank"
+                rel="noopener"
+                className="font-semibold underline underline-offset-2"
+              >
+                Aviso de privacidad
+              </a>
+            </>
+          ) : (
+            "Revisa el número: son 8 dígitos."
+          )}
         </p>
       </div>
     </>

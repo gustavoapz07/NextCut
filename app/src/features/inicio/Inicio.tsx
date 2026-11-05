@@ -189,7 +189,10 @@ export function Inicio() {
       </section>
 
       <footer className="border-t border-borde px-4 py-8 text-center text-sm text-tenue">
-        © 2026 NextCut
+        © 2026 NextCut ·{" "}
+        <Link to="/privacidad" className="underline underline-offset-2">
+          Aviso de privacidad
+        </Link>
       </footer>
     </div>
   );

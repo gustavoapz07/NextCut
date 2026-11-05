@@ -1,14 +1,14 @@
 {
   "README.md": {
-    "mtime": 1793797281.4368956,
-    "seen": 1793797301.5881274,
-    "ast_hash": "9fb4769eb5abac3bf5eaf03ddc18bb2d",
+    "mtime": 1793798799.2639594,
+    "seen": 1793798809.463349,
+    "ast_hash": "9f61176552fa048a4392f66f6a103b57",
     "semantic_hash": ""
   },
   "docs/bitacora.md": {
-    "mtime": 1793797291.5088952,
-    "seen": 1793797301.5881295,
-    "ast_hash": "c6ff18b0fba747d5d142287d0a7d3d6a",
+    "mtime": 1793893722.1922853,
+    "seen": 1793893731.9002864,
+    "ast_hash": "e9648b167b2f2830b311430b30c27006",
     "semantic_hash": ""
   },
   "docs/decisiones.md": {
@@ -24,9 +24,9 @@
     "semantic_hash": "a03e6054d92f2b3847ff257819adb86d"
   },
   "docs/seguridad.md": {
-    "mtime": 1793797281.4330862,
-    "seen": 1793797301.5881374,
-    "ast_hash": "b8a7868f080f91d0faf9669b6a43bd00",
+    "mtime": 1793798799.26496,
+    "seen": 1793798809.4633625,
+    "ast_hash": "03ac7b1bfcce7e3046ea71979c559d48",
     "semantic_hash": ""
   },
   "docs/validacion-campo.md": {
@@ -36,9 +36,9 @@
     "semantic_hash": "fce8b9c4ac2e58b20c5f98526ae1e804"
   },
   "docs/plan-implementacion.md": {
-    "mtime": 1793797281.4340925,
-    "seen": 1793797301.588136,
-    "ast_hash": "12cb227f068661067a046c13ac5cc438",
+    "mtime": 1793893722.1901805,
+    "seen": 1793893731.9002945,
+    "ast_hash": "8176be01223bd874e74ecaeb92c66875",
     "semantic_hash": ""
   },
   "app/src/components/ErrorDeRuta.tsx": {
@@ -54,9 +54,9 @@
     "semantic_hash": ""
   },
   "app/src/features/inicio/Inicio.tsx": {
-    "mtime": 1793106464.4955614,
-    "seen": 1793107347.9341273,
-    "ast_hash": "739e96b1e8f8b09ddd89dd5a835b2953",
+    "mtime": 1793798430.8639684,
+    "seen": 1793798809.4631257,
+    "ast_hash": "1b163a45ada24d9bc6a4d9d9f80819f5",
     "semantic_hash": ""
   },
   "app/src/main.tsx": {
@@ -66,15 +66,15 @@
     "semantic_hash": ""
   },
   "app/src/router.test.tsx": {
-    "mtime": 1793581015.547954,
-    "seen": 1793581415.7547472,
-    "ast_hash": "687f13b5b9ad04a06d2c4356ff7e51f7",
+    "mtime": 1793798678.77325,
+    "seen": 1793798809.463206,
+    "ast_hash": "17040a5653857740c8d6a6259eb8dc72",
     "semantic_hash": ""
   },
   "app/src/router.tsx": {
-    "mtime": 1793476374.4832828,
-    "seen": 1793476858.6818345,
-    "ast_hash": "05ed67c44444f95c3263baf1c0fa299f",
+    "mtime": 1793798646.160429,
+    "seen": 1793798809.4632082,
+    "ast_hash": "95287a2f5281aff074370cd922e3cbad",
     "semantic_hash": ""
   },
   "app/src/test/setup.ts": {
@@ -108,9 +108,9 @@
     "semantic_hash": "118f2aca7eb903a6f4244ddb2acde761"
   },
   "app/src/vite-env.d.ts": {
-    "mtime": 1793070353.2407484,
-    "seen": 1793105988.8135216,
-    "ast_hash": "04b683b00e68071e1dd477ffca5df084",
+    "mtime": 1793798430.8502336,
+    "seen": 1793798809.4632156,
+    "ast_hash": "73cc6c4905974b40506e89c595246d43",
     "semantic_hash": ""
   },
   "scripts/spikes/broadcast-publico.mjs": {
@@ -132,9 +132,9 @@
     "semantic_hash": ""
   },
   "app/src/components/Marco.tsx": {
-    "mtime": 1793474658.884261,
-    "seen": 1793474916.3392227,
-    "ast_hash": "67d36d4348f3aa887e9a33db9eac7751",
+    "mtime": 1793798430.8669817,
+    "seen": 1793798809.46307,
+    "ast_hash": "41d5d3470bcb9b8375ff01218ee76815",
     "semantic_hash": ""
   },
   "app/src/components/NumeroAnimado.tsx": {
@@ -198,9 +198,9 @@
     "semantic_hash": ""
   },
   "app/src/features/fila/Unirse.tsx": {
-    "mtime": 1793229583.7467136,
-    "seen": 1793230012.9540713,
-    "ast_hash": "171e73076e1a2a47ea550b3339d3c7a1",
+    "mtime": 1793798736.199428,
+    "seen": 1793798809.4631228,
+    "ast_hash": "61df09e2f86622423c9ae8d2cd92ec49",
     "semantic_hash": ""
   },
   "app/src/features/pantalla/PantallaTv.tsx": {
@@ -717,6 +717,42 @@
     "mtime": 1793797185.3889363,
     "seen": 1793797301.5880308,
     "ast_hash": "309ee822fd7dd376277090483d11566f",
+    "semantic_hash": ""
+  },
+  "app/src/features/legal/Privacidad.tsx": {
+    "mtime": 1793798646.135899,
+    "seen": 1793798809.4631283,
+    "ast_hash": "bccfa587b5da6ccb778f0e9567bedda4",
+    "semantic_hash": ""
+  },
+  "scripts/produccion/alta-barberia.sql": {
+    "mtime": 1793798524.3083525,
+    "seen": 1793798809.4632394,
+    "ast_hash": "2b7588a6cda20fd26f5153f6c1c97062",
+    "semantic_hash": ""
+  },
+  "scripts/revisar-produccion.mjs": {
+    "mtime": 1793798646.096372,
+    "seen": 1793798809.463246,
+    "ast_hash": "6f4d1e49c3f670a209f3c59ce96f6d75",
+    "semantic_hash": ""
+  },
+  "scripts/revisar-produccion.test.mjs": {
+    "mtime": 1793798646.0873654,
+    "seen": 1793798809.463248,
+    "ast_hash": "c6ded5ffb5029cbcb85e69c7f33dbfe0",
+    "semantic_hash": ""
+  },
+  "docs/produccion.md": {
+    "mtime": 1793893722.186002,
+    "seen": 1793893731.9002967,
+    "ast_hash": "e3e085c4b3f0fe6cf47fb9da4c61f893",
+    "semantic_hash": ""
+  },
+  "scripts/produccion/secretos.mjs": {
+    "mtime": 1793893380.2621343,
+    "seen": 1793893406.7533586,
+    "ast_hash": "0926cf896bb401514dd60e5f482d9d4b",
     "semantic_hash": ""
   }
 }

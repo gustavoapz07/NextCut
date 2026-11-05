@@ -2,7 +2,7 @@
 
 > Que ningún cliente se vaya por no saber cuánto le falta.
 
-**Estado:** Sprints 1 y 2 terminados (base de datos, fila pública, anotarse y turno en vivo) · Sprint 3 construido (login, panel, TV, "no llegó" automático y avisos por Web Push; los avisos llegan a Chrome de escritorio y a Android; falta probarlos en iPhone) · Sprint 4 empezado (panel del dueño: resumen del día, configuración, QR, pausa de la fila remota y renombrar u ocultar turnos; el horario cierra la fila en línea sola; el día se cierra solo y los teléfonos se borran a los 90 días; la fila en línea se pausa sola ante un pico y la prueba de carga pasó; endpoint de salud publicado y Sentry listo; Security Advisor revisado y el build se revisa solo antes de publicar; faltan las invitaciones por correo y las cuentas de Sentry y UptimeRobot) · Sprint 0 casi listo (falta la prueba de Web Push en iPhone) · validación de campo en pausa
+**Estado:** Sprints 1 y 2 terminados (base de datos, fila pública, anotarse y turno en vivo) · Sprint 3 construido (login, panel, TV, "no llegó" automático y avisos por Web Push; los avisos llegan a Chrome de escritorio y a Android; falta probarlos en iPhone) · Sprint 4 empezado (panel del dueño: resumen del día, configuración, QR, pausa de la fila remota y renombrar u ocultar turnos; el horario cierra la fila en línea sola; el día se cierra solo y los teléfonos se borran a los 90 días; la fila en línea se pausa sola ante un pico y la prueba de carga pasó; endpoint de salud publicado y Sentry listo; Security Advisor revisado y el build se revisa solo antes de publicar; producción preparada y aviso de privacidad publicado, a la espera de las cuentas; faltan las invitaciones por correo y las cuentas de Sentry y UptimeRobot) · Sprint 0 casi listo (falta la prueba de Web Push en iPhone) · validación de campo en pausa
 **Última actualización:** 4 de noviembre de 2026
 
 NextCut es un SaaS para barberías que atienden por orden de llegada. Convierte la fila física en una fila virtual: el cliente escanea un QR o abre un enlace, ve cuántas personas hay y cuánto falta, se anota desde donde esté y recibe un aviso cuando le toca. El barbero pasa los turnos desde el celular. El dueño ve, por primera vez, cuántos clientes atendió cada barbero, cuánto esperaron y cuántos se fueron sin cortarse.
@@ -257,6 +257,7 @@ npx supabase login      # una sola vez: abre el navegador
 npx supabase link --project-ref bquvluxsqfacleumlnmi
 npx supabase db push    # aplica las migraciones al proyecto de pruebas
 npm run deploy:pruebas  # publica en https://nextcut.gustavoapz07.workers.dev, contra el proyecto de pruebas
+npm run deploy:produccion  # publica el Worker nextcut-produccion; pasos previos en docs/produccion.md
 ```
 
 Las pruebas de RLS con pgTAP (un barbero de A no ve la fila de B) corren en CI, que levanta Supabase en su propio runner.

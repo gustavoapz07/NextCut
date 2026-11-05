@@ -36,7 +36,7 @@ Antes de la lista general, estos son los abusos más probables en este producto:
   - `.env*` en `.gitignore`, con un `.env.example` sin valores.
   - `gitleaks` en pre-commit y en CI; escaneo de secretos de GitHub activado.
   - Si una clave se filtra, se rota de inmediato y se registra en la bitácora.
-- **Prueba:** `gitleaks detect` pasa en CI. `scripts/revisar-build.mjs` (`npm run revisar:build`) revisa `dist/` en la CI y antes de cada `npm run deploy`: claves `sb_secret_…`, JWT con rol `service_role`, llaves privadas PEM, archivos `.map` y el valor de cada variable sin prefijo `VITE_` de los `.env`. Busca la clave, no el prefijo, porque `supabase-js` trae el texto `sb_secret_` para reconocer las claves.
+- **Prueba:** `gitleaks detect` pasa en CI. `scripts/revisar-build.mjs` (`npm run revisar:build`) revisa `dist/` en la CI y antes de cada `npm run deploy:pruebas` y `npm run deploy:produccion`: claves `sb_secret_…`, JWT con rol `service_role`, llaves privadas PEM, archivos `.map` y el valor de cada variable sin prefijo `VITE_` de los `.env`. Busca la clave, no el prefijo, porque `supabase-js` trae el texto `sb_secret_` para reconocer las claves.
 
 ### 2. Endpoints expuestos en la web pública · 🟩
 
@@ -70,6 +70,7 @@ Antes de la lista general, estos son los abusos más probables en este producto:
 - **Riesgo:** exponer teléfonos o hábitos de los clientes.
 - **Controles:**
   - Se pide lo mínimo: nombre y, opcional, teléfono.
+  - El aviso de privacidad (`/privacidad`, enlazado junto al campo del teléfono y en el inicio) dice qué se guarda, para qué y cuánto dura. Si cambia lo que guarda la base, se cambia también ese texto.
   - Los errores que van a Sentry salen sin IP, usuario, cookies, encabezados, códigos de turno, teléfonos ni correos, y sin las migas de clics y de consola (`app/src/lib/errores.ts`).
   - La vista pública y la TV muestran "Carlos M." y el número de turno.
   - El teléfono solo lo ve el personal de esa barbería.

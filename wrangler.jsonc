@@ -11,5 +11,20 @@
   "observability": {
     "enabled": true
   },
-  "send_metrics": false
+  "send_metrics": false,
+  // El Worker de arriba (`nextcut`) es la versión de pruebas. Producción es otro Worker, así
+  // `npm run deploy:pruebas` nunca la pisa. Se publica con `npm run deploy:produccion`.
+  // El dominio propio se agrega en "routes" cuando exista (docs/produccion.md).
+  "env": {
+    "produccion": {
+      "name": "nextcut-produccion",
+      "assets": {
+        "directory": "./dist",
+        "not_found_handling": "single-page-application"
+      },
+      "observability": {
+        "enabled": true
+      }
+    }
+  }
 }

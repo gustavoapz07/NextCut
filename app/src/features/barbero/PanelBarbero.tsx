@@ -1,4 +1,5 @@
 import {
+  Armchair,
   ArrowLeftRight,
   Banknote,
   Check,
@@ -15,8 +16,8 @@ import {
   UserX,
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import { type ReactNode, useId, useState } from "react";
-import { Navigate } from "react-router";
+import { type ReactNode, useCallback, useId, useState } from "react";
+import { Link, Navigate, useSearchParams } from "react-router";
 import { Franjas } from "@/components/Franjas";
 import { BotonMarca, Cargando } from "@/components/Marco";
 import { NumeroAnimado } from "@/components/NumeroAnimado";
@@ -25,7 +26,9 @@ import { SinConexion } from "@/components/SinConexion";
 import { lempiras, reloj } from "@/lib/formato";
 import { useReloj, useTitulo } from "@/lib/ganchos";
 import {
+  type BarberoPanel,
   type DatosPanel,
+  ELEGIR_SILLA,
   empezarTurno,
   enlaceWhatsApp,
   llamarSiguiente,
@@ -103,6 +106,8 @@ interface AccionesPanel {
   /** Solo el prototipo: muestra el mensaje en vez de abrir WhatsApp. */
   whatsAppSimulado?: () => void;
   salir?: () => void;
+  /** Solo el dueño: vuelve a la lista de sillas. */
+  cambiarSilla?: () => void;
 }
 
 // ---------------------------------------------------------------------------------------------
@@ -114,6 +119,17 @@ export function PanelBarbero() {
   if (sesion.tipo === "cargando") return <Cargando />;
   if (sesion.tipo === "fuera") return <Navigate to="/entrar" replace />;
   return <PanelReal userId={sesion.sesion.user.id} />;
+}
+
+/** La silla que eligió el dueño vive en la URL (?silla=<id>), así sobrevive a recargar. */
+function useSillaElegida() {
+  const [params, setParams] = useSearchParams();
+  const silla = params.get("silla");
+  const elegir = useCallback(
+    (valor: string | null) => setParams(valor ? { silla: valor } : {}, { replace: true }),
+    [setParams],
+  );
+  return [silla, elegir] as const;
 }
 
 const minutosDesde = (fecha: string, ahora: Date) =>
@@ -135,7 +151,8 @@ function vistaTurno(t: TurnoPersonal, datos: DatosPanel, ahora: Date): TurnoVist
 }
 
 function PanelReal({ userId }: { userId: string }) {
-  const { estado, recargar } = usePanel(userId);
+  const [sillaElegida, elegirSilla] = useSillaElegida();
+  const { estado, recargar } = usePanel(userId, sillaElegida);
   const { toast, mostrar } = useToast();
   const [ocupado, setOcupado] = useState(false);
   const ahora = useReloj(30_000);
@@ -146,6 +163,9 @@ function PanelReal({ userId }: { userId: string }) {
     return <SinConexion titulo="No pudimos cargar tu panel" alReintentar={() => void recargar()} />;
   }
   if (estado.tipo === "sin_silla") return <SinSilla />;
+  if (estado.tipo === "elegir_silla") {
+    return <ElegirSilla barberia={estado.barberia} sillas={estado.sillas} onElegir={elegirSilla} />;
+  }
 
   const { datos } = estado;
   const { barbero } = datos;
@@ -216,9 +236,79 @@ function PanelReal({ userId }: { userId: string }) {
           ),
       ),
     salir: () => void salir(),
+    cambiarSilla: datos.esDueno ? () => elegirSilla(ELEGIR_SILLA) : undefined,
   };
 
   return <Panel vista={vista} acciones={acciones} toast={<Toast toast={toast} />} />;
+}
+
+function ElegirSilla({
+  barberia,
+  sillas,
+  onElegir,
+}: {
+  barberia: string;
+  sillas: BarberoPanel[];
+  onElegir: (id: string) => void;
+}) {
+  useTitulo("Elegir silla");
+  return (
+    <main className="mx-auto flex min-h-dvh max-w-lg flex-col justify-center gap-6 px-4 py-16">
+      <div>
+        <p className="text-sm font-semibold text-tenue">{barberia}</p>
+        <h1 className="mt-1 font-display text-5xl leading-[0.9] font-black uppercase">
+          ¿En qué silla vas a atender?
+        </h1>
+        <p className="mt-3 text-lg text-tenue">
+          Como dueño puedes llamar y atender los turnos de cualquier silla.
+        </p>
+      </div>
+      {sillas.length > 0 ? (
+        <ul className="grid gap-3">
+          {sillas.map((b) => (
+            <li key={b.id}>
+              <button
+                type="button"
+                onClick={() => onElegir(b.id)}
+                className="flex w-full items-center gap-4 rounded-2xl bg-superficie p-4 text-left ring-1 ring-borde transition hover:ring-tinta"
+              >
+                <Armchair className="size-6 shrink-0" />
+                <span className="min-w-0">
+                  <span className="block font-display text-2xl leading-none font-black break-words uppercase">
+                    {b.nombre}
+                  </span>
+                  <span className="text-sm text-tenue">
+                    {[b.silla ? `Silla ${b.silla}` : null, b.apodo, b.en_pausa ? "en pausa" : null]
+                      .filter(Boolean)
+                      .join(" · ")}
+                  </span>
+                </span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="rounded-2xl bg-superficie p-4 ring-1 ring-borde">
+          Tu barbería todavía no tiene barberos. Agrégalos en Configuración.
+        </p>
+      )}
+      <div className="flex flex-wrap gap-3">
+        <Link
+          to="/dueno"
+          className="rounded-full bg-tinta px-6 py-3.5 font-display text-lg font-bold tracking-wide text-fondo uppercase"
+        >
+          Ir al resumen del dueño
+        </Link>
+        <button
+          type="button"
+          onClick={() => void salir()}
+          className="rounded-full px-6 py-3.5 font-display text-lg font-bold tracking-wide uppercase ring-1 ring-borde"
+        >
+          Salir
+        </button>
+      </div>
+    </main>
+  );
 }
 
 function SinSilla() {
@@ -372,15 +462,26 @@ function Panel({
         <div>
           <div className="mb-5 flex items-center justify-between gap-3">
             <BotonMarca />
-            {acciones.salir && (
-              <button
-                type="button"
-                onClick={acciones.salir}
-                className="inline-flex h-10 items-center gap-2 rounded-full px-4 text-sm font-semibold ring-1 ring-borde transition hover:bg-superficie-2"
-              >
-                <LogOut className="size-4" /> Salir
-              </button>
-            )}
+            <div className="flex items-center gap-2">
+              {acciones.cambiarSilla && (
+                <button
+                  type="button"
+                  onClick={acciones.cambiarSilla}
+                  className="inline-flex h-10 items-center gap-2 rounded-full px-4 text-sm font-semibold ring-1 ring-borde transition hover:bg-superficie-2"
+                >
+                  <Armchair className="size-4" /> Cambiar silla
+                </button>
+              )}
+              {acciones.salir && (
+                <button
+                  type="button"
+                  onClick={acciones.salir}
+                  className="inline-flex h-10 items-center gap-2 rounded-full px-4 text-sm font-semibold ring-1 ring-borde transition hover:bg-superficie-2"
+                >
+                  <LogOut className="size-4" /> Salir
+                </button>
+              )}
+            </div>
           </div>
           <header className="flex items-center justify-between gap-3">
             <div className="flex min-w-0 items-center gap-3">

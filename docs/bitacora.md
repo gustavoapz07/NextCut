@@ -474,4 +474,17 @@ Cada cambio del proyecto queda aquí, enlazado al documento que afecta. El grafo
   - en el navegador, el logo lleva al inicio sin el menú de demos y la consola no muestra errores.
 - **Cuentas:** existe una cuenta confirmada, creada por el autor, todavía sin barbería.
 - **Siguiente:** los datos de la barbería piloto para correr `scripts/produccion/alta-barberia.sql`.
+- **Barbería de demostración** para las visitas a barberías: "Barbería Demo" (`/b/demo`, El Progreso), sin horario para que la fila esté abierta a cualquier hora, con 3 barberos sin cuenta (Carlos, Jorge y Kevin), 4 servicios (Corte L 150, Fade L 180, Corte + barba L 230 y Barba L 100) y la cuenta del autor como dueño. Revisado en la app publicada a 375 px: la fila pública, el formulario y `/entrar` cargan sin errores ni scroll lateral. No se anotó ningún turno de prueba en producción.
+- **CI:** los commits `0a8be9e` y `fa3e58c` llegaron a GitHub. GitHub respondió dos veces `fatal error in commit_refs`, pero uno de los intentos sí había entrado. La CI pasó completa, incluida la revisión nueva del build con `supabase-js` adentro.
+
+## 2026-11-06 · El dueño elige en qué silla atender
+
+- **Qué:** al entrar con la cuenta de la Barbería Demo, el panel decía "Tu cuenta no tiene silla". El panel solo buscaba el barbero ligado a la cuenta, y el dueño no tenía uno. La base ya dejaba que el dueño atendiera cualquier silla de su barbería (`privado.puede_atender`), pero la pantalla no lo aprovechaba. La guía y `alta-barberia.sql` ya lo daban por hecho.
+- **Panel** (`app/src/lib/panel.ts` y `PanelBarbero.tsx`):
+  - si la cuenta es dueña y no tiene silla propia, el panel muestra las sillas de su barbería para elegir y un enlace al resumen del dueño;
+  - la silla elegida queda en la URL (`/panel?silla=<id>`), así sobrevive a recargar. Una silla de otra barbería o inactiva vuelve a la lista;
+  - el dueño ve "Cambiar silla" en el panel, aunque tenga una silla propia; un barbero que no es dueño no lo ve.
+  - No cambian los permisos: cada acción la vuelve a revisar la base.
+- **Pruebas:** 2 de Vitest nuevas (335 en total) y una de Playwright (`tests/e2e/dueno-silla.spec.ts`): con la cuenta de prueba, el dueño entra a su silla, cambia a otra y la silla elegida sigue después de recargar. `barbero.spec.ts` sigue pasando.
+- **Publicado** en producción con la aprobación del autor (versión `79e70a82`). El archivo del panel en línea ya trae la pantalla para elegir silla.
 

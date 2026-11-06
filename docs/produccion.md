@@ -26,7 +26,7 @@ Esta guía sirve para montar la versión que usan las barberías reales, aparte 
 | 6. Turnstile | Hecho: widget "NextCut produccion" (Managed) para el hostname de producción |
 | 7. Variables | Hecho |
 | 8. Publicar | Hecho: https://nextcut-produccion.gustavoapz07.workers.dev (versión `8f84aaea`) |
-| 9. Barbería piloto | La cuenta del dueño existe. **Faltan los datos de la barbería** para correr el alta |
+| 9. Barbería piloto | Por ahora hay una de demostración: "Barbería Demo" (`/b/demo`), siempre abierta, a nombre de la cuenta del autor. La piloto real se da de alta con sus datos cuando se cierre el acuerdo |
 | 10. Revisión | Pendiente, después del alta |
 
 `npm run deploy:produccion` no publica si falta una variable, si alguna quedó con el valor de pruebas o si la clave de Turnstile es de prueba (`scripts/revisar-produccion.mjs`). Después revisa que el build no lleve claves secretas (`scripts/revisar-build.mjs`).

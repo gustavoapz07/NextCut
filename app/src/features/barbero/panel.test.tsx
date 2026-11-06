@@ -10,7 +10,10 @@ const falso = vi.hoisted(() => ({
   entrar: vi.fn(),
   salir: vi.fn(),
   sesion: null as { user: { id: string } } | null,
-  /** Respuesta de cada consulta por tabla; "turnos:hoy" son los atendidos de hoy. */
+  /**
+   * Respuesta de cada consulta por tabla; "turnos:hoy" son los atendidos de hoy. Una clave
+   * "tabla:columna" responde a la consulta cuyo primer filtro es esa columna (si existe).
+   */
   tablas: {} as Record<string, unknown>,
   oyentes: [] as Array<(evento: string, sesion: unknown) => void>,
 }));
@@ -33,6 +36,13 @@ vi.mock("@/lib/supabase", () => {
           }
           return (...argumentos: unknown[]) => {
             if (propiedad === "eq" && argumentos[0] === "dia") clave = `${tabla}:hoy`;
+            else if (
+              propiedad === "eq" &&
+              clave === tabla &&
+              `${tabla}:${String(argumentos[0])}` in falso.tablas
+            ) {
+              clave = `${tabla}:${String(argumentos[0])}`;
+            }
             return cadena;
           };
         },
@@ -240,6 +250,48 @@ describe("panel del barbero", () => {
     fireEvent.click(await screen.findByRole("button", { name: /Llamar siguiente/ }));
     expect(
       await screen.findByText("Ya tienes a alguien llamado o en la silla."),
+    ).toBeInTheDocument();
+  });
+
+  it("un barbero que no es dueño no puede cambiar de silla", async () => {
+    conPanel([]);
+    abrir("/panel");
+    expect(await screen.findByText("Hola, Carlos")).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /Cambiar silla/ })).not.toBeInTheDocument();
+  });
+
+  it("el dueño sin silla propia elige una y atiende en ella", async () => {
+    const JORGE = {
+      ...BARBERO,
+      id: "e1000000-0000-4000-8000-000000000002",
+      nombre: "Jorge",
+      silla: 2,
+    };
+    conPanel([turno(4)]);
+    falso.tablas["barberos:user_id"] = null;
+    falso.tablas.miembros = { barberia_id: BARBERIA.id };
+    falso.tablas["barberos:barberia_id"] = [BARBERO, JORGE];
+    falso.tablas["barberos:id"] = JORGE;
+    abrir("/panel");
+
+    expect(
+      await screen.findByRole("heading", { name: "¿En qué silla vas a atender?" }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Ir al resumen del dueño" })).toHaveAttribute(
+      "href",
+      "/dueno",
+    );
+    fireEvent.click(screen.getByRole("button", { name: /Jorge/ }));
+
+    expect(await screen.findByText("Hola, Jorge")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: /Llamar siguiente/ }));
+    await waitFor(() =>
+      expect(falso.rpc).toHaveBeenCalledWith("llamar_siguiente", { p_barbero_id: JORGE.id }),
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: /Cambiar silla/ }));
+    expect(
+      await screen.findByRole("heading", { name: "¿En qué silla vas a atender?" }),
     ).toBeInTheDocument();
   });
 

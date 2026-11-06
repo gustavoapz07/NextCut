@@ -1,17 +1,17 @@
-# Graph Report - NextCut  (2026-11-05)
+# Graph Report - NextCut  (2026-11-06)
 
 ## Corpus Check
-- 126 files · ~115,047 words
+- 127 files · ~116,381 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 9 file(s) not represented in the graph (top: (none) 4, .example 2, .toml 2)
 
 ## Summary
-- 1149 nodes · 2882 edges · 64 communities (48 shown, 16 thin omitted)
+- 1153 nodes · 2899 edges · 58 communities (41 shown, 17 thin omitted)
 - Extraction: 94% EXTRACTED · 6% INFERRED · 0% AMBIGUOUS · INFERRED: 177 edges (avg confidence: 0.87)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `0a8be9e7`
+- Built from commit: `fa3e58c5`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -22,31 +22,27 @@
 - 20261027140203_base_de_datos.sql
 - turno.ts
 - ADR-008 · Desarrollo contra Supabase en la nube, sin Docker local
-- PantallaTv.tsx
+- datos.ts
 - lib/avisos.ts
-- PantallaTv.tsx
+- Turnstile.tsx
 - Variables de entorno
 - Configuracion.tsx
 - fila.ts
-- cx
+- broadcast-publico.mjs
 - concurrencia.mjs
-- dueno.ts
+- Resumen.tsx
 - Stack v0.1 con versiones
 - e2e/utilidades.ts
-- panel.ts
-- dueno.test.tsx
-- FilaPublica.tsx
+- PanelBarbero.tsx
+- Resumen.tsx
 - Turno.tsx
-- router.tsx
-- LayoutDueno.tsx
 - Fallo 2 · Endpoints expuestos
 - public.estado_salud
 - Unirse.tsx
-- PanelBarbero.tsx
+- dueno.test.tsx
 - webpush.ts
 - imports
 - errores.ts
-- cx
 - 20261031132532_avisos_web_push.sql
 - public.barberias
 - imports
@@ -59,22 +55,20 @@
 - imports
 - Puesta en producción
 - Tasa de abandono
-- panel.test.tsx
 - claves-vapid.mjs
 - revisar-build.mjs
 - ref_node_fs
 - database.types.ts
 - 20261102125411_pausa_automatica.sql
-- revisar-produccion.mjs
-- Tono
+- lib/unirse.ts
 
 ## God Nodes (most connected - your core abstractions)
 1. `cx()` - 50 edges
 2. `public.turnos` - 39 edges
-3. `useTitulo()` - 34 edges
+3. `useTitulo()` - 35 edges
 4. `Franjas()` - 33 edges
-5. `Cargando()` - 23 edges
-6. `PanelReal()` - 22 edges
+5. `PanelReal()` - 24 edges
+6. `Cargando()` - 23 edges
 7. `Seguridad` - 22 edges
 8. `BotonMarca()` - 21 edges
 9. `Plan de implementación` - 21 edges
@@ -106,7 +100,7 @@
 - **Cuidado de claves y secretos (fallo 1) a lo largo de la bitácora** — docs_bitacora_clave_anon_heredada, docs_bitacora_nextcut_repositorio, docs_bitacora_arreglo_ci_gitleaks, docs_seguridad_f01_api_keys, readme_variables_entorno [INFERRED 0.85]
 - **Mecanismo de avisos al cliente (por evento y por reloj)** — docs_plan_implementacion_edge_function_avisos, docs_plan_implementacion_pg_cron, docs_plan_implementacion_modulo_eta, readme_web_push, docs_decisiones_suscribir_push [INFERRED 0.85]
 
-## Communities (64 total, 16 thin omitted)
+## Communities (58 total, 17 thin omitted)
 
 ### Community 0 - "Investigación"
 Cohesion: 0.12
@@ -125,24 +119,24 @@ Cohesion: 0.09
 Nodes (27): eventos_turno_barberia_idx, eventos_turno_inmutable, eventos_turno_turno_idx, miembros_barberia_idx, privado.es_dueno(), privado.es_miembro(), privado.proteger_eventos(), privado.registrar_evento_turno() (+19 more)
 
 ### Community 4 - "turno.ts"
-Cohesion: 0.13
-Nodes (15): Database, EstadoFila, EstadoTurno, ADR-0007, useSenalFila(), useTurno(), supabase, ACTIVOS (+7 more)
+Cohesion: 0.16
+Nodes (14): EstadoFila, EstadoTurno, ADR-0007, useSenalFila(), useTurno(), EstadoSesion, MENSAJES_ENTRAR, ResultadoEntrar (+6 more)
 
 ### Community 5 - "ADR-008 · Desarrollo contra Supabase en la nube, sin Docker local"
 Cohesion: 0.14
 Nodes (26): Pruebas de riesgo del Sprint 0 (Broadcast público, Web Push, Turnstile con IP), 2026-10-26 · Desarrollo sin Docker y prueba de riesgo 1, 2026-10-26 · Sprint 0: base del proyecto, Biome (lint y formato), Docker local (alternativa descartada), ESLint + Prettier (alternativa descartada), Husky (alternativa descartada), Lefthook (revisiones antes de cada commit) (+18 more)
 
-### Community 6 - "PantallaTv.tsx"
-Cohesion: 0.12
-Nodes (25): DatosTurno, useIntervalo(), useReloj(), barberia, Barbero, barberos, buscarServicio(), DOMINIO (+17 more)
+### Community 6 - "datos.ts"
+Cohesion: 0.13
+Nodes (24): DatosTurno, useIntervalo(), barberia, Barbero, barberos, buscarServicio(), DOMINIO, filaInicial (+16 more)
 
 ### Community 7 - "lib/avisos.ts"
-Cohesion: 0.15
-Nodes (23): activadosAntes(), activarAvisos(), avisoLocal(), avisosActivos(), clavePublica(), confirmarEnElTelefono(), desdePantallaDeInicio(), DESPUES_DE (+15 more)
+Cohesion: 0.14
+Nodes (24): BotonAvisos(), activadosAntes(), activarAvisos(), avisoLocal(), avisosActivos(), clavePublica(), confirmarEnElTelefono(), desdePantallaDeInicio() (+16 more)
 
-### Community 8 - "PantallaTv.tsx"
-Cohesion: 0.15
-Nodes (20): SinConexion(), Anuncio(), BANDA, ESTADO, PantallaTv(), TableroPrototipo(), TableroReal(), VistaTv (+12 more)
+### Community 8 - "Turnstile.tsx"
+Cohesion: 0.33
+Nodes (4): ApiTurnstile, cargarTurnstile(), Turnstile(), Window
 
 ### Community 9 - "Variables de entorno"
 Cohesion: 0.50
@@ -150,67 +144,51 @@ Nodes (3): @fontsource-variable/big-shoulders-display, ImportMeta, ImportMetaEnv
 
 ### Community 11 - "Configuracion.tsx"
 Cohesion: 0.06
-Nodes (65): claseCampo, BarraGuardar(), Cambiar, Campo(), Configuracion(), ConfiguracionPrototipo(), ConfiguracionReal(), guardar() (+57 more)
+Nodes (64): BarraGuardar(), Cambiar, Campo(), Configuracion(), ConfiguracionPrototipo(), ConfiguracionReal(), guardar(), DatosBarberia() (+56 more)
 
 ### Community 12 - "fila.ts"
 Cohesion: 0.06
-Nodes (36): ResumenBarbero, TONOS, ANUNCIO_MS, detectarLlamados(), LlamadosVistos, conLlamado(), libre(), useAnuncios() (+28 more)
-
-### Community 13 - "cx"
-Cohesion: 0.18
-Nodes (15): Franjas(), FranjasProps, Marca(), AbrirMenu, MarcoPrototipo(), MenuPantallas(), CodigoQr(), Estilo (+7 more)
+Nodes (41): VistaTv, ResumenBarbero, tonoDe(), TONOS, ANUNCIO_MS, columnasTv(), ColumnaTv, detectarLlamados() (+33 more)
 
 ### Community 14 - "concurrencia.mjs"
 Cohesion: 0.08
 Nodes (29): admin, anotados, conteo, encabezados, inicio, rpc(), segundos, estado() (+21 more)
 
-### Community 15 - "dueno.ts"
-Cohesion: 0.09
-Nodes (33): AccionesResumen, AlertaPico(), CLASES, FilaAhora(), FilaVista, HorasPico(), Indicador, minutosDesde() (+25 more)
+### Community 15 - "Resumen.tsx"
+Cohesion: 0.14
+Nodes (18): ResumenReal(), BarberiaDueno, BarberoDueno, cargarResumen(), DatosResumen, ejecutar(), ErrorDueno, esquemaReporte (+10 more)
 
 ### Community 19 - "Stack v0.1 con versiones"
 Cohesion: 0.27
 Nodes (10): PHP + MySQL (alternativa descartada), Supabase Pro a USD 25 al mes (alternativa descartada), Vercel (alternativa descartada), Costos en planes gratuitos, Resend (SMTP de Auth), Stack v0.1 con versiones, Arquitectura, Cloudflare Workers (hosting estático) (+2 more)
 
 ### Community 20 - "e2e/utilidades.ts"
-Cohesion: 0.23
+Cohesion: 0.25
 Nodes (15): ADR-0014, anotarPorApi(), BARBERO_CLAVE, BARBERO_CORREO, cancelarPorApi(), CLAVE, datosTurno(), encabezados (+7 more)
 
-### Community 21 - "panel.ts"
-Cohesion: 0.14
-Nodes (22): PanelBarbero(), PanelReal(), SinSilla(), BarberiaPanel, BarberoPanel, cargarPanel(), diaEn(), ejecutar() (+14 more)
+### Community 21 - "PanelBarbero.tsx"
+Cohesion: 0.05
+Nodes (58): Toast(), useToast(), BARBERIA, BARBERO, falso, SERVICIOS, AccionesPanel, ActualVista (+50 more)
 
-### Community 22 - "dueno.test.tsx"
-Cohesion: 0.18
-Nodes (10): BARBERIA, CARLOS, comoDueno(), conConfiguracion(), falso, JORGE, REPORTE, turno() (+2 more)
-
-### Community 23 - "FilaPublica.tsx"
-Cohesion: 0.25
-Nodes (16): BarraPoste(), FilaPrototipo(), FilaPublica(), FilaReal(), Tarjeta(), VistaFila(), useFilaPublica(), detalleBarbero() (+8 more)
+### Community 22 - "Resumen.tsx"
+Cohesion: 0.06
+Nodes (95): ErrorDeRuta(), BarraPoste(), Franjas(), FranjasProps, Poste(), Marca(), AbrirMenu, BotonMarca() (+87 more)
 
 ### Community 24 - "Turno.tsx"
 Cohesion: 0.09
-Nodes (34): Cargando(), Acciones, ADELANTE, aparecer, Atendido(), Cancelar(), COLOR_BARRA, ControlAvisos (+26 more)
-
-### Community 25 - "router.tsx"
-Cohesion: 0.14
-Nodes (10): ErrorDeRuta(), ACTUALIZADO, Dato(), Privacidad(), Seccion(), raiz, configuracionDueno, qrDueno (+2 more)
-
-### Community 27 - "LayoutDueno.tsx"
-Cohesion: 0.17
-Nodes (21): Poste(), BotonMarca(), destinoAlEntrar(), Entrar(), enviar(), Contexto, ContextoDueno, LayoutDueno() (+13 more)
+Nodes (36): Boleto(), Acciones, ADELANTE, aparecer, Atendido(), Cancelar(), COLOR_BARRA, ControlAvisos (+28 more)
 
 ### Community 28 - "Fallo 2 · Endpoints expuestos"
 Cohesion: 0.08
 Nodes (44): Prueba de riesgo 1 superada (Broadcast público con clave publicable), Canal público fila:<barberia_id> (señal vacía), Edge Function unirse-a-fila, Funciones de la base (security definer), Prueba de riesgo 3 · Turnstile + IP, Sprint 1 · Base de datos y seguridad, Adivinar códigos de turno, Amenazas propias de una fila virtual (+36 more)
 
 ### Community 32 - "Unirse.tsx"
-Cohesion: 0.09
-Nodes (34): NoEncontrado(), ApiTurnstile, cargarTurnstile(), Turnstile(), Window, Dato(), deslizar, Envio (+26 more)
+Cohesion: 0.14
+Nodes (28): Dato(), deslizar, Envio, Espera, Formulario(), elegirYSeguir(), ir(), FormularioReal() (+20 more)
 
-### Community 33 - "PanelBarbero.tsx"
-Cohesion: 0.15
-Nodes (16): AccionesPanel, ActualVista, Anillo(), colaInicial, enSilla, Fase, METODOS, minutosDesde() (+8 more)
+### Community 33 - "dueno.test.tsx"
+Cohesion: 0.14
+Nodes (14): BARBERIA, CARLOS, comoDueno(), conConfiguracion(), falso, JORGE, REPORTE, turno() (+6 more)
 
 ### Community 35 - "webpush.ts"
 Cohesion: 0.06
@@ -221,12 +199,8 @@ Cohesion: 0.50
 Nodes (3): imports, @supabase/supabase-js, zod
 
 ### Community 37 - "errores.ts"
-Cohesion: 0.35
-Nodes (9): cargar(), iniciarErrores(), limpiarEvento(), limpiarMiga(), limpiarTexto(), limpiarValor(), reportarError(), Sdk (+1 more)
-
-### Community 38 - "cx"
-Cohesion: 0.13
-Nodes (27): Digito(), DIGITOS, NumeroAnimado(), Props, Avatar(), Boleto(), BotonPrincipal(), Confeti() (+19 more)
+Cohesion: 0.18
+Nodes (11): cargar(), iniciarErrores(), limpiarEvento(), limpiarMiga(), limpiarTexto(), limpiarValor(), reportarError(), Sdk (+3 more)
 
 ### Community 39 - "20261031132532_avisos_web_push.sql"
 Cohesion: 0.12
@@ -272,53 +246,45 @@ Nodes (13): 0. Decisiones antes de empezar (Gus), 10. Revisar antes de imprimir 
 Cohesion: 0.28
 Nodes (7): Waitwhile, Definición de abandono, Alcance del MVP (v0.1), Hoja de ruta v0.1–v0.3, Métricas de éxito, Reporte del día para el dueño, Tasa de abandono
 
-### Community 53 - "panel.test.tsx"
-Cohesion: 0.20
-Nodes (5): BARBERIA, BARBERO, falso, SERVICIOS, TurnoPersonal
-
 ### Community 54 - "claves-vapid.mjs"
 Cohesion: 0.20
 Nodes (5): archivo, carpeta, env, ENV_LOCAL, publica
 
 ### Community 55 - "revisar-build.mjs"
-Cohesion: 0.22
-Nodes (8): archivosDe(), buscarSecretos(), RAIZ, REGLAS, revisar(), rolDelJwt(), TEXTO, valoresProhibidos()
+Cohesion: 0.20
+Nodes (10): archivosDe(), buscarSecretos(), leerEnv(), RAIZ, REGLAS, revisar(), rolDelJwt(), TEXTO (+2 more)
 
 ### Community 58 - "ref_node_fs"
-Cohesion: 0.20
-Nodes (3): ICONOS, poste, publico
+Cohesion: 0.13
+Nodes (7): ICONOS, poste, publico, RAIZ, revisarVariables(), produccion, pruebas
 
 ### Community 59 - "database.types.ts"
-Cohesion: 0.20
-Nodes (9): CompositeTypes, Constants, DatabaseWithoutInternals, DefaultSchema, Enums, Json, Tables, TablesInsert (+1 more)
+Cohesion: 0.18
+Nodes (10): CompositeTypes, Constants, Database, DatabaseWithoutInternals, DefaultSchema, Enums, Json, Tables (+2 more)
 
-### Community 61 - "revisar-produccion.mjs"
-Cohesion: 0.28
-Nodes (6): leerEnv(), leerPruebas(), RAIZ, revisarVariables(), produccion, pruebas
-
-### Community 62 - "Tono"
-Cohesion: 0.22
-Nodes (7): VistaPanel, Miembro, VistaResumen, VistaFilaProps, Fuente, ResultadoUnirse, Tono
+### Community 62 - "lib/unirse.ts"
+Cohesion: 0.16
+Nodes (12): Fuente, anotarse(), claveDe(), ErrorUnirse, esCodigo(), guardarSecreto(), leerSecreto(), MENSAJES (+4 more)
 
 ## Knowledge Gaps
 - **30 isolated node(s):** `RFC-8291`, `ADR-0007`, `ADR-0007`, `ADR-0007`, `RFC-8291` (+25 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 362 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **16 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 361 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **17 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `rpc()` connect `concurrencia.mjs` to `fila.ts`, `lib/avisos.ts`?**
-  _High betweenness centrality (0.053) - this node is a cross-community bridge._
+  _High betweenness centrality (0.063) - this node is a cross-community bridge._
 - **What connects `RFC-8291`, `ADR-0007`, `ADR-0007` to the rest of the system?**
   _30 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Investigación` be split into smaller, more focused modules?**
   _Cohesion score 0.12315270935960591 - nodes in this community are weakly interconnected._
-- **Why does `cx()` connect `cx` to `Unirse.tsx`, `PanelBarbero.tsx`, `PantallaTv.tsx`, `Configuracion.tsx`, `Diagnostico.tsx`, `cx`, `dueno.ts`, `FilaPublica.tsx`, `Turno.tsx`, `LayoutDueno.tsx`?**
-  _High betweenness centrality (0.018) - this node is a cross-community bridge._
+- **Why does `useTitulo()` connect `Resumen.tsx` to `Unirse.tsx`, `datos.ts`, `Configuracion.tsx`, `Diagnostico.tsx`, `Resumen.tsx`, `PanelBarbero.tsx`, `Turno.tsx`?**
+  _High betweenness centrality (0.020) - this node is a cross-community bridge._
 - **Should `Arquitectura detallada` be split into smaller, more focused modules?**
   _Cohesion score 0.12333333333333334 - nodes in this community are weakly interconnected._
-- **Why does `useTitulo()` connect `FilaPublica.tsx` to `Unirse.tsx`, `PanelBarbero.tsx`, `cx`, `PantallaTv.tsx`, `PantallaTv.tsx`, `Configuracion.tsx`, `Diagnostico.tsx`, `cx`, `dueno.ts`, `panel.ts`, `Turno.tsx`, `router.tsx`, `LayoutDueno.tsx`?**
-  _High betweenness centrality (0.018) - this node is a cross-community bridge._
+- **Why does `cx()` connect `Resumen.tsx` to `Unirse.tsx`, `lib/avisos.ts`, `Configuracion.tsx`, `Diagnostico.tsx`, `PanelBarbero.tsx`, `Turno.tsx`?**
+  _High betweenness centrality (0.019) - this node is a cross-community bridge._
 - **Should `20261027140203_base_de_datos.sql` be split into smaller, more focused modules?**
   _Cohesion score 0.08819345661450925 - nodes in this community are weakly interconnected._

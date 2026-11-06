@@ -43,7 +43,12 @@ export interface DatosPanel {
   /** Turnos activos de toda la barbería, del más antiguo al más nuevo. */
   turnos: TurnoPersonal[];
   hoy: { atendidos: number; ingresos: number };
+  /** La cuenta es dueña de la barbería: puede cambiar de silla. */
+  esDueno: boolean;
 }
+
+/** `?silla=elegir`: el dueño pide ver la lista de sillas aunque tenga una propia. */
+export const ELEGIR_SILLA = "elegir";
 
 /** "2026-10-28" en la zona horaria de la barbería: el `dia` de sus turnos. */
 export function diaEn(zona: string, fecha = new Date()) {
@@ -58,19 +63,71 @@ export function diaEn(zona: string, fecha = new Date()) {
 export type ResultadoPanel =
   | { tipo: "listo"; datos: DatosPanel }
   | { tipo: "sin_silla" }
+  /** El dueño todavía no eligió en qué silla atender. */
+  | { tipo: "elegir_silla"; barberia: string; sillas: BarberoPanel[] }
   | { tipo: "error" };
 
-export async function cargarPanel(userId: string): Promise<ResultadoPanel> {
-  const barbero = await supabase
-    .from("barberos")
-    .select("id, nombre, apodo, silla, en_pausa, barberia_id")
-    .eq("user_id", userId)
-    .eq("activo", true)
-    .limit(1)
-    .maybeSingle();
-  if (barbero.error) return { tipo: "error" };
-  if (!barbero.data) return { tipo: "sin_silla" };
-  const { barberia_id: barberiaId, id: barberoId } = barbero.data;
+const COLUMNAS_BARBERO = "id, nombre, apodo, silla, en_pausa, barberia_id";
+
+/**
+ * Qué silla atiende esta cuenta. El barbero, la suya. El dueño, la que eligió (`sillaElegida`);
+ * si no eligió y no tiene una propia, la lista para elegir. La base deja que el dueño atienda
+ * cualquier silla de su barbería (`privado.puede_atender`), así que esto no amplía permisos.
+ */
+export async function cargarPanel(
+  userId: string,
+  sillaElegida: string | null = null,
+): Promise<ResultadoPanel> {
+  const [propia, membresia] = await Promise.all([
+    supabase
+      .from("barberos")
+      .select(COLUMNAS_BARBERO)
+      .eq("user_id", userId)
+      .eq("activo", true)
+      .limit(1)
+      .maybeSingle(),
+    supabase
+      .from("miembros")
+      .select("barberia_id")
+      .eq("user_id", userId)
+      .eq("rol", "dueno")
+      .limit(1)
+      .maybeSingle(),
+  ]);
+  if (propia.error || membresia.error) return { tipo: "error" };
+  const barberiaDueno = membresia.data?.barberia_id ?? null;
+
+  let barbero = propia.data;
+  if (barberiaDueno && sillaElegida && sillaElegida !== ELEGIR_SILLA) {
+    const elegida = await supabase
+      .from("barberos")
+      .select(COLUMNAS_BARBERO)
+      .eq("id", sillaElegida)
+      .eq("barberia_id", barberiaDueno)
+      .eq("activo", true)
+      .maybeSingle();
+    if (elegida.error) return { tipo: "error" };
+    // Una silla que ya no existe o es de otra barbería vuelve a la lista.
+    barbero = elegida.data ?? null;
+    if (!barbero) sillaElegida = ELEGIR_SILLA;
+  }
+
+  if (barberiaDueno && (!barbero || sillaElegida === ELEGIR_SILLA)) {
+    const [barberia, sillas] = await Promise.all([
+      supabase.from("barberias").select("nombre").eq("id", barberiaDueno).single(),
+      supabase
+        .from("barberos")
+        .select(COLUMNAS_BARBERO)
+        .eq("barberia_id", barberiaDueno)
+        .eq("activo", true)
+        .order("silla")
+        .order("nombre"),
+    ]);
+    if (barberia.error || sillas.error) return { tipo: "error" };
+    return { tipo: "elegir_silla", barberia: barberia.data.nombre, sillas: sillas.data };
+  }
+  if (!barbero) return { tipo: "sin_silla" };
+  const { barberia_id: barberiaId, id: barberoId } = barbero;
 
   const barberia = await supabase
     .from("barberias")
@@ -108,7 +165,7 @@ export async function cargarPanel(userId: string): Promise<ResultadoPanel> {
   return {
     tipo: "listo",
     datos: {
-      barbero: barbero.data,
+      barbero,
       barberia: barberia.data,
       servicios: servicios.data,
       turnos: turnos.data,
@@ -117,6 +174,7 @@ export async function cargarPanel(userId: string): Promise<ResultadoPanel> {
         // `numeric` puede llegar como texto: se convierte antes de sumar.
         ingresos: atendidos.data.reduce((total, t) => total + Number(t.monto ?? 0), 0),
       },
+      esDueno: barberiaDueno === barberiaId,
     },
   };
 }
@@ -124,19 +182,19 @@ export async function cargarPanel(userId: string): Promise<ResultadoPanel> {
 export type EstadoPanel = { tipo: "cargando" } | ResultadoPanel;
 
 /** El panel siempre al día: recarga con la señal de la fila de su barbería. */
-export function usePanel(userId: string) {
+export function usePanel(userId: string, sillaElegida: string | null = null) {
   const [estado, setEstado] = useState<EstadoPanel>({ tipo: "cargando" });
   const ultimaPeticion = useRef(0);
 
   const recargar = useCallback(async () => {
     const peticion = ++ultimaPeticion.current;
-    const resultado = await cargarPanel(userId);
+    const resultado = await cargarPanel(userId, sillaElegida);
     if (peticion !== ultimaPeticion.current) return;
     // Con datos en pantalla, un error de red no los borra; el siguiente aviso vuelve a intentar.
     setEstado((anterior) =>
       resultado.tipo === "error" && anterior.tipo === "listo" ? anterior : resultado,
     );
-  }, [userId]);
+  }, [userId, sillaElegida]);
 
   useEffect(() => {
     setEstado({ tipo: "cargando" });

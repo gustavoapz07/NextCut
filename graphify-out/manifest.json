@@ -6,9 +6,9 @@
     "semantic_hash": ""
   },
   "docs/bitacora.md": {
-    "mtime": 1793893722.1922853,
-    "seen": 1793893731.9002864,
-    "ast_hash": "e9648b167b2f2830b311430b30c27006",
+    "mtime": 1794006315.2626586,
+    "seen": 1794006323.8694465,
+    "ast_hash": "c8dc8b2ac9c84e05ec715062f8df8c0e",
     "semantic_hash": ""
   },
   "docs/decisiones.md": {
@@ -156,9 +156,9 @@
     "semantic_hash": ""
   },
   "app/src/features/barbero/PanelBarbero.tsx": {
-    "mtime": 1793234430.8332903,
-    "seen": 1793234875.7348213,
-    "ast_hash": "1a5cee205ff9ea17782de5ccf376cfce",
+    "mtime": 1793895717.5440083,
+    "seen": 1794006212.8682258,
+    "ast_hash": "9f6a87db16aa3b9931cec4748e16144a",
     "semantic_hash": ""
   },
   "app/src/features/dueno/CodigoQr.tsx": {
@@ -390,15 +390,15 @@
     "semantic_hash": ""
   },
   "app/src/features/barbero/panel.test.tsx": {
-    "mtime": 1793234479.4056766,
-    "seen": 1793234875.7348242,
-    "ast_hash": "2d0e980bf14e6a1580e6c052c8a12ce7",
+    "mtime": 1793895741.1396396,
+    "seen": 1794006212.8682294,
+    "ast_hash": "d9e6ff55da9d4f963355393463c81b03",
     "semantic_hash": ""
   },
   "app/src/lib/panel.ts": {
-    "mtime": 1793234728.289163,
-    "seen": 1793234875.7348635,
-    "ast_hash": "109a99366519cb45d99bd1bdd7492be0",
+    "mtime": 1793895692.8444865,
+    "seen": 1794006212.8683019,
+    "ast_hash": "cc71effcf9656dfe1f9623ea0e21ffb1",
     "semantic_hash": ""
   },
   "app/src/lib/sesion.ts": {
@@ -744,15 +744,21 @@
     "semantic_hash": ""
   },
   "docs/produccion.md": {
-    "mtime": 1793893722.186002,
-    "seen": 1793893731.9002967,
-    "ast_hash": "e3e085c4b3f0fe6cf47fb9da4c61f893",
+    "mtime": 1793895405.1913712,
+    "seen": 1793895420.679984,
+    "ast_hash": "59f689080c183569bb83bf0086bd1362",
     "semantic_hash": ""
   },
   "scripts/produccion/secretos.mjs": {
     "mtime": 1793893380.2621343,
     "seen": 1793893406.7533586,
     "ast_hash": "0926cf896bb401514dd60e5f482d9d4b",
+    "semantic_hash": ""
+  },
+  "tests/e2e/dueno-silla.spec.ts": {
+    "mtime": 1793895828.0847366,
+    "seen": 1794006212.8684795,
+    "ast_hash": "c2b8a8bd4b5f5a8835a538b67bf9dfc3",
     "semantic_hash": ""
   }
 }

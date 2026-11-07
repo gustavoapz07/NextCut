@@ -756,7 +756,7 @@ function Dato({ titulo, valor }: { titulo: string; valor: string }) {
 function Imprimiendo({ nombre, numero }: { nombre: string; numero: number }) {
   return (
     <motion.div
-      className="fixed inset-0 z-50 grid place-items-center overflow-hidden bg-poste-rojo text-white"
+      className="fixed inset-0 z-50 grid place-items-center overflow-hidden bg-noche text-hueso"
       initial={{ clipPath: "circle(0% at 50% 100%)" }}
       animate={{ clipPath: "circle(150% at 50% 100%)" }}
       transition={{ duration: 0.75, ease: [0.7, 0, 0.3, 1] }}

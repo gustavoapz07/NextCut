@@ -137,7 +137,7 @@ function vistaReal(datos: DatosResumen, ahora: Date): Omit<VistaResumen, "cambia
         valor: reporte.atendidos,
         detalle: `${reporte.turnos} ${reporte.turnos === 1 ? "turno" : "turnos"} hoy`,
         icono: Scissors,
-        clase: CLASES.rojo,
+        clase: CLASES.tinta,
       },
       {
         titulo: "Ingresos registrados",
@@ -148,7 +148,7 @@ function vistaReal(datos: DatosResumen, ahora: Date): Omit<VistaResumen, "cambia
             ? `${lempiras(Math.round(reporte.ingresos / reporte.atendidos))} por cliente`
             : "Todavía sin cobros",
         icono: Wallet,
-        clase: CLASES.tinta,
+        clase: CLASES.suave,
       },
       {
         titulo: "Espera promedio",
@@ -283,7 +283,7 @@ function ResumenPrototipo() {
         valor: r.atendidos,
         detalle: "4 más que el lunes pasado",
         icono: Scissors,
-        clase: CLASES.rojo,
+        clase: CLASES.tinta,
       },
       {
         titulo: "Ingresos registrados",
@@ -291,7 +291,7 @@ function ResumenPrototipo() {
         formato: lempiras,
         detalle: `${lempiras(Math.round(r.ingresos / r.atendidos))} por cliente`,
         icono: Wallet,
-        clase: CLASES.tinta,
+        clase: CLASES.suave,
       },
       {
         titulo: "Espera promedio",

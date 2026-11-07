@@ -103,7 +103,7 @@ Cada decisión importante queda aquí con su contexto, las alternativas consider
 
 ## ADR-010 · Prototipo de diseño antes de la validación e identidad visual
 
-- **Fecha:** 27/10/2026 · **Estado:** aceptada · cambia el orden del [plan de implementación](plan-implementacion.md#9-sprints)
+- **Fecha:** 27/10/2026 · **Estado:** aceptada · cambia el orden del [plan de implementación](plan-implementacion.md#9-sprints) · la paleta y el logo (punto 2) los reemplaza [ADR-018](#adr-018--paleta-monocroma-con-ladrillo-y-marino)
 - **Contexto:** el plan pedía validar en campo antes de construir. El autor decidió dejar por ahora la validación y el resto del Sprint 0, y concentrarse en diseñar y desarrollar, empezando por definir cómo se ve el producto.
 - **Decisión:**
   1. Se construye un **prototipo navegable sin backend** de todas las pantallas de la v0.1: portada, fila pública (`/b/:slug`), anotarse (`/b/:slug/unirse`), turno en vivo (`/t/:codigo`), TV (`/b/:slug/tv`), entrar (`/entrar`), panel del barbero (`/panel`) y dueño (`/dueno`, `/dueno/configuracion`, `/dueno/qr`). Los datos son de ejemplo (`app/src/prototipo/`) y una simulación mueve la fila sola para mostrar el tiempo real.
@@ -206,3 +206,16 @@ Cada decisión importante queda aquí con su contexto, las alternativas consider
   4. **La Edge Function `salud` revisa la base y el reloj de pg_cron.** Llama a `estado_salud()`, que solo puede usar la clave secreta y dice si `vencer_tolerancia` corrió bien en los últimos 3 minutos. Si el reloj se detiene, el "no llegó" automático y los avisos dejan de funcionar aunque la app se vea bien. Responde 200 o 503, acepta GET y HEAD, espera 5 segundos como máximo y no da detalles del error ni datos de las barberías. No pide sesión, para que UptimeRobot la pueda consultar.
 - **Alternativas:** *Cargar Sentry con la app:* sumaría 30 KB o más a cada primera visita para un error que casi nunca pasa. *Las listas de datos sensibles de Sentry en el servidor:* llegan después de que el dato salió del teléfono. *Un endpoint de salud que solo responda "ok":* no se enteraría de que pg_cron se detuvo.
 - **Consecuencias:** hay que crear el proyecto en Sentry, poner su DSN en `.env.pruebas` (es público: termina dentro del JavaScript) y activar en Sentry "Prevent Storing of IP Addresses". El monitor de UptimeRobot hay que crearlo a mano con la URL de `salud`. Los errores que pasan antes de que cargue el SDK solo llegan si rompen una ruta.
+
+## ADR-018 · Paleta monocroma con ladrillo y marino
+
+- **Fecha:** 06/11/2026 · **Estado:** aceptada · reemplaza el punto 2 de [ADR-010](#adr-010--prototipo-de-diseño-antes-de-la-validación-e-identidad-visual)
+- **Contexto:** con el rojo y el azul del poste rellenando botones, tarjetas y pantallas completas, la app se seguía viendo chillona. El autor pidió una paleta más neutra y conservar las tipografías.
+- **Decisión:**
+  1. **Base monocroma:** papel gris cálido `#f4f3f0`, tinta grafito `#1a1918` y grises intermedios. En modo oscuro, fondo `#121211` y tinta `#f0eeea`.
+  2. **Dos acentos apagados** que solo aparecen cuando dicen algo: ladrillo `#a63d30` para lo urgente ("te toca", errores, pausa) y marino `#2f4b73` para lo informativo ("ya casi", estados en vivo). Son el rojo y el azul del poste sin brillo, así la app se sigue reconociendo como de barbería. Las franjas del poste siguen siendo el motivo, en ladrillo, blanco y marino. Con texto blanco encima dan 6.3:1 y 8.8:1 de contraste.
+  3. **La acción principal va en grafito** (token `primario`, que en modo oscuro se vuelve claro), no en rojo: botón grande, "Llamar siguiente", imprimir, guardar e invitar.
+  4. **Los nombres de los tokens no cambian** (`poste-rojo`, `poste-azul`, `hueso`, `noche`) para no tocar cada pantalla; el comentario de `index.css` explica que hoy son ladrillo, marino, gris y grafito.
+  5. **Logo: el boleto del turno.** Un boleto con muescas, línea punteada y la "N" recortada, más "NEXT" de rótulo y "CUT" ligera. Es el mismo boleto que ve el cliente en su turno, así la marca dice "tienes tu lugar" en vez de "barbería". El punto ladrillo del talón es el único color. La N es un trazo, no texto, para verse igual sin la fuente y en el favicon. El poste deja de ser logo y queda en franjas, barras de progreso y la pantalla de carga.
+- **Alternativas:** *Logos:* el poste mínimo anterior se sentía genérico (lo usa cualquier barbería); se compararon una X de NEXT hecha tijera, tres barras como fila y el nombre cortado en diagonal, y el autor eligió el boleto. *Arcilla `#a14e3c` y pizarra `#4a5b74`:* se probó primero; se veía demasiado café y gris. *Óxido y petróleo* (azul verdoso) y *cobre y acero:* se compararon y se alejaban del poste. *Grafito y arcilla con los acentos en botones:* más color del necesario. *Hueso suavizado* (bajar la saturación y dejar todo lo demás igual): los rellenos grandes seguían siendo de color.
+- **Consecuencias:** los estilos del cartel QR ahora se llaman Clásico, Noche, Ladrillo y Marino. Los íconos PNG se regeneraron con `scripts/iconos.mjs`.

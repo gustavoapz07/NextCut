@@ -1,34 +1,39 @@
 @import "tailwindcss";
 
 /*
- * Identidad de NextCut: los tres colores del poste de barbería (rojo, blanco y azul)
- * sobre papel hueso y tinta azul noche. Rojo y azul van en tonos profundos, de barbería
- * clásica, para que el conjunto no se vea chillón.
- * - Tokens semánticos (fondo, tinta, rojo, azul…): cambian en modo oscuro y sirven para texto.
- * - Tokens fijos (poste-rojo, poste-azul, hueso, noche): rellenos que llevan texto blanco.
+ * Identidad de NextCut: monocromo (papel gris cálido y tinta grafito) con dos acentos
+ * apagados del poste de barbería: ladrillo para lo urgente ("te toca", errores) y marino
+ * para lo informativo ("ya casi", estados). El color se gana su lugar; casi todo es gris.
+ * - Tokens semánticos (fondo, tinta, rojo, azul, primario…): cambian en modo oscuro.
+ * - Tokens fijos (poste-rojo, poste-azul, hueso, noche): rellenos que llevan texto claro.
+ *   Los nombres vienen de la paleta anterior (ADR-010); hoy "rojo" es ladrillo y "azul", marino.
  */
 :root {
-  --fondo: #f3eee4;
-  --superficie: #fffcf6;
-  --superficie-2: #e8e0d0;
-  --tinta: #0d1430;
-  --tenue: #565c7a;
-  --borde: rgb(13 20 48 / 0.14);
-  --rojo: #b8312a;
-  --azul: #2c4d96;
+  --fondo: #f4f3f0;
+  --superficie: #fdfcfa;
+  --superficie-2: #e7e5e0;
+  --tinta: #1a1918;
+  --tenue: #66635d;
+  --borde: rgb(26 25 24 / 0.13);
+  --rojo: #9a3527;
+  --azul: #2c4669;
+  --primario: #1a1918;
+  --sobre-primario: #f4f3f0;
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --fondo: #0a0f24;
-    --superficie: #121a38;
-    --superficie-2: #1c2550;
-    --tinta: #f3eee4;
-    --tenue: #a3a9c6;
-    --borde: rgb(243 238 228 / 0.14);
-    --rojo: #e8736a;
-    --azul: #93a8e6;
+    --fondo: #121211;
+    --superficie: #1b1b19;
+    --superficie-2: #292826;
+    --tinta: #f0eeea;
+    --tenue: #a6a39c;
+    --borde: rgb(240 238 234 / 0.13);
+    --rojo: #e48a7c;
+    --azul: #9db3d6;
+    --primario: #f0eeea;
+    --sobre-primario: #1a1918;
     color-scheme: dark;
   }
 }
@@ -42,14 +47,16 @@
   --color-borde: var(--borde);
   --color-rojo: var(--rojo);
   --color-azul: var(--azul);
+  --color-primario: var(--primario);
+  --color-sobre-primario: var(--sobre-primario);
 }
 
 @theme {
-  --color-poste-rojo: #b8312a;
-  --color-poste-azul: #2c4d96;
-  --color-hueso: #f3eee4;
-  --color-noche: #0a0f24;
-  --color-noche-2: #141b3a;
+  --color-poste-rojo: #a63d30;
+  --color-poste-azul: #2f4b73;
+  --color-hueso: #f4f3f0;
+  --color-noche: #1a1918;
+  --color-noche-2: #262523;
 
   --font-sans: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
   --font-display:
@@ -136,8 +143,8 @@ body {
 }
 
 ::selection {
-  background-color: var(--color-poste-rojo);
-  color: #fff;
+  background-color: var(--tinta);
+  color: var(--fondo);
 }
 
 :focus-visible {

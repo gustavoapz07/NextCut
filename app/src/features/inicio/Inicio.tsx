@@ -162,7 +162,7 @@ export function Inicio() {
                 <li key={p.ruta}>
                   <Link
                     to={p.ruta}
-                    className="group relative flex h-full flex-col gap-8 overflow-hidden rounded-[2rem] bg-superficie p-5 ring-1 ring-borde transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-24px_rgb(13_20_48/0.5)] hover:ring-tinta"
+                    className="group relative flex h-full flex-col gap-8 overflow-hidden rounded-[2rem] bg-superficie p-5 ring-1 ring-borde transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-24px_rgb(26_25_24/0.5)] hover:ring-tinta"
                   >
                     <span className="flex items-start justify-between">
                       <span className="grid size-12 place-items-center rounded-2xl bg-tinta text-fondo transition-colors duration-300 group-hover:bg-poste-rojo group-hover:text-white">

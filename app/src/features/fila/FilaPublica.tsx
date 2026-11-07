@@ -263,7 +263,7 @@ function VistaFila({
 
         <section aria-labelledby="t-fila" className="mt-4 px-4">
           <motion.div
-            className="relative overflow-hidden rounded-[2rem] bg-tinta px-6 pt-8 pb-6 text-fondo shadow-[0_24px_50px_-24px_rgb(13_20_48/0.7)]"
+            className="relative overflow-hidden rounded-[2rem] bg-tinta px-6 pt-8 pb-6 text-fondo shadow-[0_24px_50px_-24px_rgb(26_25_24/0.7)]"
             initial={{ rotate: 0, scale: 0.96, opacity: 0 }}
             animate={{ rotate: -1.5, scale: 1, opacity: 1 }}
             transition={{ delay: 0.15, type: "spring", stiffness: 90, damping: 13 }}
@@ -312,7 +312,7 @@ function VistaFila({
             <li>
               <Tarjeta
                 to={abierta ? unirse("cualquiera") : null}
-                className="group relative flex items-center gap-4 overflow-hidden rounded-[1.75rem] bg-poste-azul p-4 pl-6 text-white transition active:scale-[0.98]"
+                className="group relative flex items-center gap-4 overflow-hidden rounded-[1.75rem] bg-noche p-4 pl-6 text-hueso ring-1 ring-white/10 transition active:scale-[0.98]"
               >
                 <Franjas vertical className="absolute inset-y-0 left-0 w-2" ancho={5} />
                 <span className="grid size-14 shrink-0 place-items-center rounded-full bg-white/15">

@@ -143,7 +143,7 @@ function MenuPantallas({ abierto, onCerrar }: { abierto: boolean; onCerrar: () =
                             cx(
                               "flex items-center gap-3 rounded-2xl px-4 py-2.5 transition",
                               isActive && !search
-                                ? "bg-poste-rojo text-white"
+                                ? "bg-primario text-sobre-primario"
                                 : "hover:bg-superficie-2",
                             )
                           }

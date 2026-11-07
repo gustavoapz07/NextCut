@@ -83,7 +83,7 @@ export function Avatar({
 }
 
 const CLASE_PRINCIPAL =
-  "group relative flex h-16 w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-poste-rojo px-6 font-display text-2xl font-extrabold tracking-wide text-white uppercase shadow-[0_10px_24px_-16px_rgb(10_15_36/0.55)] transition active:scale-[0.97] disabled:pointer-events-none disabled:opacity-40 disabled:shadow-none";
+  "group relative flex h-16 w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-primario px-6 font-display text-2xl font-extrabold tracking-wide text-sobre-primario uppercase shadow-[0_10px_24px_-16px_rgb(26_25_24/0.55)] transition active:scale-[0.97] disabled:pointer-events-none disabled:opacity-40 disabled:shadow-none";
 
 function RellenoPrincipal({ children, flecha }: { children: ReactNode; flecha: boolean }) {
   return (
@@ -99,7 +99,7 @@ function RellenoPrincipal({ children, flecha }: { children: ReactNode; flecha: b
   );
 }
 
-/** El botón rojo grande: la acción principal de cada pantalla. */
+/** El botón grande en grafito: la acción principal de cada pantalla. */
 export function BotonPrincipal({
   children,
   className,
@@ -150,7 +150,7 @@ export function Boleto({
   className?: string;
 }) {
   return (
-    <div className={cx("text-tinta drop-shadow-[0_18px_28px_rgb(13_20_48/0.2)]", className)}>
+    <div className={cx("text-tinta drop-shadow-[0_18px_28px_rgb(26_25_24/0.2)]", className)}>
       <div className="muesca-abajo rounded-t-[1.75rem] bg-superficie px-6 pt-6 pb-5">{arriba}</div>
       <div className="relative muesca-arriba rounded-b-[1.75rem] bg-superficie px-6 pt-5 pb-6">
         <div

@@ -558,7 +558,7 @@ function Panel({
                     : "No hay nadie en fila"
               }
               icono={Megaphone}
-              className="col-span-2 h-28 bg-poste-rojo text-white"
+              className="col-span-2 h-28 bg-primario text-sobre-primario"
               disabled={ocupado || fase !== "libre" || !siguiente || pausa}
               onClick={acciones.llamar}
             />
@@ -910,7 +910,7 @@ function HojaTerminar({
       />
       <motion.section
         aria-label={`Cerrar el turno #${turno.numero}`}
-        className="fixed inset-x-0 bottom-0 z-50 mx-auto max-w-lg rounded-t-[2.25rem] bg-fondo px-5 pt-3 pb-[max(1.25rem,env(safe-area-inset-bottom))] shadow-[0_-20px_60px_-20px_rgb(10_15_36/0.6)]"
+        className="fixed inset-x-0 bottom-0 z-50 mx-auto max-w-lg rounded-t-[2.25rem] bg-fondo px-5 pt-3 pb-[max(1.25rem,env(safe-area-inset-bottom))] shadow-[0_-20px_60px_-20px_rgb(26_25_24/0.6)]"
         initial={{ y: "100%" }}
         animate={{ y: 0 }}
         exit={{ y: "100%" }}

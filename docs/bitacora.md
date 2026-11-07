@@ -488,3 +488,17 @@ Cada cambio del proyecto queda aquí, enlazado al documento que afecta. El grafo
 - **Pruebas:** 2 de Vitest nuevas (335 en total) y una de Playwright (`tests/e2e/dueno-silla.spec.ts`): con la cuenta de prueba, el dueño entra a su silla, cambia a otra y la silla elegida sigue después de recargar. `barbero.spec.ts` sigue pasando.
 - **Publicado** en producción con la aprobación del autor (versión `79e70a82`). El archivo del panel en línea ya trae la pantalla para elegir silla.
 
+## 2026-11-06 · Paleta neutra y carga inicial
+
+- **Qué:** rediseño de color pedido por el autor: menos chillón, mismas tipografías. Decisión en [ADR-018](decisiones.md#adr-018--paleta-monocroma-con-ladrillo-y-marino).
+- **Paleta** (`app/src/index.css`): monocromo gris y grafito con ladrillo (`#a63d30`) y marino (`#2f4b73`) como acentos, elegidos por el autor entre cuatro parejas (la primera, arcilla y pizarra, se veía demasiado café); token nuevo `primario` / `sobre-primario` para la acción principal.
+- **Pantallas:**
+  - botón principal, "Llamar siguiente", imprimir cartel, guardar e invitar pasan de rojo a grafito;
+  - "El primero libre" (fila pública) y la animación de "¡Listo!" al anotarse pasan de azul y rojo a grafito;
+  - en el resumen del dueño, "Atendidos" va en grafito e "Ingresos" en blanco; solo "En fila ahora" lleva pizarra;
+  - los colores escritos a mano (barra del navegador por estado del turno, QR, favicon, manifiesto, sombras) siguen la paleta nueva, y los íconos PNG se regeneraron.
+- **Arreglo:** en el celular, la pastilla blanca de la pestaña activa del dueño quedaba flotando sobre el resumen y tapaba "Abandonos". La barra de abajo ahora es `layoutRoot` de motion.
+- **Logo nuevo:** el boleto del turno (muescas, línea punteada, la "N" recortada y un punto ladrillo) reemplaza al poste mínimo, que se sentía genérico. El autor lo eligió entre cuatro ideas. Cambian `Marca.tsx` (exporta también `Boleto`), `favicon.svg`, `scripts/iconos.mjs` y los íconos PNG regenerados. Revisado en la fila, el turno, el panel, el dueño, el cartel QR y la TV, en claro y oscuro.
+- **Carga:** el build precarga las dos fuentes en su versión latina y abre la conexión con Supabase desde el HTML (plugin `cargaInicial` en `vite.config.ts`). El resto ya estaba bien repartido: cada pantalla carga aparte.
+- **Pruebas:** lint, tipos y Vitest (361) pasan. Revisado en el navegador a 375 px en claro y oscuro (fila pública, anotarse, turno, panel del barbero, entrar) y a 1280 px (TV, resumen y QR del dueño).
+

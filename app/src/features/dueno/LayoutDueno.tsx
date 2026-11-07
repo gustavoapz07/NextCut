@@ -224,7 +224,10 @@ function MarcoDueno({ contexto, onSalir }: { contexto: ContextoDueno; onSalir?: 
           <Outlet />
         </main>
 
-        <nav
+        {/* layoutRoot: la barra es fija, así la pestaña activa se mide contra ella y no contra
+            la página con scroll (si no, la pastilla blanca quedaba flotando sobre el contenido). */}
+        <motion.nav
+          layoutRoot
           aria-label="Secciones del dueño"
           className={cx(
             "fixed inset-x-3 bottom-3 z-30 mx-auto grid max-w-md gap-1 rounded-full bg-noche p-1.5 text-hueso shadow-2xl ring-1 ring-white/10 lg:hidden print:hidden",
@@ -258,7 +261,7 @@ function MarcoDueno({ contexto, onSalir }: { contexto: ContextoDueno; onSalir?: 
               )}
             </NavLink>
           ))}
-        </nav>
+        </motion.nav>
       </div>
     </Contexto.Provider>
   );

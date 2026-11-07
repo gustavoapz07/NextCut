@@ -325,11 +325,11 @@ const TEMAS = {
 };
 
 const COLOR_BARRA: Record<keyof typeof TEMAS, string> = {
-  esperando: "#f3eee4",
-  casi: "#2c4d96",
-  llamado: "#b8312a",
-  en_silla: "#0a0f24",
-  final: "#f3eee4",
+  esperando: "#f4f3f0",
+  casi: "#2f4b73",
+  llamado: "#a63d30",
+  en_silla: "#1a1918",
+  final: "#f4f3f0",
 };
 
 function PantallaTurno({

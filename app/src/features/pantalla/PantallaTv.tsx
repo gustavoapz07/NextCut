@@ -287,7 +287,7 @@ function Tablero({ vista }: { vista: VistaTv }) {
             value={vista.qr}
             size={256}
             bgColor="transparent"
-            fgColor="#0a0f24"
+            fgColor="#1a1918"
             title="Código QR para anotarse en la fila"
             className="h-[9.5vh] min-h-16 w-auto"
           />

@@ -7,24 +7,23 @@ import { chromium } from "@playwright/test";
 
 const publico = new URL("../app/public/", import.meta.url);
 const svg = await readFile(new URL("favicon.svg", publico), "utf8");
-// El poste solo, sin el fondo redondeado, para los íconos a sangre y la insignia.
-const poste = svg.replace(/<rect width="64" height="64" rx="16" fill="#0a0f24"\/>/, "");
+// El boleto solo, sin el fondo redondeado, para los íconos a sangre y la insignia.
+const boleto = svg.replace(/<rect width="64" height="64" rx="16" fill="#1a1918"\/>/, "");
+if (boleto === svg) throw new Error("favicon.svg cambió: no encontré el fondo redondeado");
 
 const ICONOS = [
   // Tal cual el favicon, con las esquinas redondeadas.
   { archivo: "icono-192.png", tamano: 192, html: svg },
   { archivo: "icono-512.png", tamano: 512, html: svg },
-  // A sangre: Android (maskable) y iPhone recortan la forma ellos mismos. El poste queda dentro
+  // A sangre: Android (maskable) y iPhone recortan la forma ellos mismos. El boleto queda dentro
   // de la zona segura (el círculo central del 80 %).
-  { archivo: "icono-mascara-512.png", tamano: 512, fondo: "#0a0f24", html: poste, escala: 0.62 },
-  { archivo: "apple-touch-icon.png", tamano: 180, fondo: "#0a0f24", html: poste, escala: 0.78 },
+  { archivo: "icono-mascara-512.png", tamano: 512, fondo: "#1a1918", html: boleto, escala: 0.62 },
+  { archivo: "apple-touch-icon.png", tamano: 180, fondo: "#1a1918", html: boleto, escala: 0.78 },
   // Insignia de la barra de Android: solo la silueta, en blanco sobre transparente.
   {
     archivo: "insignia-96.png",
     tamano: 96,
-    html: poste
-      .replace(/fill="url\(#franjas\)"/, 'fill="#fff"')
-      .replace(/stroke="#f3eee4"/, 'stroke="#fff"'),
+    html: boleto.replace(/fill="#f4f3f0"/, 'fill="#fff"').replace(/fill="#a63d30"/, 'fill="#fff"'),
     escala: 0.9,
   },
 ];

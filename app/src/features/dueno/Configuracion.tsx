@@ -115,7 +115,7 @@ function BarraGuardar({
             type="button"
             onClick={onGuardar}
             disabled={guardando}
-            className="rounded-full bg-poste-rojo px-5 py-2.5 text-sm font-bold text-white disabled:opacity-70"
+            className="rounded-full bg-primario px-5 py-2.5 text-sm font-bold text-sobre-primario disabled:opacity-70"
           >
             {guardando ? "Guardando…" : "Guardar"}
           </button>
@@ -976,7 +976,7 @@ function Equipo({ onCambio }: { onCambio: () => void }) {
           />
           <button
             type="submit"
-            className="flex h-14 shrink-0 items-center justify-center gap-2 rounded-2xl bg-poste-rojo px-6 font-bold text-white transition active:scale-[0.97]"
+            className="flex h-14 shrink-0 items-center justify-center gap-2 rounded-2xl bg-primario px-6 font-bold text-sobre-primario transition active:scale-[0.97]"
           >
             <UserPlus className="size-5" /> Invitar
           </button>
@@ -1124,7 +1124,7 @@ function Deslizador({
         max={max}
         value={valor}
         onChange={(e) => onCambio(Number(e.target.value))}
-        className="mt-4 w-full accent-poste-rojo"
+        className="mt-4 w-full accent-tinta"
       />
     </div>
   );

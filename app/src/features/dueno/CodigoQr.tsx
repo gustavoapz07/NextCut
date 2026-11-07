@@ -18,17 +18,17 @@ const ESTILOS = {
   noche: {
     nombre: "Noche",
     cartel: "bg-noche text-hueso",
-    acento: "text-[#e8736a]",
+    acento: "text-[#e48a7c]",
     muestra: "bg-noche",
   },
   rojo: {
-    nombre: "Rojo",
+    nombre: "Ladrillo",
     cartel: "bg-poste-rojo text-white",
     acento: "text-white",
     muestra: "bg-poste-rojo",
   },
   azul: {
-    nombre: "Azul",
+    nombre: "Marino",
     cartel: "bg-poste-azul text-white",
     acento: "text-white",
     muestra: "bg-poste-azul",
@@ -99,7 +99,7 @@ export function CodigoQr() {
                 value={enlaceQr}
                 size={200}
                 level="M"
-                fgColor="#0a0f24"
+                fgColor="#1a1918"
                 bgColor="#ffffff"
                 title={`Código QR de la fila de ${barberia.nombre}`}
                 className="h-auto w-[min(200px,52vw)]"
@@ -147,7 +147,7 @@ export function CodigoQr() {
             <button
               type="button"
               onClick={() => window.print()}
-              className="mt-4 flex h-14 w-full items-center justify-center gap-2 rounded-full bg-poste-rojo font-display text-xl font-extrabold tracking-wide text-white uppercase transition active:scale-[0.97]"
+              className="mt-4 flex h-14 w-full items-center justify-center gap-2 rounded-full bg-primario font-display text-xl font-extrabold tracking-wide text-sobre-primario uppercase transition active:scale-[0.97]"
             >
               <Printer className="size-5" /> Imprimir cartel
             </button>

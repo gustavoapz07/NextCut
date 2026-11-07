@@ -246,3 +246,15 @@ Cada decisión importante queda aquí con su contexto, las alternativas consider
   4. **La cuenta admin no es dueña de ninguna barbería.** Se borró la Barbería Demo de producción. Para enseñar NextCut en las visitas se da de alta una barbería con otro correo, como cualquier otra.
 - **Alternativas:** *Dejar el enlace en el panel del dueño:* mezcla los papeles. *Un selector de papel al entrar:* sobra mientras una cuenta tenga un solo papel.
 - **Consecuencias:** quien administra y quien atiende una barbería usan cuentas distintas. Si el autor quiere una barbería de demostración, necesita un segundo correo.
+
+## ADR-019 · El dueño atiende cualquier silla desde su resumen
+
+- **Fecha:** 07/11/2026 · **Estado:** aceptada
+- **Contexto:** cuando un barbero no puede atender (se fue, está ocupado o faltó), sus clientes se quedan esperando. El dueño ya podía cubrirlo desde `/panel` eligiendo esa silla, pero el camino estaba escondido y lo sacaba de su resumen.
+- **Decisión:**
+  1. **Sección "Sillas" en el resumen del dueño,** debajo de los indicadores: una tarjeta por barbero activo con su estado (libre, llamado, atendiendo o en pausa), a quién tiene, cuántos hay en su fila y a quién llamaría.
+  2. **Lo que se puede hacer depende del momento:** libre → "Llamar siguiente"; llamado → "Empezar", "No llegó" y "Avisarle por WhatsApp" si dejó número; atendiendo → "Terminar y cobrar" (servicio, monto con el precio del servicio y forma de pago); en pausa → "Quitar pausa".
+  3. **Las mismas funciones de la base que el panel del barbero** (`llamar_siguiente`, `empezar_turno`, `marcar_no_llego`, `terminar_turno`, `pausar_barbero`). La base ya deja que el dueño las use en cualquier silla de su barbería (`privado.puede_atender`), así que no hay permisos nuevos ni migración.
+  4. **"Abrir su panel completo"** queda como enlace en cada tarjeta, para quien prefiera la pantalla del barbero.
+- **Alternativas:** *Pasar los turnos del barbero ausente a otra silla:* sirve cuando el barbero no vuelve en todo el día; queda para después si hace falta. *Solo un enlace al panel del barbero:* era lo que había y no se encontraba.
+- **Consecuencias:** el corte que cierra el dueño cuenta para el barbero de esa silla en el reporte del día, igual que cuando lo cierra el barbero.

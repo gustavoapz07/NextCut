@@ -120,6 +120,8 @@ function turno(numero: number, cambios: Partial<TurnoDueno> = {}): TurnoDueno {
     estado: "esperando",
     oculto: false,
     creado_en: new Date(Date.now() - 12 * 60_000).toISOString(),
+    servicio_id: "s-corte",
+    telefono: null,
     ...cambios,
   };
 }
@@ -131,6 +133,10 @@ function comoDueno(cambios: { reporte?: ReporteDia; turnos?: TurnoDueno[] } = {}
     miembros: { barberia_id: BARBERIA.id },
     barberias: BARBERIA,
     barberos: [CARLOS, JORGE],
+    servicios: [
+      { id: "s-barba", nombre: "Barba", precio_ref: 100 },
+      { id: "s-corte", nombre: "Corte", precio_ref: 150 },
+    ],
     turnos: cambios.turnos ?? [
       turno(8, { nombre: "Ana Pérez", barbero_id: CARLOS.id, estado: "en_silla" }),
       turno(9, { nombre: "Luis Mejía", barbero_id: CARLOS.id }),
@@ -217,11 +223,94 @@ describe("panel del dueño", () => {
   it("la fila muestra quien espera o fue llamado, con nombre completo y su barbero", async () => {
     comoDueno();
     abrir("/dueno");
-    expect(await screen.findByText("Luis Mejía")).toBeInTheDocument();
-    expect(screen.getByText("Marta Díaz")).toBeInTheDocument();
+    const fila = within(await screen.findByRole("region", { name: "Fila ahora" }));
+    expect(fila.getByText("Luis Mejía")).toBeInTheDocument();
+    expect(fila.getByText("Marta Díaz")).toBeInTheDocument();
     // Quien ya está en la silla no está en la fila.
-    expect(screen.queryByText("Ana Pérez")).not.toBeInTheDocument();
-    expect(screen.getByText("El primero")).toBeInTheDocument();
+    expect(fila.queryByText("Ana Pérez")).not.toBeInTheDocument();
+    expect(fila.getByText("El primero")).toBeInTheDocument();
+  });
+
+  describe("atender una silla desde el resumen", () => {
+    it("cada silla dice a quién tiene y a quién llamaría", async () => {
+      comoDueno();
+      abrir("/dueno");
+      const carlos = within(await screen.findByRole("listitem", { name: "Silla de Carlos" }));
+      expect(carlos.getByText("Atendiendo")).toBeInTheDocument();
+      expect(carlos.getByText("Ana Pérez")).toBeInTheDocument();
+      const jorge = within(screen.getByRole("listitem", { name: "Silla de Jorge" }));
+      expect(jorge.getByText("Libre")).toBeInTheDocument();
+      // A Jorge le toca "el primero libre" (Marta); Luis es de Carlos.
+      expect(jorge.getByText("1 en su fila")).toBeInTheDocument();
+      expect(jorge.getByText("Sigue #10 Marta D.")).toBeInTheDocument();
+    });
+
+    it("el dueño llama al siguiente por la silla de Jorge", async () => {
+      comoDueno();
+      abrir("/dueno");
+      const jorge = within(await screen.findByRole("listitem", { name: "Silla de Jorge" }));
+      fireEvent.click(jorge.getByRole("button", { name: "Llamar siguiente" }));
+      expect(await screen.findByText("Llamaste al siguiente")).toBeInTheDocument();
+      expect(falso.rpc).toHaveBeenCalledWith("llamar_siguiente", { p_barbero_id: JORGE.id });
+    });
+
+    it("con alguien llamado, el dueño lo pasa a la silla", async () => {
+      comoDueno({
+        turnos: [turno(11, { nombre: "Pedro Ruiz", barbero_id: JORGE.id, estado: "llamado" })],
+      });
+      abrir("/dueno");
+      const jorge = within(await screen.findByRole("listitem", { name: "Silla de Jorge" }));
+      expect(jorge.getByText("Llamado")).toBeInTheDocument();
+      fireEvent.click(jorge.getByRole("button", { name: "Empezar" }));
+      expect(await screen.findByText("Empezó el corte")).toBeInTheDocument();
+      expect(falso.rpc).toHaveBeenCalledWith("empezar_turno", { p_turno_id: "t-11" });
+    });
+
+    it("termina y cobra el corte de Carlos con el precio de su servicio", async () => {
+      comoDueno();
+      abrir("/dueno");
+      const carlos = within(await screen.findByRole("listitem", { name: "Silla de Carlos" }));
+      fireEvent.click(carlos.getByRole("button", { name: "Terminar y cobrar" }));
+      expect(carlos.getByLabelText("Cobrado (L)")).toHaveValue("150");
+      fireEvent.click(carlos.getByRole("button", { name: "Tarjeta" }));
+      fireEvent.click(carlos.getByRole("button", { name: "Terminar" }));
+      expect(await screen.findByText("Corte terminado")).toBeInTheDocument();
+      expect(falso.rpc).toHaveBeenCalledWith("terminar_turno", {
+        p_turno_id: "t-8",
+        p_monto: 150,
+        p_metodo_pago: "tarjeta",
+        p_servicio_id: "s-corte",
+      });
+    });
+
+    it("una silla en pausa se puede volver a abrir antes de llamar", async () => {
+      comoDueno();
+      falso.tablas.barberos = [CARLOS, { ...JORGE, en_pausa: true }];
+      abrir("/dueno");
+      const jorge = within(await screen.findByRole("listitem", { name: "Silla de Jorge" }));
+      expect(jorge.queryByRole("button", { name: "Llamar siguiente" })).not.toBeInTheDocument();
+      fireEvent.click(jorge.getByRole("button", { name: "Quitar pausa" }));
+      expect(await screen.findByText("La silla está disponible otra vez")).toBeInTheDocument();
+      expect(falso.rpc).toHaveBeenCalledWith("pausar_barbero", {
+        p_barbero_id: JORGE.id,
+        p_en_pausa: false,
+      });
+    });
+
+    it("si la base no deja, lo explica para el dueño", async () => {
+      comoDueno();
+      falso.rpc.mockImplementation(async (funcion: string) =>
+        funcion === "llamar_siguiente"
+          ? { data: null, error: { message: "barbero_ocupado" } }
+          : { data: funcion === "reporte_dia" ? REPORTE : true, error: null },
+      );
+      abrir("/dueno");
+      const jorge = within(await screen.findByRole("listitem", { name: "Silla de Jorge" }));
+      fireEvent.click(jorge.getByRole("button", { name: "Llamar siguiente" }));
+      expect(
+        await screen.findByText("Esa silla ya tiene a alguien llamado o en la silla."),
+      ).toBeInTheDocument();
+    });
   });
 
   it("sin turnos hoy lo dice en vez de dibujar una gráfica vacía", async () => {

@@ -28,25 +28,39 @@ import {
   horaCorta,
   horasDelDia,
   MENSAJES_DUENO,
+  MENSAJES_SILLA,
   ocultarTurno,
   pausarFilaRemota,
   type ResultadoDueno,
   renombrarTurno,
+  sillasDe,
   useResumen,
 } from "@/lib/dueno";
 import { tonoDe } from "@/lib/fila";
 import { fechaLarga, lempiras } from "@/lib/formato";
 import { useReloj, useTitulo } from "@/lib/ganchos";
+import {
+  empezarTurno,
+  enlaceWhatsApp,
+  llamarSiguiente,
+  marcarNoLlego,
+  pausarBarbero,
+  type ResultadoAccion,
+  terminarTurno,
+} from "@/lib/panel";
 import { cx } from "@/lib/utilidades";
 import {
   barberia as barberiaPrototipo,
+  barberos as barberosPrototipo,
   buscarBarbero,
   nombreDe,
   reporte as reportePrototipo,
+  servicios as serviciosPrototipo,
   type Tono,
 } from "@/prototipo/datos";
 import { useFilaEnVivo } from "@/prototipo/simulacion";
 import { useContextoDueno } from "./contexto";
+import { type AccionesSilla, type ServicioSilla, Sillas, type SillaVista } from "./Sillas";
 
 interface Indicador {
   titulo: string;
@@ -87,12 +101,15 @@ interface VistaResumen {
   }>;
   horas: Array<{ clave: string; etiqueta: string; texto: string; turnos: number }>;
   fila: FilaVista[];
+  sillas: SillaVista[];
+  servicios: ServicioSilla[];
 }
 
 interface AccionesResumen {
   alternarRemota: () => void;
   renombrar: (clave: string, nombre: string) => void;
   ocultar: (clave: string, oculto: boolean) => void;
+  silla: AccionesSilla;
 }
 
 const CLASES = {
@@ -115,8 +132,14 @@ export function Resumen() {
 const minutosDesde = (fecha: string, ahora: Date) =>
   Math.max(0, Math.round((ahora.getTime() - Date.parse(fecha)) / 60_000));
 
+/** "Ana Pérez" → "Ana P.", como en las pantallas públicas. */
+const nombreCorto = (nombre: string) => {
+  const [primero, segundo] = nombre.trim().split(/\s+/);
+  return segundo ? `${primero} ${segundo[0]}.` : (primero ?? nombre);
+};
+
 function vistaReal(datos: DatosResumen, ahora: Date): Omit<VistaResumen, "cambiandoRemota"> {
-  const { barberia, reporte, barberos, turnos } = datos;
+  const { barberia, reporte, barberos, turnos, servicios } = datos;
   const enFila = turnos.filter((t) => t.estado === "esperando");
   const cancelaron = reporte.abandonos - reporte.no_llegaron;
   return {
@@ -210,6 +233,28 @@ function vistaReal(datos: DatosResumen, ahora: Date): Omit<VistaResumen, "cambia
         origen: t.origen,
         espera: minutosDesde(t.creado_en, ahora),
       })),
+    sillas: sillasDe(datos).map(({ barbero, actual, cola }, i) => ({
+      clave: barbero.id,
+      nombre: barbero.nombre,
+      silla: barbero.silla,
+      tono: tonoDe(i),
+      enPausa: barbero.en_pausa,
+      actual:
+        actual && (actual.estado === "llamado" || actual.estado === "en_silla")
+          ? {
+              clave: actual.id,
+              numero: actual.numero,
+              nombre: actual.nombre,
+              estado: actual.estado,
+              servicioId: actual.servicio_id,
+              whatsapp: enlaceWhatsApp(actual, barberia.nombre, barbero.silla),
+            }
+          : null,
+      enFila: cola.length,
+      siguiente: cola[0] ? `#${cola[0].numero} ${nombreCorto(cola[0].nombre)}` : null,
+      panel: `/panel?silla=${barbero.id}`,
+    })),
+    servicios: servicios.map((s) => ({ id: s.id, nombre: s.nombre, precio: Number(s.precio_ref) })),
   };
 }
 
@@ -249,7 +294,29 @@ function ResumenReal({ barberiaId }: { barberiaId: string }) {
     },
     renombrar: (clave, nombre) => void correr(() => renombrarTurno(clave, nombre)),
     ocultar: (clave, oculto) => void correr(() => ocultarTurno(clave, oculto)),
+    silla: {
+      llamar: (barberoId) =>
+        enSilla(llamarSiguiente(barberoId), (turno) =>
+          turno === null ? "No había nadie en esa fila." : "Llamaste al siguiente",
+        ),
+      empezar: (turnoId) => enSilla(empezarTurno(turnoId), () => "Empezó el corte"),
+      noLlego: (turnoId) => enSilla(marcarNoLlego(turnoId), () => "Marcaste que no llegó"),
+      terminar: (turnoId, monto, metodo, servicioId) =>
+        enSilla(terminarTurno(turnoId, monto, metodo, servicioId), () => "Corte terminado"),
+      quitarPausa: (barberoId) =>
+        enSilla(pausarBarbero(barberoId, false), () => "La silla está disponible otra vez"),
+    },
   };
+
+  /** Las acciones de una silla: el mismo camino que el panel del barbero, con avisos al dueño. */
+  async function enSilla<T>(
+    llamada: Promise<ResultadoAccion<T>>,
+    listo: (datos: T) => string,
+  ): Promise<void> {
+    const resultado = await llamada;
+    mostrar(resultado.ok ? listo(resultado.datos) : MENSAJES_SILLA[resultado.error]);
+    await recargar();
+  }
 
   return (
     <>
@@ -269,6 +336,7 @@ function ResumenPrototipo() {
   const [nombres, setNombres] = useState<Record<string, string>>({});
   const [ocultos, setOcultos] = useState<Record<string, boolean>>({});
   const { fila } = useFilaEnVivo(9000);
+  const { toast, mostrar } = useToast();
   const r = reportePrototipo;
   const pico = Math.max(...r.horas.map((h) => h.turnos));
 
@@ -351,15 +419,48 @@ function ResumenPrototipo() {
       origen: t.origen,
       espera: t.espera,
     })),
+    sillas: barberosPrototipo.map((b) => {
+      const cola = fila.filter((t) => t.barbero === b.id || t.barbero === "cualquiera");
+      return {
+        clave: b.id,
+        nombre: b.nombre,
+        silla: b.silla,
+        tono: b.tono,
+        enPausa: false,
+        actual:
+          b.atendiendo === null
+            ? null
+            : {
+                clave: `actual-${b.id}`,
+                numero: b.atendiendo,
+                nombre: "Cliente en la silla",
+                estado: "en_silla" as const,
+                servicioId: null,
+                whatsapp: null,
+              },
+        enFila: cola.length,
+        siguiente: cola[0] ? `#${cola[0].numero} ${cola[0].nombre}` : null,
+        panel: null,
+      };
+    }),
+    servicios: serviciosPrototipo.map((s) => ({ id: s.id, nombre: s.nombre, precio: s.precio })),
   };
 
+  // En la demo las sillas no cambian: cada botón solo explica qué haría.
+  const demo = async () => mostrar("En la demo no se llama a nadie de verdad.");
   const acciones: AccionesResumen = {
     alternarRemota: () => setRemota((activa) => !activa),
     renombrar: (clave, nombre) => setNombres((n) => ({ ...n, [clave]: nombre })),
     ocultar: (clave, oculto) => setOcultos((o) => ({ ...o, [clave]: oculto })),
+    silla: { llamar: demo, empezar: demo, noLlego: demo, terminar: demo, quitarPausa: demo },
   };
 
-  return <PantallaResumen vista={vista} acciones={acciones} />;
+  return (
+    <>
+      <PantallaResumen vista={vista} acciones={acciones} />
+      <Toast toast={toast} />
+    </>
+  );
 }
 
 // ---------------------------------------------------------------------------------------------
@@ -448,6 +549,8 @@ function PantallaResumen({ vista, acciones }: { vista: VistaResumen; acciones: A
           </motion.article>
         ))}
       </section>
+
+      <Sillas sillas={vista.sillas} servicios={vista.servicios} acciones={acciones.silla} />
 
       <div className="mt-6 grid gap-6 lg:grid-cols-[1.15fr_1fr]">
         <section className="rounded-[2rem] bg-superficie p-6 ring-1 ring-borde">
@@ -632,9 +735,14 @@ function FilaAhora({
   }
 
   return (
-    <section className="mt-6 rounded-[2rem] bg-superficie p-6 ring-1 ring-borde">
+    <section
+      aria-labelledby="titulo-fila"
+      className="mt-6 rounded-[2rem] bg-superficie p-6 ring-1 ring-borde"
+    >
       <div className="flex flex-wrap items-end justify-between gap-3">
-        <h2 className="font-display text-4xl leading-tight font-black uppercase">Fila ahora</h2>
+        <h2 id="titulo-fila" className="font-display text-4xl leading-tight font-black uppercase">
+          Fila ahora
+        </h2>
         <Link
           to={`/b/${slug}/tv`}
           className="text-sm font-semibold text-azul underline-offset-4 hover:underline"

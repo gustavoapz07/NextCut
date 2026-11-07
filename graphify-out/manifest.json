@@ -6,15 +6,15 @@
     "semantic_hash": ""
   },
   "docs/bitacora.md": {
-    "mtime": 1794066437.651184,
-    "seen": 1794066447.0884042,
-    "ast_hash": "cd3760645f1ac18aad58fbb789a5b9d3",
+    "mtime": 1794067760.1336055,
+    "seen": 1794067770.4430773,
+    "ast_hash": "f3b9d4e5f3e6944c8990ddfb37182287",
     "semantic_hash": ""
   },
   "docs/decisiones.md": {
-    "mtime": 1794066226.008757,
-    "seen": 1794066237.0708542,
-    "ast_hash": "d77f7130a2007e125f54b2eab9b91e70",
+    "mtime": 1794067602.9608133,
+    "seen": 1794067614.1218078,
+    "ast_hash": "a36af0084ca69c14786f5c7e1ab2ba43",
     "semantic_hash": ""
   },
   "docs/investigacion.md": {
@@ -180,9 +180,9 @@
     "semantic_hash": ""
   },
   "app/src/features/dueno/Resumen.tsx": {
-    "mtime": 1794008813.477728,
-    "seen": 1794008894.6997137,
-    "ast_hash": "4bba14dd68b97efdf80a37494cdd267a",
+    "mtime": 1794067469.2760966,
+    "seen": 1794067614.121227,
+    "ast_hash": "ffa3294c39ffa4e7794817f578e78f76",
     "semantic_hash": ""
   },
   "app/src/features/fila/FilaPublica.tsx": {
@@ -540,15 +540,15 @@
     "semantic_hash": ""
   },
   "app/src/features/dueno/dueno.test.tsx": {
-    "mtime": 1794066055.3734126,
-    "seen": 1794066237.0706055,
-    "ast_hash": "0fd989936f27176c89b824b7b7a64aba",
+    "mtime": 1794067528.2677927,
+    "seen": 1794067614.1212432,
+    "ast_hash": "a9a543d8b669cdad14c9b16e925b531d",
     "semantic_hash": ""
   },
   "app/src/lib/dueno.ts": {
-    "mtime": 1793624400.662166,
-    "seen": 1793624721.6071994,
-    "ast_hash": "9161c52f0f69706975d26b8ff7210918",
+    "mtime": 1794067411.6910644,
+    "seen": 1794067614.1213257,
+    "ast_hash": "9a61eda4df24ef1c8fb07e5b92230aab",
     "semantic_hash": ""
   },
   "scripts/e2e/dueno-prueba.sql": {
@@ -849,6 +849,12 @@
     "mtime": 1794065816.604008,
     "seen": 1794066237.0708106,
     "ast_hash": "cddcd630d0fd6bfe7af2157415d6df69",
+    "semantic_hash": ""
+  },
+  "app/src/features/dueno/Sillas.tsx": {
+    "mtime": 1794067527.7087083,
+    "seen": 1794067614.1212323,
+    "ast_hash": "acdd630b3e2b3b3c67c8eb19feab1bc5",
     "semantic_hash": ""
   }
 }

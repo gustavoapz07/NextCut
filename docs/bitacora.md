@@ -554,3 +554,14 @@ Cada cambio del proyecto queda aquí, enlazado al documento que afecta. El grafo
 - **Producción:** se borró la Barbería Demo (3 barberos, 4 servicios y 1 turno). Quedan 0 barberías y la cuenta del autor solo como admin.
 - **Publicado** (con permiso del autor): `db push` aplicó `admin_detalle` en `nextcut-produccion` (la CLI quedó otra vez en `siguiente-pruebas`) y `npm run deploy:produccion` publicó la versión `23b55cb8` después de `npm run check` (363 pruebas). Revisado desde afuera: `/dueno` y `/admin/nueva` sin sesión mandan a entrar con su destino, consola sin errores, y `admin_barberia` solo la ejecuta una cuenta con sesión.
 - **Falta (Gus):** entrar con su cuenta y dar de alta la primera barbería.
+
+## 2026-11-07 · El dueño atiende cualquier silla desde su resumen
+
+- **Qué:** si un barbero no puede, el dueño llama a sus clientes desde su propio resumen ([ADR-019](decisiones.md#adr-019--el-dueño-atiende-cualquier-silla-desde-su-resumen)).
+- **App:**
+  - `app/src/features/dueno/Sillas.tsx`: una tarjeta por silla con su estado y la acción que toca (llamar, empezar, no llegó, avisar por WhatsApp, terminar y cobrar, quitar pausa) y el enlace a su panel completo;
+  - `lib/dueno.ts`: el resumen también carga los servicios activos y el servicio y teléfono de cada turno; `sillasDe` arma cada silla con el mismo orden que `llamar_siguiente`; los errores se dicen para el dueño (`MENSAJES_SILLA`);
+  - en la demo (`/demo/dueno`) las sillas se ven, y los botones solo avisan que es una demo.
+- **Base:** sin cambios. Son las funciones del panel del barbero, que ya dejaban al dueño atender cualquier silla de su barbería.
+- **Pruebas:** 6 de Vitest nuevas (369 en total, también sin las variables de Supabase): estado de cada silla, llamar por la silla de otro barbero, empezar, terminar con el precio del servicio y la forma de pago, quitar la pausa y el mensaje cuando la base no deja. En el navegador: la demo y el resumen real de la barbería de pruebas, y a 375 px el formulario de cobro sin scroll lateral. No se llamó a nadie en la base de pruebas.
+- **Publicado** (con permiso del autor): `npm run check` pasó (369 pruebas) y `npm run deploy:produccion` publicó la versión `d50ad850`. En producción, `/demo/dueno` muestra la sección "Sillas" sin errores en la consola.

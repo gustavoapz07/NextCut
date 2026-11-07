@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import type { Database } from "./database.types";
 import { useSenalFila } from "./enVivo";
+import type { ErrorAccion } from "./panel";
 import { supabase } from "./supabase";
 
 type Tablas = Database["public"]["Tables"];
@@ -23,8 +24,18 @@ export type BarberiaDueno = Pick<
 export type BarberoDueno = Pick<Tablas["barberos"]["Row"], "id" | "nombre" | "silla" | "en_pausa">;
 export type TurnoDueno = Pick<
   Tablas["turnos"]["Row"],
-  "id" | "numero" | "nombre" | "barbero_id" | "origen" | "estado" | "oculto" | "creado_en"
+  | "id"
+  | "numero"
+  | "nombre"
+  | "barbero_id"
+  | "origen"
+  | "estado"
+  | "oculto"
+  | "creado_en"
+  | "servicio_id"
+  | "telefono"
 >;
+export type ServicioDueno = Pick<Tablas["servicios"]["Row"], "id" | "nombre" | "precio_ref">;
 
 const COLUMNAS_BARBERIA =
   "id, nombre, slug, zona, zona_horaria, fila_remota_activa, pausa_automatica_en, pico_turnos";
@@ -89,12 +100,14 @@ export interface DatosResumen {
   barberos: BarberoDueno[];
   /** Turnos activos (en fila, llamados o en la silla), del más antiguo al más nuevo. */
   turnos: TurnoDueno[];
+  /** Servicios activos, para cobrar al terminar un corte desde el resumen. */
+  servicios: ServicioDueno[];
 }
 
 export type ResultadoResumen = { tipo: "listo"; datos: DatosResumen } | { tipo: "error" };
 
 export async function cargarResumen(barberiaId: string): Promise<ResultadoResumen> {
-  const [barberia, reporte, barberos, turnos] = await Promise.all([
+  const [barberia, reporte, barberos, turnos, servicios] = await Promise.all([
     supabase.from("barberias").select(COLUMNAS_BARBERIA).eq("id", barberiaId).single(),
     supabase.rpc("reporte_dia", { p_barberia_id: barberiaId }),
     supabase
@@ -106,13 +119,24 @@ export async function cargarResumen(barberiaId: string): Promise<ResultadoResume
       .order("nombre"),
     supabase
       .from("turnos")
-      .select("id, numero, nombre, barbero_id, origen, estado, oculto, creado_en")
+      .select(
+        "id, numero, nombre, barbero_id, origen, estado, oculto, creado_en, servicio_id, telefono",
+      )
       .eq("barberia_id", barberiaId)
       .in("estado", ["esperando", "llamado", "en_silla"])
       .order("creado_en")
       .order("numero"),
+    supabase
+      .from("servicios")
+      .select("id, nombre, precio_ref")
+      .eq("barberia_id", barberiaId)
+      .eq("activo", true)
+      .order("precio_ref")
+      .order("nombre"),
   ]);
-  if (barberia.error || reporte.error || barberos.error || turnos.error) return { tipo: "error" };
+  if (barberia.error || reporte.error || barberos.error || turnos.error || servicios.error) {
+    return { tipo: "error" };
+  }
   const leido = esquemaReporte.safeParse(reporte.data);
   if (!leido.success) return { tipo: "error" };
   return {
@@ -122,6 +146,7 @@ export async function cargarResumen(barberiaId: string): Promise<ResultadoResume
       reporte: leido.data,
       barberos: barberos.data,
       turnos: turnos.data,
+      servicios: servicios.data ?? [],
     },
   };
 }
@@ -151,6 +176,40 @@ export function useResumen(barberiaId: string) {
   useSenalFila(barberiaId, recargar, 30_000);
   return { estado, recargar };
 }
+
+export interface SillaDueno {
+  barbero: BarberoDueno;
+  /** El turno llamado o en la silla, si hay. */
+  actual: TurnoDueno | null;
+  /** Lo que `llamar_siguiente` le daría a esta silla, en el mismo orden (incluye "el primero"). */
+  cola: TurnoDueno[];
+}
+
+/** Cada silla con su turno actual y su fila, para atenderla desde el resumen. */
+export function sillasDe({ barberos, turnos }: Pick<DatosResumen, "barberos" | "turnos">) {
+  return barberos.map(
+    (barbero): SillaDueno => ({
+      barbero,
+      actual:
+        turnos.find(
+          (t) => t.barbero_id === barbero.id && (t.estado === "llamado" || t.estado === "en_silla"),
+        ) ?? null,
+      cola: turnos.filter(
+        (t) => t.estado === "esperando" && (t.barbero_id === null || t.barbero_id === barbero.id),
+      ),
+    }),
+  );
+}
+
+/** Los errores de las acciones de una silla, dichos para el dueño y no para el barbero. */
+export const MENSAJES_SILLA: Record<ErrorAccion, string> = {
+  ocupado: "Esa silla ya tiene a alguien llamado o en la silla.",
+  en_pausa: "Esa silla está en pausa: quítale la pausa para llamar.",
+  cambio: "Ese turno ya cambió. Actualizamos el resumen.",
+  sin_permiso: "Tu cuenta no puede atender en esa silla.",
+  monto: "Revisa el monto y la forma de pago.",
+  error: "No se pudo guardar. Revisa tu conexión e inténtalo de nuevo.",
+};
 
 /** De la primera a la última hora con turnos, sin huecos, para la gráfica de horas pico. */
 export function horasDelDia(porHora: ReporteDia["por_hora"]) {

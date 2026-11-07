@@ -532,3 +532,11 @@ Cada cambio del proyecto queda aquí, enlazado al documento que afecta. El grafo
 - **Carga:** el build precarga las dos fuentes en su versión latina y abre la conexión con Supabase desde el HTML (plugin `cargaInicial` en `vite.config.ts`). El resto ya estaba bien repartido: cada pantalla carga aparte.
 - **Pruebas:** lint, tipos y Vitest (361) pasan. Revisado en el navegador a 375 px en claro y oscuro (fila pública, anotarse, turno, panel del barbero, entrar) y a 1280 px (TV, resumen y QR del dueño).
 
+
+## 2026-11-07 · La CI falla con el super admin
+
+- **Qué:** la CI del commit `03f0d82` falló en dos pasos.
+  - **Vitest:** `app/src/lib/cuentas.test.ts` cargaba la conexión real a Supabase, y en la CI no hay variables, así que `supabase.ts` lanzaba su error al importar. En local pasaba porque existe `.env.local`. Ahora simula la conexión, como las demás pruebas. Comprobado corriendo Vitest sin las variables: 361 pruebas.
+  - **pgTAP:** `01_permisos.test.sql` tiene la lista exacta de funciones que ejecuta una cuenta con sesión y no tenía `soy_admin` ni `admin_barberias`.
+- **Pruebas nuevas de la base** (`supabase/tests/database/10_admin.test.sql`, 24): solo el admin da de alta barberías y ve la lista; la dirección no se repite; la barbería nace con su dueño y un servicio; solo el dueño liga cuentas a sus sillas (no a una con cuenta ni a una inactiva); quién le puede poner contraseña nueva a quién; nadie con sesión toca `privado.admins` ni las funciones de la Edge Function.
+- **Cómo se probaron sin Docker:** las dos pruebas de la base corrieron en `siguiente-pruebas` dentro de una transacción que termina con un error a propósito, así se deshace todo. 6 y 24 pasan, y después no quedó ninguna cuenta, barbería, admin ni la extensión pgTAP.

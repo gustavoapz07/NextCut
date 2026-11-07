@@ -1,17 +1,17 @@
 # Graph Report - NextCut  (2026-11-07)
 
 ## Corpus Check
-- 138 files · ~126,144 words
+- 139 files · ~127,088 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 9 file(s) not represented in the graph (top: (none) 4, .example 2, .toml 2)
 
 ## Summary
-- 1257 nodes · 3166 edges · 75 communities (55 shown, 20 thin omitted)
+- 1258 nodes · 3166 edges · 76 communities (55 shown, 21 thin omitted)
 - Extraction: 94% EXTRACTED · 6% INFERRED · 0% AMBIGUOUS · INFERRED: 176 edges (avg confidence: 0.87)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `5b2877f2`
+- Built from commit: `03f0d827`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -22,7 +22,7 @@
 - 20261027140203_base_de_datos.sql
 - turno.ts
 - ADR-008 · Desarrollo contra Supabase en la nube, sin Docker local
-- datos.ts
+- PantallaTv.tsx
 - LayoutDueno.tsx
 - webpush.ts
 - Variables de entorno
@@ -34,7 +34,7 @@
 - Stack v0.1 con versiones
 - e2e/utilidades.ts
 - panel.ts
-- Resumen.tsx
+- Marco.tsx
 - database.types.ts
 - Turno.tsx
 - public.barberos
@@ -116,7 +116,7 @@
 - **Cuidado de claves y secretos (fallo 1) a lo largo de la bitácora** — docs_bitacora_clave_anon_heredada, docs_bitacora_nextcut_repositorio, docs_bitacora_arreglo_ci_gitleaks, docs_seguridad_f01_api_keys, readme_variables_entorno [INFERRED 0.85]
 - **Mecanismo de avisos al cliente (por evento y por reloj)** — docs_plan_implementacion_edge_function_avisos, docs_plan_implementacion_pg_cron, docs_plan_implementacion_modulo_eta, readme_web_push, docs_decisiones_suscribir_push [INFERRED 0.85]
 
-## Communities (75 total, 20 thin omitted)
+## Communities (76 total, 21 thin omitted)
 
 ### Community 0 - "Investigación"
 Cohesion: 0.12
@@ -142,7 +142,7 @@ Nodes (10): Database, EstadoFila, EstadoTurno, ADR-0007, supabase, ACTIVOS, esqu
 Cohesion: 0.14
 Nodes (26): Pruebas de riesgo del Sprint 0 (Broadcast público, Web Push, Turnstile con IP), 2026-10-26 · Desarrollo sin Docker y prueba de riesgo 1, 2026-10-26 · Sprint 0: base del proyecto, Biome (lint y formato), Docker local (alternativa descartada), ESLint + Prettier (alternativa descartada), Husky (alternativa descartada), Lefthook (revisiones antes de cada commit) (+18 more)
 
-### Community 6 - "datos.ts"
+### Community 6 - "PantallaTv.tsx"
 Cohesion: 0.12
 Nodes (35): ResumenPrototipo(), FilaPrototipo(), FilaPublica(), Anuncio(), BANDA, ColumnaBarbero(), ESTADO, PantallaTv() (+27 more)
 
@@ -190,7 +190,7 @@ Nodes (15): ADR-0014, anotarPorApi(), BARBERO_CLAVE, BARBERO_CORREO, cancelarPor
 Cohesion: 0.07
 Nodes (34): BARBERIA, BARBERO, falso, SERVICIOS, AccionesPanel, minutosDesde(), PanelReal(), useSillaElegida() (+26 more)
 
-### Community 22 - "Resumen.tsx"
+### Community 22 - "Marco.tsx"
 Cohesion: 0.12
 Nodes (28): ErrorDeRuta(), Franjas(), FranjasProps, Poste(), Marca(), AbrirMenu, MarcoPrototipo(), MenuPantallas() (+20 more)
 
@@ -340,19 +340,19 @@ Nodes (3): boleto, ICONOS, publico
 
 ## Knowledge Gaps
 - **38 isolated node(s):** `ADR-0017`, `ADR-0017`, `ADR-0017`, `ADR-0017`, `RFC-8291` (+33 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 402 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **20 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 403 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **21 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `useTitulo()` connect `datos.ts` to `Unirse.tsx`, `LayoutDueno.tsx`, `Configuracion.tsx`, `Diagnostico.tsx`, `useTitulo`, `PanelBarbero.tsx`, `panel.ts`, `Resumen.tsx`, `Turno.tsx`, `dueno.ts`?**
+- **Why does `useTitulo()` connect `PantallaTv.tsx` to `Unirse.tsx`, `LayoutDueno.tsx`, `Configuracion.tsx`, `Diagnostico.tsx`, `useTitulo`, `PanelBarbero.tsx`, `panel.ts`, `Marco.tsx`, `Turno.tsx`, `dueno.ts`?**
   _High betweenness centrality (0.017) - this node is a cross-community bridge._
 - **What connects `ADR-0017`, `ADR-0017`, `ADR-0017` to the rest of the system?**
   _38 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Investigación` be split into smaller, more focused modules?**
   _Cohesion score 0.12315270935960591 - nodes in this community are weakly interconnected._
-- **Why does `cx()` connect `PanelBarbero.tsx` to `Unirse.tsx`, `datos.ts`, `LayoutDueno.tsx`, `Configuracion.tsx`, `Diagnostico.tsx`, `useTitulo`, `Resumen.tsx`, `Turno.tsx`?**
+- **Why does `cx()` connect `PanelBarbero.tsx` to `Unirse.tsx`, `PantallaTv.tsx`, `LayoutDueno.tsx`, `Configuracion.tsx`, `Diagnostico.tsx`, `useTitulo`, `Marco.tsx`, `Turno.tsx`?**
   _High betweenness centrality (0.016) - this node is a cross-community bridge._
 - **Should `Arquitectura detallada` be split into smaller, more focused modules?**
   _Cohesion score 0.12333333333333334 - nodes in this community are weakly interconnected._

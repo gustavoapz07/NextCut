@@ -6,9 +6,9 @@
     "semantic_hash": ""
   },
   "docs/bitacora.md": {
-    "mtime": 1794063795.959272,
-    "seen": 1794063806.523226,
-    "ast_hash": "91dd5bd069ddc44178ae6b0a3ebf0372",
+    "mtime": 1794064542.1972082,
+    "seen": 1794064581.3895063,
+    "ast_hash": "f7ea9772724538ef8d577c1d34abdc4a",
     "semantic_hash": ""
   },
   "docs/decisiones.md": {
@@ -258,9 +258,9 @@
     "semantic_hash": ""
   },
   "supabase/tests/database/01_permisos.test.sql": {
-    "mtime": 1793109394.2338512,
-    "seen": 1793111467.685897,
-    "ast_hash": "e103f4bb637bb06f8210b20417873569",
+    "mtime": 1794064388.122051,
+    "seen": 1794064581.3894644,
+    "ast_hash": "3bbc14a6f6b6bd9d78bafe1b6ecbf042",
     "semantic_hash": ""
   },
   "supabase/tests/database/02_aislamiento.test.sql": {
@@ -780,9 +780,9 @@
     "semantic_hash": ""
   },
   "app/src/lib/cuentas.test.ts": {
-    "mtime": 1794008651.3439167,
-    "seen": 1794008894.699767,
-    "ast_hash": "1c9d9b79f997264bd5998ab6646afbef",
+    "mtime": 1794064387.453478,
+    "seen": 1794064581.3892639,
+    "ast_hash": "6176e3800b59f0a79814ef14aafa82c3",
     "semantic_hash": ""
   },
   "app/src/lib/cuentas.ts": {
@@ -825,6 +825,12 @@
     "mtime": 1794008336.2275314,
     "seen": 1794008894.7001061,
     "ast_hash": "43313f8a4dba7d2a2fde1be82c3657f3",
+    "semantic_hash": ""
+  },
+  "supabase/tests/database/10_admin.test.sql": {
+    "mtime": 1794064422.948324,
+    "seen": 1794064581.3894858,
+    "ast_hash": "2269c526f7d920615c6c1c6c11854480",
     "semantic_hash": ""
   }
 }

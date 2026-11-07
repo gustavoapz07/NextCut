@@ -1,4 +1,8 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+
+// Sin conexión real: en la CI no hay variables de Supabase y estas pruebas no la necesitan.
+vi.mock("@/lib/supabase", () => ({ supabase: {} }));
+
 import { mensajeDeAcceso } from "@/components/ClaveTemporal";
 import { destinoAlEntrar } from "@/features/acceso/Entrar";
 import { debeCambiarClave, problemaClave, slugDe } from "./cuentas";

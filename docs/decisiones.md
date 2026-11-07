@@ -207,6 +207,21 @@ Cada decisión importante queda aquí con su contexto, las alternativas consider
 - **Alternativas:** *Cargar Sentry con la app:* sumaría 30 KB o más a cada primera visita para un error que casi nunca pasa. *Las listas de datos sensibles de Sentry en el servidor:* llegan después de que el dato salió del teléfono. *Un endpoint de salud que solo responda "ok":* no se enteraría de que pg_cron se detuvo.
 - **Consecuencias:** hay que crear el proyecto en Sentry, poner su DSN en `.env.pruebas` (es público: termina dentro del JavaScript) y activar en Sentry "Prevent Storing of IP Addresses". El monitor de UptimeRobot hay que crearlo a mano con la URL de `salud`. Los errores que pasan antes de que cargue el SDK solo llegan si rompen una ruta.
 
+## ADR-017 · Super admin y cuentas con contraseña temporal, sin correo
+
+- **Fecha:** 06/11/2026 · **Estado:** aceptada · cambia la "invitación por correo" del [Sprint 4](plan-implementacion.md#sprint-4--dueño-antiabuso-y-lanzamiento-semana-6)
+- **Contexto:** para salir a buscar barberías hace falta darlas de alta en minutos, sin correr SQL a mano. El plan pedía invitaciones por correo, pero el SMTP de Resend no existe todavía y el registro público de cuentas está apagado en producción. Además, la pantalla de entrar decía "pídele al dueño que te la cambie" y el dueño no tenía cómo.
+- **Decisión:**
+  1. **Super admin en `privado.admins`.** Solo se agrega con SQL ([`hacer-admin.sql`](../scripts/produccion/hacer-admin.sql)); ninguna pantalla nombra admins. En `/admin` el admin da de alta una barbería (nombre, dirección `/b/<slug>`, zona y correo del dueño) y le pone una contraseña nueva al dueño que la olvide.
+  2. **El dueño crea las cuentas de sus barberos** desde Configuración → Barberos, sobre una silla ya guardada, y les pone una contraseña nueva cuando la olvidan. Agregar barberos sin cuenta sigue igual.
+  3. **Contraseña temporal en vez de correo.** La Edge Function `cuentas` crea la cuenta ya confirmada con la API de administración de Auth y devuelve una contraseña de 14 caracteres (`k7pq-m3xa-tr9w`, sin letras que se confundan) que la app muestra una sola vez, con un botón que copia el mensaje para WhatsApp. La cuenta queda marcada (`cambiar_clave` en `user_metadata`) y al entrar tiene que elegir la suya.
+  4. **La base decide quién puede qué.** La Edge Function revisa la sesión con Auth y pasa a la base el id que sacó del token, nunca uno del cuerpo de la petición. Las funciones (`admin_puede_crear`, `alta_barberia`, `dueno_puede_ligar`, `ligar_cuenta_barbero`, `cuenta_para_restablecer`) solo las ejecuta `service_role` y vuelven a revisar que sea admin o dueño de esa barbería. Un dueño no le cambia la contraseña a otro dueño ni a sí mismo por aquí.
+  5. **Antes de crear una cuenta se revisa el permiso,** y si después falla el alta o el ligado, la cuenta recién creada se borra para poder reintentar.
+  6. **Un correo que ya tiene cuenta** se reusa como dueño de otra barbería (sin tocar su contraseña), pero no se liga a la silla de un barbero: un dueño no puede meter en su barbería la cuenta de otra persona.
+  7. **La barbería nace con un servicio "Corte" (30 min, L 150)** para que la fila funcione desde el primer momento; el dueño lo ajusta.
+- **Alternativas:** *Esperar a Resend e invitar por correo:* frena las visitas y depende de que el dueño revise su correo. *Seguir con `alta-barberia.sql`:* exige el editor SQL de producción en cada visita. *Que el admin escriba la contraseña:* termina siendo la misma para todos.
+- **Consecuencias:** quien recibe la contraseña la recibe por WhatsApp; por eso es temporal y se cambia al entrar. La marca `cambiar_clave` es una guía y no un control de seguridad: la cuenta la puede quitar ella misma, pero solo afecta a su propia contraseña. `alta-barberia.sql` queda para cargar una barbería con horario, barberos y servicios de una vez. Cuando exista Resend, la recuperación por correo se suma a esto sin reemplazarlo.
+
 ## ADR-018 · Paleta monocroma con ladrillo y marino
 
 - **Fecha:** 06/11/2026 · **Estado:** aceptada · reemplaza el punto 2 de [ADR-010](#adr-010--prototipo-de-diseño-antes-de-la-validación-e-identidad-visual)

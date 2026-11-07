@@ -488,6 +488,36 @@ Cada cambio del proyecto queda aquí, enlazado al documento que afecta. El grafo
 - **Pruebas:** 2 de Vitest nuevas (335 en total) y una de Playwright (`tests/e2e/dueno-silla.spec.ts`): con la cuenta de prueba, el dueño entra a su silla, cambia a otra y la silla elegida sigue después de recargar. `barbero.spec.ts` sigue pasando.
 - **Publicado** en producción con la aprobación del autor (versión `79e70a82`). El archivo del panel en línea ya trae la pantalla para elegir silla.
 
+
+## 2026-11-06 · Super admin y cuentas con contraseña temporal
+
+- **Qué:** para dar de alta barberías durante las visitas sin abrir el editor SQL. Decisión en [ADR-017](decisiones.md#adr-017--super-admin-y-cuentas-con-contraseña-temporal-sin-correo); reemplaza la invitación por correo del Sprint 4.
+- **Base** (`supabase/migrations/20261106150000_super_admin.sql`): tabla `privado.admins`, `soy_admin` y `admin_barberias` para la sesión del admin, y las funciones que usa la Edge Function, solo para `service_role`, que vuelven a revisar si quien pide es admin o dueño.
+- **Edge Function `cuentas`** (`supabase/functions/cuentas/`, lógica en `_shared/cuentas.ts`): crea la barbería con su dueño, la cuenta de un barbero ligada a su silla, y pone contraseñas nuevas. Revisa la sesión con Auth, crea las cuentas ya confirmadas y devuelve una contraseña temporal una sola vez. Si algo falla después de crear la cuenta, la borra.
+- **App:**
+  - `/admin`: alta de barberías (la dirección se arma sola con el nombre) y lista con el correo del dueño, cuántos barberos tiene y "Nueva contraseña para el dueño";
+  - Configuración → Barberos: "Crear cuenta" en cada silla sin cuenta y "Nueva contraseña" en las que tienen; en la del propio dueño dice "Es tu cuenta";
+  - `/cambiar-clave`: quien entra con contraseña temporal elige la suya (10 o más, con letras y números) antes de llegar a su panel;
+  - al entrar, el admin va a `/admin` si no pidió otra página;
+  - el mensaje con la contraseña se copia listo para WhatsApp.
+- **Script:** [`scripts/produccion/hacer-admin.sql`](../scripts/produccion/hacer-admin.sql) nombra admin a una cuenta. [produccion.md](produccion.md#9-barbería-piloto) explica el alta nueva.
+- **Pruebas:** 26 de Vitest nuevas (361 en total). Revisado en el navegador contra la base de pruebas: sin sesión `/admin` y `/cambiar-clave` mandan a entrar; en Configuración aparecen "Es tu cuenta" y "Crear cuenta"; `/cambiar-clave` a 375 px sin scroll lateral; consola sin errores.
+- **En pruebas** (07/11/2026, con permiso del autor): `db push` aplicó la migración y `functions deploy cuentas --use-api` publicó la función. Probado de punta a punta en `localhost:5173` con la cuenta de prueba nombrada admin por un rato:
+  - el admin entra y cae en `/admin`; crea "Prueba Admin Él" (la dirección salió sola: `prueba-admin-el`) y recibe la contraseña temporal del dueño;
+  - el dueño entra con ella, pasa por `/cambiar-clave` y llega a su configuración; agrega a Kevin, le crea la cuenta y la silla queda con "Nueva contraseña";
+  - Kevin entra con su temporal, la cambia y ve "Hola, Kevin" en la silla 1;
+  - con la sesión de Kevin, la función responde 403 a crear una barbería y a restablecer una contraseña, y no se creó ninguna cuenta;
+  - consola sin errores. Al terminar se borraron la barbería y las 2 cuentas, y la cuenta de prueba dejó de ser admin.
+- **Ajuste:** el panel del barbero manda a `/entrar?siguiente=/panel`; antes, sin destino, un admin habría terminado en `/admin`.
+- **En producción** (07/11/2026, con permiso del autor): `db push` enlazado a `nextcut-produccion` aplicó la migración, `functions deploy cuentas --use-api` publicó la función (responde 401 sin sesión y acepta solo el origen de producción) y la cuenta del autor quedó como admin en `privado.admins`. La CLI quedó enlazada otra vez a `siguiente-pruebas`.
+- **App publicada** (07/11/2026), después del commit de la paleta neutra (`5b2877f`): `npm run check` pasó completo (361 pruebas) y `npm run deploy:produccion` publicó `nextcut-produccion` (versión `e8c9d19b`). Revisado desde afuera: `/admin` sin sesión manda a `/entrar?siguiente=/admin` y la consola no muestra errores.
+- **Corrección (07/11/2026):** al autor, que también es dueño de la Barbería Demo, la app lo llevaba a `/dueno`. Solo iba a `/admin` justo después de escribir la contraseña y sin destino pedido; con la sesión ya abierta, o entrando desde un enlace a `/dueno`, nunca. Ahora:
+  - `/entrar` con la sesión abierta y sin destino pedido manda al admin a `/admin`;
+  - el panel del dueño muestra "Administración" (en la barra lateral y en el encabezado del celular) cuando la cuenta es admin. Solo pregunta si es admin cuando la cuenta ya es dueña;
+  - `soyAdmin` responde "no" si no hay conexión, en vez de fallar.
+  Probado en local contra pruebas, con la cuenta de prueba como admin un momento: entrando por `/dueno` aparece "Administración", `/entrar` lleva a `/admin`, y sin admin el enlace desaparece. 361 pruebas. Publicado en producción (versión `1919b2fb`).
+- **Falta (Gus):** dar de alta la primera barbería real desde `/admin`.
+
 ## 2026-11-06 · Paleta neutra y carga inicial
 
 - **Qué:** rediseño de color pedido por el autor: menos chillón, mismas tipografías. Decisión en [ADR-018](decisiones.md#adr-018--paleta-monocroma-con-ladrillo-y-marino).

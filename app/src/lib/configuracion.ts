@@ -34,6 +34,8 @@ export interface BarberoConfig {
   activo: boolean;
   /** Tiene una cuenta para entrar al panel. */
   conCuenta: boolean;
+  /** Es la cuenta de quien configura: su contraseña no se cambia desde aquí. */
+  cuentaPropia?: boolean;
 }
 
 export interface ServicioConfig {
@@ -222,7 +224,8 @@ export function cambiosEntre(original: DatosConfig, borrador: DatosConfig): Oper
 export type ResultadoCarga = { tipo: "listo"; datos: DatosConfig } | { tipo: "error" };
 
 export async function cargarConfiguracion(barberiaId: string): Promise<ResultadoCarga> {
-  const [barberia, barberos, servicios] = await Promise.all([
+  const [sesion, barberia, barberos, servicios] = await Promise.all([
+    supabase.auth.getSession(),
     supabase
       .from("barberias")
       .select("id, nombre, slug, zona, max_fila, tolerancia_min, pico_turnos, horario")
@@ -262,6 +265,7 @@ export async function cargarConfiguracion(barberiaId: string): Promise<Resultado
         silla: b.silla,
         activo: b.activo,
         conCuenta: b.user_id !== null,
+        cuentaPropia: b.user_id !== null && b.user_id === sesion.data.session?.user.id,
       })),
       servicios: servicios.data.map((s) => ({
         clave: s.id,

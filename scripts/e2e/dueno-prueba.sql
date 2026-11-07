@@ -4,7 +4,7 @@
 -- silla 1: `puede_atender` deja pasar al barbero en persona, y el dueño es miembro de la barbería.
 --
 -- Va después de barbero-prueba.sql. Se puede correr las veces que haga falta.
--- Nunca va en producción (ahí las cuentas se crean por invitación, Sprint 4).
+-- Nunca va en producción (ahí las cuentas las crean el admin y el dueño, ADR-017).
 
 update public.miembros
 set rol = 'dueno'

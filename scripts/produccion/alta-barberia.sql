@@ -1,5 +1,6 @@
 -- Da de alta una barbería en producción, con su dueño, barberos y servicios (docs/produccion.md).
--- Mientras no existan las invitaciones por correo, así se carga la barbería piloto.
+-- Lo normal es darla de alta en /admin (ADR-017); este script sirve para cargar de una vez el
+-- horario, los barberos y los servicios.
 --
 -- Antes de correrlo:
 --   1. Crear la cuenta del dueño en Supabase: Authentication → Users → Add user → Create new user,

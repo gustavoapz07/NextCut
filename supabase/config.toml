@@ -428,3 +428,7 @@ verify_jwt = false
 # La consulta UptimeRobot sin sesión; solo dice si la base y pg_cron responden (ADR-016).
 [functions.salud]
 verify_jwt = false
+
+# Revisa la sesión por dentro con Auth (getUser) y la base vuelve a revisar los permisos (ADR-017).
+[functions.cuentas]
+verify_jwt = false

@@ -1,10 +1,11 @@
-import { ArrowUpRight, LayoutDashboard, LogOut, QrCode, Settings } from "lucide-react";
+import { ArrowUpRight, LayoutDashboard, LogOut, QrCode, Settings, ShieldCheck } from "lucide-react";
 import { motion } from "motion/react";
 import { useCallback, useEffect, useState } from "react";
 import { Link, Navigate, NavLink, Outlet, useLocation } from "react-router";
 import { Poste } from "@/components/Franjas";
 import { BotonMarca, Cargando } from "@/components/Marco";
 import { SinConexion } from "@/components/SinConexion";
+import { debeCambiarClave, soyAdmin } from "@/lib/cuentas";
 import { cargarBarberiaDueno, type ResultadoBarberia } from "@/lib/dueno";
 import { useTitulo } from "@/lib/ganchos";
 import { salir, useSesion } from "@/lib/sesion";
@@ -26,6 +27,9 @@ export function LayoutDueno() {
   if (sesion.tipo === "fuera") {
     return <Navigate to={`/entrar?siguiente=${encodeURIComponent(pathname)}`} replace />;
   }
+  if (debeCambiarClave(sesion.sesion.user)) {
+    return <Navigate to={`/cambiar-clave?siguiente=${encodeURIComponent(pathname)}`} replace />;
+  }
   return <LayoutReal userId={sesion.sesion.user.id} />;
 }
 
@@ -40,6 +44,20 @@ function LayoutReal({ userId }: { userId: string }) {
   useEffect(() => {
     void cargar();
   }, [cargar]);
+  // El admin también puede ser dueño: desde aquí tiene que poder volver a /admin (ADR-017).
+  // Solo se pregunta cuando la cuenta sí es dueña.
+  const [admin, setAdmin] = useState(false);
+  const esDueno = estado.tipo === "listo";
+  useEffect(() => {
+    if (!esDueno) return;
+    let vivo = true;
+    void soyAdmin().then((es) => {
+      if (vivo) setAdmin(es);
+    });
+    return () => {
+      vivo = false;
+    };
+  }, [esDueno]);
 
   if (estado.tipo === "cargando") return <Cargando />;
   if (estado.tipo === "error") {
@@ -63,6 +81,7 @@ function LayoutReal({ userId }: { userId: string }) {
         },
       }}
       onSalir={() => void salir()}
+      admin={admin}
     />
   );
 }
@@ -123,7 +142,15 @@ export function LayoutDuenoPrototipo() {
 // Marco compartido
 // ---------------------------------------------------------------------------------------------
 
-function MarcoDueno({ contexto, onSalir }: { contexto: ContextoDueno; onSalir?: () => void }) {
+function MarcoDueno({
+  contexto,
+  onSalir,
+  admin = false,
+}: {
+  contexto: ContextoDueno;
+  onSalir?: () => void;
+  admin?: boolean;
+}) {
   const { base, barberia } = contexto;
   const secciones = [
     { ruta: base, titulo: "Resumen", corto: "Resumen", icono: LayoutDashboard },
@@ -175,6 +202,14 @@ function MarcoDueno({ contexto, onSalir }: { contexto: ContextoDueno; onSalir?: 
           </nav>
 
           <div className="relative mt-auto grid gap-1 text-sm">
+            {admin && (
+              <Link
+                to="/admin"
+                className="flex items-center justify-between rounded-xl px-4 py-2 font-semibold text-hueso transition hover:bg-white/5"
+              >
+                Administración <ShieldCheck className="size-4" />
+              </Link>
+            )}
             {[
               [`/b/${barberia.slug}/tv`, "Pantalla de TV"],
               [`/b/${barberia.slug}`, "Fila pública"],
@@ -208,6 +243,15 @@ function MarcoDueno({ contexto, onSalir }: { contexto: ContextoDueno; onSalir?: 
           <span className="min-w-0 truncate font-display text-xl font-black uppercase">
             {barberia.nombre}
           </span>
+          {admin && (
+            <Link
+              to="/admin"
+              aria-label="Administración"
+              className="grid size-10 shrink-0 place-items-center rounded-full ring-1 ring-borde"
+            >
+              <ShieldCheck className="size-4" />
+            </Link>
+          )}
           {onSalir && (
             <button
               type="button"

@@ -1,16 +1,47 @@
 import { Eye, EyeOff } from "lucide-react";
 import { motion } from "motion/react";
-import { type FormEvent, useId, useState } from "react";
+import { type FormEvent, useEffect, useId, useState } from "react";
 import { Navigate, useNavigate, useSearchParams } from "react-router";
 import { Franjas } from "@/components/Franjas";
 import { BotonMarca, Cargando } from "@/components/Marco";
 import { BotonPrincipal, claseCampo } from "@/components/Piezas";
+import { debeCambiarClave, soyAdmin } from "@/lib/cuentas";
 import { useTitulo } from "@/lib/ganchos";
 import { entrar, MENSAJES_ENTRAR, type ResultadoEntrar, useSesion } from "@/lib/sesion";
+import { supabase } from "@/lib/supabase";
 
 /** A dónde ir después de entrar: solo los paneles del personal, nunca otra página u otro sitio. */
 export function destinoAlEntrar(siguiente: string | null) {
-  return siguiente && /^\/(panel|dueno)(\/[a-z]+)?$/.test(siguiente) ? siguiente : "/panel";
+  return siguiente && /^\/(panel|dueno|admin)(\/[a-z]+)?$/.test(siguiente) ? siguiente : "/panel";
+}
+
+/** Con una contraseña temporal, primero se elige la propia (ADR-017). */
+const pasandoPorClave = (destino: string) =>
+  `/cambiar-clave?siguiente=${encodeURIComponent(destino)}`;
+
+/** A dónde va quien llega aquí con la sesión ya abierta: sin destino pedido, el admin a /admin. */
+function ConSesion({
+  pedido,
+  destino,
+  temporal,
+}: {
+  pedido: string | null;
+  destino: string;
+  temporal: boolean;
+}) {
+  const [final, setFinal] = useState<string | null>(pedido ? destino : null);
+  useEffect(() => {
+    if (pedido) return;
+    let vivo = true;
+    void soyAdmin().then((admin) => {
+      if (vivo) setFinal(admin ? "/admin" : destino);
+    });
+    return () => {
+      vivo = false;
+    };
+  }, [pedido, destino]);
+  if (!final) return <Cargando />;
+  return <Navigate to={temporal ? pasandoPorClave(final) : final} replace />;
 }
 
 export function Entrar() {
@@ -18,7 +49,8 @@ export function Entrar() {
   const sesion = useSesion();
   const navigate = useNavigate();
   const [params] = useSearchParams();
-  const destino = destinoAlEntrar(params.get("siguiente"));
+  const pedido = params.get("siguiente");
+  const destino = destinoAlEntrar(pedido);
   const [correo, setCorreo] = useState("");
   const [clave, setClave] = useState("");
   const [verClave, setVerClave] = useState(false);
@@ -29,7 +61,15 @@ export function Entrar() {
 
   if (sesion.tipo === "cargando") return <Cargando />;
   // Con la sesión abierta no hay nada que hacer aquí.
-  if (sesion.tipo === "dentro" && !enviando) return <Navigate to={destino} replace />;
+  if (sesion.tipo === "dentro" && !enviando) {
+    return (
+      <ConSesion
+        pedido={pedido}
+        destino={destino}
+        temporal={debeCambiarClave(sesion.sesion.user)}
+      />
+    );
+  }
 
   async function enviar(evento: FormEvent) {
     evento.preventDefault();
@@ -37,7 +77,11 @@ export function Entrar() {
     setError(null);
     const resultado = await entrar(correo, clave);
     if (resultado === "ok") {
-      navigate(destino, { replace: true });
+      // Sin un destino pedido, el admin va a su panel.
+      const final = !pedido && (await soyAdmin()) ? "/admin" : destino;
+      const { data } = await supabase.auth.getSession();
+      const temporal = debeCambiarClave(data.session?.user);
+      navigate(temporal ? pasandoPorClave(final) : final, { replace: true });
       return;
     }
     setError(resultado);
@@ -120,9 +164,9 @@ export function Entrar() {
                 </button>
               </div>
             </div>
-            {/* Recuperar la contraseña por correo necesita el SMTP de Resend (pendiente). */}
+            {/* Recuperarla por correo necesita el SMTP de Resend; mientras, la da quien creó la cuenta (ADR-017). */}
             <p className="text-sm text-tenue">
-              ¿Olvidaste tu contraseña? Pídele al dueño de la barbería que te la cambie.
+              ¿Olvidaste tu contraseña? Pídele al dueño de la barbería una nueva.
             </p>
           </div>
 

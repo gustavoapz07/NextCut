@@ -349,6 +349,21 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      admin_barberias: { Args: never; Returns: Json }
+      admin_puede_crear: {
+        Args: { p_admin: string; p_slug: string }
+        Returns: undefined
+      }
+      alta_barberia: {
+        Args: {
+          p_admin: string
+          p_dueno: string
+          p_nombre: string
+          p_slug: string
+          p_zona: string
+        }
+        Returns: Json
+      }
       avisos_pendientes: {
         Args: { p_barberia?: string; p_clave: string }
         Returns: Json
@@ -360,11 +375,24 @@ export type Database = {
         Returns: boolean
       }
       cerrar_dia: { Args: never; Returns: number }
+      cuenta_para_restablecer: {
+        Args: { p_barberia: string; p_barbero: string; p_quien: string }
+        Returns: string
+      }
+      cuenta_por_correo: { Args: { p_correo: string }; Returns: string }
+      dueno_puede_ligar: {
+        Args: { p_barbero: string; p_dueno: string }
+        Returns: undefined
+      }
       empezar_turno: { Args: { p_turno_id: string }; Returns: Json }
       fila_publica: { Args: { p_slug: string }; Returns: Json }
       liberar_aviso: {
         Args: { p_tipo: string; p_turno: string }
         Returns: boolean
+      }
+      ligar_cuenta_barbero: {
+        Args: { p_barbero: string; p_cuenta: string; p_dueno: string }
+        Returns: undefined
       }
       llamar_siguiente: { Args: { p_barbero_id: string }; Returns: Json }
       marcar_no_llego: { Args: { p_turno_id: string }; Returns: Json }
@@ -392,6 +420,7 @@ export type Database = {
         Args: { p_tipo: string; p_turno: string }
         Returns: boolean
       }
+      soy_admin: { Args: never; Returns: boolean }
       suscribir_push: {
         Args: { p_codigo: string; p_secreto: string; p_suscripcion: Json }
         Returns: boolean

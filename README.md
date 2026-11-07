@@ -2,8 +2,8 @@
 
 > Que ningún cliente se vaya por no saber cuánto le falta.
 
-**Estado:** Sprints 1 y 2 terminados (base de datos, fila pública, anotarse y turno en vivo) · Sprint 3 construido (login, panel, TV, "no llegó" automático y avisos por Web Push; los avisos llegan a Chrome de escritorio y a Android; falta probarlos en iPhone) · Sprint 4 empezado (panel del dueño: resumen del día, configuración, QR, pausa de la fila remota y renombrar u ocultar turnos; el horario cierra la fila en línea sola; el día se cierra solo y los teléfonos se borran a los 90 días; la fila en línea se pausa sola ante un pico y la prueba de carga pasó; endpoint de salud publicado y Sentry listo; Security Advisor revisado y el build se revisa solo antes de publicar; producción preparada y aviso de privacidad publicado, a la espera de las cuentas; faltan las invitaciones por correo y las cuentas de Sentry y UptimeRobot) · Sprint 0 casi listo (falta la prueba de Web Push en iPhone) · validación de campo en pausa
-**Última actualización:** 4 de noviembre de 2026
+**Estado:** Sprints 1 y 2 terminados (base de datos, fila pública, anotarse y turno en vivo) · Sprint 3 construido (login, panel, TV, "no llegó" automático y avisos por Web Push; los avisos llegan a Chrome de escritorio y a Android; falta probarlos en iPhone) · Sprint 4 empezado (panel del dueño: resumen del día, configuración, QR, pausa de la fila remota y renombrar u ocultar turnos; el horario cierra la fila en línea sola; el día se cierra solo y los teléfonos se borran a los 90 días; la fila en línea se pausa sola ante un pico y la prueba de carga pasó; endpoint de salud publicado y Sentry listo; Security Advisor revisado y el build se revisa solo antes de publicar; producción preparada y aviso de privacidad publicado, a la espera de las cuentas; super admin en `/admin` para dar de alta barberías y cuentas de barberos con contraseña temporal; faltan las cuentas de Sentry y UptimeRobot) · Sprint 0 casi listo (falta la prueba de Web Push en iPhone) · validación de campo en pausa
+**Última actualización:** 6 de noviembre de 2026
 
 NextCut es un SaaS para barberías que atienden por orden de llegada. Convierte la fila física en una fila virtual: el cliente escanea un QR o abre un enlace, ve cuántas personas hay y cuánto falta, se anota desde donde esté y recibe un aviso cuando le toca. El barbero pasa los turnos desde el celular. El dueño ve, por primera vez, cuántos clientes atendió cada barbero, cuánto esperaron y cuántos se fueron sin cortarse.
 
@@ -239,7 +239,7 @@ El diseño se auditó contra los 10 fallos más comunes en apps con APIs y agent
 ├── tests/e2e/                ← pruebas de punta a punta (Playwright)
 └── supabase/
     ├── migrations/           ← esquema, RLS, funciones y tareas programadas
-    ├── functions/            ← Edge Functions (anotarse, avisos, invitaciones, salud)
+    ├── functions/            ← Edge Functions (anotarse, avisos, cuentas, salud)
     └── tests/                ← pruebas de RLS con pgTAP
 ```
 

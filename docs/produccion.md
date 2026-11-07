@@ -19,7 +19,7 @@ Esta guía sirve para montar la versión que usan las barberías reales, aparte 
 |---|---|
 | 0. Decisiones | Hecho: se pausó `cms-opalo` y producción usa `nextcut-produccion.gustavoapz07.workers.dev` (sin dominio propio) |
 | 1. Proyecto de Supabase | Hecho. Las claves heredadas ya venían desactivadas (la API responde 401 con `anon`) |
-| 2. Base y funciones | Hecho: 8 migraciones, 5 tareas de `pg_cron` y las 3 funciones publicadas |
+| 2. Base y funciones | Hecho: 8 migraciones, 5 tareas de `pg_cron` y las 3 funciones publicadas. Hecho también lo de ADR-017 (07/11/2026): migración `super_admin`, función `cuentas` y el autor como admin. App publicada con `/admin` (versión `1919b2fb`) |
 | 3. Secretos | Hecho: los 5 secretos, cargados por el autor con `scripts/produccion/secretos.mjs` |
 | 4. Vault | Hecho |
 | 5. Auth | Hecho: Site URL, redirección `/**`, registro apagado y contraseña de 10 con letras y números |
@@ -56,7 +56,7 @@ npx supabase functions deploy --project-ref <ref> --use-api
 No hace falta la contraseña de la base: con la sesión de `npx supabase login`, la CLI entra con un rol temporal ("Initialising login role...").
 
 - `db push` aplica todas las migraciones: tablas, RLS, funciones y las tareas de `pg_cron` (el "no llegó" automático, los avisos, el cierre del día y el borrado de teléfonos).
-- `functions deploy` publica `unirse-a-fila`, `avisos` y `salud`, con `verify_jwt = false` según `supabase/config.toml`.
+- `functions deploy` publica `unirse-a-fila`, `avisos`, `salud` y `cuentas`, con `verify_jwt = false` según `supabase/config.toml`. `cuentas` usa el mismo `ORIGENES_PERMITIDOS`.
 - **Al terminar, volver a enlazar pruebas** (`npx supabase link --project-ref bquvluxsqfacleumlnmi`), para que el próximo `db push` no vaya a producción sin querer.
 - `seed.sql` no se carga en la nube: producción empieza vacía.
 
@@ -133,9 +133,13 @@ Si el dominio cambia, hay que actualizar `ORIGENES_PERMITIDOS`, la *Site URL* de
 
 ## 9. Barbería piloto
 
-1. **(Gus)** Crear la cuenta del dueño en **Authentication → Users → Add user → Create new user**, con *Auto Confirm User*. Igual para cada barbero que vaya a usar su propia cuenta. Es opcional: el dueño puede atender cualquier silla desde su panel.
-2. Llenar la sección "Datos de la barbería" de [`scripts/produccion/alta-barberia.sql`](../scripts/produccion/alta-barberia.sql) (nombre, slug, horario, barberos y servicios) y correrlo una vez en el editor SQL de producción. Si algo está mal, no guarda nada.
-3. El dueño entra en `/entrar`, revisa **Configuración** y descarga el QR en `/dueno/qr`.
+**Desde el panel de admin ([ADR-017](decisiones.md#adr-017--super-admin-y-cuentas-con-contraseña-temporal-sin-correo)):**
+
+1. **(Gus, una sola vez)** Nombrar admin a tu cuenta con [`scripts/produccion/hacer-admin.sql`](../scripts/produccion/hacer-admin.sql) en el editor SQL de producción.
+2. Entrar en `/entrar`: el admin cae en `/admin`. Llenar "Nueva barbería" (nombre, dirección, zona y correo del dueño) y mandarle al dueño por WhatsApp el mensaje con la contraseña temporal. No se vuelve a mostrar.
+3. El dueño entra, elige su contraseña, agrega a sus barberos en **Configuración → Barberos** (con "Crear cuenta" si cada uno va a usar la suya), ajusta servicios y horario y descarga el QR en `/dueno/qr`.
+
+**Con SQL, para cargar todo de una vez:** llenar [`scripts/produccion/alta-barberia.sql`](../scripts/produccion/alta-barberia.sql) (nombre, slug, horario, barberos y servicios) después de crear las cuentas en **Authentication → Users → Add user** con *Auto Confirm User*, y correrlo una vez en el editor SQL. Si algo está mal, no guarda nada.
 
 ## 10. Revisar antes de imprimir el QR
 

@@ -5,9 +5,19 @@ import {
   HORARIO_INICIAL,
   type Horario,
 } from "@shared/horario";
-import { Mail, Minus, Plus, RotateCcw, ShieldCheck, Trash2, UserPlus } from "lucide-react";
+import {
+  KeyRound,
+  Mail,
+  Minus,
+  Plus,
+  RotateCcw,
+  ShieldCheck,
+  Trash2,
+  UserPlus,
+} from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { type ReactNode, useCallback, useEffect, useId, useState } from "react";
+import { ClaveTemporal } from "@/components/ClaveTemporal";
 import { Cargando } from "@/components/Marco";
 import { Avatar, claseCampo, Toast, useToast } from "@/components/Piezas";
 import { SinConexion } from "@/components/SinConexion";
@@ -22,6 +32,7 @@ import {
   type ServicioConfig,
   validar,
 } from "@/lib/configuracion";
+import { crearCuentaBarbero, MENSAJES_CUENTAS, restablecerBarbero } from "@/lib/cuentas";
 import { tonoDe } from "@/lib/fila";
 import { useTitulo } from "@/lib/ganchos";
 import { cx } from "@/lib/utilidades";
@@ -177,6 +188,16 @@ function ConfiguracionReal({ barberiaId }: { barberiaId: string }) {
   const cambiar = (cambio: (d: DatosConfig) => DatosConfig) =>
     setBorrador((actual) => (actual ? cambio(actual) : actual));
 
+  // La cuenta ya quedó creada en la base: se marca sin recargar, para no perder el borrador.
+  const marcarConCuenta = (id: string) => {
+    const conCuenta = (d: DatosConfig): DatosConfig => ({
+      ...d,
+      barberos: d.barberos.map((b) => (b.id === id ? { ...b, conCuenta: true } : b)),
+    });
+    setEstado((e) => (e.tipo === "listo" ? { ...e, datos: conCuenta(e.datos) } : e));
+    cambiar(conCuenta);
+  };
+
   return (
     <div className="mx-auto max-w-4xl">
       <p className="text-lg font-medium text-tenue">Tu barbería</p>
@@ -196,7 +217,9 @@ function ConfiguracionReal({ barberiaId }: { barberiaId: string }) {
           className="mt-6"
         >
           {pestana === "barberia" && <DatosReales datos={borrador} cambiar={cambiar} />}
-          {pestana === "barberos" && <EquipoReal datos={borrador} cambiar={cambiar} />}
+          {pestana === "barberos" && (
+            <EquipoReal datos={borrador} cambiar={cambiar} onCuentaCreada={marcarConCuenta} />
+          )}
           {pestana === "servicios" && <ServiciosReales datos={borrador} cambiar={cambiar} />}
           {pestana === "fila" && <ReglasReales datos={borrador} cambiar={cambiar} />}
         </motion.div>
@@ -360,6 +383,127 @@ function DatosBasicos({
   );
 }
 
+/** La cuenta del barbero para entrar a su panel: crearla o ponerle una contraseña nueva. */
+function CuentaBarbero({
+  barbero: b,
+  onCreada,
+  onRestablecida,
+}: {
+  barbero: BarberoConfig;
+  onCreada: (correo: string, clave: string) => void;
+  onRestablecida: (clave: string) => void;
+}) {
+  const [abierto, setAbierto] = useState(false);
+  const [correo, setCorreo] = useState("");
+  const [enviando, setEnviando] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  if (b.id === null) {
+    return <p className="text-sm text-tenue sm:col-span-3">Nuevo: se agrega al guardar.</p>;
+  }
+  const id = b.id;
+
+  async function crear() {
+    setEnviando(true);
+    setError(null);
+    const resultado = await crearCuentaBarbero(id, correo);
+    setEnviando(false);
+    if (!resultado.ok) {
+      setError(MENSAJES_CUENTAS[resultado.error]);
+      return;
+    }
+    setAbierto(false);
+    setCorreo("");
+    onCreada(resultado.datos.correo, resultado.datos.clave);
+  }
+
+  async function restablecer() {
+    if (!window.confirm(`¿Poner una contraseña nueva a ${b.nombre}? La de ahora deja de servir.`)) {
+      return;
+    }
+    setEnviando(true);
+    setError(null);
+    const resultado = await restablecerBarbero(id);
+    setEnviando(false);
+    if (!resultado.ok) {
+      setError(MENSAJES_CUENTAS[resultado.error]);
+      return;
+    }
+    onRestablecida(resultado.datos.clave);
+  }
+
+  const claseEnlace =
+    "flex items-center gap-1.5 text-sm font-semibold text-tinta underline-offset-4 hover:underline disabled:opacity-60";
+
+  return (
+    <div className="grid gap-2 sm:col-span-3">
+      {b.cuentaPropia ? (
+        <p className="text-sm text-tenue">Es tu cuenta.</p>
+      ) : b.conCuenta ? (
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+          <p className="text-sm text-tenue">Entra al panel con su cuenta.</p>
+          <button
+            type="button"
+            onClick={() => void restablecer()}
+            disabled={enviando}
+            className={claseEnlace}
+          >
+            <KeyRound className="size-4" /> Nueva contraseña
+          </button>
+        </div>
+      ) : abierto ? (
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            void crear();
+          }}
+          className="flex flex-wrap gap-2"
+        >
+          <input
+            type="email"
+            required
+            autoComplete="off"
+            aria-label={`Correo de ${b.nombre}`}
+            placeholder="Su correo"
+            value={correo}
+            onChange={(e) => setCorreo(e.target.value)}
+            className="h-11 min-w-0 flex-1 basis-48 rounded-xl bg-superficie px-3 ring-1 ring-borde outline-none focus:ring-2 focus:ring-azul"
+          />
+          <button
+            type="submit"
+            disabled={enviando}
+            className="h-11 rounded-xl bg-tinta px-4 text-sm font-bold text-fondo disabled:opacity-60"
+          >
+            {enviando ? "Creando…" : "Crear cuenta"}
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setAbierto(false);
+              setError(null);
+            }}
+            className="h-11 rounded-xl px-3 text-sm font-semibold text-tenue"
+          >
+            Cancelar
+          </button>
+        </form>
+      ) : (
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+          <p className="text-sm text-tenue">Todavía no tiene cuenta para el panel.</p>
+          <button type="button" onClick={() => setAbierto(true)} className={claseEnlace}>
+            <Mail className="size-4" /> Crear cuenta
+          </button>
+        </div>
+      )}
+      {error && (
+        <p role="alert" className="text-sm font-medium text-rojo">
+          {error}
+        </p>
+      )}
+    </div>
+  );
+}
+
 function siguienteSilla(lista: BarberoConfig[]) {
   const ocupadas = new Set(lista.filter((b) => b.activo).map((b) => b.silla));
   let silla = 1;
@@ -367,7 +511,20 @@ function siguienteSilla(lista: BarberoConfig[]) {
   return silla;
 }
 
-function EquipoReal({ datos, cambiar }: { datos: DatosConfig; cambiar: Cambiar }) {
+function EquipoReal({
+  datos,
+  cambiar,
+  onCuentaCreada,
+}: {
+  datos: DatosConfig;
+  cambiar: Cambiar;
+  onCuentaCreada: (barberoId: string) => void;
+}) {
+  const [entregada, setEntregada] = useState<{
+    titulo: string;
+    correo: string | null;
+    clave: string;
+  } | null>(null);
   const actualizar = (clave: string, cambio: Partial<BarberoConfig>) =>
     cambiar((d) => ({
       ...d,
@@ -387,9 +544,17 @@ function EquipoReal({ datos, cambiar }: { datos: DatosConfig; cambiar: Cambiar }
 
   return (
     <div className="grid grid-cols-1 gap-4">
+      {entregada && (
+        <ClaveTemporal
+          titulo={entregada.titulo}
+          correo={entregada.correo}
+          clave={entregada.clave}
+          onCerrar={() => setEntregada(null)}
+        />
+      )}
       <Tarjeta
         titulo="Tu equipo"
-        texto="Cada barbero aparece en la fila pública y en la TV con su silla."
+        texto="Cada barbero aparece en la fila pública y en la TV con su silla. Con una cuenta, entra a su propio panel."
       >
         <ul className="grid gap-2">
           {activos.map((b, i) => (
@@ -428,13 +593,16 @@ function EquipoReal({ datos, cambiar }: { datos: DatosConfig; cambiar: Cambiar }
                     className="w-full min-w-0 bg-transparent font-semibold tabular-nums outline-none"
                   />
                 </label>
-                <p className="text-sm text-tenue sm:col-span-3">
-                  {b.conCuenta
-                    ? "Entra al panel con su cuenta."
-                    : b.id === null
-                      ? "Nuevo: se agrega al guardar."
-                      : "Todavía no tiene cuenta para el panel."}
-                </p>
+                <CuentaBarbero
+                  barbero={b}
+                  onCreada={(correo, clave) => {
+                    if (b.id) onCuentaCreada(b.id);
+                    setEntregada({ titulo: `Cuenta de ${b.nombre}`, correo, clave });
+                  }}
+                  onRestablecida={(clave) =>
+                    setEntregada({ titulo: `Contraseña nueva de ${b.nombre}`, correo: null, clave })
+                  }
+                />
               </div>
               <button
                 type="button"

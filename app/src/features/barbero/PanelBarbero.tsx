@@ -23,6 +23,7 @@ import { BotonMarca, Cargando } from "@/components/Marco";
 import { NumeroAnimado } from "@/components/NumeroAnimado";
 import { Avatar, BotonPrincipal, Toast, useToast } from "@/components/Piezas";
 import { SinConexion } from "@/components/SinConexion";
+import { debeCambiarClave } from "@/lib/cuentas";
 import { lempiras, reloj } from "@/lib/formato";
 import { useReloj, useTitulo } from "@/lib/ganchos";
 import {
@@ -117,7 +118,10 @@ interface AccionesPanel {
 export function PanelBarbero() {
   const sesion = useSesion();
   if (sesion.tipo === "cargando") return <Cargando />;
-  if (sesion.tipo === "fuera") return <Navigate to="/entrar" replace />;
+  if (sesion.tipo === "fuera") return <Navigate to="/entrar?siguiente=/panel" replace />;
+  if (debeCambiarClave(sesion.sesion.user)) {
+    return <Navigate to="/cambiar-clave?siguiente=/panel" replace />;
+  }
   return <PanelReal userId={sesion.sesion.user.id} />;
 }
 

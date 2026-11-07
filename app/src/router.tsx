@@ -66,6 +66,16 @@ export const rutas: RouteObject[] = [
         lazy: () => import("./features/acceso/Entrar").then((m) => ({ Component: m.Entrar })),
       },
       {
+        path: "cambiar-clave",
+        lazy: () =>
+          import("./features/acceso/CambiarClave").then((m) => ({ Component: m.CambiarClave })),
+      },
+      {
+        // Super admin: da de alta barberías y sus dueños (ADR-017).
+        path: "admin",
+        lazy: () => import("./features/admin/Admin").then((m) => ({ Component: m.Admin })),
+      },
+      {
         path: "panel",
         lazy: () =>
           import("./features/barbero/PanelBarbero").then((m) => ({ Component: m.PanelBarbero })),

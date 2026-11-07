@@ -71,9 +71,28 @@ export const rutas: RouteObject[] = [
           import("./features/acceso/CambiarClave").then((m) => ({ Component: m.CambiarClave })),
       },
       {
-        // Super admin: da de alta barberías y sus dueños (ADR-017).
+        // Panel del super admin, aparte de los de las barberías (ADR-017 y ADR-018).
         path: "admin",
-        lazy: () => import("./features/admin/Admin").then((m) => ({ Component: m.Admin })),
+        lazy: () =>
+          import("./features/admin/LayoutAdmin").then((m) => ({ Component: m.LayoutAdmin })),
+        children: [
+          {
+            index: true,
+            lazy: () => import("./features/admin/Admin").then((m) => ({ Component: m.Barberias })),
+          },
+          {
+            path: "nueva",
+            lazy: () =>
+              import("./features/admin/Admin").then((m) => ({ Component: m.NuevaBarberia })),
+          },
+          {
+            path: "b/:id",
+            lazy: () =>
+              import("./features/admin/Admin").then((m) => ({
+                Component: m.DetalleBarberiaAdmin,
+              })),
+          },
+        ],
       },
       {
         path: "panel",

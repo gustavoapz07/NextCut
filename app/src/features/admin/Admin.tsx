@@ -1,47 +1,83 @@
-import { ArrowUpRight, KeyRound, LogOut, Store } from "lucide-react";
-import { type FormEvent, useCallback, useEffect, useId, useState } from "react";
-import { Link, Navigate } from "react-router";
+import { ArrowLeft, ArrowUpRight, ChevronRight, KeyRound, Plus, Store, Tv } from "lucide-react";
+import { type FormEvent, type ReactNode, useCallback, useEffect, useId, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router";
 import { ClaveTemporal } from "@/components/ClaveTemporal";
-import { BotonMarca, Cargando } from "@/components/Marco";
+import { Cargando } from "@/components/Marco";
 import { BotonPrincipal, claseCampo } from "@/components/Piezas";
 import { SinConexion } from "@/components/SinConexion";
 import {
-  type BarberiaAdmin,
   cargarBarberiasAdmin,
+  cargarDetalleAdmin,
   crearBarberia,
-  debeCambiarClave,
+  type DetalleBarberia,
   MENSAJES_CUENTAS,
   type ResultadoAdmin,
+  type ResultadoDetalle,
   restablecerDueno,
   slugDe,
 } from "@/lib/cuentas";
+import { lempiras } from "@/lib/formato";
 import { useTitulo } from "@/lib/ganchos";
-import { salir, useSesion } from "@/lib/sesion";
 
-// Panel del super admin (ADR-017): da de alta barberías con la cuenta de su dueño y le pone una
-// contraseña nueva al dueño que la olvidó. Quién es admin lo decide la tabla privado.admins.
+// Las secciones del panel del admin (ADR-018). El marco y la revisión de que la cuenta es admin
+// viven en LayoutAdmin; aquí, cada función de la base lo vuelve a revisar.
 
-export function Admin() {
-  useTitulo("Administración");
-  const sesion = useSesion();
-  if (sesion.tipo === "cargando") return <Cargando />;
-  if (sesion.tipo === "fuera") return <Navigate to="/entrar?siguiente=/admin" replace />;
-  if (debeCambiarClave(sesion.sesion.user)) {
-    return <Navigate to="/cambiar-clave?siguiente=/admin" replace />;
-  }
-  return <AdminReal />;
+function Encabezado({
+  antes,
+  titulo,
+  accion,
+}: {
+  antes: string;
+  titulo: string;
+  accion?: ReactNode;
+}) {
+  return (
+    <div className="flex flex-wrap items-end justify-between gap-4">
+      <div className="min-w-0">
+        <p className="text-lg font-medium text-tenue">{antes}</p>
+        <h1 className="font-display text-[clamp(3rem,10vw,5.5rem)] leading-[0.9] font-black break-words uppercase">
+          {titulo}
+        </h1>
+      </div>
+      {accion}
+    </div>
+  );
 }
 
-type Entregada = { titulo: string; correo: string; clave: string };
+function Tarjeta({ titulo, children }: { titulo: string; children: ReactNode }) {
+  return (
+    <section className="min-w-0 rounded-[2rem] bg-superficie p-6 ring-1 ring-borde">
+      <h2 className="font-display text-3xl leading-none font-black uppercase">{titulo}</h2>
+      <div className="mt-5">{children}</div>
+    </section>
+  );
+}
 
-function AdminReal() {
+function Aviso({ children }: { children: ReactNode }) {
+  return (
+    <p
+      role="alert"
+      className="rounded-2xl bg-superficie px-4 py-3 text-sm font-medium text-rojo ring-1 ring-rojo/40"
+    >
+      {children}
+    </p>
+  );
+}
+
+const fecha = (iso: string) =>
+  new Date(iso).toLocaleDateString("es-HN", { day: "numeric", month: "short", year: "numeric" });
+
+// ---------------------------------------------------------------------------------------------
+// /admin: todas las barberías
+// ---------------------------------------------------------------------------------------------
+
+export function Barberias() {
+  useTitulo("Barberías · Administración");
   const [estado, setEstado] = useState<{ tipo: "cargando" } | ResultadoAdmin>({
     tipo: "cargando",
   });
-  const [entregada, setEntregada] = useState<Entregada | null>(null);
-  const [aviso, setAviso] = useState<string | null>(null);
-
   const cargar = useCallback(async () => {
+    setEstado({ tipo: "cargando" });
     setEstado(await cargarBarberiasAdmin());
   }, []);
   useEffect(() => {
@@ -49,141 +85,130 @@ function AdminReal() {
   }, [cargar]);
 
   if (estado.tipo === "cargando") return <Cargando />;
-  if (estado.tipo === "error") {
+  if (estado.tipo !== "listo") {
     return (
       <SinConexion titulo="No pudimos cargar las barberías" alReintentar={() => void cargar()} />
     );
   }
-  if (estado.tipo === "no_admin") return <NoEsAdmin />;
-
-  async function nuevaClaveDueno(b: BarberiaAdmin) {
-    if (!b.dueno_correo) return;
-    if (
-      !window.confirm(
-        `¿Poner una contraseña nueva a ${b.dueno_correo}? La de ahora deja de servir.`,
-      )
-    ) {
-      return;
-    }
-    setAviso(null);
-    const resultado = await restablecerDueno(b.id);
-    if (!resultado.ok) {
-      setAviso(MENSAJES_CUENTAS[resultado.error]);
-      return;
-    }
-    setEntregada({
-      titulo: `Contraseña nueva del dueño de ${b.nombre}`,
-      correo: b.dueno_correo,
-      clave: resultado.datos.clave,
-    });
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
 
   return (
-    <div className="mx-auto min-h-dvh max-w-3xl px-4 pt-5 pb-16 sm:px-6">
-      <header className="flex items-center justify-between gap-3">
-        <BotonMarca />
-        <button
-          type="button"
-          onClick={() => void salir()}
-          className="flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold ring-1 ring-borde"
-        >
-          Salir <LogOut className="size-4" />
-        </button>
-      </header>
-
-      <p className="mt-10 text-lg font-medium text-tenue">Administración</p>
-      <h1 className="font-display text-[clamp(3rem,10vw,5.5rem)] leading-[0.9] font-black uppercase">
-        Barberías
-      </h1>
-
-      <div className="mt-8 grid gap-4">
-        {entregada && (
-          <ClaveTemporal
-            titulo={entregada.titulo}
-            correo={entregada.correo}
-            clave={entregada.clave}
-            onCerrar={() => setEntregada(null)}
-          />
-        )}
-        {aviso && (
-          <p
-            role="alert"
-            className="rounded-2xl bg-superficie px-4 py-3 text-sm font-medium text-rojo ring-1 ring-rojo/40"
+    <div className="mx-auto max-w-4xl">
+      <Encabezado
+        antes="Administración"
+        titulo="Barberías"
+        accion={
+          <Link
+            to="/admin/nueva"
+            className="flex h-12 items-center gap-2 rounded-full bg-tinta px-5 font-semibold text-fondo"
           >
-            {aviso}
-          </p>
+            <Plus className="size-5" /> Nueva barbería
+          </Link>
+        }
+      />
+      <p className="mt-3 text-tenue">
+        {estado.barberias.length === 1
+          ? "1 barbería dada de alta."
+          : `${estado.barberias.length} barberías dadas de alta.`}
+      </p>
+
+      {estado.barberias.length === 0 ? (
+        <div className="mt-8 rounded-[2rem] bg-superficie p-8 text-center ring-1 ring-borde">
+          <Store className="mx-auto size-10 text-tenue" />
+          <p className="mt-3 font-semibold">Todavía no hay barberías.</p>
+          <p className="mt-1 text-sm text-tenue">Da de alta la primera con su dueño.</p>
+        </div>
+      ) : (
+        <ul className="mt-8 grid gap-3">
+          {estado.barberias.map((b) => (
+            <li key={b.id}>
+              <Link
+                to={`/admin/b/${b.id}`}
+                className="flex items-center gap-4 rounded-[1.5rem] bg-superficie p-5 ring-1 ring-borde transition hover:ring-tinta"
+              >
+                <div className="min-w-0 flex-1">
+                  <p className="font-display text-2xl leading-none font-black break-words uppercase">
+                    {b.nombre}
+                  </p>
+                  <p className="mt-1.5 text-sm text-tenue break-all">
+                    /b/{b.slug} · {b.dueno_correo ?? "Sin dueño"}
+                  </p>
+                  <p className="mt-1 text-sm text-tenue">
+                    {b.barberos} {b.barberos === 1 ? "barbero" : "barberos"}
+                    {b.zona ? ` · ${b.zona}` : ""} · desde {fecha(b.creado_en)}
+                  </p>
+                </div>
+                <ChevronRight className="size-5 shrink-0 text-tenue" />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------------------------
+// /admin/nueva: alta de una barbería con su dueño
+// ---------------------------------------------------------------------------------------------
+
+type Creada = { slug: string; correo: string; clave: string | null };
+
+export function NuevaBarberia() {
+  useTitulo("Nueva barbería · Administración");
+  const [creada, setCreada] = useState<Creada | null>(null);
+
+  return (
+    <div className="mx-auto max-w-2xl">
+      <Encabezado antes="Administración" titulo="Nueva barbería" />
+      <div className="mt-8 grid gap-4">
+        {creada ? (
+          <Lista creada={creada} onOtra={() => setCreada(null)} />
+        ) : (
+          <FormularioAlta onCreada={setCreada} />
         )}
-
-        <NuevaBarberia
-          onCreada={(resultado) => {
-            setAviso(
-              resultado.clave
-                ? null
-                : `${resultado.correo} ya tenía cuenta: entra con su contraseña de siempre.`,
-            );
-            if (resultado.clave) {
-              setEntregada({
-                titulo: `Lista: /b/${resultado.slug}`,
-                correo: resultado.correo,
-                clave: resultado.clave,
-              });
-            }
-            window.scrollTo({ top: 0, behavior: "smooth" });
-            void cargar();
-          }}
-        />
-
-        <section className="rounded-[2rem] bg-superficie p-6 ring-1 ring-borde">
-          <h2 className="font-display text-3xl leading-none font-black uppercase">
-            Dadas de alta ({estado.barberias.length})
-          </h2>
-          {estado.barberias.length === 0 ? (
-            <p className="mt-3 text-tenue">Todavía no hay barberías.</p>
-          ) : (
-            <ul className="mt-5 grid gap-2">
-              {estado.barberias.map((b) => (
-                <li key={b.id} className="rounded-2xl bg-fondo p-4 ring-1 ring-borde">
-                  <div className="flex flex-wrap items-start justify-between gap-2">
-                    <div className="min-w-0">
-                      <p className="font-semibold break-words">{b.nombre}</p>
-                      <p className="text-sm text-tenue break-all">
-                        {b.dueno_correo ?? "Sin dueño"} · {b.barberos}{" "}
-                        {b.barberos === 1 ? "barbero" : "barberos"}
-                        {b.zona ? ` · ${b.zona}` : ""}
-                      </p>
-                    </div>
-                    <Link
-                      to={`/b/${b.slug}`}
-                      className="flex shrink-0 items-center gap-1 rounded-full px-3 py-1.5 text-sm font-semibold ring-1 ring-borde"
-                    >
-                      /b/{b.slug} <ArrowUpRight className="size-4" />
-                    </Link>
-                  </div>
-                  {b.dueno_correo && (
-                    <button
-                      type="button"
-                      onClick={() => void nuevaClaveDueno(b)}
-                      className="mt-3 flex items-center gap-1.5 text-sm font-semibold text-tenue transition hover:text-tinta"
-                    >
-                      <KeyRound className="size-4" /> Nueva contraseña para el dueño
-                    </button>
-                  )}
-                </li>
-              ))}
-            </ul>
-          )}
-        </section>
       </div>
     </div>
   );
 }
 
-function NuevaBarberia({
-  onCreada,
-}: {
-  onCreada: (resultado: { slug: string; correo: string; clave: string | null }) => void;
-}) {
+function Lista({ creada, onOtra }: { creada: Creada; onOtra: () => void }) {
+  const [verClave, setVerClave] = useState(true);
+  return (
+    <>
+      {creada.clave && verClave ? (
+        <ClaveTemporal
+          titulo={`Lista: /b/${creada.slug}`}
+          correo={creada.correo}
+          clave={creada.clave}
+          onCerrar={() => setVerClave(false)}
+        />
+      ) : (
+        <p className="rounded-2xl bg-superficie px-4 py-3 text-sm font-medium ring-1 ring-borde">
+          {creada.clave
+            ? `Lista: /b/${creada.slug}.`
+            : `Lista: /b/${creada.slug}. ${creada.correo} ya tenía cuenta: entra con su contraseña de siempre.`}
+        </p>
+      )}
+      <div className="grid gap-3 sm:grid-cols-2">
+        <button
+          type="button"
+          onClick={onOtra}
+          className="flex h-14 items-center justify-center gap-2 rounded-full font-semibold ring-1 ring-borde"
+        >
+          <Plus className="size-5" /> Dar de alta otra
+        </button>
+        <Link
+          to="/admin"
+          className="flex h-14 items-center justify-center rounded-full bg-tinta font-semibold text-fondo"
+        >
+          Ver todas las barberías
+        </Link>
+      </div>
+    </>
+  );
+}
+
+function FormularioAlta({ onCreada }: { onCreada: (creada: Creada) => void }) {
   const [nombre, setNombre] = useState("");
   const [slug, setSlug] = useState("");
   const [slugTocado, setSlugTocado] = useState(false);
@@ -203,11 +228,7 @@ function NuevaBarberia({
       setError(MENSAJES_CUENTAS[resultado.error]);
       return;
     }
-    setNombre("");
-    setSlug("");
-    setSlugTocado(false);
-    setZona("");
-    setCorreo("");
+    window.scrollTo({ top: 0, behavior: "smooth" });
     onCreada(resultado.datos);
   }
 
@@ -216,12 +237,9 @@ function NuevaBarberia({
       onSubmit={(e) => void enviar(e)}
       className="rounded-[2rem] bg-superficie p-6 ring-1 ring-borde"
     >
-      <h2 className="flex items-center gap-2 font-display text-3xl leading-none font-black uppercase">
-        <Store className="size-7" /> Nueva barbería
-      </h2>
-      <p className="mt-1 text-sm text-tenue">
+      <p className="text-sm text-tenue">
         Se crea con su dueño y un servicio "Corte" para empezar. El dueño agrega a sus barberos y
-        ajusta los servicios desde su configuración.
+        ajusta los servicios y el horario desde su configuración.
       </p>
 
       <div className="mt-5 grid gap-4">
@@ -300,12 +318,9 @@ function NuevaBarberia({
       </div>
 
       {error && (
-        <p
-          role="alert"
-          className="mt-5 rounded-2xl bg-fondo px-4 py-3 text-sm font-medium text-rojo ring-1 ring-rojo/40"
-        >
-          {error}
-        </p>
+        <div className="mt-5">
+          <Aviso>{error}</Aviso>
+        </div>
       )}
       <BotonPrincipal type="submit" className="mt-6" disabled={enviando}>
         {enviando ? "Creando…" : "Crear barbería"}
@@ -314,30 +329,202 @@ function NuevaBarberia({
   );
 }
 
-function NoEsAdmin() {
-  useTitulo("Solo para el administrador");
-  return (
-    <main className="mx-auto flex min-h-dvh max-w-md flex-col justify-center px-4 py-10">
-      <BotonMarca />
-      <h1 className="mt-10 font-display text-6xl leading-[0.9] font-black uppercase">
-        Solo para el administrador
-      </h1>
-      <p className="mt-4 text-lg text-tenue">Esta cuenta no puede dar de alta barberías.</p>
-      <div className="mt-8 grid gap-3">
-        <Link
-          to="/panel"
-          className="flex h-14 items-center justify-center rounded-full bg-tinta font-display text-xl font-extrabold text-fondo uppercase"
-        >
-          Ir a mi panel
-        </Link>
-        <button
-          type="button"
-          onClick={() => void salir()}
-          className="h-14 rounded-full font-semibold ring-1 ring-borde"
-        >
-          Salir
-        </button>
+// ---------------------------------------------------------------------------------------------
+// /admin/b/:id: el detalle de una barbería
+// ---------------------------------------------------------------------------------------------
+
+export function DetalleBarberiaAdmin() {
+  const { id = "" } = useParams();
+  const [estado, setEstado] = useState<{ tipo: "cargando" } | ResultadoDetalle>({
+    tipo: "cargando",
+  });
+  const cargar = useCallback(async () => {
+    setEstado({ tipo: "cargando" });
+    setEstado(await cargarDetalleAdmin(id));
+  }, [id]);
+  useEffect(() => {
+    void cargar();
+  }, [cargar]);
+  useTitulo(
+    estado.tipo === "listo" ? `${estado.barberia.nombre} · Administración` : "Administración",
+  );
+
+  if (estado.tipo === "cargando") return <Cargando />;
+  if (estado.tipo === "no_existe") {
+    return (
+      <div className="mx-auto max-w-2xl">
+        <Volver />
+        <p className="mt-6 text-lg">Esta barbería no existe.</p>
       </div>
-    </main>
+    );
+  }
+  if (estado.tipo !== "listo") {
+    return (
+      <SinConexion titulo="No pudimos cargar la barbería" alReintentar={() => void cargar()} />
+    );
+  }
+  return <Detalle barberia={estado.barberia} />;
+}
+
+function Volver() {
+  return (
+    <Link
+      to="/admin"
+      className="inline-flex items-center gap-1.5 text-sm font-semibold text-tenue hover:text-tinta"
+    >
+      <ArrowLeft className="size-4" /> Todas las barberías
+    </Link>
+  );
+}
+
+function Detalle({ barberia: b }: { barberia: DetalleBarberia }) {
+  const navigate = useNavigate();
+  const [clave, setClave] = useState<string | null>(null);
+  const [aviso, setAviso] = useState<string | null>(null);
+  const [enviando, setEnviando] = useState(false);
+  const activos = b.barberos.filter((x) => x.activo);
+  const inactivos = b.barberos.length - activos.length;
+
+  async function nuevaClaveDueno() {
+    if (!b.dueno_correo) return;
+    if (
+      !window.confirm(
+        `¿Poner una contraseña nueva a ${b.dueno_correo}? La de ahora deja de servir.`,
+      )
+    ) {
+      return;
+    }
+    setEnviando(true);
+    setAviso(null);
+    const resultado = await restablecerDueno(b.id);
+    setEnviando(false);
+    if (!resultado.ok) {
+      if (resultado.error === "sin_sesion") navigate("/entrar?siguiente=/admin");
+      setAviso(MENSAJES_CUENTAS[resultado.error]);
+      return;
+    }
+    setClave(resultado.datos.clave);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  return (
+    <div className="mx-auto max-w-4xl">
+      <Volver />
+      <div className="mt-4">
+        <Encabezado antes={b.zona ?? "Barbería"} titulo={b.nombre} />
+      </div>
+      <div className="mt-4 flex flex-wrap gap-2">
+        <Link
+          to={`/b/${b.slug}`}
+          className="flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold ring-1 ring-borde"
+        >
+          /b/{b.slug} <ArrowUpRight className="size-4" />
+        </Link>
+        <Link
+          to={`/b/${b.slug}/tv`}
+          className="flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold ring-1 ring-borde"
+        >
+          <Tv className="size-4" /> Pantalla de TV
+        </Link>
+      </div>
+
+      <div className="mt-8 grid gap-4">
+        {clave && b.dueno_correo && (
+          <ClaveTemporal
+            titulo={`Contraseña nueva del dueño de ${b.nombre}`}
+            correo={b.dueno_correo}
+            clave={clave}
+            onCerrar={() => setClave(null)}
+          />
+        )}
+        {aviso && <Aviso>{aviso}</Aviso>}
+
+        <div className="grid gap-4 sm:grid-cols-3">
+          <Dato titulo="Turnos en 7 días" valor={String(b.turnos_7_dias)} />
+          <Dato titulo="Atendidos en 7 días" valor={String(b.atendidos_7_dias)} />
+          <Dato
+            titulo="Fila en línea"
+            valor={b.fila_remota_activa ? "Abierta" : "Pausada"}
+            detalle={b.con_horario ? "Con horario" : "Sin horario"}
+          />
+        </div>
+
+        <Tarjeta titulo="Dueño">
+          <p className="font-semibold break-all">{b.dueno_correo ?? "Sin dueño"}</p>
+          <p className="mt-1 text-sm text-tenue">Alta el {fecha(b.creado_en)}.</p>
+          {b.dueno_correo && (
+            <button
+              type="button"
+              onClick={() => void nuevaClaveDueno()}
+              disabled={enviando}
+              className="mt-4 flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold ring-1 ring-borde disabled:opacity-60"
+            >
+              <KeyRound className="size-4" />
+              {enviando ? "Generando…" : "Nueva contraseña para el dueño"}
+            </button>
+          )}
+        </Tarjeta>
+
+        <div className="grid gap-4 lg:grid-cols-2">
+          <Tarjeta titulo={`Barberos (${activos.length})`}>
+            {activos.length === 0 ? (
+              <p className="text-tenue">El dueño todavía no agrega barberos.</p>
+            ) : (
+              <ul className="grid gap-2">
+                {activos.map((x) => (
+                  <li
+                    key={`${x.nombre}-${x.silla}`}
+                    className="flex items-center justify-between gap-3 rounded-2xl bg-fondo px-4 py-3 ring-1 ring-borde"
+                  >
+                    <div className="min-w-0">
+                      <p className="font-semibold break-words">{x.nombre}</p>
+                      <p className="text-sm text-tenue break-all">{x.correo ?? "Sin cuenta"}</p>
+                    </div>
+                    <span className="shrink-0 text-sm text-tenue tabular-nums">
+                      {x.silla ? `Silla ${x.silla}` : "Sin silla"}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {inactivos > 0 && (
+              <p className="mt-3 text-sm text-tenue">
+                {inactivos === 1 ? "1 ya no atiende." : `${inactivos} ya no atienden.`}
+              </p>
+            )}
+          </Tarjeta>
+
+          <Tarjeta titulo="Servicios">
+            <ul className="grid gap-2">
+              {b.servicios
+                .filter((s) => s.activo)
+                .map((s) => (
+                  <li
+                    key={s.nombre}
+                    className="flex items-center justify-between gap-3 rounded-2xl bg-fondo px-4 py-3 ring-1 ring-borde"
+                  >
+                    <span className="min-w-0 font-semibold break-words">{s.nombre}</span>
+                    <span className="shrink-0 text-sm text-tenue tabular-nums">
+                      {s.duracion_min} min · {lempiras(s.precio_ref)}
+                    </span>
+                  </li>
+                ))}
+            </ul>
+          </Tarjeta>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Dato({ titulo, valor, detalle }: { titulo: string; valor: string; detalle?: string }) {
+  return (
+    <div className="rounded-[1.5rem] bg-superficie p-5 ring-1 ring-borde">
+      <p className="text-sm text-tenue">{titulo}</p>
+      <p className="mt-1 font-display text-4xl leading-none font-black uppercase tabular-nums">
+        {valor}
+      </p>
+      {detalle && <p className="mt-1 text-sm text-tenue">{detalle}</p>}
+    </div>
   );
 }

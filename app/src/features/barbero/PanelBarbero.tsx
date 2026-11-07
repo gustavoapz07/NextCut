@@ -18,6 +18,7 @@ import {
 import { AnimatePresence, motion } from "motion/react";
 import { type ReactNode, useCallback, useId, useState } from "react";
 import { Link, Navigate, useSearchParams } from "react-router";
+import { AlPanelSiEsAdmin } from "@/components/AlPanelSiEsAdmin";
 import { Franjas } from "@/components/Franjas";
 import { BotonMarca, Cargando } from "@/components/Marco";
 import { NumeroAnimado } from "@/components/NumeroAnimado";
@@ -166,7 +167,13 @@ function PanelReal({ userId }: { userId: string }) {
   if (estado.tipo === "error") {
     return <SinConexion titulo="No pudimos cargar tu panel" alReintentar={() => void recargar()} />;
   }
-  if (estado.tipo === "sin_silla") return <SinSilla />;
+  if (estado.tipo === "sin_silla") {
+    return (
+      <AlPanelSiEsAdmin>
+        <SinSilla />
+      </AlPanelSiEsAdmin>
+    );
+  }
   if (estado.tipo === "elegir_silla") {
     return <ElegirSilla barberia={estado.barberia} sillas={estado.sillas} onElegir={elegirSilla} />;
   }

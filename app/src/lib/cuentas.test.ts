@@ -5,7 +5,7 @@ vi.mock("@/lib/supabase", () => ({ supabase: {} }));
 
 import { mensajeDeAcceso } from "@/components/ClaveTemporal";
 import { destinoAlEntrar } from "@/features/acceso/Entrar";
-import { debeCambiarClave, problemaClave, slugDe } from "./cuentas";
+import { debeCambiarClave, destinoDelAdmin, problemaClave, slugDe } from "./cuentas";
 
 describe("slugDe", () => {
   it.each([
@@ -60,6 +60,18 @@ describe("mensajeDeAcceso", () => {
 describe("destinoAlEntrar", () => {
   it("acepta el panel del admin", () => {
     expect(destinoAlEntrar("/admin")).toBe("/admin");
+    expect(destinoAlEntrar("/admin/nueva")).toBe("/admin/nueva");
+    const detalle = "/admin/b/f1000000-0000-4000-8000-00000000000a";
+    expect(destinoAlEntrar(detalle)).toBe(detalle);
     expect(destinoAlEntrar("/admin/../b")).toBe("/panel");
+    expect(destinoAlEntrar("/admin/b/otra-cosa")).toBe("/panel");
+  });
+});
+
+describe("destinoDelAdmin", () => {
+  it("el admin siempre entra a su panel, aunque viniera de otro", () => {
+    expect(destinoDelAdmin("/panel")).toBe("/admin");
+    expect(destinoDelAdmin("/dueno/configuracion")).toBe("/admin");
+    expect(destinoDelAdmin("/admin/nueva")).toBe("/admin/nueva");
   });
 });

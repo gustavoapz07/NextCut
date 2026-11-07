@@ -540,3 +540,17 @@ Cada cambio del proyecto queda aquí, enlazado al documento que afecta. El grafo
   - **pgTAP:** `01_permisos.test.sql` tiene la lista exacta de funciones que ejecuta una cuenta con sesión y no tenía `soy_admin` ni `admin_barberias`.
 - **Pruebas nuevas de la base** (`supabase/tests/database/10_admin.test.sql`, 24): solo el admin da de alta barberías y ve la lista; la dirección no se repite; la barbería nace con su dueño y un servicio; solo el dueño liga cuentas a sus sillas (no a una con cuenta ni a una inactiva); quién le puede poner contraseña nueva a quién; nadie con sesión toca `privado.admins` ni las funciones de la Edge Function.
 - **Cómo se probaron sin Docker:** las dos pruebas de la base corrieron en `siguiente-pruebas` dentro de una transacción que termina con un error a propósito, así se deshace todo. 6 y 24 pasan, y después no quedó ninguna cuenta, barbería, admin ni la extensión pgTAP.
+
+## 2026-11-07 · Panel propio del admin y adiós a la Barbería Demo
+
+- **Qué:** el admin entraba al panel del dueño y llegaba a `/admin` por un enlace. Ahora tiene su propio panel y no es dueño de nada ([ADR-018](decisiones.md#adr-018--el-admin-tiene-su-propio-panel-y-no-es-dueño)).
+- **Base** (`supabase/migrations/20261107160000_admin_detalle.sql`): `admin_barberia(id)` da el detalle de una barbería solo al admin. Pruebas de la base: `01_permisos` la suma a la lista y `10_admin` revisa que la dueña no ve el detalle de otra, que el admin ve al dueño y a cada barbero con su correo, y que una barbería que no existe da vacío.
+- **App:**
+  - `LayoutAdmin`: marco propio con "Barberías" y "Nueva barbería" (barra lateral y pestañas en el celular), el correo del admin y "Salir"; si la cuenta no es admin, "Solo para el administrador";
+  - `/admin` lista las barberías y cada una abre su detalle en `/admin/b/<id>`; `/admin/nueva` es el alta, que termina con la contraseña temporal y "Dar de alta otra" o "Ver todas";
+  - al entrar, el admin va a `/admin` aunque haya pedido `/dueno` o `/panel`; `destinoAlEntrar` acepta `/admin/nueva` y `/admin/b/<uuid>`;
+  - se quitó el enlace "Administración" del panel del dueño; si el admin abre `/dueno` o `/panel` lo manda a su panel (`AlPanelSiEsAdmin`).
+- **Pruebas:** 363 de Vitest (corridas también sin las variables de Supabase, como en la CI). En el navegador, contra pruebas y con la cuenta de prueba como admin un momento: entrando con `?siguiente=/dueno` cae en `/admin`; la lista y el detalle cargan con dueño, barberos, servicios y conteos; a 375 px sin scroll lateral. La cuenta de prueba dejó de ser admin al terminar.
+- **Producción:** se borró la Barbería Demo (3 barberos, 4 servicios y 1 turno). Quedan 0 barberías y la cuenta del autor solo como admin.
+- **Publicado** (con permiso del autor): `db push` aplicó `admin_detalle` en `nextcut-produccion` (la CLI quedó otra vez en `siguiente-pruebas`) y `npm run deploy:produccion` publicó la versión `23b55cb8` después de `npm run check` (363 pruebas). Revisado desde afuera: `/dueno` y `/admin/nueva` sin sesión mandan a entrar con su destino, consola sin errores, y `admin_barberia` solo la ejecuta una cuenta con sesión.
+- **Falta (Gus):** entrar con su cuenta y dar de alta la primera barbería.

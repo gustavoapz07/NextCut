@@ -6,15 +6,15 @@
     "semantic_hash": ""
   },
   "docs/bitacora.md": {
-    "mtime": 1794064542.1972082,
-    "seen": 1794064581.3895063,
-    "ast_hash": "f7ea9772724538ef8d577c1d34abdc4a",
+    "mtime": 1794066437.651184,
+    "seen": 1794066447.0884042,
+    "ast_hash": "cd3760645f1ac18aad58fbb789a5b9d3",
     "semantic_hash": ""
   },
   "docs/decisiones.md": {
-    "mtime": 1794063253.9957516,
-    "seen": 1794063261.5396745,
-    "ast_hash": "30b6e793b7c348c0e6a23ce095d8c7a5",
+    "mtime": 1794066226.008757,
+    "seen": 1794066237.0708542,
+    "ast_hash": "d77f7130a2007e125f54b2eab9b91e70",
     "semantic_hash": ""
   },
   "docs/investigacion.md": {
@@ -72,9 +72,9 @@
     "semantic_hash": ""
   },
   "app/src/router.tsx": {
-    "mtime": 1794008563.720284,
-    "seen": 1794008894.6998825,
-    "ast_hash": "7a16264a603c122df4fd8b48fe8dba8a",
+    "mtime": 1794065948.20617,
+    "seen": 1794066237.0706935,
+    "ast_hash": "2f44557765d0d951d1722fb27864add2",
     "semantic_hash": ""
   },
   "app/src/test/setup.ts": {
@@ -96,9 +96,9 @@
     "semantic_hash": ""
   },
   "app/src/lib/database.types.ts": {
-    "mtime": 1794008434.594425,
-    "seen": 1794008894.6997747,
-    "ast_hash": "9c8f36c41f686a743a858bf2ce840d6a",
+    "mtime": 1794065828.906811,
+    "seen": 1794066237.0706353,
+    "ast_hash": "52d9745422665db28d5172ce4301a059",
     "semantic_hash": ""
   },
   "app/src/lib/supabase.ts": {
@@ -150,15 +150,15 @@
     "semantic_hash": ""
   },
   "app/src/features/acceso/Entrar.tsx": {
-    "mtime": 1794063612.9772527,
-    "seen": 1794063806.5227077,
-    "ast_hash": "3b5fc96984b0ebe049318bd726f5ffdd",
+    "mtime": 1794066009.5253904,
+    "seen": 1794066237.070578,
+    "ast_hash": "d85ad5f043450a94215facb7d6df6f88",
     "semantic_hash": ""
   },
   "app/src/features/barbero/PanelBarbero.tsx": {
-    "mtime": 1794063253.9887605,
-    "seen": 1794063261.5393834,
-    "ast_hash": "d44a867c7faad9cc1dcea85babc10bee",
+    "mtime": 1794066009.6401348,
+    "seen": 1794066237.0705862,
+    "ast_hash": "0b24ac661fb8fc62024cdb635a89f5a4",
     "semantic_hash": ""
   },
   "app/src/features/dueno/CodigoQr.tsx": {
@@ -174,9 +174,9 @@
     "semantic_hash": ""
   },
   "app/src/features/dueno/LayoutDueno.tsx": {
-    "mtime": 1794063692.4891226,
-    "seen": 1794063806.5227447,
-    "ast_hash": "3c0a2b0a9ae8893b006c7ceac3d4d579",
+    "mtime": 1794066009.6146777,
+    "seen": 1794066237.070599,
+    "ast_hash": "b8b7cfd0e2d6f33db26f83ba0872ed12",
     "semantic_hash": ""
   },
   "app/src/features/dueno/Resumen.tsx": {
@@ -258,9 +258,9 @@
     "semantic_hash": ""
   },
   "supabase/tests/database/01_permisos.test.sql": {
-    "mtime": 1794064388.122051,
-    "seen": 1794064581.3894644,
-    "ast_hash": "3bbc14a6f6b6bd9d78bafe1b6ecbf042",
+    "mtime": 1794065827.2912524,
+    "seen": 1794066237.0708153,
+    "ast_hash": "cc32e50e1fee4d9a29b69339ef07d3d6",
     "semantic_hash": ""
   },
   "supabase/tests/database/02_aislamiento.test.sql": {
@@ -540,9 +540,9 @@
     "semantic_hash": ""
   },
   "app/src/features/dueno/dueno.test.tsx": {
-    "mtime": 1793624504.2834103,
-    "seen": 1793624721.6071687,
-    "ast_hash": "81a462e8862abe9604dcb074904bffa3",
+    "mtime": 1794066055.3734126,
+    "seen": 1794066237.0706055,
+    "ast_hash": "0fd989936f27176c89b824b7b7a64aba",
     "semantic_hash": ""
   },
   "app/src/lib/dueno.ts": {
@@ -744,9 +744,9 @@
     "semantic_hash": ""
   },
   "docs/produccion.md": {
-    "mtime": 1794063795.960434,
-    "seen": 1794063806.523236,
-    "ast_hash": "68175daad62e948e4af4d0c44482dab8",
+    "mtime": 1794066437.651184,
+    "seen": 1794066447.0884204,
+    "ast_hash": "5e158417ffc7c844dba2b3c2b9414dab",
     "semantic_hash": ""
   },
   "scripts/produccion/secretos.mjs": {
@@ -774,21 +774,21 @@
     "semantic_hash": ""
   },
   "app/src/features/admin/Admin.tsx": {
-    "mtime": 1794008633.056482,
-    "seen": 1794008894.6996856,
-    "ast_hash": "1b204b6a6cacc385a53ce8bfae8920bf",
+    "mtime": 1794066009.5630693,
+    "seen": 1794066237.0705807,
+    "ast_hash": "6cf2aaae87419dd9666cc6bf0b892071",
     "semantic_hash": ""
   },
   "app/src/lib/cuentas.test.ts": {
-    "mtime": 1794064387.453478,
-    "seen": 1794064581.3892639,
-    "ast_hash": "6176e3800b59f0a79814ef14aafa82c3",
+    "mtime": 1794066077.5154688,
+    "seen": 1794066237.0706313,
+    "ast_hash": "9691ee5aab054deff5278bdc2000dbaa",
     "semantic_hash": ""
   },
   "app/src/lib/cuentas.ts": {
-    "mtime": 1794063649.3504486,
-    "seen": 1794063806.5228186,
-    "ast_hash": "cd4dbb98b40e0b5f4268fb4c23349157",
+    "mtime": 1794065859.947209,
+    "seen": 1794066237.0706332,
+    "ast_hash": "ebf015e5174a838adef0a982f2e60c3b",
     "semantic_hash": ""
   },
   "scripts/produccion/hacer-admin.sql": {
@@ -828,9 +828,27 @@
     "semantic_hash": ""
   },
   "supabase/tests/database/10_admin.test.sql": {
-    "mtime": 1794064422.948324,
-    "seen": 1794064581.3894858,
-    "ast_hash": "2269c526f7d920615c6c1c6c11854480",
+    "mtime": 1794065828.3686683,
+    "seen": 1794066237.0708349,
+    "ast_hash": "7041355a8246af466e1e6976c90c6819",
+    "semantic_hash": ""
+  },
+  "app/src/components/AlPanelSiEsAdmin.tsx": {
+    "mtime": 1794066004.6548734,
+    "seen": 1794066237.0705357,
+    "ast_hash": "be1944a6b25b43cbe81775ae19d09b68",
+    "semantic_hash": ""
+  },
+  "app/src/features/admin/LayoutAdmin.tsx": {
+    "mtime": 1794065950.4235506,
+    "seen": 1794066237.0705833,
+    "ast_hash": "6040c9cc17c30f1cd51ea1e97d0345bd",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/20261107160000_admin_detalle.sql": {
+    "mtime": 1794065816.604008,
+    "seen": 1794066237.0708106,
+    "ast_hash": "cddcd630d0fd6bfe7af2157415d6df69",
     "semantic_hash": ""
   }
 }

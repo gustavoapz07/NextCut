@@ -130,6 +130,56 @@ export async function cargarBarberiasAdmin(): Promise<ResultadoAdmin> {
   return leido.success ? { tipo: "listo", barberias: leido.data } : { tipo: "error" };
 }
 
+const esquemaDetalle = z.object({
+  id: z.string(),
+  nombre: z.string(),
+  slug: z.string(),
+  zona: z.string().nullable(),
+  creado_en: z.string(),
+  fila_remota_activa: z.boolean(),
+  con_horario: z.boolean(),
+  dueno_correo: z.string().nullable(),
+  barberos: z.array(
+    z.object({
+      nombre: z.string(),
+      silla: z.number().nullable(),
+      activo: z.boolean(),
+      correo: z.string().nullable(),
+    }),
+  ),
+  servicios: z.array(
+    z.object({
+      nombre: z.string(),
+      duracion_min: z.number(),
+      // `numeric` puede llegar como texto.
+      precio_ref: z.coerce.number(),
+      activo: z.boolean(),
+    }),
+  ),
+  turnos_7_dias: z.number(),
+  atendidos_7_dias: z.number(),
+});
+export type DetalleBarberia = z.infer<typeof esquemaDetalle>;
+
+export type ResultadoDetalle =
+  | { tipo: "listo"; barberia: DetalleBarberia }
+  | { tipo: "no_existe" }
+  | { tipo: "no_admin" }
+  | { tipo: "error" };
+
+export async function cargarDetalleAdmin(barberiaId: string): Promise<ResultadoDetalle> {
+  const { data, error } = await supabase.rpc("admin_barberia", { p_barberia: barberiaId });
+  if (error) return error.code === "42501" ? { tipo: "no_admin" } : { tipo: "error" };
+  if (data === null) return { tipo: "no_existe" };
+  const leido = esquemaDetalle.safeParse(data);
+  return leido.success ? { tipo: "listo", barberia: leido.data } : { tipo: "error" };
+}
+
+/** A dónde va el admin al entrar: a su panel, salvo que haya pedido una página de ese panel. */
+export function destinoDelAdmin(pedido: string | null) {
+  return pedido?.startsWith("/admin") ? pedido : "/admin";
+}
+
 // ---------------------------------------------------------------------------------------------
 // Contraseña temporal
 // ---------------------------------------------------------------------------------------------

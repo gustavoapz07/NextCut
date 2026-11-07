@@ -5,41 +5,41 @@ import { Navigate, useNavigate, useSearchParams } from "react-router";
 import { Franjas } from "@/components/Franjas";
 import { BotonMarca, Cargando } from "@/components/Marco";
 import { BotonPrincipal, claseCampo } from "@/components/Piezas";
-import { debeCambiarClave, soyAdmin } from "@/lib/cuentas";
+import { debeCambiarClave, destinoDelAdmin, soyAdmin } from "@/lib/cuentas";
 import { useTitulo } from "@/lib/ganchos";
 import { entrar, MENSAJES_ENTRAR, type ResultadoEntrar, useSesion } from "@/lib/sesion";
 import { supabase } from "@/lib/supabase";
 
 /** A dónde ir después de entrar: solo los paneles del personal, nunca otra página u otro sitio. */
 export function destinoAlEntrar(siguiente: string | null) {
-  return siguiente && /^\/(panel|dueno|admin)(\/[a-z]+)?$/.test(siguiente) ? siguiente : "/panel";
+  const valido =
+    siguiente &&
+    (/^\/(panel|dueno)(\/[a-z]+)?$/.test(siguiente) ||
+      /^\/admin(\/nueva|\/b\/[0-9a-f-]{36})?$/.test(siguiente));
+  return valido ? siguiente : "/panel";
 }
 
 /** Con una contraseña temporal, primero se elige la propia (ADR-017). */
 const pasandoPorClave = (destino: string) =>
   `/cambiar-clave?siguiente=${encodeURIComponent(destino)}`;
 
-/** A dónde va quien llega aquí con la sesión ya abierta: sin destino pedido, el admin a /admin. */
-function ConSesion({
-  pedido,
-  destino,
-  temporal,
-}: {
-  pedido: string | null;
-  destino: string;
-  temporal: boolean;
-}) {
-  const [final, setFinal] = useState<string | null>(pedido ? destino : null);
+/** El admin siempre entra a su panel; los demás, a donde pidieron (ADR-018). */
+async function destinoFinal(destino: string) {
+  return (await soyAdmin()) ? destinoDelAdmin(destino) : destino;
+}
+
+/** Quien llega aquí con la sesión ya abierta sigue a su panel. */
+function ConSesion({ destino, temporal }: { destino: string; temporal: boolean }) {
+  const [final, setFinal] = useState<string | null>(null);
   useEffect(() => {
-    if (pedido) return;
     let vivo = true;
-    void soyAdmin().then((admin) => {
-      if (vivo) setFinal(admin ? "/admin" : destino);
+    void destinoFinal(destino).then((ir) => {
+      if (vivo) setFinal(ir);
     });
     return () => {
       vivo = false;
     };
-  }, [pedido, destino]);
+  }, [destino]);
   if (!final) return <Cargando />;
   return <Navigate to={temporal ? pasandoPorClave(final) : final} replace />;
 }
@@ -49,8 +49,7 @@ export function Entrar() {
   const sesion = useSesion();
   const navigate = useNavigate();
   const [params] = useSearchParams();
-  const pedido = params.get("siguiente");
-  const destino = destinoAlEntrar(pedido);
+  const destino = destinoAlEntrar(params.get("siguiente"));
   const [correo, setCorreo] = useState("");
   const [clave, setClave] = useState("");
   const [verClave, setVerClave] = useState(false);
@@ -62,13 +61,7 @@ export function Entrar() {
   if (sesion.tipo === "cargando") return <Cargando />;
   // Con la sesión abierta no hay nada que hacer aquí.
   if (sesion.tipo === "dentro" && !enviando) {
-    return (
-      <ConSesion
-        pedido={pedido}
-        destino={destino}
-        temporal={debeCambiarClave(sesion.sesion.user)}
-      />
-    );
+    return <ConSesion destino={destino} temporal={debeCambiarClave(sesion.sesion.user)} />;
   }
 
   async function enviar(evento: FormEvent) {
@@ -77,8 +70,7 @@ export function Entrar() {
     setError(null);
     const resultado = await entrar(correo, clave);
     if (resultado === "ok") {
-      // Sin un destino pedido, el admin va a su panel.
-      const final = !pedido && (await soyAdmin()) ? "/admin" : destino;
+      const final = await destinoFinal(destino);
       const { data } = await supabase.auth.getSession();
       const temporal = debeCambiarClave(data.session?.user);
       navigate(temporal ? pasandoPorClave(final) : final, { replace: true });

@@ -29,7 +29,8 @@ select set_eq(
   array[
     'fila_publica', 'ver_turno', 'cancelar_turno', 'suscribir_push', 'llamar_siguiente',
     'empezar_turno', 'terminar_turno', 'marcar_no_llego', 'pausar_barbero', 'pausar_fila_remota',
-    'renombrar_turno', 'ocultar_turno', 'reporte_dia', 'soy_admin', 'admin_barberias'
+    'renombrar_turno', 'ocultar_turno', 'reporte_dia', 'soy_admin', 'admin_barberias',
+    'admin_barberia'
   ],
   'el personal no ejecuta unirse_a_fila ni las tareas programadas'
 );

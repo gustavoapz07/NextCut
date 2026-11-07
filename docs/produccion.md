@@ -19,14 +19,14 @@ Esta guía sirve para montar la versión que usan las barberías reales, aparte 
 |---|---|
 | 0. Decisiones | Hecho: se pausó `cms-opalo` y producción usa `nextcut-produccion.gustavoapz07.workers.dev` (sin dominio propio) |
 | 1. Proyecto de Supabase | Hecho. Las claves heredadas ya venían desactivadas (la API responde 401 con `anon`) |
-| 2. Base y funciones | Hecho: 8 migraciones, 5 tareas de `pg_cron` y las 3 funciones publicadas. Hecho también lo de ADR-017 (07/11/2026): migración `super_admin`, función `cuentas` y el autor como admin. App publicada con `/admin` (versión `1919b2fb`) |
+| 2. Base y funciones | Hecho: 8 migraciones, 5 tareas de `pg_cron` y las 3 funciones publicadas. Hecho también lo de ADR-017 (07/11/2026): migración `super_admin`, función `cuentas` y el autor como admin. Panel propio del admin publicado (versión `23b55cb8`, ADR-018) |
 | 3. Secretos | Hecho: los 5 secretos, cargados por el autor con `scripts/produccion/secretos.mjs` |
 | 4. Vault | Hecho |
 | 5. Auth | Hecho: Site URL, redirección `/**`, registro apagado y contraseña de 10 con letras y números |
 | 6. Turnstile | Hecho: widget "NextCut produccion" (Managed) para el hostname de producción |
 | 7. Variables | Hecho |
 | 8. Publicar | Hecho: https://nextcut-produccion.gustavoapz07.workers.dev (versión `8f84aaea`) |
-| 9. Barbería piloto | Por ahora hay una de demostración: "Barbería Demo" (`/b/demo`), siempre abierta, a nombre de la cuenta del autor. La piloto real se da de alta con sus datos cuando se cierre el acuerdo |
+| 9. Barbería piloto | Ninguna todavía: la Barbería Demo se borró el 07/11/2026 (ADR-018). Las barberías se dan de alta en `/admin` |
 | 10. Revisión | Pendiente, después del alta |
 
 `npm run deploy:produccion` no publica si falta una variable, si alguna quedó con el valor de pruebas o si la clave de Turnstile es de prueba (`scripts/revisar-produccion.mjs`). Después revisa que el build no lleve claves secretas (`scripts/revisar-build.mjs`).

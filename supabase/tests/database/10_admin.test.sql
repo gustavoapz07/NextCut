@@ -144,6 +144,10 @@ set request.jwt.claims to '{"sub": "f0000000-0000-4000-8000-0000000000a1", "role
 select ok(not public.soy_admin(), 'la dueña no es admin');
 select throws_ok($$ select public.admin_barberias() $$, '42501', null, 'y no ve la lista de barberías');
 select throws_ok(
+  $$ select public.admin_barberia('f1000000-0000-4000-8000-00000000000b') $$,
+  '42501', null, 'ni el detalle de otra barbería'
+);
+select throws_ok(
   $$ insert into privado.admins (user_id) values ('f0000000-0000-4000-8000-0000000000a1') $$,
   '42501', null, 'ni se puede nombrar admin'
 );
@@ -155,6 +159,22 @@ select ok(public.soy_admin(), 'el admin sí es admin');
 select ok(
   jsonb_array_length(public.admin_barberias()) >= 3,
   'y ve todas las barberías con su dueño'
+);
+select is(
+  public.admin_barberia('f1000000-0000-4000-8000-00000000000a') ->> 'dueno_correo',
+  'duena-a@admin.test',
+  'en el detalle ve al dueño'
+);
+select is(
+  (select array_agg(x ->> 'correo' order by x ->> 'nombre')
+   from jsonb_array_elements(public.admin_barberia('f1000000-0000-4000-8000-00000000000a') -> 'barberos') x
+   where (x ->> 'activo')::boolean),
+  array['barbero-a@admin.test', 'nuevo@admin.test'],
+  'y a cada barbero con el correo de su cuenta'
+);
+select ok(
+  public.admin_barberia('f1000000-0000-4000-8000-0000000000ff') is null,
+  'una barbería que no existe da vacío'
 );
 
 reset role;

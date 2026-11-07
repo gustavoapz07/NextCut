@@ -349,6 +349,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      admin_barberia: { Args: { p_barberia: string }; Returns: Json }
       admin_barberias: { Args: never; Returns: Json }
       admin_puede_crear: {
         Args: { p_admin: string; p_slug: string }

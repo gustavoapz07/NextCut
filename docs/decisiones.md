@@ -234,3 +234,15 @@ Cada decisión importante queda aquí con su contexto, las alternativas consider
   5. **Logo: el boleto del turno.** Un boleto con muescas, línea punteada y la "N" recortada, más "NEXT" de rótulo y "CUT" ligera. Es el mismo boleto que ve el cliente en su turno, así la marca dice "tienes tu lugar" en vez de "barbería". El punto ladrillo del talón es el único color. La N es un trazo, no texto, para verse igual sin la fuente y en el favicon. El poste deja de ser logo y queda en franjas, barras de progreso y la pantalla de carga.
 - **Alternativas:** *Logos:* el poste mínimo anterior se sentía genérico (lo usa cualquier barbería); se compararon una X de NEXT hecha tijera, tres barras como fila y el nombre cortado en diagonal, y el autor eligió el boleto. *Arcilla `#a14e3c` y pizarra `#4a5b74`:* se probó primero; se veía demasiado café y gris. *Óxido y petróleo* (azul verdoso) y *cobre y acero:* se compararon y se alejaban del poste. *Grafito y arcilla con los acentos en botones:* más color del necesario. *Hueso suavizado* (bajar la saturación y dejar todo lo demás igual): los rellenos grandes seguían siendo de color.
 - **Consecuencias:** los estilos del cartel QR ahora se llaman Clásico, Noche, Ladrillo y Marino. Los íconos PNG se regeneraron con `scripts/iconos.mjs`.
+
+## ADR-018 · El admin tiene su propio panel y no es dueño
+
+- **Fecha:** 07/11/2026 · **Estado:** aceptada · ajusta [ADR-017](#adr-017--super-admin-y-cuentas-con-contraseña-temporal-sin-correo)
+- **Contexto:** con ADR-017, la cuenta del autor era a la vez admin y dueña de la Barbería Demo. Al entrar caía en el panel del dueño y llegaba a `/admin` por un enlace puesto ahí. Mezclar los dos papeles en una cuenta confunde y le da al admin, sin querer, los permisos de dueño de una barbería.
+- **Decisión:**
+  1. **El admin siempre entra a `/admin`,** venga de donde venga. Solo respeta el destino pedido si es una página del mismo panel (`/admin/nueva` o `/admin/b/<id>`).
+  2. **`/admin` es un panel con su propio marco**, igual que el del dueño (barra lateral en computadora, pestañas abajo en el celular): **Barberías** (la lista), **Nueva barbería** (el alta con su dueño) y el **detalle** de cada barbería (dueño y "nueva contraseña", barberos con el correo de su cuenta, servicios, turnos y atendidos de los últimos 7 días, estado de la fila en línea). El detalle sale de `admin_barberia(id)`, que solo responde al admin y no trae datos de los clientes, solo conteos.
+  3. **El panel del dueño no tiene enlaces al admin.** Si el admin abre `/dueno` o `/panel`, no ve "no eres dueño" ni "no tienes silla": lo manda a su panel.
+  4. **La cuenta admin no es dueña de ninguna barbería.** Se borró la Barbería Demo de producción. Para enseñar NextCut en las visitas se da de alta una barbería con otro correo, como cualquier otra.
+- **Alternativas:** *Dejar el enlace en el panel del dueño:* mezcla los papeles. *Un selector de papel al entrar:* sobra mientras una cuenta tenga un solo papel.
+- **Consecuencias:** quien administra y quien atiende una barbería usan cuentas distintas. Si el autor quiere una barbería de demostración, necesita un segundo correo.

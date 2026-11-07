@@ -180,7 +180,20 @@ describe("panel del dueño", () => {
       await screen.findByRole("heading", { level: 1, name: "Solo para dueños" }),
     ).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Ir a mi panel" })).toHaveAttribute("href", "/panel");
-    expect(falso.rpc).not.toHaveBeenCalled();
+    // Solo pregunta si es el admin (para mandarlo a su panel); nada de la barbería.
+    expect(falso.rpc.mock.calls.map(([f]) => f)).toEqual(["soy_admin"]);
+  });
+
+  it("el admin que abre /dueno va a su propio panel", async () => {
+    falso.sesion = { user: { id: "u-admin" } };
+    falso.tablas = { miembros: null };
+    falso.rpc.mockImplementation(async (funcion: string) => ({
+      data: funcion === "soy_admin" ? true : funcion === "admin_barberias" ? [] : null,
+      error: null,
+    }));
+    abrir("/dueno");
+    expect(await screen.findByRole("heading", { level: 1, name: "Barberías" })).toBeInTheDocument();
+    expect(screen.getByText("Todavía no hay barberías.")).toBeInTheDocument();
   });
 
   it("muestra el reporte del día de su barbería", async () => {
